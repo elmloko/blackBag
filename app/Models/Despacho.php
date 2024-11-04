@@ -20,5 +20,6 @@ class Despacho extends Model
         'nrodespacho',
         'peso',
         'identificador',
+        'ano',
     ];
 }
