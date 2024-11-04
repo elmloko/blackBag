@@ -344,13 +344,13 @@ return [
             ],
         ],
         [
-            'text' => 'Consultas Informacion',
+            'text' => 'DESPACHOS',
             'icon' => 'fas fa-users',
             // 'can'  => 'users.index',
             'submenu' => [
                 [
-                    'text' => 'Consulta Correspondencia',
-                    'url' => '',
+                    'text' => 'Despachos Abiertos',
+                    'url' => '/iniciar',
                     'icon' => 'fas fa-user',
                 ],
             ],
