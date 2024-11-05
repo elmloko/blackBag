@@ -69,8 +69,8 @@
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info"
-                                                    wire:click="mostrarQueja({{ $despacho->id }})" target="_blank">
-                                                    Ver Queja
+                                                    wire:click="mostrarSaca({{ $despacho->id }})" target="_blank">
+                                                    Ver Sacas
                                                 </button>
                                             </td>
                                         </tr>

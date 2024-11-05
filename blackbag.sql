@@ -21,7 +21,7 @@ USE `blackbag`;
 
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL DEFAULT 0,
   `ofdestino` varchar(50) DEFAULT NULL,
   `categoria` varchar(50) DEFAULT NULL,
   `subclase` varchar(50) DEFAULT NULL,
@@ -35,16 +35,11 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~1 rows (aproximadamente)
 INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'BOLPZ', 'A', 'UA', 1, NULL, NULL, NULL, NULL, NULL, '2024-11-05 21:48:44', '2024-11-05 21:48:44', NULL),
-	(2, 'BOTJA', 'A', 'UA', 2, NULL, NULL, NULL, NULL, NULL, '2024-11-05 21:48:53', '2024-11-05 21:48:53', NULL),
-	(3, 'BOTJA', 'A', 'UM', 3, NULL, NULL, NULL, NULL, NULL, '2024-11-05 22:04:29', '2024-11-05 22:04:29', NULL),
-	(4, 'BOTJA', 'A', 'UM', 3, NULL, NULL, NULL, NULL, NULL, '2024-11-05 22:04:42', '2024-11-05 22:04:42', NULL),
-	(5, 'BOLPZ', 'A', 'UB', 2, NULL, NULL, 'BOLPZAUB4002', 4, NULL, '2024-11-05 22:35:15', '2024-11-05 22:35:15', NULL),
-	(6, 'BOPOI', 'A', 'UA', 1, NULL, NULL, 'BOPOIAUA4001', 4, 'ABIERTO', '2024-11-05 22:43:53', '2024-11-05 22:43:53', NULL);
+	(0, 'BOTJA', 'A', 'UA', 1, NULL, NULL, 'BOLPZBOTJAAUA4001', 4, 'ABIERTO', '2024-11-06 00:29:26', '2024-11-06 00:29:26', NULL);
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -436,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla blackbag.pulse_entries: ~146 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
@@ -628,6 +623,21 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 
 -- Volcando datos para la tabla blackbag.role_has_permissions: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla blackbag.saca
+CREATE TABLE IF NOT EXISTS `saca` (
+  `id` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `nrosaca` int(11) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `peso` float(8,3) DEFAULT NULL,
+  `nropaquetes` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `despacho_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla blackbag.saca: ~0 rows (aproximadamente)
+
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -636,16 +646,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `ci` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.users: ~0 rows (aproximadamente)
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'TGu1G0p048cmwdgoiYPDuQBO7oS2S5jsyPcAnlc9wnNg7L3h1CNtR4BnaOhU', '2024-10-24 00:43:33', '2024-10-24 00:43:33', NULL);
+-- Volcando datos para la tabla blackbag.users: ~1 rows (aproximadamente)
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `city`, `ci`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'TGu1G0p048cmwdgoiYPDuQBO7oS2S5jsyPcAnlc9wnNg7L3h1CNtR4BnaOhU', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2024-11-05 23:21:55', NULL),
+	(2, 'Leonardo Doria Medina Ochoa', 'leonardo.doria@correos.gob.bo', NULL, '$2y$10$j0ccA5Pghe8OmWdNHeU2zOgpd.ubGV4V9E5xVlwTF92yw0lF2JIMC', NULL, 'LA PAZ', 12345678, '2024-11-05 23:18:56', '2024-11-05 23:29:15', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

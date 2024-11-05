@@ -3,10 +3,10 @@
 @section('title', 'SIRECO')
 
 @section('template_title')
-    Despachos Abiertos
+    Mostrar Sacas
 @endsection
 
 @section('content')
-    @livewire('iniciar')
+    @livewire('mostrar')
     @include('footer')
 @stop

@@ -25,6 +25,17 @@ class Iniciar extends Component
         'subclase' => 'required|string|max:50',
     ];
 
+    protected $cityCodes = [
+        'LA PAZ' => 'BOLPZ',
+        'TARIJA' => 'BOTJA',
+        'POTOSI' => 'BOPOI',
+        'PANDO' => 'BOCIJ',
+        'ORURO' => 'BOORU',
+        'BENI' => 'BOTDD',
+        'SUCRE' => 'BOSRE',
+        'SANTA CRUZ' => 'BOSRZ',
+    ];
+
     public function crearDespacho()
     {
         $this->validate();
@@ -58,8 +69,12 @@ class Iniciar extends Component
         // Calcula el último dígito del año actual
         $ultimoDigitoAno = substr(Carbon::now()->format('Y'), -1);
 
+        // Obtén el código de la ciudad del usuario logueado
+        $userCity = auth()->user()->city;
+        $ofremitente = $this->cityCodes[$userCity] ?? 'UNKNOWN'; // Usa 'UNKNOWN' si la ciudad no está en el mapeo
+
         // Construye el identificador concatenando los valores deseados
-        $identificador = $this->ofdestino . $this->categoria . $this->subclase . $ultimoDigitoAno . $this->nrodespacho;
+        $identificador = $ofremitente . $this->ofdestino . $this->categoria . $this->subclase . $ultimoDigitoAno . $this->nrodespacho;
 
         // Guarda el despacho en la base de datos con el estado "ABIERTO", el último dígito del año, y el identificador
         Despacho::create([
@@ -73,12 +88,13 @@ class Iniciar extends Component
             'identificador' => $identificador,  // Guarda el identificador generado
         ]);
 
-        session()->flash('message', 'Despacho creado exitosamente.');
+        session()->flash('success', 'Despacho creado exitosamente.');
 
         // Cierra el modal de confirmación y restablece los campos
         $this->dispatch('closeConfirmModal');
         $this->reset(['categoria', 'ofdestino', 'subclase', 'nrodespacho', 'fechaHoraActual']);
     }
+
 
     public function render()
     {

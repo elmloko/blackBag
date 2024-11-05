@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DespachoController;
+use App\Http\Controllers\SacaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +73,8 @@ Route::middleware('auth')->group(function () {
     //despachos
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
 
+    //sacas
+    Route::get('/mostrar/{id}/show', [SacaController::class, 'getMostrar'])->name('sacas.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
