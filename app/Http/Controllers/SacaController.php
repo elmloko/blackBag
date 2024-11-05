@@ -14,4 +14,17 @@ class SacaController extends Controller
 
         return view('sacas.crear', compact('id', 'sacas'));
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'despacho_id' => 'required',
+            'tipo' => 'required|string|max:50',
+            'peso' => 'required|numeric',
+            'nropaquetes' => 'required|integer',
+        ]);
+
+        Saca::create($request->all());
+
+        return redirect()->back()->with('message', 'Saca creada exitosamente');
+    }
 }

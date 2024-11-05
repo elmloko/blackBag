@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');
+    Route::post('/sacas', [SacaController::class, 'store'])->name('saca.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
