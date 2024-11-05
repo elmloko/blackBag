@@ -68,10 +68,7 @@
                                             <td>{{ $despacho->peso }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-info"
-                                                    wire:click="mostrarSaca({{ $despacho->id }})" target="_blank">
-                                                    Ver Sacas
-                                                </button>
+                                                <a href="{{ route('saca.crear', $despacho->id) }}" class="btn btn-primary">Ver Detalles de Saca</a>
                                             </td>
                                         </tr>
                                     @endforeach
