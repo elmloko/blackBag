@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.migrations: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.migrations: ~6 rows (aproximadamente)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~255 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~258 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -636,7 +636,9 @@ CREATE TABLE IF NOT EXISTS `saca` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~1 rows (aproximadamente)
+INSERT INTO `saca` (`id`, `nrosaca`, `tipo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
+	(0, NULL, 'a', 12.000, 21, '2024-11-06 01:58:02', '2024-11-06 01:58:02', '0');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -655,7 +657,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.users: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.users: ~2 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `city`, `ci`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'TGu1G0p048cmwdgoiYPDuQBO7oS2S5jsyPcAnlc9wnNg7L3h1CNtR4BnaOhU', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2024-11-05 23:21:55', NULL),
 	(2, 'Leonardo Doria Medina Ochoa', 'leonardo.doria@correos.gob.bo', NULL, '$2y$10$j0ccA5Pghe8OmWdNHeU2zOgpd.ubGV4V9E5xVlwTF92yw0lF2JIMC', NULL, 'LA PAZ', 12345678, '2024-11-05 23:18:56', '2024-11-05 23:29:15', NULL);
