@@ -83,10 +83,9 @@
                                                     <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                 </button>
                                             @else
-                                                <button wire:click="delete({{ $user->id }})"
-                                                    class="btn btn-sm btn-warning">
-                                                    <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
-                                                </button>
+                                            <button wire:click="deleteUser({{ $user->id }})" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
+                                            </button>
                                                 <a class="btn btn-sm btn-success"
                                                     href="{{ route('users.edit', $user->id) }}">
                                                     <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}

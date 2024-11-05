@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $user = new User();
         $roles = Role::all();
-        return view('user.create', compact('user','roles'));
+        return view('user.create', compact('user', 'roles'));
     }
 
     public function store(Request $request)
@@ -31,21 +31,21 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'Regional' => 'required',
+            'city' => 'required',
             'ci' => 'required',
         ]);
-    
+
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
-        $user->Regional = $request->input('Regional');
+        $user->city = $request->input('city');
         $user->ci = $request->input('ci');
 
         $user->save();
 
         $user->assignRole($request->input('roles'));
-        
+
         return redirect()->route('users.index')
             ->with('success', 'Usuario creado correctamente');
     }
@@ -62,7 +62,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::all();
 
-        return view('user.edit', compact('user','roles'));
+        return view('user.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)
@@ -70,37 +70,19 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
-            'Regional' => 'required',
+            'city' => 'required',
             'ci' => 'required',
         ]);
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->roles()->sync($request->roles);
-        $user->Regional = $request->input('Regional');
+        $user->city = $request->input('city');
         $user->ci = $request->input('ci');
-        
+
         $user->save();
 
         return redirect()->route('users.index')
             ->with('success', 'Usuario actualizado correctamente');
-    }
-
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario dado de baja correctamente');
-    }
-
-    public function restore($id)
-    {
-        $user = User::withTrashed()->findOrFail($id);
-        $user->restore();
-
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario reactivado correctamente');
     }
 }

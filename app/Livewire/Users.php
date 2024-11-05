@@ -32,6 +32,22 @@ class Users extends Component
         $this->dispatch('openModal'); // Disparar evento para abrir el modal
     }
 
+    public function deleteUser($userId)
+    {
+        $user = User::withTrashed()->findOrFail($userId);
+        $user->delete();
+
+        session()->flash('success', 'Usuario dado de baja correctamente.');
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario reactivado correctamente');
+    }
     // Método para actualizar la contraseña del usuario
     public function updatePassword()
     {
@@ -63,7 +79,7 @@ class Users extends Component
         $users = User::withTrashed()
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->searchQuery . '%')
-                      ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
             })
             ->paginate(10);
 
