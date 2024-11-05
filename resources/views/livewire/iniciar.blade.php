@@ -53,6 +53,7 @@
                                         <th>Subclase</th>
                                         <th>Nro. Envases</th>
                                         <th>Peso</th>
+                                        <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,7 @@
                                             <td>{{ $despacho->subclase }}</td>
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
+                                            <td>{{ $despacho->estado }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info"
                                                     wire:click="mostrarQueja({{ $despacho->id }})" target="_blank">

@@ -21,5 +21,6 @@ class Despacho extends Model
         'peso',
         'identificador',
         'ano',
+        'estado',
     ];
 }

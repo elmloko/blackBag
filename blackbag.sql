@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `ofdestino` varchar(50) DEFAULT NULL,
   `categoria` varchar(50) DEFAULT NULL,
   `subclase` varchar(50) DEFAULT NULL,
-  `nroenvase` int(11) DEFAULT NULL,
   `nrodespacho` int(11) DEFAULT NULL,
+  `nroenvase` int(11) DEFAULT NULL,
   `peso` float(8,3) DEFAULT NULL,
   `identificador` varchar(50) DEFAULT NULL,
   `ano` int(11) DEFAULT NULL,
@@ -37,12 +37,14 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~4 rows (aproximadamente)
-INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nroenvase`, `nrodespacho`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'CBBA', 'A', 'UR', 0, 1, 0.100, 'x', NULL, NULL, '2024-11-04 19:55:15', NULL, NULL),
-	(4, 'a', 'a', 'a', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-05 00:35:10', '2024-11-05 00:35:10', NULL),
-	(5, 'BOLPZ', 'A', 'UL', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-05 00:54:14', '2024-11-05 00:54:14', NULL),
-	(6, 'BOLPZ', 'A', 'UA', NULL, 5797, NULL, NULL, NULL, NULL, '2024-11-05 01:09:16', '2024-11-05 01:09:16', NULL);
+-- Volcando datos para la tabla blackbag.despacho: ~5 rows (aproximadamente)
+INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'BOLPZ', 'A', 'UA', 1, NULL, NULL, NULL, NULL, NULL, '2024-11-05 21:48:44', '2024-11-05 21:48:44', NULL),
+	(2, 'BOTJA', 'A', 'UA', 2, NULL, NULL, NULL, NULL, NULL, '2024-11-05 21:48:53', '2024-11-05 21:48:53', NULL),
+	(3, 'BOTJA', 'A', 'UM', 3, NULL, NULL, NULL, NULL, NULL, '2024-11-05 22:04:29', '2024-11-05 22:04:29', NULL),
+	(4, 'BOTJA', 'A', 'UM', 3, NULL, NULL, NULL, NULL, NULL, '2024-11-05 22:04:42', '2024-11-05 22:04:42', NULL),
+	(5, 'BOLPZ', 'A', 'UB', 2, NULL, NULL, 'BOLPZAUB4002', 4, NULL, '2024-11-05 22:35:15', '2024-11-05 22:35:15', NULL),
+	(6, 'BOPOI', 'A', 'UA', 1, NULL, NULL, 'BOPOIAUA4001', 4, 'ABIERTO', '2024-11-05 22:43:53', '2024-11-05 22:43:53', NULL);
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -158,9 +160,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=660 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~250 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~255 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -434,9 +436,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~145 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~146 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -643,7 +645,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Volcando datos para la tabla blackbag.users: ~0 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', NULL, '2024-10-24 00:43:33', '2024-10-24 00:43:33', NULL);
+	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'TGu1G0p048cmwdgoiYPDuQBO7oS2S5jsyPcAnlc9wnNg7L3h1CNtR4BnaOhU', '2024-10-24 00:43:33', '2024-10-24 00:43:33', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
