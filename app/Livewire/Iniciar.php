@@ -55,13 +55,22 @@ class Iniciar extends Component
 
     public function confirmarGuardarDespacho()
     {
-        // Guarda el despacho en la base de datos
+        // Calcula el último dígito del año actual
+        $ultimoDigitoAno = substr(Carbon::now()->format('Y'), -1);
+
+        // Construye el identificador concatenando los valores deseados
+        $identificador = $this->ofdestino . $this->categoria . $this->subclase . $ultimoDigitoAno . $this->nrodespacho;
+
+        // Guarda el despacho en la base de datos con el estado "ABIERTO", el último dígito del año, y el identificador
         Despacho::create([
             'categoria' => $this->categoria,
             'ofdestino' => $this->ofdestino,
             'subclase' => $this->subclase,
             'nrodespacho' => $this->nrodespacho,
             'fecha_hora_creacion' => $this->fechaHoraActual,
+            'estado' => 'ABIERTO',
+            'ano' => $ultimoDigitoAno,
+            'identificador' => $identificador,  // Guarda el identificador generado
         ]);
 
         session()->flash('message', 'Despacho creado exitosamente.');
