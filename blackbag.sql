@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,7 +21,7 @@ USE `blackbag`;
 
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
-  `id` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ofdestino` varchar(50) DEFAULT NULL,
   `categoria` varchar(50) DEFAULT NULL,
   `subclase` varchar(50) DEFAULT NULL,
@@ -35,11 +35,12 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~0 rows (aproximadamente)
 INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(0, 'BOTJA', 'A', 'UA', 1, NULL, NULL, 'BOLPZBOTJAAUA4001', 4, 'ABIERTO', '2024-11-06 00:29:26', '2024-11-06 00:29:26', NULL);
+	(1, 'BOTJA', 'A', 'UA', 1, NULL, NULL, 'BOLPZBOTJAAUA4001', 4, 'ABIERTO', '2024-11-06 00:29:26', '2024-11-06 00:29:26', NULL),
+	(2, 'BOTJA', 'B', 'UM', 2, NULL, NULL, 'BOLPZBOTJABUM4002', 4, 'ABIERTO', '2024-11-06 22:11:31', '2024-11-06 22:11:31', NULL);
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -155,9 +156,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=823 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~258 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~302 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -416,7 +417,51 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(648, 1730754540, 60, 'user_request', '1', 'count', 2.00, NULL),
 	(656, 1730754780, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(657, 1730754720, 360, 'user_request', '1', 'count', 1.00, NULL),
-	(658, 1730754720, 1440, 'user_request', '1', 'count', 1.00, NULL);
+	(658, 1730754720, 1440, 'user_request', '1', 'count', 1.00, NULL),
+	(659, 1730902620, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(660, 1730902320, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(661, 1730901600, 1440, 'user_request', '1', 'count', 8.00, NULL),
+	(662, 1730897280, 10080, 'user_request', '1', 'count', 15.00, NULL),
+	(667, 1730902980, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(668, 1730902680, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(691, 1730903040, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(692, 1730903040, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(693, 1730903040, 1440, 'user_request', '1', 'count', 5.00, NULL),
+	(699, 1730904060, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(700, 1730903760, 360, 'user_request', '1', 'count', 1.00, NULL),
+	(703, 1730904120, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(704, 1730904120, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(707, 1730904360, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(711, 1730904600, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(712, 1730904480, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(713, 1730904480, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(719, 1730915460, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(720, 1730915280, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(721, 1730914560, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(722, 1730907360, 10080, 'user_request', '1', 'count', 22.00, NULL),
+	(727, 1730916360, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(728, 1730916360, 360, 'user_request', '1', 'count', 20.00, NULL),
+	(729, 1730916000, 1440, 'user_request', '1', 'count', 20.00, NULL),
+	(731, 1730916420, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(739, 1730916480, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(755, 1730916480, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'count', 1.00, NULL),
+	(756, 1730916360, 360, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'count', 1.00, NULL),
+	(757, 1730916000, 1440, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'count', 1.00, NULL),
+	(758, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'count', 1.00, NULL),
+	(763, 1730916480, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'max', 1730916518.00, NULL),
+	(764, 1730916360, 360, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'max', 1730916518.00, NULL),
+	(765, 1730916000, 1440, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'max', 1730916518.00, NULL),
+	(766, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'max', 1730916518.00, NULL),
+	(767, 1730916600, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(787, 1730916660, 60, 'user_request', '1', 'count', 7.00, NULL),
+	(791, 1730916660, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'count', 1.00, NULL),
+	(792, 1730916360, 360, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'count', 1.00, NULL),
+	(793, 1730916000, 1440, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'count', 1.00, NULL),
+	(794, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'count', 1.00, NULL),
+	(799, 1730916660, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
+	(800, 1730916360, 360, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
+	(801, 1730916000, 1440, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
+	(802, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -431,9 +476,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~146 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~180 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -580,7 +625,46 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(143, 1730754537, 'user_request', '1', NULL),
 	(144, 1730754543, 'user_request', '1', NULL),
 	(145, 1730754555, 'user_request', '1', NULL),
-	(146, 1730754799, 'user_request', '1', NULL);
+	(146, 1730754799, 'user_request', '1', NULL),
+	(265, 1730902669, 'user_request', '1', NULL),
+	(266, 1730902670, 'user_request', '1', NULL),
+	(267, 1730903008, 'user_request', '1', NULL),
+	(268, 1730903011, 'user_request', '1', NULL),
+	(269, 1730903022, 'user_request', '1', NULL),
+	(270, 1730903023, 'user_request', '1', NULL),
+	(271, 1730903029, 'user_request', '1', NULL),
+	(272, 1730903033, 'user_request', '1', NULL),
+	(273, 1730903040, 'user_request', '1', NULL),
+	(274, 1730903040, 'user_request', '1', NULL),
+	(275, 1730904099, 'user_request', '1', NULL),
+	(276, 1730904130, 'user_request', '1', NULL),
+	(277, 1730904402, 'user_request', '1', NULL),
+	(278, 1730904610, 'user_request', '1', NULL),
+	(279, 1730904611, 'user_request', '1', NULL),
+	(280, 1730915469, 'user_request', '1', NULL),
+	(281, 1730915470, 'user_request', '1', NULL),
+	(282, 1730916404, 'user_request', '1', NULL),
+	(283, 1730916439, 'user_request', '1', NULL),
+	(284, 1730916474, 'user_request', '1', NULL),
+	(285, 1730916486, 'user_request', '1', NULL),
+	(286, 1730916487, 'user_request', '1', NULL),
+	(287, 1730916507, 'user_request', '1', NULL),
+	(288, 1730916510, 'user_request', '1', NULL),
+	(289, 1730916518, 'user_request', '1', NULL),
+	(290, 1730916518, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 1730916518),
+	(291, 1730916632, 'user_request', '1', NULL),
+	(292, 1730916632, 'user_request', '1', NULL),
+	(293, 1730916645, 'user_request', '1', NULL),
+	(294, 1730916646, 'user_request', '1', NULL),
+	(295, 1730916652, 'user_request', '1', NULL),
+	(296, 1730916661, 'user_request', '1', NULL),
+	(297, 1730916663, 'user_request', '1', NULL),
+	(298, 1730916663, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 1730916663),
+	(299, 1730916680, 'user_request', '1', NULL),
+	(300, 1730916689, 'user_request', '1', NULL),
+	(301, 1730916690, 'user_request', '1', NULL),
+	(302, 1730916693, 'user_request', '1', NULL),
+	(303, 1730916696, 'user_request', '1', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -625,7 +709,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 
 -- Volcando estructura para tabla blackbag.saca
 CREATE TABLE IF NOT EXISTS `saca` (
-  `id` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nrosaca` int(11) DEFAULT NULL,
   `tipo` varchar(50) DEFAULT NULL,
   `peso` float(8,3) DEFAULT NULL,
@@ -634,11 +718,13 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~3 rows (aproximadamente)
 INSERT INTO `saca` (`id`, `nrosaca`, `tipo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
-	(0, NULL, 'a', 12.000, 21, '2024-11-06 01:58:02', '2024-11-06 01:58:02', '0');
+	(1, NULL, 'a', 12.000, 21, '2024-11-06 01:58:02', '2024-11-06 01:58:02', '0'),
+	(2, NULL, 'CG', 32.000, 32, '2024-11-06 22:10:32', '2024-11-06 22:10:32', '0'),
+	(3, NULL, 'FW', 123.000, 23, '2024-11-06 22:10:45', '2024-11-06 22:10:45', '0');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (

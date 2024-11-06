@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Saca;
+use App\Models\Despacho;
 
 class SacaController extends Controller
 {
@@ -22,9 +23,29 @@ class SacaController extends Controller
             'peso' => 'required|numeric',
             'nropaquetes' => 'required|integer',
         ]);
-
-        Saca::create($request->all());
-
+    
+        // Obtener el último valor de nrosaca y calcular el siguiente
+        $lastSaca = Saca::orderBy('id', 'desc')->first();
+        $nextNroSaca = $lastSaca ? sprintf('%03d', intval($lastSaca->nrosaca) + 1) : '001';
+    
+        // Obtener el identificador del despacho
+        $despacho = Despacho::find($request->despacho_id);
+        $identificadorDespacho = $despacho ? $despacho->identificador : '';
+    
+        // Concatenar el identificador del despacho con el número de saca
+        $identificadorSaca = $identificadorDespacho . $nextNroSaca;
+    
+        // Crear la nueva saca con el valor de nrosaca y el identificador
+        Saca::create([
+            'despacho_id' => $request->despacho_id,
+            'tipo' => $request->tipo,
+            'peso' => $request->peso,
+            'nropaquetes' => $request->nropaquetes,
+            'nrosaca' => $nextNroSaca,
+            'identificador' => $identificadorSaca,
+        ]);
+    
         return redirect()->back()->with('message', 'Saca creada exitosamente');
     }
+      
 }

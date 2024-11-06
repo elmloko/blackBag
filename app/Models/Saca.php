@@ -29,6 +29,7 @@ class Saca extends Model
         'peso',
         'nropaquetes',
         'despacho_id',
+        'identificador',
     ];
 
     // Definir las relaciones

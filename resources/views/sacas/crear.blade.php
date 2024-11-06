@@ -53,6 +53,7 @@
                                     <thead>
                                         <tr>
                                             <th>Número de Saca</th>
+                                            <th>Identificador</th>
                                             <th>Tipo</th>
                                             <th>Peso</th>
                                             <th>Número de Paquetes</th>
@@ -63,8 +64,24 @@
                                     <tbody>
                                         @foreach ($sacas as $saca)
                                             <tr>
-                                                <td>{{ $saca->nrosaca }}</td>
-                                                <td>{{ $saca->tipo }}</td>
+                                                <td>{{ str_pad($saca->nrosaca, 3, '0', STR_PAD_LEFT) }}</td>
+                                                <td>{{ $saca->identificador }}</td>
+                                                @php
+                                                    $tipos = [
+                                                        'BG' => 'BG (Saca)',
+                                                        'CG' => 'CG (Rodillo Cesta)',
+                                                        'CN' => 'CN (Contenedor)',
+                                                        'FW' => 'FW (Carro con bandejas)',
+                                                        'GU' => 'GU (Bandeja plana)',
+                                                        'IB' => 'IB (Caja en palé IPC)',
+                                                        'IL' => 'IL (Bandeja IPC)',
+                                                        'IS' => 'IS (Saca de IPC)',
+                                                        'PB' => 'PB (Caja en palé)',
+                                                        'PU' => 'PU (Bandeja de cartas)',
+                                                        'PX' => 'PX (Palé)',
+                                                    ];
+                                                @endphp
+                                                <td>{{ $tipos[$saca->tipo] ?? $saca->tipo }}</td>
                                                 <td>{{ $saca->peso }}</td>
                                                 <td>{{ $saca->nropaquetes }}</td>
                                                 <td>{{ $saca->created_at }}</td>
@@ -109,11 +126,23 @@
 
                             <div class="form-group">
                                 <label for="tipo">Tipo</label>
-                                <input type="text" class="form-control" id="tipo" name="tipo" required>
+                                <select class="form-control" id="tipo" name="tipo" required>
+                                    <option value="BG">BG (Saca)</option>
+                                    <option value="CG">CG (Rodillo) Cesta</option>
+                                    <option value="CN">CN Contenedor</option>
+                                    <option value="FW">FW Carro con bandejas (carro, plataforma)</option>
+                                    <option value="GU">GU Bandeja plana</option>
+                                    <option value="IB">IB Caja en palé IPC</option>
+                                    <option value="IL">IL Bandeja IPC</option>
+                                    <option value="IS">IS Saca de IPC</option>
+                                    <option value="PB">PB Caja en palé</option>
+                                    <option value="PU">PU Bandeja de cartas</option>
+                                    <option value="PX">PX Palé</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="peso">Peso</label>
-                                <input type="number" step="0.001" class="form-control" id="peso" name="peso"
+                                <input type="text" step="0,001" class="form-control" id="peso" name="peso"
                                     required>
                             </div>
                             <div class="form-group">
