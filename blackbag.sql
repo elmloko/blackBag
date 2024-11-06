@@ -19,6 +19,20 @@
 CREATE DATABASE IF NOT EXISTS `blackbag` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `blackbag`;
 
+-- Volcando estructura para tabla blackbag.contenido
+CREATE TABLE IF NOT EXISTS `contenido` (
+  `id` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `descripcion` varchar(50) DEFAULT NULL,
+  `peso` float(8,3) DEFAULT NULL,
+  `nropaquetes` int(11) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla blackbag.contenido: ~0 rows (aproximadamente)
+
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -37,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~1 rows (aproximadamente)
 INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'BOTJA', 'A', 'UA', 1, NULL, NULL, 'BOLPZBOTJAAUA4001', 4, 'ABIERTO', '2024-11-06 00:29:26', '2024-11-06 00:29:26', NULL),
 	(2, 'BOTJA', 'B', 'UM', 2, NULL, NULL, 'BOLPZBOTJABUM4002', 4, 'ABIERTO', '2024-11-06 22:11:31', '2024-11-06 22:11:31', NULL);
@@ -156,9 +170,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=823 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1011 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~302 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~329 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -438,10 +452,10 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(719, 1730915460, 60, 'user_request', '1', 'count', 2.00, NULL),
 	(720, 1730915280, 360, 'user_request', '1', 'count', 2.00, NULL),
 	(721, 1730914560, 1440, 'user_request', '1', 'count', 2.00, NULL),
-	(722, 1730907360, 10080, 'user_request', '1', 'count', 22.00, NULL),
+	(722, 1730907360, 10080, 'user_request', '1', 'count', 34.00, NULL),
 	(727, 1730916360, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(728, 1730916360, 360, 'user_request', '1', 'count', 20.00, NULL),
-	(729, 1730916000, 1440, 'user_request', '1', 'count', 20.00, NULL),
+	(729, 1730916000, 1440, 'user_request', '1', 'count', 32.00, NULL),
 	(731, 1730916420, 60, 'user_request', '1', 'count', 2.00, NULL),
 	(739, 1730916480, 60, 'user_request', '1', 'count', 5.00, NULL),
 	(755, 1730916480, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Http\\\\Controllers\\\\SacaController.php:26"]', 'count', 1.00, NULL),
@@ -461,7 +475,41 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(799, 1730916660, 60, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
 	(800, 1730916360, 360, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
 	(801, 1730916000, 1440, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
-	(802, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL);
+	(802, 1730907360, 10080, 'exception', '["Illuminate\\\\Database\\\\UniqueConstraintViolationException","app\\\\Livewire\\\\Iniciar.php:80"]', 'max', 1730916663.00, NULL),
+	(823, 1730916960, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(824, 1730916720, 360, 'user_request', '1', 'count', 7.00, NULL),
+	(827, 1730917020, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(851, 1730917200, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(852, 1730917080, 360, 'user_request', '1', 'count', 5.00, NULL),
+	(863, 1730917260, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(871, 1730917680, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(872, 1730917440, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(873, 1730917440, 1440, 'user_request', '1', 'count', 11.00, NULL),
+	(874, 1730917440, 10080, 'user_request', '1', 'count', 35.00, NULL),
+	(879, 1730917740, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(887, 1730917860, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(888, 1730917800, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(891, 1730918040, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(895, 1730918280, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(896, 1730918160, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(903, 1730918340, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(907, 1730918640, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(908, 1730918520, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(911, 1730918700, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(915, 1730919000, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(916, 1730918880, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(917, 1730918880, 1440, 'user_request', '1', 'count', 24.00, NULL),
+	(919, 1730919060, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(923, 1730919120, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(931, 1730919300, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(932, 1730919240, 360, 'user_request', '1', 'count', 14.00, NULL),
+	(935, 1730919360, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(959, 1730919480, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(963, 1730919540, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(987, 1730919660, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(988, 1730919600, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(995, 1730919720, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(1007, 1730919780, 60, 'user_request', '1', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -476,9 +524,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=351 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~180 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~232 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -664,7 +712,54 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(300, 1730916689, 'user_request', '1', NULL),
 	(301, 1730916690, 'user_request', '1', NULL),
 	(302, 1730916693, 'user_request', '1', NULL),
-	(303, 1730916696, 'user_request', '1', NULL);
+	(303, 1730916696, 'user_request', '1', NULL),
+	(304, 1730917014, 'user_request', '1', NULL),
+	(305, 1730917020, 'user_request', '1', NULL),
+	(306, 1730917024, 'user_request', '1', NULL),
+	(307, 1730917028, 'user_request', '1', NULL),
+	(308, 1730917032, 'user_request', '1', NULL),
+	(309, 1730917035, 'user_request', '1', NULL),
+	(310, 1730917037, 'user_request', '1', NULL),
+	(311, 1730917248, 'user_request', '1', NULL),
+	(312, 1730917255, 'user_request', '1', NULL),
+	(313, 1730917258, 'user_request', '1', NULL),
+	(314, 1730917265, 'user_request', '1', NULL),
+	(315, 1730917266, 'user_request', '1', NULL),
+	(316, 1730917695, 'user_request', '1', NULL),
+	(317, 1730917695, 'user_request', '1', NULL),
+	(318, 1730917750, 'user_request', '1', NULL),
+	(319, 1730917750, 'user_request', '1', NULL),
+	(320, 1730917880, 'user_request', '1', NULL),
+	(321, 1730918044, 'user_request', '1', NULL),
+	(322, 1730918322, 'user_request', '1', NULL),
+	(323, 1730918338, 'user_request', '1', NULL),
+	(324, 1730918353, 'user_request', '1', NULL),
+	(325, 1730918695, 'user_request', '1', NULL),
+	(326, 1730918757, 'user_request', '1', NULL),
+	(327, 1730919018, 'user_request', '1', NULL),
+	(328, 1730919081, 'user_request', '1', NULL),
+	(329, 1730919169, 'user_request', '1', NULL),
+	(330, 1730919179, 'user_request', '1', NULL),
+	(331, 1730919347, 'user_request', '1', NULL),
+	(332, 1730919379, 'user_request', '1', NULL),
+	(333, 1730919385, 'user_request', '1', NULL),
+	(334, 1730919390, 'user_request', '1', NULL),
+	(335, 1730919390, 'user_request', '1', NULL),
+	(336, 1730919407, 'user_request', '1', NULL),
+	(337, 1730919409, 'user_request', '1', NULL),
+	(338, 1730919532, 'user_request', '1', NULL),
+	(339, 1730919550, 'user_request', '1', NULL),
+	(340, 1730919555, 'user_request', '1', NULL),
+	(341, 1730919559, 'user_request', '1', NULL),
+	(342, 1730919560, 'user_request', '1', NULL),
+	(343, 1730919567, 'user_request', '1', NULL),
+	(344, 1730919568, 'user_request', '1', NULL),
+	(345, 1730919661, 'user_request', '1', NULL),
+	(346, 1730919668, 'user_request', '1', NULL),
+	(347, 1730919765, 'user_request', '1', NULL),
+	(348, 1730919769, 'user_request', '1', NULL),
+	(349, 1730919773, 'user_request', '1', NULL),
+	(350, 1730919786, 'user_request', '1', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -711,6 +806,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 CREATE TABLE IF NOT EXISTS `saca` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nrosaca` int(11) DEFAULT NULL,
+  `identificador` varchar(50) DEFAULT NULL,
   `tipo` varchar(50) DEFAULT NULL,
   `peso` float(8,3) DEFAULT NULL,
   `nropaquetes` int(11) DEFAULT NULL,
@@ -718,13 +814,14 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~3 rows (aproximadamente)
-INSERT INTO `saca` (`id`, `nrosaca`, `tipo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
-	(1, NULL, 'a', 12.000, 21, '2024-11-06 01:58:02', '2024-11-06 01:58:02', '0'),
-	(2, NULL, 'CG', 32.000, 32, '2024-11-06 22:10:32', '2024-11-06 22:10:32', '0'),
-	(3, NULL, 'FW', 123.000, 23, '2024-11-06 22:10:45', '2024-11-06 22:10:45', '0');
+-- Volcando datos para la tabla blackbag.saca: ~4 rows (aproximadamente)
+INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
+	(3, NULL, NULL, 'BG', 222.000, 23, '2024-11-06 22:10:45', '2024-11-06 22:59:28', '1'),
+	(4, 1, 'BOLPZBOTJABUM4002001', 'BG', 21.000, 12, '2024-11-06 22:21:06', '2024-11-06 22:21:06', '2'),
+	(5, 2, 'BOLPZBOTJABUM4002002', 'CG', 12.000, 12, '2024-11-06 22:28:15', '2024-11-06 22:28:15', '2'),
+	(6, 3, 'BOLPZBOTJABUM4002003', 'BG', 13.000, 51, '2024-11-06 22:29:10', '2024-11-06 22:29:10', '2');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
