@@ -69,13 +69,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/role-has-permission/{roleHasPermission}/edit', [RoleHasPermissionController::class, 'edit'])->name('role-has-permissions.edit');
     Route::put('/role-has-permission/{roleHasPermission', [RoleHasPermissionController::class, 'update'])->name('role-has-permissions.update');
     Route::delete('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'destroy'])->name('role-has-permissions.destroy');
-    
+
     //despachos
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');
     Route::post('/sacas', [SacaController::class, 'store'])->name('saca.store');
+    Route::delete('/saca/{id}', [SacaController::class, 'destroy'])->name('saca.delete');
+    Route::put('/saca/{id}', [SacaController::class, 'update'])->name('saca.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
