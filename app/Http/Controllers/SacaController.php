@@ -11,7 +11,7 @@ class SacaController extends Controller
     public function crear($id)
     {
         // Obtener las sacas relacionadas con el despacho
-        $sacas = Saca::where('despacho_id', $id)->get();
+        $sacas = Saca::where('despacho_id', $id)->with('contenido')->get();
 
         return view('sacas.crear', compact('id', 'sacas'));
     }
@@ -20,8 +20,8 @@ class SacaController extends Controller
         $request->validate([
             'despacho_id' => 'required',
             'tipo' => 'required|string|max:50',
-            'peso' => 'required|numeric',
-            'nropaquetes' => 'required|integer',
+            // 'peso' => 'required|numeric',
+            // 'nropaquetes' => 'required|integer',
         ]);
 
         // Obtener el último valor de nrosaca y calcular el siguiente
@@ -39,8 +39,8 @@ class SacaController extends Controller
         Saca::create([
             'despacho_id' => $request->despacho_id,
             'tipo' => $request->tipo,
-            'peso' => $request->peso,
-            'nropaquetes' => $request->nropaquetes,
+            // 'peso' => $request->peso,
+            // 'nropaquetes' => $request->nropaquetes,
             'nrosaca' => $nextNroSaca,
             'identificador' => $identificadorSaca,
         ]);

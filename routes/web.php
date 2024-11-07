@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DespachoController;
 use App\Http\Controllers\SacaController;
+use App\Http\Controllers\ContenidoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +79,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/sacas', [SacaController::class, 'store'])->name('saca.store');
     Route::delete('/saca/{id}', [SacaController::class, 'destroy'])->name('saca.delete');
     Route::put('/saca/{id}', [SacaController::class, 'update'])->name('saca.update');
+
+    //contenido
+    Route::put('/contenido/{id}', [ContenidoController::class, 'update'])->name('contenido.update');
+    Route::post('/contenido/store', [ContenidoController::class, 'store'])->name('contenido.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

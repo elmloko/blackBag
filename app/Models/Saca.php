@@ -37,6 +37,10 @@ class Saca extends Model
     {
         return $this->belongsTo(Despacho::class, 'despacho_id');
     }
+    public function contenido()
+    {
+        return $this->hasOne(Contenido::class, 'saca_id');
+    }
 
     // Desactivar timestamps si no se desea manejar created_at y updated_at automáticamente
     public $timestamps = true;
