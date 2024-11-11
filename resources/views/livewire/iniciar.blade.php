@@ -110,8 +110,12 @@
                                             <td>{{ $despacho->peso }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
-                                                <a href="{{ route('saca.crear', $despacho->id) }}"
-                                                    class="btn btn-primary">Ver Detalles de Saca</a>
+                                                @if ($despacho->estado === 'CERRADO')
+                                                    <button wire:click="reaperturarDespacho({{ $despacho->id }})" class="btn btn-warning">Reaperturar Saca</button>
+                                                    <button wire:click="expedicionDespacho({{ $despacho->id }})" class="btn btn-info">Expedición</button>
+                                                    @elseif ($despacho->estado === 'APERTURA' || $despacho->estado === 'REAPERTURA')
+                                                    <a href="{{ route('saca.crear', $despacho->id) }}" class="btn btn-primary">Ver Detalles de Saca</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

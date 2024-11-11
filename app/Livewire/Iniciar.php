@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Despacho;
+use App\Models\Saca;
 use Carbon\Carbon;
 
 class Iniciar extends Component
@@ -83,7 +84,7 @@ class Iniciar extends Component
             'subclase' => $this->subclase,
             'nrodespacho' => $this->nrodespacho,
             'fecha_hora_creacion' => $this->fechaHoraActual,
-            'estado' => 'ABIERTO',
+            'estado' => 'APERTURA',
             'ano' => $ultimoDigitoAno,
             'identificador' => $identificador,  // Guarda el identificador generado
         ]);
@@ -94,13 +95,35 @@ class Iniciar extends Component
         $this->dispatch('closeConfirmModal');
         $this->reset(['categoria', 'ofdestino', 'subclase', 'nrodespacho', 'fechaHoraActual']);
     }
+    public function reaperturarDespacho($despachoId)
+    {
+        // Cambiar el estado de todas las sacas relacionadas a 'APERTURA'
+        Saca::where('despacho_id', $despachoId)->update(['estado' => 'APERTURA']);
 
+        // Cambiar el estado del despacho a 'REAPERTURA'
+        $despacho = Despacho::findOrFail($despachoId);
+        $despacho->update(['estado' => 'REAPERTURA']);
 
+        // Emitir un mensaje de éxito
+        session()->flash('message', 'Despacho y todas sus sacas reaperturadas exitosamente.');
+    }
+    public function expedicionDespacho($despachoId)
+    {
+        // Encontrar el despacho y actualizar su estado
+        $despacho = Despacho::findOrFail($despachoId);
+        $despacho->update(['estado' => 'EXPEDICION']);
+
+        // Mensaje de éxito
+        session()->flash('message', 'El despacho ha sido cambiado a estado EXPEDICION.');
+    }
     public function render()
     {
-        $despachos = Despacho::where('ofdestino', 'like', '%' . $this->searchTerm . '%')
-            ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
-            ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%')
+        $despachos = Despacho::where(function ($query) {
+            $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
+        })
+            ->whereIn('estado', ['APERTURA', 'CERRADO', 'REAPERTURA']) // Filtra solo los estados deseados
             ->paginate($this->perPage);
 
         return view('livewire.iniciar', [

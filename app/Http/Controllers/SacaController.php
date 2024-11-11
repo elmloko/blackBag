@@ -78,14 +78,24 @@ class SacaController extends Controller
     {
         // Obtener todas las sacas relacionadas al despacho
         $sacas = Saca::where('despacho_id', $id)->get();
-
+    
+        // Verificar si alguna saca tiene peso o nropaquetes en null o 0
+        $incompleteSacas = $sacas->contains(function ($saca) {
+            return $saca->peso === null || $saca->peso == 0 || $saca->nropaquetes === null || $saca->nropaquetes == 0;
+        });
+    
+        // Si existe alguna saca incompleta, redirigir con un mensaje de error
+        if ($incompleteSacas) {
+            return redirect()->back()->with('error', 'No se puede cerrar el despacho. Todas las sacas deben tener valores válidos de peso y número de paquetes.');
+        }
+    
         // Calcular la suma total de peso y número de paquetes
         $totalPeso = $sacas->sum('peso');
         $totalPaquetes = $sacas->sum('nropaquetes');
-
+    
         // Cambiar el estado de todas las sacas a 'CERRADO'
         Saca::where('despacho_id', $id)->update(['estado' => 'CERRADO']);
-
+    
         // Cambiar el estado del despacho a 'CERRADO' y guardar los totales
         $despacho = Despacho::findOrFail($id);
         $despacho->update([
@@ -93,8 +103,9 @@ class SacaController extends Controller
             'peso' => $totalPeso,
             'nroenvase' => $totalPaquetes,
         ]);
-
+    
         // Redirigir a la pantalla /iniciar con un mensaje de éxito
         return redirect('/iniciar')->with('message', 'Despacho cerrado exitosamente con todos los datos actualizados');
     }
+    
 }
