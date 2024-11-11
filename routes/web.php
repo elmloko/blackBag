@@ -73,13 +73,14 @@ Route::middleware('auth')->group(function () {
 
     //despachos
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
-    Route::post('/despacho/{id}/cerrar', [SacaController::class, 'cerrar'])->name('despacho.cerrar');
+    Route::get('/expedicion', [DespachoController::class, 'getExpedicion']);
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');
     Route::post('/sacas', [SacaController::class, 'store'])->name('saca.store');
     Route::delete('/saca/{id}', [SacaController::class, 'destroy'])->name('saca.delete');
     Route::put('/saca/{id}', [SacaController::class, 'update'])->name('saca.update');
+    Route::post('/despacho/{id}/cerrar', [SacaController::class, 'cerrar'])->name('despacho.cerrar');
 
     //contenido
     Route::put('/contenido/{id}', [ContenidoController::class, 'update'])->name('contenido.update');

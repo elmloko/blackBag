@@ -10,4 +10,8 @@ class DespachoController extends Controller
     {
         return view('despacho.iniciar ');
     }
+    public function getExpedicion ()
+    {
+        return view('despacho.expedicion ');
+    }
 }

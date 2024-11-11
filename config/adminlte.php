@@ -353,6 +353,11 @@ return [
                     'url' => '/iniciar',
                     'icon' => 'fas fa-user',
                 ],
+                [
+                    'text' => 'Despachos Expedicion',
+                    'url' => '/expedicion',
+                    'icon' => 'fas fa-user',
+                ],
             ],
         ],
         [
