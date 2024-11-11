@@ -5,8 +5,10 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Despacho;
+use App\Models\Contenido;
 use App\Models\Saca;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Iniciar extends Component
 {
@@ -109,13 +111,82 @@ class Iniciar extends Component
     }
     public function expedicionDespacho($despachoId)
     {
+        // Mapeo de siglas a nombres de ciudades
+        $ciudades = [
+            'BOLPZ' => 'LA PAZ',
+            'BOTJA' => 'TARIJA',
+            'BOPOI' => 'POTOSI',
+            'BOCIJ' => 'PANDO',
+            'BOORU' => 'ORURO',
+            'BOTDD' => 'BENI',
+            'BOSRE' => 'SUCRE',
+            'BOSRZ' => 'SANTA CRUZ',
+        ];
+    
+        // Obtener la ciudad del usuario como origen
+        $ciudadOrigen = auth()->user()->city;
+    
+        // Obtener la sigla de la ciudad de origen, si existe en el mapeo
+        $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
+    
         // Encontrar el despacho y actualizar su estado
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'EXPEDICION']);
+    
+        // Obtener todos los registros de saca relacionados al despacho
+        $sacas = Saca::where('despacho_id', $despacho->id)->get();
+    
+        // Obtener el contenido relacionado a cada saca y calcular totales si es necesario
+        $contenidoData = [];
+        $totalPeso = 0;
+        $totalPaquetes = 0;
+    
+        foreach ($sacas as $saca) {
+            $contenido = Contenido::where('saca_id', $saca->id)->get();
+    
+            // Calcular totales
+            foreach ($contenido as $item) {
+                $totalPeso += $item->pesom + $item->pesol + $item->pesou;
+                $totalPaquetes += $item->nropaquetesm + $item->nropaquetesl + $item->nropaquetesu;
+            }
+    
+            $contenidoData[] = [
+                'saca' => $saca,
+                'contenido' => $contenido
+            ];
+        }
+    
+        // Convertir la sigla de ofdestino a nombre de ciudad para usar en el PDF
+        $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
+    
+        // Datos para el PDF
+        $data = [
+            'despacho' => $despacho,
+            'sacas' => $sacas,
+            'contenidoData' => $contenidoData,
+            'totalPeso' => $totalPeso,
+            'totalPaquetes' => $totalPaquetes,
+            'ciudadOrigen' => $ciudadOrigen, // Ciudad completa como origen
+            'siglaOrigen' => $siglaOrigen,    // Sigla de la ciudad origen
+            'ofdestino' => $despacho->ofdestino, // Mantiene la sigla original
+            'ciudadDestino' => $ciudadDestino, // Nombre de la ciudad destino
+            'categoria' => $despacho->categoria,
+            'subclase' => $despacho->subclase,
+            'ano' => $despacho->created_at->format('Y'),
+            'nrodespacho' => $despacho->nrodespacho,
+            'identificador' => $despacho->identificador,
+            'created_at' => $despacho->created_at,
+        ];
+    
+        // Crear el PDF usando una vista en Blade llamada 'despacho.pdf.cn31'
+        $pdf = PDF::loadView('despacho.pdf.cn31', $data);
+    
+        // Utiliza streamDownload para transmitir el PDF al navegador
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'CN.pdf');
+    }    
 
-        // Mensaje de éxito
-        session()->flash('message', 'El despacho ha sido cambiado a estado EXPEDICION.');
-    }
     public function render()
     {
         $despachos = Despacho::where(function ($query) {
