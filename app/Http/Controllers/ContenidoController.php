@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contenido;
+use App\Models\Saca;
 
 class ContenidoController extends Controller
 {
@@ -39,9 +40,21 @@ class ContenidoController extends Controller
             'tipou' => $request->tipou,
         ]);
 
+        // Calcular los totales de peso y número de paquetes
+        $totalPeso = ($request->pesom ?? 0) + ($request->pesol ?? 0) + ($request->pesou ?? 0);
+        $totalPaquetes = ($request->nropaquetesm ?? 0) + ($request->nropaquetesl ?? 0) + ($request->nropaquetesu ?? 0);
+
+        // Actualizar la tabla saca con los totales calculados
+        $saca = Saca::findOrFail($request->saca_id);
+        $saca->update([
+            'peso' => $totalPeso,
+            'nropaquetes' => $totalPaquetes,
+        ]);
+
         // Redirección después de la creación exitosa
-        return redirect()->back()->with('message', 'Contenido creado exitosamente');
+        return redirect()->back()->with('message', 'Contenido creado exitosamente y saca actualizada');
     }
+
     public function update(Request $request, $id)
     {
         // Validación de los datos de entrada
@@ -57,7 +70,7 @@ class ContenidoController extends Controller
             'tipol' => 'nullable|string|max:50',
             'tipou' => 'nullable|string|max:50',
         ]);
-
+    
         // Encontrar el contenido existente y actualizar sus datos
         $contenido = Contenido::findOrFail($id);
         $contenido->update([
@@ -72,8 +85,20 @@ class ContenidoController extends Controller
             'tipol' => $request->tipol,
             'tipou' => $request->tipou,
         ]);
-
+    
+        // Calcular los totales de peso y número de paquetes
+        $totalPeso = ($request->pesom ?? 0) + ($request->pesol ?? 0) + ($request->pesou ?? 0);
+        $totalPaquetes = ($request->nropaquetesm ?? 0) + ($request->nropaquetesl ?? 0) + ($request->nropaquetesu ?? 0);
+    
+        // Actualizar la tabla saca con los totales calculados
+        $saca = Saca::findOrFail($contenido->saca_id);
+        $saca->update([
+            'peso' => $totalPeso,
+            'nropaquetes' => $totalPaquetes,
+        ]);
+    
         // Redirección después de la actualización exitosa
-        return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
+        return redirect()->back()->with('message', 'Contenido actualizado exitosamente y saca actualizada');
     }
+    
 }
