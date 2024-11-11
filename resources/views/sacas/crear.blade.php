@@ -318,6 +318,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="card-footer text-right">
+                                <form action="{{ route('despacho.cerrar', $id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Cerrar Despacho</button>
+                                </form>
+                            </div>
                             <div class="card-footer">
                                 <!-- Aquí puedes incluir una paginación si es necesario -->
                             </div>

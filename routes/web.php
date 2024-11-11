@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
 
     //despachos
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
+    Route::post('/despacho/{id}/cerrar', [SacaController::class, 'cerrar'])->name('despacho.cerrar');
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');
