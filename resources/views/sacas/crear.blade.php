@@ -29,14 +29,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="d-flex align-items-center">
-                                    <div class="ml-auto">
-                                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                            data-target="#createSacaModal">
-                                            Crear Nueva Saca
-                                        </button>
-                                    </div>
-                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/iniciar" class="btn btn-secondary">Atrás</a>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createSacaModal">
+                                        Crear Nueva Saca
+                                    </button>
+                                </div>                                
                             </div>
                             @if (session()->has('message'))
                                 <div class="alert alert-success">

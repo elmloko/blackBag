@@ -20,12 +20,12 @@ class SacaController extends Controller
         $request->validate([
             'despacho_id' => 'required',
             'tipo' => 'required|string|max:50',
-            // 'peso' => 'required|numeric',
-            // 'nropaquetes' => 'required|integer',
         ]);
 
-        // Obtener el último valor de nrosaca y calcular el siguiente
-        $lastSaca = Saca::orderBy('id', 'desc')->first();
+        // Obtener el último valor de nrosaca para el despacho actual y calcular el siguiente
+        $lastSaca = Saca::where('despacho_id', $request->despacho_id)
+            ->orderBy('nrosaca', 'desc')
+            ->first();
         $nextNroSaca = $lastSaca ? sprintf('%03d', intval($lastSaca->nrosaca) + 1) : '001';
 
         // Obtener el identificador del despacho
@@ -39,14 +39,14 @@ class SacaController extends Controller
         Saca::create([
             'despacho_id' => $request->despacho_id,
             'tipo' => $request->tipo,
-            // 'peso' => $request->peso,
-            // 'nropaquetes' => $request->nropaquetes,
             'nrosaca' => $nextNroSaca,
             'identificador' => $identificadorSaca,
         ]);
 
         return redirect()->back()->with('message', 'Saca creada exitosamente');
     }
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
