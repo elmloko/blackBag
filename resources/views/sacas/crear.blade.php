@@ -31,10 +31,11 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <a href="/iniciar" class="btn btn-secondary">Atrás</a>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createSacaModal">
+                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#createSacaModal">
                                         Crear Nueva Saca
                                     </button>
-                                </div>                                
+                                </div>
                             </div>
                             @if (session()->has('message'))
                                 <div class="alert alert-success">
@@ -54,6 +55,7 @@
                                             <th>Identificador</th>
                                             <th>Tipo</th>
                                             <th>Peso</th>
+                                            <th>Etiqueta</th>
                                             <th>Número de Paquetes</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
@@ -82,9 +84,14 @@
                                                         'PU' => 'PU (Bandeja de cartas)',
                                                         'PX' => 'PX (Palé)',
                                                     ];
+                                                    $etiqueta = [
+                                                        'RO' => 'RO - Roja',
+                                                        'BL' => 'BL - Blanca',
+                                                    ];
                                                 @endphp
                                                 <td>{{ $tipos[$saca->tipo] ?? $saca->tipo }}</td>
                                                 <td>{{ $saca->peso }}</td>
+                                                <td>{{ $etiqueta[$saca->etiqueta] ?? $saca->etiqueta }}</td>
                                                 <td>{{ $saca->nropaquetes }}</td>
                                                 <td>{{ $saca->created_at }}</td>
                                                 <td>
@@ -221,7 +228,8 @@
                                                                                 <option value="MISP"
                                                                                     {{ optional($contenido)->descripcion == 'MISP' ? 'selected' : '' }}>
                                                                                     MISP - Enviado al descubierto: especial
-                                                                                    (sin tasas ni gastos pagaderos)</option>
+                                                                                    (sin tasas ni gastos pagaderos)
+                                                                                </option>
                                                                             </select>
                                                                         </div>
 
@@ -318,7 +326,8 @@
                                 </table>
                             </div>
                             <div class="card-footer text-right">
-                                <form action="{{ route('despacho.cerrar', $id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
+                                <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
+                                    onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Cerrar Despacho</button>
                                 </form>
@@ -364,6 +373,13 @@
                                     <option value="PB">PB Caja en palé</option>
                                     <option value="PU">PU Bandeja de cartas</option>
                                     <option value="PX">PX Palé</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="etiqueta">Etiqueta</label>
+                                <select class="form-control" id="etiqueta" name="etiqueta" required>
+                                    <option value="RO  ">RO - Roja</option>
+                                    <option value="BL">BL Blanca</option>
                                 </select>
                             </div>
                             <div class="form-group">
