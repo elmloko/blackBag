@@ -147,7 +147,6 @@
                                                                         </div>
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Guardar Cambios</button>
-
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -367,7 +366,7 @@
                                     <option value="PX">PX Palé</option>
                                 </select>
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="peso">Peso</label>
                                 <input type="text" step="0,001" class="form-control" id="peso" name="peso"
                                     required>
@@ -375,8 +374,7 @@
                             <div class="form-group">
                                 <label for="nropaquetes">Número de Paquetes</label>
                                 <input type="number" class="form-control" id="nropaquetes" name="nropaquetes" required>
-                            </div> --}}
-
+                            </div>
                             <button type="submit" class="btn btn-primary">Crear Saca</button>
                         </form>
                     </div>

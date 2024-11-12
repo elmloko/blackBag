@@ -112,7 +112,7 @@
                 <th>Destino</th>
                 <td colspan="5">{{ $ciudadDestino }} - AGENCIA BOLIVIANA DE CORREOS</td>
             </tr>
-        </thead>        
+        </thead>
         <tbody>
             <tr>
                 <th>Origen OE</th>
@@ -179,24 +179,24 @@
                 <th>Peso Kg.</th>
             </tr>
             <tr>
-                <td>CERTIFICADA</td>
-                {{-- <td>{{ $data->PAQUETESR }}</td>
-                <td>{{ $data->PESOR }}</td> --}}
+                <td>ORDINARIOS</td>
+                <td>{{ $nropaquetesu }}</td>
+                <td>{{ $pesou }}</td>
             </tr>
             <tr>
                 <td>LC /AO</td>
-                {{-- <td>{{ $data->PAQUETESU }}</td>
-                <td>{{ $data->PESOU }}</td> --}}
+                <td>{{ $nropaquetesl }}</td>
+                <td>{{ $pesol }}</td>
             </tr>
             <tr>
                 <td>SACAS M</td>
-                {{-- <td>{{ $data->PAQUETESM }}</td>
-                <td>{{ $data->PESOM }}</td> --}}
+                <td>{{ $nropaquetesm }}</td>
+                <td>{{ $pesom }}</td>
             </tr>
             <tr>
                 <td>Total</td>
-                {{-- <td>{{ $sum2 }}</td>
-                <td>{{ $sum1 }}</td> --}}
+                <td>{{ $totalPaquetes }}</td>
+                <td>{{ $totalPeso }}</td>
                 < </tr>
         </tbody>
     </table>

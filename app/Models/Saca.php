@@ -31,6 +31,7 @@ class Saca extends Model
         'despacho_id',
         'identificador',
         'estado',
+        'etiqueta',
     ];
 
     // Definir las relaciones

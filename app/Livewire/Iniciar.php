@@ -42,30 +42,42 @@ class Iniciar extends Component
     public function crearDespacho()
     {
         $this->validate();
-
+    
         // Verifica que la oficina seleccionada esté definida
         if (!$this->ofdestino) {
             session()->flash('message', 'Por favor, selecciona una oficina.');
             return;
         }
-
+    
+        // Verificar si ya existe un despacho en estado APERTURA o REAPERTURA con el mismo ofdestino
+        $despachoExistente = Despacho::where('ofdestino', $this->ofdestino)
+            ->whereIn('estado', ['APERTURA', 'REAPERTURA'])
+            ->exists();
+    
+            if ($despachoExistente) {
+                session()->flash('error', 'No se puede crear un despacho con la misma oficina en estado APERTURA o REAPERTURA.');
+                $this->dispatch('closeCreateDespachoModal'); // Cierra el modal
+                return;
+            }
+    
         // Obtiene el último número de despacho para la oficina seleccionada
         $ultimoDespacho = Despacho::where('ofdestino', $this->ofdestino)->latest('id')->first();
         $ultimoNumero = $ultimoDespacho ? intval($ultimoDespacho->nrodespacho) : 0;
-
+    
         // Incrementa el número de despacho en +1
         $nuevoNumero = $ultimoNumero + 1;
-
+    
         // Formatea el número con ceros a la izquierda para obtener el formato 001, 002, etc.
         $this->nrodespacho = str_pad($nuevoNumero, 3, '0', STR_PAD_LEFT);
-
+    
         // Guarda la fecha y hora actual
         $this->fechaHoraActual = Carbon::now()->format('Y-m-d H:i:s');
-
+    
         // Cierra el modal de creación y abre el de confirmación
         $this->dispatch('closeCreateDespachoModal');
         $this->dispatch('openConfirmModal');
     }
+    
 
     public function confirmarGuardarDespacho()
     {
@@ -122,70 +134,75 @@ class Iniciar extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-    
+
         // Obtener la ciudad del usuario como origen
         $ciudadOrigen = auth()->user()->city;
-    
-        // Obtener la sigla de la ciudad de origen, si existe en el mapeo
         $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
-    
+
         // Encontrar el despacho y actualizar su estado
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'EXPEDICION']);
-    
+
+        // Inicializar los totales
+        $totalPeso = $totalPaquetes = 0;
+        $pesom = $pesol = $pesou = 0;
+        $nropaquetesm = $nropaquetesl = $nropaquetesu = 0;
+
         // Obtener todos los registros de saca relacionados al despacho
         $sacas = Saca::where('despacho_id', $despacho->id)->get();
-    
-        // Obtener el contenido relacionado a cada saca y calcular totales si es necesario
-        $contenidoData = [];
-        $totalPeso = 0;
-        $totalPaquetes = 0;
-    
+
         foreach ($sacas as $saca) {
             $contenido = Contenido::where('saca_id', $saca->id)->get();
-    
-            // Calcular totales
+
             foreach ($contenido as $item) {
+                // Sumatorias individuales
+                $pesom += $item->pesom;
+                $pesol += $item->pesol;
+                $pesou += $item->pesou;
+                $nropaquetesm += $item->nropaquetesm;
+                $nropaquetesl += $item->nropaquetesl;
+                $nropaquetesu += $item->nropaquetesu;
+
+                // Sumatoria general
                 $totalPeso += $item->pesom + $item->pesol + $item->pesou;
                 $totalPaquetes += $item->nropaquetesm + $item->nropaquetesl + $item->nropaquetesu;
             }
-    
-            $contenidoData[] = [
-                'saca' => $saca,
-                'contenido' => $contenido
-            ];
         }
-    
-        // Convertir la sigla de ofdestino a nombre de ciudad para usar en el PDF
+
+        // Convertir la sigla de ofdestino a nombre de ciudad
         $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
-    
+
         // Datos para el PDF
         $data = [
             'despacho' => $despacho,
             'sacas' => $sacas,
-            'contenidoData' => $contenidoData,
             'totalPeso' => $totalPeso,
             'totalPaquetes' => $totalPaquetes,
-            'ciudadOrigen' => $ciudadOrigen, // Ciudad completa como origen
-            'siglaOrigen' => $siglaOrigen,    // Sigla de la ciudad origen
-            'ofdestino' => $despacho->ofdestino, // Mantiene la sigla original
-            'ciudadDestino' => $ciudadDestino, // Nombre de la ciudad destino
+            'ciudadOrigen' => $ciudadOrigen,
+            'siglaOrigen' => $siglaOrigen,
+            'ofdestino' => $despacho->ofdestino,
+            'ciudadDestino' => $ciudadDestino,
             'categoria' => $despacho->categoria,
             'subclase' => $despacho->subclase,
             'ano' => $despacho->created_at->format('Y'),
             'nrodespacho' => $despacho->nrodespacho,
             'identificador' => $despacho->identificador,
             'created_at' => $despacho->created_at,
+            'pesom' => $pesom,
+            'pesol' => $pesol,
+            'pesou' => $pesou,
+            'nropaquetesm' => $nropaquetesm,
+            'nropaquetesl' => $nropaquetesl,
+            'nropaquetesu' => $nropaquetesu,
         ];
-    
-        // Crear el PDF usando una vista en Blade llamada 'despacho.pdf.cn31'
+
+        // Crear el PDF usando la vista 'despacho.pdf.cn31'
         $pdf = PDF::loadView('despacho.pdf.cn31', $data);
-    
-        // Utiliza streamDownload para transmitir el PDF al navegador
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'CN.pdf');
-    }    
+    }
 
     public function render()
     {

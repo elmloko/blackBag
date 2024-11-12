@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `contenido` (
 INSERT INTO `contenido` (`id`, `descripcion`, `pesom`, `pesol`, `pesou`, `nropaquetesm`, `nropaquetesl`, `nropaquetesu`, `tipom`, `tipou`, `tipol`, `created_at`, `updated_at`, `saca_id`) VALUES
 	(1, 'MINL', 0.500, NULL, NULL, 24, NULL, NULL, 'M', 'U', 'L', '2024-11-11 18:05:23', '2024-11-11 18:05:23', 2),
 	(2, 'MINL', 0.800, 2.000, NULL, 53, 7, NULL, 'M', 'U', 'L', '2024-11-11 18:22:00', '2024-11-11 18:22:00', 3),
-	(3, 'MINL', 15.000, NULL, NULL, 26, NULL, NULL, 'M', 'U', 'L', '2024-11-11 18:34:57', '2024-11-11 18:46:02', 4);
+	(3, 'MINL', 15.000, 5.000, 23.000, 26, 14, 54, 'M', 'U', 'L', '2024-11-11 18:34:57', '2024-11-11 22:46:44', 4);
 
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `despacho` (
 
 -- Volcando datos para la tabla blackbag.despacho: ~3 rows (aproximadamente)
 INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'BOTJA', 'A', 'UA', 1, 110, 18.300, 'BOLPZBOTJAAUA4001', 4, 'EXPEDICION', '2024-11-06 00:29:26', '2024-11-11 22:00:35', NULL),
+	(1, 'BOTJA', 'A', 'UA', 1, 178, 46.300, 'BOLPZBOTJAAUA4001', 4, 'REAPERTURA', '2024-11-06 00:29:26', '2024-11-12 18:25:29', NULL),
 	(2, 'BOTJA', 'B', 'UM', 2, NULL, NULL, 'BOLPZBOTJABUM4002', 4, 'APERTURA', '2024-11-06 22:11:31', '2024-11-06 22:11:31', NULL),
 	(3, 'BOPOI', 'A', 'UL', 1, NULL, NULL, 'BOLPZBOPOIAUL4001', 4, 'APERTURA', '2024-11-08 23:35:02', '2024-11-08 23:35:02', NULL);
 
@@ -182,9 +182,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=2391 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2639 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~484 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~733 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -682,15 +682,15 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(1967, 1731341040, 60, 'user_request', '1', 'count', 3.00, NULL),
 	(1968, 1731340800, 360, 'user_request', '1', 'count', 3.00, NULL),
 	(1969, 1731340800, 1440, 'user_request', '1', 'count', 30.00, NULL),
-	(1970, 1731340800, 10080, 'user_request', '1', 'count', 43.00, NULL),
+	(1970, 1731340800, 10080, 'user_request', '1', 'count', 66.00, NULL),
 	(1971, 1731341040, 60, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 2.00, NULL),
 	(1972, 1731340800, 360, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 2.00, NULL),
 	(1973, 1731340800, 1440, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 5.00, NULL),
-	(1974, 1731340800, 10080, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 5.00, NULL),
+	(1974, 1731340800, 10080, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 6.00, NULL),
 	(1975, 1731341040, 60, 'slow_user_request', '1', 'count', 2.00, NULL),
 	(1976, 1731340800, 360, 'slow_user_request', '1', 'count', 2.00, NULL),
 	(1977, 1731340800, 1440, 'slow_user_request', '1', 'count', 5.00, NULL),
-	(1978, 1731340800, 10080, 'slow_user_request', '1', 'count', 5.00, NULL),
+	(1978, 1731340800, 10080, 'slow_user_request', '1', 'count', 6.00, NULL),
 	(1979, 1731341040, 60, 'exception', '["Error","app\\\\Livewire\\\\Iniciar.php:126"]', 'count', 2.00, NULL),
 	(1980, 1731340800, 360, 'exception', '["Error","app\\\\Livewire\\\\Iniciar.php:126"]', 'count', 2.00, NULL),
 	(1981, 1731340800, 1440, 'exception', '["Error","app\\\\Livewire\\\\Iniciar.php:126"]', 'count', 5.00, NULL),
@@ -791,11 +791,11 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(2294, 1731342240, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
 	(2295, 1731342240, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
 	(2296, 1731342240, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
-	(2297, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 5.00, NULL),
+	(2297, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 6.00, NULL),
 	(2299, 1731342240, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731342249.00, NULL),
 	(2300, 1731342240, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731342249.00, NULL),
 	(2301, 1731342240, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731342249.00, NULL),
-	(2302, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731346680.00, NULL),
+	(2302, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731348428.00, NULL),
 	(2303, 1731345540, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(2304, 1731345480, 360, 'user_request', '1', 'count', 4.00, NULL),
 	(2305, 1731345120, 1440, 'user_request', '1', 'count', 6.00, NULL),
@@ -835,7 +835,101 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(2377, 1731346560, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731346680.00, NULL),
 	(2379, 1731348000, 60, 'user_request', '1', 'count', 3.00, NULL),
 	(2380, 1731348000, 360, 'user_request', '1', 'count', 3.00, NULL),
-	(2381, 1731348000, 1440, 'user_request', '1', 'count', 3.00, NULL);
+	(2381, 1731348000, 1440, 'user_request', '1', 'count', 12.00, NULL),
+	(2391, 1731348420, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2392, 1731348360, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(2395, 1731348420, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
+	(2396, 1731348360, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
+	(2397, 1731348000, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'count', 1.00, NULL),
+	(2403, 1731348420, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731348428.00, NULL),
+	(2404, 1731348360, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731348428.00, NULL),
+	(2405, 1731348000, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 'max', 1731348428.00, NULL),
+	(2407, 1731348480, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(2411, 1731348840, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2412, 1731348720, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(2415, 1731348840, 60, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 1.00, NULL),
+	(2416, 1731348720, 360, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 1.00, NULL),
+	(2417, 1731348000, 1440, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'count', 1.00, NULL),
+	(2418, 1731348840, 60, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(2419, 1731348720, 360, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(2420, 1731348000, 1440, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(2421, 1731348840, 60, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2422, 1731348720, 360, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2423, 1731348000, 1440, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2424, 1731340800, 10080, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2431, 1731348840, 60, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'max', 2053.00, NULL),
+	(2432, 1731348720, 360, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'max', 2053.00, NULL),
+	(2433, 1731348000, 1440, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 'max', 2053.00, NULL),
+	(2434, 1731348840, 60, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731348880.00, NULL),
+	(2435, 1731348720, 360, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731348880.00, NULL),
+	(2436, 1731348000, 1440, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731348880.00, NULL),
+	(2437, 1731340800, 10080, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731348880.00, NULL),
+	(2439, 1731349020, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(2447, 1731349020, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2448, 1731348720, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2449, 1731348000, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2450, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'count', 1.00, NULL),
+	(2455, 1731349020, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731349057.00, NULL),
+	(2456, 1731348720, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731349057.00, NULL),
+	(2457, 1731348000, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731349057.00, NULL),
+	(2458, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 'max', 1731349057.00, NULL),
+	(2463, 1731349680, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2464, 1731349440, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(2465, 1731349440, 1440, 'user_request', '1', 'count', 14.00, NULL),
+	(2471, 1731350160, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2472, 1731350160, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(2479, 1731350400, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2487, 1731350760, 60, 'user_request', '1', 'count', 8.00, NULL),
+	(2488, 1731350520, 360, 'user_request', '1', 'count', 8.00, NULL),
+	(2491, 1731350760, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2492, 1731350520, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2493, 1731349440, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2494, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2499, 1731350760, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731350781.00, NULL),
+	(2500, 1731350520, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731350781.00, NULL),
+	(2501, 1731349440, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731350781.00, NULL),
+	(2502, 1731340800, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731350781.00, NULL),
+	(2527, 1731351060, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(2528, 1731350880, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(2529, 1731350880, 1440, 'user_request', '1', 'count', 6.00, NULL),
+	(2530, 1731350880, 10080, 'user_request', '1', 'count', 10.00, NULL),
+	(2531, 1731351180, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(2532, 1731351180, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2533, 1731350880, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2534, 1731350880, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2535, 1731350880, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 2.00, NULL),
+	(2539, 1731351180, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731351188.00, NULL),
+	(2540, 1731350880, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731351188.00, NULL),
+	(2541, 1731350880, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731351188.00, NULL),
+	(2542, 1731350880, 10080, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731352738.00, NULL),
+	(2543, 1731351360, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2544, 1731351240, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(2551, 1731351720, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2552, 1731351600, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(2559, 1731352680, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(2560, 1731352680, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(2561, 1731352320, 1440, 'user_request', '1', 'count', 4.00, NULL),
+	(2571, 1731352680, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2572, 1731352680, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2573, 1731352320, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'count', 1.00, NULL),
+	(2579, 1731352680, 60, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731352738.00, NULL),
+	(2580, 1731352680, 360, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731352738.00, NULL),
+	(2581, 1731352320, 1440, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 'max', 1731352738.00, NULL),
+	(2583, 1731418020, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(2584, 1731417840, 360, 'user_request', '1', 'count', 1.00, NULL),
+	(2585, 1731417120, 1440, 'user_request', '1', 'count', 1.00, NULL),
+	(2586, 1731411360, 10080, 'user_request', '1', 'count', 9.00, NULL),
+	(2587, 1731418560, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2588, 1731418560, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(2589, 1731418560, 1440, 'user_request', '1', 'count', 6.00, NULL),
+	(2595, 1731418620, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(2611, 1731421380, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(2612, 1731421080, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(2613, 1731420000, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(2619, 1731421500, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(2620, 1731421440, 360, 'user_request', '1', 'count', 5.00, NULL),
+	(2621, 1731421440, 1440, 'user_request', '1', 'count', 5.00, NULL),
+	(2622, 1731421440, 10080, 'user_request', '1', 'count', 5.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -850,9 +944,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=663 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=718 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~464 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~592 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -1397,7 +1491,62 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(659, 1731346680, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 1731346680),
 	(660, 1731348018, 'user_request', '1', NULL),
 	(661, 1731348029, 'user_request', '1', NULL),
-	(662, 1731348035, 'user_request', '1', NULL);
+	(662, 1731348035, 'user_request', '1', NULL),
+	(663, 1731348425, 'user_request', '1', NULL),
+	(664, 1731348428, 'user_request', '1', NULL),
+	(665, 1731348428, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:113"]', 1731348428),
+	(666, 1731348487, 'user_request', '1', NULL),
+	(667, 1731348877, 'user_request', '1', NULL),
+	(668, 1731348880, 'slow_request', '["POST","\\/iniciar","via \\/livewire\\/update"]', 2053),
+	(669, 1731348880, 'slow_user_request', '1', NULL),
+	(670, 1731348880, 'user_request', '1', NULL),
+	(671, 1731348880, 'exception', '["Error","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 1731348880),
+	(672, 1731349042, 'user_request', '1', NULL),
+	(673, 1731349051, 'user_request', '1', NULL),
+	(674, 1731349057, 'user_request', '1', NULL),
+	(675, 1731349057, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:95"]', 1731349057),
+	(676, 1731349070, 'user_request', '1', NULL),
+	(677, 1731349687, 'user_request', '1', NULL),
+	(678, 1731349696, 'user_request', '1', NULL),
+	(679, 1731350194, 'user_request', '1', NULL),
+	(680, 1731350197, 'user_request', '1', NULL),
+	(681, 1731350449, 'user_request', '1', NULL),
+	(682, 1731350452, 'user_request', '1', NULL),
+	(683, 1731350777, 'user_request', '1', NULL),
+	(684, 1731350780, 'user_request', '1', NULL),
+	(685, 1731350781, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 1731350781),
+	(686, 1731350783, 'user_request', '1', NULL),
+	(687, 1731350786, 'user_request', '1', NULL),
+	(688, 1731350804, 'user_request', '1', NULL),
+	(689, 1731350804, 'user_request', '1', NULL),
+	(690, 1731350815, 'user_request', '1', NULL),
+	(691, 1731350816, 'user_request', '1', NULL),
+	(692, 1731351072, 'user_request', '1', NULL),
+	(693, 1731351188, 'user_request', '1', NULL),
+	(694, 1731351188, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 1731351188),
+	(695, 1731351383, 'user_request', '1', NULL),
+	(696, 1731351402, 'user_request', '1', NULL),
+	(697, 1731351755, 'user_request', '1', NULL),
+	(698, 1731351779, 'user_request', '1', NULL),
+	(699, 1731352712, 'user_request', '1', NULL),
+	(700, 1731352715, 'user_request', '1', NULL),
+	(701, 1731352725, 'user_request', '1', NULL),
+	(702, 1731352738, 'user_request', '1', NULL),
+	(703, 1731352738, 'exception', '["ErrorException","resources\\\\views\\\\despacho\\\\pdf\\\\cn31.blade.php:183"]', 1731352738),
+	(704, 1731418021, 'user_request', '1', NULL),
+	(705, 1731418599, 'user_request', '1', NULL),
+	(706, 1731418608, 'user_request', '1', NULL),
+	(707, 1731418642, 'user_request', '1', NULL),
+	(708, 1731418646, 'user_request', '1', NULL),
+	(709, 1731418674, 'user_request', '1', NULL),
+	(710, 1731418676, 'user_request', '1', NULL),
+	(711, 1731421420, 'user_request', '1', NULL),
+	(712, 1731421422, 'user_request', '1', NULL),
+	(713, 1731421525, 'user_request', '1', NULL),
+	(714, 1731421529, 'user_request', '1', NULL),
+	(715, 1731421532, 'user_request', '1', NULL),
+	(716, 1731421536, 'user_request', '1', NULL),
+	(717, 1731421542, 'user_request', '1', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -1458,9 +1607,9 @@ CREATE TABLE IF NOT EXISTS `saca` (
 -- Volcando datos para la tabla blackbag.saca: ~4 rows (aproximadamente)
 INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
 	(1, 1, 'BOLPZBOTJABUM4002001', 'FW', 'APERTURA', NULL, NULL, '2024-11-11 17:55:50', '2024-11-11 17:55:50', '2'),
-	(2, 1, 'BOLPZBOTJAAUA4001001', 'BG', 'CERRADO', 0.500, 24, '2024-11-11 17:56:36', '2024-11-11 19:21:52', '1'),
-	(3, 2, 'BOLPZBOTJAAUA4001002', 'BG', 'CERRADO', 2.800, 60, '2024-11-11 18:21:43', '2024-11-11 19:21:52', '1'),
-	(4, 3, 'BOLPZBOTJAAUA4001003', 'BG', 'CERRADO', 15.000, 26, '2024-11-11 18:34:35', '2024-11-11 19:21:52', '1');
+	(2, 1, 'BOLPZBOTJAAUA4001001', 'BG', 'APERTURA', 0.500, 24, '2024-11-11 17:56:36', '2024-11-12 18:25:29', '1'),
+	(3, 2, 'BOLPZBOTJAAUA4001002', 'BG', 'APERTURA', 2.800, 60, '2024-11-11 18:21:43', '2024-11-12 18:25:29', '1'),
+	(4, 3, 'BOLPZBOTJAAUA4001003', 'BG', 'APERTURA', 43.000, 94, '2024-11-11 18:34:35', '2024-11-12 18:25:29', '1');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
