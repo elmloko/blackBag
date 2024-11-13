@@ -54,8 +54,8 @@
                                             <th>Número de Saca</th>
                                             <th>Identificador</th>
                                             <th>Tipo</th>
-                                            <th>Peso</th>
                                             <th>Etiqueta</th>
+                                            <th>Peso</th>
                                             <th>Número de Paquetes</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
@@ -90,8 +90,8 @@
                                                     ];
                                                 @endphp
                                                 <td>{{ $tipos[$saca->tipo] ?? $saca->tipo }}</td>
-                                                <td>{{ $saca->peso }}</td>
                                                 <td>{{ $etiqueta[$saca->etiqueta] ?? $saca->etiqueta }}</td>
+                                                <td>{{ $saca->peso }}</td>
                                                 <td>{{ $saca->nropaquetes }}</td>
                                                 <td>{{ $saca->created_at }}</td>
                                                 <td>
