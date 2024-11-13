@@ -145,14 +145,14 @@
                                                                                 <option value="BL" {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>BL Blanca</option>
                                                                             </select>
                                                                         </div>                                                                        
-                                                                        {{-- <div class="form-group">
+                                                                        <div class="form-group">
                                                                             <label for="peso">Peso</label>
                                                                             <input type="text" step="0,001"
                                                                                 class="form-control" id="peso"
                                                                                 name="peso" value="{{ $saca->peso }}"
                                                                                 required>
                                                                         </div>
-                                                                        <div class="form-group">
+                                                                        {{-- <div class="form-group">
                                                                             <label for="nropaquetes">Número de
                                                                                 Paquetes</label>
                                                                             <input type="number" class="form-control"
@@ -193,22 +193,18 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form
-                                                                        action="{{ $contenido ? route('contenido.update', $contenido->id) : route('contenido.store') }}"
-                                                                        method="POST">
+                                                                    <form action="{{ $contenido ? route('contenido.update', $contenido->id) : route('contenido.store') }}" method="POST">
                                                                         @csrf
                                                                         @if ($contenido)
                                                                             @method('PUT')
                                                                         @endif
-
-                                                                        <input type="hidden" name="saca_id"
-                                                                            value="{{ $saca->id }}">
-
+                                                                
+                                                                        <input type="hidden" name="saca_id" value="{{ $saca->id }}">
+                                                                
                                                                         <!-- Campo de descripción -->
                                                                         <div class="form-group">
                                                                             <label for="descripcion">Descripción</label>
-                                                                            <select class="form-control" id="descripcion"
-                                                                                name="descripcion" required>
+                                                                            <select class="form-control" id="descripcion" name="descripcion" required>
                                                                                 <option value="MINL"
                                                                                     {{ optional($contenido)->descripcion == 'MINL' ? 'selected' : '' }}>
                                                                                     MINL - Normal</option>
@@ -237,92 +233,40 @@
                                                                                     MISP - Enviado al descubierto: especial
                                                                                     (sin tasas ni gastos pagaderos)
                                                                                 </option>
+                                                                                <!-- Añade las demás opciones aquí -->
                                                                             </select>
                                                                         </div>
+                                                                        <h5 class="mb-3">Contenido declarado</h5>
+                                                                        <!-- Campo para LC/AO -->
+                                                                        <div class="row">
 
-                                                                        <!-- Tabla para Peso, Número de Paquetes y Tipo -->
-                                                                        <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Tipo</th>
-                                                                                    <th>Peso</th>
-                                                                                    <th>Número de Paquetes</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span
-                                                                                            class="form-control-plaintext">M</span>
-                                                                                        <input type="hidden"
-                                                                                            name="tipom" value="M">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="pesom" name="pesom"
-                                                                                            step="0.001"
-                                                                                            value="{{ optional($contenido)->pesom }}">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="nropaquetesm"
-                                                                                            name="nropaquetesm"
-                                                                                            value="{{ optional($contenido)->nropaquetesm }}">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span
-                                                                                            class="form-control-plaintext">LC/AO</span>
-                                                                                        <input type="hidden"
-                                                                                            name="tipol" value="L">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="pesol" name="pesol"
-                                                                                            step="0.001"
-                                                                                            value="{{ optional($contenido)->pesol }}">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="nropaquetesl"
-                                                                                            name="nropaquetesl"
-                                                                                            value="{{ optional($contenido)->nropaquetesl }}">
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <span
-                                                                                            class="form-control-plaintext">U</span>
-                                                                                        <input type="hidden"
-                                                                                            name="tipou" value="U">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="pesou" name="pesou"
-                                                                                            step="0.001"
-                                                                                            value="{{ optional($contenido)->pesou }}">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="nropaquetesu"
-                                                                                            name="nropaquetesu"
-                                                                                            value="{{ optional($contenido)->nropaquetesu }}">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">{{ $contenido ? 'Actualizar' : 'Guardar' }}
-                                                                            Contenido</button>
+                                                                            <div class="col-md-3 text-center">
+                                                                                <br>
+                                                                                <span style="color: #ffffff;">Cantidad</span>
+                                                                            </div>
+                                                                            <!-- Campo para LC/AO -->
+                                                                            <div class="form-group col-md-3">
+                                                                                <label for="lcao">LC/AO</label>
+                                                                                <input type="number" class="form-control" id="lcao" name="lcao" value="{{ $contenido->lcao ?? '' }}">
+                                                                            </div>
+                                                                        
+                                                                            <!-- Campo para SACAS M -->
+                                                                            <div class="form-group col-md-3">
+                                                                                <label for="sacasm">SACAS M</label>
+                                                                                <input type="number" class="form-control" id="sacasm" name="sacasm" value="{{ $contenido->sacasm ?? '' }}">
+                                                                            </div>
+                                                                        
+                                                                            <!-- Campo para CN33 -->
+                                                                            <div class="form-group col-md-3">
+                                                                                <label for="listas">CN33</label>
+                                                                                <input type="number" class="form-control" id="listas" name="listas" value="{{ $contenido->listas ?? '' }}">
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                
+                                                                        <button type="submit" class="btn btn-primary">{{ $contenido ? 'Actualizar' : 'Guardar' }} Contenido</button>
                                                                     </form>
                                                                 </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -394,10 +338,10 @@
                                 <input type="text" step="0,001" class="form-control" id="peso" name="peso"
                                     required>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="nropaquetes">Número de Paquetes</label>
                                 <input type="number" class="form-control" id="nropaquetes" name="nropaquetes" required>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="btn btn-primary">Crear Saca</button>
                         </form>
                     </div>

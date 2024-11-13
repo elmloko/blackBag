@@ -13,15 +13,11 @@ class Contenido extends Model
 
     protected $fillable = [
         'descripcion',
-        'pesou',
-        'pesol',
-        'pesom',
-        'nropaquetesu',
-        'nropaquetesl',
-        'nropaquetesm',
-        'tipou',
-        'tipom',
-        'tipol',
+        'listas',
+        'nropaquetesro',
+        'nropaquetesbl',
+        'sacasm',
+        'lcao',
         'saca_id',
     ];
 
