@@ -140,11 +140,16 @@
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="etiqueta">Etiqueta</label>
-                                                                            <select class="form-control" id="etiqueta" name="etiqueta" required>
-                                                                                <option value="RO" {{ $saca->etiqueta == 'RO' ? 'selected' : '' }}>RO - Roja</option>
-                                                                                <option value="BL" {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>BL Blanca</option>
+                                                                            <select class="form-control" id="etiqueta"
+                                                                                name="etiqueta" required>
+                                                                                <option value="RO"
+                                                                                    {{ $saca->etiqueta == 'RO' ? 'selected' : '' }}>
+                                                                                    RO - Roja</option>
+                                                                                <option value="BL"
+                                                                                    {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>
+                                                                                    BL Blanca</option>
                                                                             </select>
-                                                                        </div>                                                                        
+                                                                        </div>
                                                                         <div class="form-group">
                                                                             <label for="peso">Peso</label>
                                                                             <input type="text" step="0,001"
@@ -193,18 +198,22 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="{{ $contenido ? route('contenido.update', $contenido->id) : route('contenido.store') }}" method="POST">
+                                                                    <form
+                                                                        action="{{ $contenido ? route('contenido.update', $contenido->id) : route('contenido.store') }}"
+                                                                        method="POST">
                                                                         @csrf
                                                                         @if ($contenido)
                                                                             @method('PUT')
                                                                         @endif
-                                                                
-                                                                        <input type="hidden" name="saca_id" value="{{ $saca->id }}">
-                                                                
+
+                                                                        <input type="hidden" name="saca_id"
+                                                                            value="{{ $saca->id }}">
+
                                                                         <!-- Campo de descripción -->
                                                                         <div class="form-group">
                                                                             <label for="descripcion">Descripción</label>
-                                                                            <select class="form-control" id="descripcion" name="descripcion" required>
+                                                                            <select class="form-control" id="descripcion"
+                                                                                name="descripcion" required>
                                                                                 <option value="MINL"
                                                                                     {{ optional($contenido)->descripcion == 'MINL' ? 'selected' : '' }}>
                                                                                     MINL - Normal</option>
@@ -240,33 +249,68 @@
                                                                         <!-- Campo para LC/AO -->
                                                                         <div class="row">
 
-                                                                            <div class="col-md-3 text-center">
+                                                                            <div class="col-md-2 text-center">
                                                                                 <br>
-                                                                                <span style="color: #ffffff;">Cantidad</span>
+                                                                                <span
+                                                                                    style="color: #ffffff;">Cantidad</span>
                                                                             </div>
                                                                             <!-- Campo para LC/AO -->
-                                                                            <div class="form-group col-md-3">
+                                                                            <div class="form-group col-md-4">
                                                                                 <label for="lcao">LC/AO</label>
-                                                                                <input type="number" class="form-control" id="lcao" name="lcao" value="{{ $contenido->lcao ?? '' }}">
+                                                                                <input type="number" class="form-control"
+                                                                                    id="lcao" name="lcao"
+                                                                                    value="{{ $contenido->lcao ?? '' }}">
                                                                             </div>
-                                                                        
+
                                                                             <!-- Campo para SACAS M -->
                                                                             <div class="form-group col-md-3">
                                                                                 <label for="sacasm">SACAS M</label>
-                                                                                <input type="number" class="form-control" id="sacasm" name="sacasm" value="{{ $contenido->sacasm ?? '' }}">
+                                                                                <input type="number" class="form-control"
+                                                                                    id="sacasm" name="sacasm"
+                                                                                    value="{{ $contenido->sacasm ?? '' }}">
                                                                             </div>
-                                                                        
+
                                                                             <!-- Campo para CN33 -->
                                                                             <div class="form-group col-md-3">
                                                                                 <label for="listas">CN33</label>
-                                                                                <input type="number" class="form-control" id="listas" name="listas" value="{{ $contenido->listas ?? '' }}">
+                                                                                <input type="number" class="form-control"
+                                                                                    id="listas" name="listas"
+                                                                                    value="{{ $contenido->listas ?? '' }}">
                                                                             </div>
-                                                                        </div>                                                                        
-                                                                
-                                                                        <button type="submit" class="btn btn-primary">{{ $contenido ? 'Actualizar' : 'Guardar' }} Contenido</button>
+                                                                        </div>
+                                                                        <h5 class="mb-3">Paquetería declarada</h5>
+                                                                        <!-- Campo para LC/AO -->
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-2 text-center">
+                                                                                <br>
+                                                                                <span
+                                                                                    style="color: #ffffff;">Cantidad</span>
+                                                                            </div>
+                                                                            <!-- Campo para ROJAS -->
+                                                                            <div class="form-group col-md-5">
+                                                                                <label for="nropaquetesro">ROJAS</label>
+                                                                                <input type="number" class="form-control"
+                                                                                    id="nropaquetesro"
+                                                                                    name="nropaquetesro"
+                                                                                    value="{{ $contenido->nropaquetesro ?? '' }}">
+                                                                            </div>
+
+                                                                            <!-- Campo para BLANCAS -->
+                                                                            <div class="form-group col-md-5">
+                                                                                <label for="nropaquetesbl">BLANCAS</label>
+                                                                                <input type="number" class="form-control"
+                                                                                    id="nropaquetesbl"
+                                                                                    name="nropaquetesbl"
+                                                                                    value="{{ $contenido->nropaquetesbl ?? '' }}">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">{{ $contenido ? 'Actualizar' : 'Guardar' }}
+                                                                            Contenido</button>
                                                                     </form>
                                                                 </div>
-                                                                
                                                             </div>
                                                         </div>
                                                     </div>

@@ -17,8 +17,10 @@ class ContenidoController extends Controller
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
             'listas' => 'nullable|integer',
+            'nropaquetesro' => 'nullable|integer',
+            'nropaquetesbl' => 'nullable|integer',
         ]);
-    
+
         // Creación del nuevo contenido en la base de datos
         Contenido::create([
             'saca_id' => $request->saca_id,
@@ -26,12 +28,13 @@ class ContenidoController extends Controller
             'lcao' => $request->lcao,
             'sacasm' => $request->sacasm,
             'listas' => $request->listas,
+            'nropaquetesro' => $request->nropaquetesro,
+            'nropaquetesbl' => $request->nropaquetesbl,
         ]);
-    
+
         // Redirección después de la creación exitosa
         return redirect()->back()->with('message', 'Contenido creado exitosamente');
     }
-    
 
     public function update(Request $request, $id)
     {
@@ -41,6 +44,8 @@ class ContenidoController extends Controller
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
             'listas' => 'nullable|integer',
+            'nropaquetesro' => 'nullable|integer',
+            'nropaquetesbl' => 'nullable|integer',
         ]);
     
         // Encontrar el contenido existente y actualizar sus datos
@@ -50,10 +55,11 @@ class ContenidoController extends Controller
             'lcao' => $request->lcao,
             'sacasm' => $request->sacasm,
             'listas' => $request->listas,
+            'nropaquetesro' => $request->nropaquetesro,
+            'nropaquetesbl' => $request->nropaquetesbl,
         ]);
     
         // Redirección después de la actualización exitosa
         return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
-    }
-    
+    }    
 }
