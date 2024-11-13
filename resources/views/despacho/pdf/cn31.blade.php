@@ -157,8 +157,7 @@
             </tr>
             <tr>
                 <td>Sacas M</td>
-                {{-- <td>{{ $data->SACAM }}</td> --}}
-                <td>0</td>
+                <td>{{ $sacasm }}</td>
                 <td>Envases que deben devolverse</td>
                 <td></td>
                 <td></td>
@@ -180,24 +179,19 @@
             </tr>
             <tr>
                 <td>ORDINARIOS</td>
-                <td>{{ $nropaquetesu }}</td>
-                <td>{{ $pesou }}</td>
+                <td>{{ $nropaquetesbl }}</td>
+                <td></td>
             </tr>
             <tr>
-                <td>LC /AO</td>
-                <td>{{ $nropaquetesl }}</td>
-                <td>{{ $pesol }}</td>
-            </tr>
-            <tr>
-                <td>SACAS M</td>
-                <td>{{ $nropaquetesm }}</td>
-                <td>{{ $pesom }}</td>
+                <td>CERTIFICADOS</td>
+                <td>{{ $nropaquetesro }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Total</td>
                 <td>{{ $totalPaquetes }}</td>
                 <td>{{ $totalPeso }}</td>
-                < </tr>
+            </tr>
         </tbody>
     </table>
     <br>

@@ -145,8 +145,7 @@ class Iniciar extends Component
 
         // Inicializar los totales
         $totalPeso = $totalPaquetes = 0;
-        $pesom = $pesol = $pesou = 0;
-        $nropaquetesm = $nropaquetesl = $nropaquetesu = 0;
+        $nropaquetesro = $nropaquetesbl = 0;
 
         // Obtener todos los registros de saca relacionados al despacho
         $sacas = Saca::where('despacho_id', $despacho->id)->get();
@@ -156,16 +155,11 @@ class Iniciar extends Component
 
             foreach ($contenido as $item) {
                 // Sumatorias individuales
-                $pesom += $item->pesom;
-                $pesol += $item->pesol;
-                $pesou += $item->pesou;
-                $nropaquetesm += $item->nropaquetesm;
-                $nropaquetesl += $item->nropaquetesl;
-                $nropaquetesu += $item->nropaquetesu;
+                $nropaquetesro += $item->nropaquetesro;
+                $nropaquetesbl += $item->nropaquetesbl;
 
                 // Sumatoria general
-                $totalPeso += $item->pesom + $item->pesol + $item->pesou;
-                $totalPaquetes += $item->nropaquetesm + $item->nropaquetesl + $item->nropaquetesu;
+                $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl;
             }
         }
 
@@ -188,12 +182,8 @@ class Iniciar extends Component
             'nrodespacho' => $despacho->nrodespacho,
             'identificador' => $despacho->identificador,
             'created_at' => $despacho->created_at,
-            'pesom' => $pesom,
-            'pesol' => $pesol,
-            'pesou' => $pesou,
-            'nropaquetesm' => $nropaquetesm,
-            'nropaquetesl' => $nropaquetesl,
-            'nropaquetesu' => $nropaquetesu,
+            'nropaquetesro' => $nropaquetesro,
+            'nropaquetesbl' => $nropaquetesbl,
         ];
 
         // Crear el PDF usando la vista 'despacho.pdf.cn31'
