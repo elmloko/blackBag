@@ -55,7 +55,7 @@
                                             <th>Identificador</th>
                                             <th>Tipo</th>
                                             <th>Etiqueta</th>
-                                            <th>Peso</th>
+                                            <th>Peso(Kg.)</th>
                                             <th>Número de Paquetes</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
@@ -378,7 +378,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="peso">Peso</label>
+                                <label for="peso">Peso (Kg.)</label>
                                 <input type="text" step="0,001" class="form-control" id="peso" name="peso"
                                     required>
                             </div>
