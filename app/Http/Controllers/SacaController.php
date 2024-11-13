@@ -63,15 +63,16 @@ class SacaController extends Controller
     {
         $request->validate([
             'tipo' => 'required|string|max:50',
-            'peso' => 'required|numeric',
-            'nropaquetes' => 'required|integer',
+            'peso' => 'nullable|numeric',
+            'etiqueta' => 'required|string|max:50',
+            'nropaquetes' => 'nullable|integer',
         ]);
-
+    
         $saca = Saca::findOrFail($id);
-        $saca->update($request->only('tipo', 'peso', 'nropaquetes'));
-
+        $saca->update($request->only('tipo', 'peso', 'nropaquetes', 'etiqueta'));
+    
         return redirect()->back()->with('message', 'Saca actualizada exitosamente');
-    }
+    }    
 
     public function destroy($id)
     {

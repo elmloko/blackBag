@@ -139,6 +139,13 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group">
+                                                                            <label for="etiqueta">Etiqueta</label>
+                                                                            <select class="form-control" id="etiqueta" name="etiqueta" required>
+                                                                                <option value="RO" {{ $saca->etiqueta == 'RO' ? 'selected' : '' }}>RO - Roja</option>
+                                                                                <option value="BL" {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>BL Blanca</option>
+                                                                            </select>
+                                                                        </div>                                                                        
+                                                                        {{-- <div class="form-group">
                                                                             <label for="peso">Peso</label>
                                                                             <input type="text" step="0,001"
                                                                                 class="form-control" id="peso"
@@ -151,7 +158,7 @@
                                                                             <input type="number" class="form-control"
                                                                                 id="nropaquetes" name="nropaquetes"
                                                                                 value="{{ $saca->nropaquetes }}" required>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Guardar Cambios</button>
                                                                     </form>
