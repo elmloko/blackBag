@@ -134,7 +134,7 @@
             </tr>
         </tbody>
     </table>
-    <p><b>1. Cantidad de envases</p>
+    <p><b>1. Cantidad de sacas</p>
     <table>
         <thead>
             <tr>
@@ -149,18 +149,19 @@
         <tbody>
             <tr>
                 <td>Prioritario/no prioritario LC/AO</td>
-                {{-- <td>{{ $data->SACAR }}</td>
-                <td>{{ $data->SACAU }}</td> --}}
-                <td>Envases en el data</td>
-                {{-- <td>{{ $sum }}</td> --}}
-                {{-- <td>{{ $sum }}</td> --}}
+                <td>{{ $totalContenidoR }}</td>
+                <td>{{ $totalContenidoB }}</td>
+                <td>Envases en el despacho</td>
+                <td>{{ $totalContenido }}</td>
+                <td>{{ $totalContenido }}</td>
             </tr>
             <tr>
                 <td>Sacas M</td>
                 <td>{{ $sacasm }}</td>
-                <td>Envases que deben devolverse</td>
-                <td></td>
-                <td></td>
+                <td>----</td>
+                <td>CN 33</td>
+                <td>{{ $listas }}</td>
+                <td>----</td>
             </tr>
         </tbody>
     </table>
