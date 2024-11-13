@@ -11,7 +11,6 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
-
         }
 
         th,
@@ -41,6 +40,16 @@
 
         .title {
             text-align: center;
+        }
+
+        .barcode-container {
+            text-align: center;
+            margin-bottom: 20px; /* Aumenta el margen inferior */
+        }
+
+        .barcode-content {
+            display: inline-block;
+            margin-bottom: 10px; /* Agrega espacio debajo del código de barras */
         }
 
         .firma {
@@ -84,23 +93,19 @@
             <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
             <p class="cn">CN 31</p>
         </div>
+        
         <div class="title">
             <h2>Hoja de Aviso</h2>
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
+        <div class="barcode-container">
+            <div class="barcode-content">
+                {!! DNS1D::getBarcodeHTML($identificador, 'C128', 1.25, 25) !!}
+                <br>
+                <div>{{ $identificador }}</div>
+            </div>
+        </div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <td class="transparent-border">{!! DNS1D::getBarcodeHTML($identificador, 'C128', 1.25, 25) !!}</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="transparent-border" colspan="2">{{ $identificador }}</td>
-            </tr>
-        </tbody>
-    </table>
     <table>
         <thead>
             <tr>
@@ -134,7 +139,7 @@
             </tr>
         </tbody>
     </table>
-    <p><b>1. Cantidad de sacas</p>
+    <p><b>1. Cantidad de sacas</b></p>
     <table>
         <thead>
             <tr>
@@ -165,7 +170,7 @@
             </tr>
         </tbody>
     </table>
-    <p><b>2. Gastos de tránsito y gastos terminales</p>
+    <p><b>2. Gastos de tránsito y gastos terminales</b></p>
     <table>
         <thead>
             <tr>
@@ -203,12 +208,10 @@
         <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
             <p class="special-text">__________________________</p>
             <p class="special-text">RECIBIDO POR</p>
-            {{-- <p class="special-text">{{ $data->TRASPORTE }}</p> --}}
         </td>
         <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
             <p class="special-text">__________________________ </p>
             <p class="special-text">ENTREGADO POR</p>
-            {{-- <p class="special-text">{{ auth()->user()->name }}</p> --}}
         </td>
     </table>
 </body>
