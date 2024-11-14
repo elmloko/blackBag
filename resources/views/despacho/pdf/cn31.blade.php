@@ -137,7 +137,7 @@
             <tr>
                 <td>Peso: {{ $saca->peso }} Kg.</td>
                 <td>NoPaq: {{ $saca->nropaquetes }}</td>
-                <td colspan="2" class="transparent-bottom-border text-center">{{ $saca->identificador }}</td>
+                <td colspan="2" class="transparent-bottom-border text-center">{{ $saca->receptaculo }}</td>
             </tr>
             <tr>
                 @php
@@ -151,7 +151,7 @@
                 <td>Via: {{ $subclaseTranslation[$categoria] ?? $categoria }}</td>
                 <td></td>
                 <td colspan="2">
-                    <p>{!! DNS1D::getBarcodeHTML($saca->identificador, 'C128', 1.08, 40) !!}</p>
+                    <p>{!! DNS1D::getBarcodeHTML($saca->receptaculo, 'C128', 1.08, 40) !!}</p>
                 </td>
             </tr>
         </table>
