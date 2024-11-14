@@ -196,7 +196,7 @@
             <tr>
                 <td>Total</td>
                 <td>{{ $totalPaquetes }}</td>
-                <td>{{ $totalPeso }}</td>
+                <td>{{ $peso }}</td>
             </tr>
         </tbody>
     </table>

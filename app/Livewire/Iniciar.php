@@ -187,6 +187,7 @@ class Iniciar extends Component
         $data = [
             'despacho' => $despacho,
             'sacas' => $sacas,
+            'peso' => $despacho->peso,
             'totalPeso' => $totalPeso,
             'totalPaquetes' => $totalPaquetes,
             'ciudadOrigen' => $ciudadOrigen,
