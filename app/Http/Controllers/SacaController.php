@@ -43,7 +43,11 @@ class SacaController extends Controller
         // Concatenar el identificador del despacho con el número de saca
         $identificadorSaca = $identificadorDespacho . $nextNroSaca;
 
-        // Crear la nueva saca con el valor de nrosaca y el identificador
+        // Crear la variable receptaculo
+        $pesoFormateado = str_pad(str_replace(['.', ','], '', number_format($request->peso, 1, '', '')), 4, '0', STR_PAD_LEFT);
+        $receptaculo = $identificadorSaca . $pesoFormateado;
+
+        // Crear la nueva saca con el valor de nrosaca, identificador y receptaculo
         Saca::create([
             'despacho_id' => $request->despacho_id,
             'tipo' => $request->tipo,
@@ -53,11 +57,11 @@ class SacaController extends Controller
             'peso' => $request->peso,
             'nropaquetes' => $request->nropaquetes,
             'estado' => 'APERTURA',
+            'receptaculo' => $receptaculo, // Guardar la variable receptaculo
         ]);
 
         return redirect()->back()->with('message', 'Saca creada exitosamente');
     }
-
 
     public function update(Request $request, $id)
     {
@@ -67,12 +71,27 @@ class SacaController extends Controller
             'etiqueta' => 'required|string|max:50',
             'nropaquetes' => 'nullable|integer',
         ]);
-    
+
+        // Buscar la saca a actualizar
         $saca = Saca::findOrFail($id);
-        $saca->update($request->only('tipo', 'peso', 'nropaquetes', 'etiqueta'));
-    
+
+        // Formatear el peso en formato 0000 (sin puntos ni comas)
+        $pesoFormateado = str_pad(str_replace(['.', ','], '', number_format($request->peso, 1, '', '')), 4, '0', STR_PAD_LEFT);
+
+        // Actualizar el valor de receptaculo con identificador + peso formateado
+        $receptaculo = $saca->identificador . $pesoFormateado;
+
+        // Actualizar la saca con los nuevos valores
+        $saca->update([
+            'tipo' => $request->tipo,
+            'peso' => $request->peso,
+            'nropaquetes' => $request->nropaquetes,
+            'etiqueta' => $request->etiqueta,
+            'receptaculo' => $receptaculo, // Guardar el nuevo valor de receptaculo
+        ]);
+
         return redirect()->back()->with('message', 'Saca actualizada exitosamente');
-    }    
+    }
 
     public function destroy($id)
     {

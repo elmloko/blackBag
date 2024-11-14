@@ -217,7 +217,6 @@ class Iniciar extends Component
             echo $pdf->output();
         }, 'CN.pdf');
     }
-    
 
     public function render()
     {

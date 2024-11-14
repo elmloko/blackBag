@@ -32,6 +32,7 @@ class Saca extends Model
         'identificador',
         'estado',
         'etiqueta',
+        'receptaculo',
     ];
 
     // Definir las relaciones
