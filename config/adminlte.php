@@ -344,7 +344,7 @@ return [
             ],
         ],
         [
-            'text' => 'DESPACHOS',
+            'text' => 'DESPACHOS LC',
             'icon' => 'fas fa-users',
             // 'can'  => 'users.index',
             'submenu' => [
@@ -356,6 +356,11 @@ return [
                 [
                     'text' => 'Despachos Expedicion',
                     'url' => '/expedicion',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Despachos Admisiones',
+                    'url' => '/admitir',
                     'icon' => 'fas fa-user',
                 ],
             ],

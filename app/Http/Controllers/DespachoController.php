@@ -14,4 +14,8 @@ class DespachoController extends Controller
     {
         return view('despacho.expedicion ');
     }
+    public function getAdmitir ()
+    {
+        return view('despacho.admitir ');
+    }
 }
