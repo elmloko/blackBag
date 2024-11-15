@@ -211,7 +211,7 @@ class Iniciar extends Component
         ];
     
         // Crear el PDF usando la vista 'despacho.pdf.cn31'
-        $pdf = PDF::loadView('despacho.pdf.cn31', $data);
+        $pdf = PDF::loadView('despacho.pdf.cn', $data);
     
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
