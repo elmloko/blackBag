@@ -54,14 +54,14 @@ class Admitir extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-    
+
         // Buscar el registro en la tabla Saca
         $registro = Saca::where('receptaculo', $this->searchReceptaculo)->first();
-    
+
         if ($registro) {
             // Obtener el despacho relacionado a través de la relación en el modelo Saca
             $despacho = $registro->despacho; // Asegúrate de tener la relación en el modelo Saca
-            
+
             // Verificar si el destino de la oficina coincide con la ciudad del usuario
             if ($despacho && isset($oficinas[$despacho->ofdestino]) && auth()->user()->city == $oficinas[$despacho->ofdestino]) {
                 // Si no existe en los seleccionados, agregarlo
@@ -77,7 +77,7 @@ class Admitir extends Component
             // Si no se encuentra el registro, mostrar un mensaje de error
             session()->flash('error', 'No se encontró ningún registro con el receptáculo proporcionado.');
         }
-    }      
+    }
 
     public function quitarRegistro($id)
     {
@@ -89,35 +89,28 @@ class Admitir extends Component
     public function admitir()
     {
         foreach ($this->registrosSeleccionados as $registro) {
-            // Buscar el registro en Saca
+
             $saca = Saca::find($registro['id']);
-            
-            // Si el registro de Saca es encontrado, actualizamos su estado
+
             if ($saca) {
                 $saca->estado = 'ADMITIDO';
                 $saca->save();
-                
-                // Buscar el despacho relacionado, basado en el identificador de Saca
+
                 $despacho = Despacho::where('identificador', $saca->identificador)->first(); // Ajusta según la relación
-    
-                // Si el despacho es encontrado, también actualizamos su estado
+
                 if ($despacho) {
                     $despacho->estado = 'ADMITIDO';
                     $despacho->save();
                 }
             }
         }
-    
-        // Limpiar la lista de registros seleccionados
+
         $this->registrosSeleccionados = [];
-    
-        // Mostrar mensaje de éxito
+
         session()->flash('message', 'Todos los registros seleccionados fueron admitidos exitosamente.');
         
-        // Cerrar el modal
-        $this->dispatch('hide-modal');
+        return redirect(request()->header('Referer'));
     }
-    
 
     public function render()
     {
@@ -126,7 +119,7 @@ class Admitir extends Component
                 ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
         })
-            ->whereIn('estado', ['EXPEDICION'])
+            ->whereIn('estado', ['ADMITIDO'])
             ->paginate($this->perPage);
 
         return view('livewire.admitir', [

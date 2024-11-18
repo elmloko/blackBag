@@ -139,7 +139,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="admitirModalLabel">Admitir Registros</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Por favor, ingrese el valor del campo `saca.receptaculo` que desea buscar:</p>
@@ -147,15 +146,15 @@
                         placeholder="Saca Receptáculo" class="form-control">
                 </div>
                 @if (session()->has('message'))
-                            <div class="alert alert-success">
-                                {{ session('message') }}
-                            </div>
-                        @endif
-                        @if (session()->has('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="mt-3">
                     @if (count($registrosSeleccionados) > 0)
                         <table class="table table-sm">
@@ -186,11 +185,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" wire:click="admitir">Admitir Todos</button>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -199,9 +197,12 @@
         modal.show();
     });
 
-    document.addEventListener('hide-modal', () => {
-        const modalElement = document.getElementById('admitirModal');
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        modal.hide();
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('hide-modal', () => {
+            console.log('Evento hide-modal recibido'); // Verifica en la consola
+            const modalElement = document.getElementById('admitirModal');
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modal.hide();
+        });
     });
 </script>
