@@ -72,7 +72,7 @@
         .first-table td {
             border: 1px solid #000;
             padding: 5px;
-            line-height: 0.5;
+            line-height: 1.2;
         }
 
         .header {
@@ -261,6 +261,7 @@
         </table>
     </div>
 </body>
+
 <body>
     <!-- CN-38 Content -->
     <div class="content">
@@ -334,18 +335,20 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Despacho</th>
-                    <th>Origen</th>
-                    <th>Destino</th>
-                    <th>Correspondencia</th>
-                    <th>Peso (Kg.)</th>
-                    <th>Observaciones</th>
+                    <th>DESPACHO</th>
+                    <th>ORIGEN</th>
+                    <th>DESTINO</th>
+                    <th>LC-BOLSAS DE CORREO</th>
+                    <th>CP-BOLSAS DE CORREO</th>
+                    <th>EMS-BOLSAS DE CORREO</th>
+                    <th>PESO (Kg.)</th>
+                    <th>OBSERVACIONES</th>
                 </tr>
             </thead>
             <tbody>
                 @php $i = 1; @endphp
                 @foreach ($sacas as $index => $saca)
-                    @if ($i > 40)
+                    @if ($i > 20)
                     @break
                 @endif
                 <tr>
@@ -356,10 +359,14 @@
                             <strong>F</strong>
                         @endif
                     </td>
-                    <td>{{ $siglaOrigen }} </td>
-                    <td>{{ $ofdestino }}</td>
-                    <td>{{ $saca->nropaquetes }}</td>
-                    <td>{{ $saca->peso }} Kg.</td>
+                    <td>AGBC - {{ $siglaOrigen }}
+                    </td>
+                    <td>AGBC - {{ $ofdestino }}
+                    </td>
+                    <td>1</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ $saca->peso }}Kg.</td>
                     <td>
                         @php
                             $tipos = [
@@ -387,9 +394,11 @@
             @endforeach
 
             <!-- Filas vacías si el total de $sacas es menor que 30 -->
-            @for ($j = $i; $j <= 40; $j++)
+            @for ($j = $i; $j <= 20; $j++)
                 <tr>
                     <td>{{ $j }}</td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -404,11 +413,9 @@
         <thead>
             <tr>
                 <td>SACAS TOTAL</td>
-                <th>{{ $totalContenido }}</th>
+                <th>{{ $saca->nrosaca }}</th>
                 <td>PESO TOTAL</td>
                 <th>{{ $peso }} Kg.</th>
-                <td>PAQUETES TOTAL</td>
-                <th>{{ $totalPaquetes }}</th>
             </tr>
         </thead>
     </table>

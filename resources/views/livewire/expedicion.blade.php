@@ -27,6 +27,11 @@
                                         class="form-control" style="margin-right: 10px;">
                                     <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                                 </div>
+                                <div class="ml-auto d-flex">
+                                    <input type="date" wire:model="fechaInicio" class="form-control" style="margin-right: 10px;">
+                                    <input type="date" wire:model="fechaFin" class="form-control" style="margin-right: 10px;">
+                                    <button type="button" class="btn btn-success" wire:click="exportToExcel">Exportar a Excel</button>
+                                </div>
                             </div>
                         </div>
                         @if (session()->has('message'))
@@ -50,6 +55,7 @@
                                         <th>Nro. Envases</th>
                                         <th>Peso</th>
                                         <th>Estado</th>
+                                        <th>Enviado:</th>
                                         {{-- <th>Acciones</th> --}}
                                     </tr>
                                 </thead>
@@ -105,6 +111,7 @@
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
                                             <td>{{ $despacho->estado }}</td>
+                                            <td>{{ $despacho->updated_at }}</td>
                                             {{-- <td>
                                                 
                                             </td> --}}
