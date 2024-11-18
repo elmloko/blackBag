@@ -134,56 +134,79 @@
         </div>
     </section>
     <div wire:ignore.self class="modal fade" id="admitirModal" tabindex="-1" aria-labelledby="admitirModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="admitirModalLabel">Admitir Registros</h5>
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="admitirModalLabel">📦 Admitir Registros</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Por favor, ingrese el valor del campo `saca.receptaculo` que desea buscar:</p>
-                    <input type="text" wire:model="searchReceptaculo" wire:input="buscarReceptaculo"
-                        placeholder="Saca Receptáculo" class="form-control">
-                </div>
-                @if (session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
+                    <div class="mb-3">
+                        <label for="searchReceptaculo" class="form-label">🔍 Buscar por Receptáculo</label>
+                        <input
+                            type="text"
+                            id="searchReceptaculo"
+                            wire:model="searchReceptaculo"
+                            wire:input="buscarReceptaculo"
+                            class="form-control"
+                            placeholder="Ingrese el código del receptáculo"
+                        />
                     </div>
-                @endif
-                @if (session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                <div class="mt-3">
-                    @if (count($registrosSeleccionados) > 0)
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Receptáculo</th>
-                                    <th>Estado</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($registrosSeleccionados as $registro)
-                                    <tr>
-                                        <td>{{ $registro['receptaculo'] }}</td>
-                                        <td>{{ $registro['estado'] }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                wire:click="quitarRegistro({{ $registro['id'] }})">Quitar</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <p class="text-warning">No se han seleccionado registros aún.</p>
+    
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> {{ session('message') }}
+                        </div>
                     @endif
+    
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            <i class="fas fa-times-circle"></i> {{ session('error') }}
+                        </div>
+                    @endif
+    
+                    <div class="mt-4">
+                        @if (count($registrosSeleccionados) > 0)
+                            <table class="table table-hover table-bordered text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>📦 Receptáculo</th>
+                                        <th>📄 Estado</th>
+                                        <th>🛠️ Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($registrosSeleccionados as $registro)
+                                        <tr>
+                                            <td>{{ $registro['receptaculo'] }}</td>
+                                            <td>
+                                                <span class="badge bg-success">{{ $registro['estado'] }}</span>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-sm btn-danger"
+                                                    wire:click="quitarRegistro({{ $registro['id'] }})"
+                                                >
+                                                    Quitar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p class="text-muted text-center">No se han seleccionado registros aún.</p>
+                        @endif
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" wire:click="admitir">Admitir Todos</button>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        wire:click="admitir"
+                    >
+                        Admitir Todos
+                    </button>
                 </div>
             </div>
         </div>
