@@ -54,20 +54,20 @@ class Admitir extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-    
+
         // Buscar el registro en la tabla Saca
         $registro = Saca::where('receptaculo', $this->searchReceptaculo)->first();
-    
+
         if ($registro) {
             // Verificar si el estado de Saca es "CERRADO"
             if ($registro->estado !== 'CERRADO') {
                 session()->flash('error', 'El estado del receptáculo debe ser "CERRADO" para su recepción.');
                 return;
             }
-    
+
             // Obtener el despacho relacionado a través de la relación en el modelo Saca
             $despacho = $registro->despacho; // Asegúrate de tener la relación en el modelo Saca
-    
+
             // Verificar si el destino de la oficina coincide con la ciudad del usuario
             if ($despacho && isset($oficinas[$despacho->ofdestino]) && auth()->user()->city == $oficinas[$despacho->ofdestino]) {
                 // Si no existe en los seleccionados, agregarlo
@@ -83,7 +83,7 @@ class Admitir extends Component
             // Si no se encuentra el registro, mostrar un mensaje de error
             session()->flash('error', 'No se encontró ningún registro con el receptáculo proporcionado.');
         }
-    }     
+    }
 
     public function quitarRegistro($id)
     {
@@ -95,26 +95,32 @@ class Admitir extends Component
     public function admitir()
     {
         foreach ($this->registrosSeleccionados as $registro) {
-
+            // Busca el registro en la tabla Saca
             $saca = Saca::find($registro['id']);
 
             if ($saca) {
+                // Cambia el estado de Saca a ADMITIDO
                 $saca->estado = 'ADMITIDO';
                 $saca->save();
 
-                $despacho = Despacho::where('identificador', $saca->identificador)->first(); // Ajusta según la relación
+                // Busca el registro relacionado en la tabla Despacho usando despacho_id
+                $despacho = Despacho::find($saca->despacho_id);
 
                 if ($despacho) {
+                    // Cambia el estado de Despacho a ADMITIDO
                     $despacho->estado = 'ADMITIDO';
                     $despacho->save();
                 }
             }
         }
 
+        // Limpia los registros seleccionados
         $this->registrosSeleccionados = [];
 
+        // Muestra un mensaje de éxito al usuario
         session()->flash('message', 'Todos los registros seleccionados fueron admitidos exitosamente.');
 
+        // Redirige a la página anterior
         return redirect(request()->header('Referer'));
     }
 
