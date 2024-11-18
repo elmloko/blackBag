@@ -7,6 +7,6 @@
 @endsection
 
 @section('content')
-    {{-- @livewire('iniciar') --}}
+    @livewire('admitir')
     @include('footer')
 @stop
