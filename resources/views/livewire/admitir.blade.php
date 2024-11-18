@@ -59,6 +59,7 @@
                                         <th>Subclase</th>
                                         <th>Nro. Envases</th>
                                         <th>Peso</th>
+                                        <th>Sacas Admitidas/Expedicion</th>
                                         <th>Estado</th>
                                         <th>Enviado:</th>
                                         {{-- <th>Acciones</th> --}}
@@ -115,6 +116,7 @@
                                             <td>{{ $subclases[$despacho->subclase] ?? $despacho->subclase }}</td>
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
+                                            <td>{{ $despacho->sacas_admitidas }} / {{ $despacho->sacas_cerradas }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>{{ $despacho->updated_at }}</td>
                                             {{-- <td>
@@ -133,7 +135,8 @@
             </div>
         </div>
     </section>
-    <div wire:ignore.self class="modal fade" id="admitirModal" tabindex="-1" aria-labelledby="admitirModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="admitirModal" tabindex="-1" aria-labelledby="admitirModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
@@ -142,28 +145,23 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="searchReceptaculo" class="form-label">🔍 Buscar por Receptáculo</label>
-                        <input
-                            type="text"
-                            id="searchReceptaculo"
-                            wire:model="searchReceptaculo"
-                            wire:input="buscarReceptaculo"
-                            class="form-control"
-                            placeholder="Ingrese el código del receptáculo"
-                        />
+                        <input type="text" id="searchReceptaculo" wire:model="searchReceptaculo"
+                            wire:input="buscarReceptaculo" class="form-control"
+                            placeholder="Ingrese el código del receptáculo" />
                     </div>
-    
+
                     @if (session()->has('message'))
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle"></i> {{ session('message') }}
                         </div>
                     @endif
-    
+
                     @if (session()->has('error'))
                         <div class="alert alert-danger">
                             <i class="fas fa-times-circle"></i> {{ session('error') }}
                         </div>
                     @endif
-    
+
                     <div class="mt-4">
                         @if (count($registrosSeleccionados) > 0)
                             <table class="table table-hover table-bordered text-center">
@@ -182,11 +180,8 @@
                                                 <span class="badge bg-success">{{ $registro['estado'] }}</span>
                                             </td>
                                             <td>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-sm btn-danger"
-                                                    wire:click="quitarRegistro({{ $registro['id'] }})"
-                                                >
+                                                <button type="button" class="btn btn-sm btn-danger"
+                                                    wire:click="quitarRegistro({{ $registro['id'] }})">
                                                     Quitar
                                                 </button>
                                             </td>
@@ -200,11 +195,7 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        wire:click="admitir"
-                    >
+                    <button type="button" class="btn btn-primary" wire:click="admitir">
                         Admitir Todos
                     </button>
                 </div>

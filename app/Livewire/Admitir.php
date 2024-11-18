@@ -131,11 +131,16 @@ class Admitir extends Component
                 ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
         })
-            ->whereIn('estado', ['ADMITIDO'])
-            ->paginate($this->perPage);
-
+        ->paginate($this->perPage);
+    
+        // Agregar el conteo de sacas admitidas y cerradas para cada despacho
+        foreach ($despachos as $despacho) {
+            $despacho->sacas_admitidas = Saca::where('despacho_id', $despacho->id)->where('estado', 'ADMITIDO')->count();
+            $despacho->sacas_cerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
+        }
+    
         return view('livewire.admitir', [
             'despachos' => $despachos,
         ]);
-    }
+    }    
 }
