@@ -49,6 +49,7 @@ class ExpedicionExport implements FromQuery, WithHeadings, WithMapping, WithStyl
             'BOTJA' => 'BOTJA - TARIJA',
             'BOPOI' => 'BOPOI - POTOSI',
             'BOCIJ' => 'BOCIJ - PANDO',
+            'BOCBB' => 'BOCBB - COCHABAMBA',
             'BOORU' => 'BOORU - ORURO',
             'BOTDD' => 'BOTDD - BENI',
             'BOSRE' => 'BOSRE - SUCRE',

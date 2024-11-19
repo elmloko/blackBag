@@ -66,6 +66,7 @@
                                                     'BOTJA' => 'BOTJA - TARIJA',
                                                     'BOPOI' => 'BOPOI - POTOSI',
                                                     'BOCIJ' => 'BOCIJ - PANDO',
+                                                    'BOCBB' => 'BOCBB - COCHABAMBA',
                                                     'BOORU' => 'BOORU - ORURO',
                                                     'BOTDD' => 'BOTDD - BENI',
                                                     'BOSRE' => 'BOSRE - SUCRE',
@@ -164,6 +165,7 @@
                                 <option value="BOLPZ">BOLPZ - LA PAZ</option>
                                 <option value="BOTJA">BOTJA - TARIJA</option>
                                 <option value="BOPOI">BOPOI - POTOSI</option>
+                                <option value="BOCBB">BOCBB - COCHABAMBA</option>
                                 <option value="BOCIJ">BOCIJ - PANDO</option>
                                 <option value="BOORU">BOORU - ORURO</option>
                                 <option value="BOTDD">BOTDD - BENI</option>

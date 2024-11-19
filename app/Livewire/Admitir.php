@@ -49,6 +49,7 @@ class Admitir extends Component
             'BOTJA' => 'TARIJA',
             'BOPOI' => 'POTOSI',
             'BOCIJ' => 'PANDO',
+            'BOCBB' => 'COCHABAMBA',
             'BOORU' => 'ORURO',
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
