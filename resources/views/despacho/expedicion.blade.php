@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'SIRECO')
+@section('title', 'GESPA')
 
 @section('template_title')
     Despachos Abiertos

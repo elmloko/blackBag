@@ -442,7 +442,7 @@
     <table class="cn35-table">
         <tr>
             <td colspan="2" class="transparent-bottom-border">PARA :</td>
-            <td class="transparent-bottom-border text-center">TrackingBO LC/AO</td>
+            <td class="transparent-bottom-border text-center">GESPA LC/AO</td>
             <td class="transparent-bottom-border text-center">CN 35</td>
         </tr>
         <tr>
