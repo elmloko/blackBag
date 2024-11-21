@@ -28,12 +28,12 @@
                                     <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                                 </div>
                                 <div class="ml-auto d-flex">
-                                    <input type="date" wire:model="fechaInicio" class="form-control"
+                                    {{-- <input type="date" wire:model="fechaInicio" class="form-control"
                                         style="margin-right: 10px;">
                                     <input type="date" wire:model="fechaFin" class="form-control"
                                         style="margin-right: 10px;">
                                     <button type="button" class="btn btn-success" wire:click="exportToExcel">Exportar a
-                                        Excel</button>
+                                        Excel</button> --}}
                                     <button type="button" class="btn btn-info" wire:click="showModal">Admitir
                                         Registros</button>
                                 </div>

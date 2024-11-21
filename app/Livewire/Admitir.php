@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Exports\ExpedicionExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Saca;
+use App\Models\Eventos;
 
 class Admitir extends Component
 {
@@ -63,6 +64,7 @@ class Admitir extends Component
             // Verificar si el estado de Saca es "CERRADO"
             if ($registro->estado !== 'CERRADO') {
                 session()->flash('error', 'El estado del receptáculo debe ser "CERRADO" para su recepción.');
+
                 return;
             }
 
@@ -75,16 +77,33 @@ class Admitir extends Component
                 $existe = collect($this->registrosSeleccionados)->contains('id', $registro->id);
                 if (!$existe) {
                     $this->registrosSeleccionados[] = $registro;
+
+                    // Registrar evento de éxito
+                    Eventos::create([
+                        'action' => 'BUSQUEDA EXITOSA',
+                        'descripcion' => 'Receptáculo recibido correctamente',
+                        'identificador' => $registro->receptaculo,
+                        'user_id' => auth()->user()->name,
+                    ]);
                 }
             } else {
                 // Si la ciudad del usuario no coincide con el destino de la oficina, rechazarlo
                 session()->flash('error', 'El destino de la oficina no coincide con su ciudad.');
+
+                // Registrar evento de rechazo
+                Eventos::create([
+                    'action' => 'RECHAZO',
+                    'descripcion' => 'El destino del receptáculo no coincide con la ciudad del usuario',
+                    'identificador' => $registro->receptaculo,
+                    'user_id' => auth()->user()->name,
+                ]);
             }
         } else {
             // Si no se encuentra el registro, mostrar un mensaje de error
             session()->flash('error', 'No se encontró ningún registro con el receptáculo proporcionado.');
         }
     }
+
 
     public function quitarRegistro($id)
     {
@@ -104,6 +123,14 @@ class Admitir extends Component
                 $saca->estado = 'ADMITIDO';
                 $saca->save();
 
+                // Registrar el evento para el receptáculo admitido
+                Eventos::create([
+                    'action' => 'ADMITIDO',
+                    'descripcion' => 'Receptáculo admitido exitosamente',
+                    'identificador' => $saca->receptaculo,
+                    'user_id' => auth()->user()->name,
+                ]);
+
                 // Busca el registro relacionado en la tabla Despacho usando despacho_id
                 $despacho = Despacho::find($saca->despacho_id);
 
@@ -111,6 +138,14 @@ class Admitir extends Component
                     // Cambia el estado de Despacho a ADMITIDO
                     $despacho->estado = 'ADMITIDO';
                     $despacho->save();
+
+                    // Registrar el evento para el despacho relacionado
+                    Eventos::create([
+                        'action' => 'ADMITIDO',
+                        'descripcion' => 'Despacho admitido debido a la admisión de receptáculos',
+                        'identificador' => $despacho->identificador,
+                        'user_id' => auth()->user()->name,
+                    ]);
                 }
             }
         }
@@ -125,6 +160,7 @@ class Admitir extends Component
         return redirect(request()->header('Referer'));
     }
 
+
     public function render()
     {
         $despachos = Despacho::where(function ($query) {
@@ -132,16 +168,16 @@ class Admitir extends Component
                 ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
         })
-        ->paginate($this->perPage);
-    
+            ->paginate($this->perPage);
+
         // Agregar el conteo de sacas admitidas y cerradas para cada despacho
         foreach ($despachos as $despacho) {
             $despacho->sacas_admitidas = Saca::where('despacho_id', $despacho->id)->where('estado', 'ADMITIDO')->count();
             $despacho->sacas_cerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
         }
-    
+
         return view('livewire.admitir', [
             'despachos' => $despachos,
         ]);
-    }    
+    }
 }

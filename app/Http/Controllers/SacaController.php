@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Saca;
+use App\Models\Eventos;
 use App\Models\Despacho;
 
 class SacaController extends Controller
@@ -60,6 +61,13 @@ class SacaController extends Controller
             'receptaculo' => $receptaculo, // Guardar la variable receptaculo
         ]);
 
+        Eventos::create([
+            'action' => 'APERTURA',
+            'descripcion' => 'Creacion de saca',
+            'identificador' => $identificadorSaca,
+            'user_id' => auth()->user()->name,
+        ]);
+
         return redirect()->back()->with('message', 'Saca creada exitosamente');
     }
 
@@ -90,16 +98,40 @@ class SacaController extends Controller
             'receptaculo' => $receptaculo, // Guardar el nuevo valor de receptaculo
         ]);
 
+        Eventos::create([
+            'action' => 'ACTUALIZACION',
+            'descripcion' => 'Edicion de Saca',
+            'identificador' => $receptaculo,
+            'user_id' => auth()->user()->name,
+        ]);
+
         return redirect()->back()->with('message', 'Saca actualizada exitosamente');
     }
 
     public function destroy($id)
     {
+        // Encuentra la saca que se va a eliminar
         $saca = Saca::findOrFail($id);
+
+        // Rescata el valor del campo 'receptaculo' antes de eliminarla
+        $receptaculo = $saca->receptaculo;
+
+        // Elimina la saca
         $saca->delete();
 
+        // Crea un registro en la tabla Eventos
+        Eventos::create([
+            'action' => 'ELIMINACION', // Cambié a ELIMINACION para reflejar la acción
+            'descripcion' => 'Eliminación de Saca',
+            'identificador' => $receptaculo, // Usa el campo rescatado
+            'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
+        ]);
+
+        // Redirecciona con un mensaje de éxito
         return redirect()->back()->with('message', 'Saca eliminada exitosamente');
     }
+
+
     public function cerrar($id)
     {
         // Obtener todas las sacas relacionadas al despacho
@@ -129,6 +161,16 @@ class SacaController extends Controller
             'peso' => $totalPeso,
             'nroenvase' => $totalPaquetes,
         ]);
+
+        // Registrar cada saca en la tabla Eventos
+        foreach ($sacas as $saca) {
+            Eventos::create([
+                'action' => 'CLAUSURA',
+                'descripcion' => 'Cierre de Saca',
+                'identificador' => $saca->receptaculo, // Campo receptaculo para identificar la saca
+                'user_id' => auth()->user()->name, // ID del usuario autenticado
+            ]);
+        }
 
         // Redirigir a la pantalla /iniciar con un mensaje de éxito
         return redirect('/iniciar')->with('message', 'Despacho cerrado exitosamente con todos los datos actualizados');

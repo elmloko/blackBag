@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contenido;
 use App\Models\Saca;
+use App\Models\Eventos;
 
 class ContenidoController extends Controller
 {
@@ -32,14 +33,23 @@ class ContenidoController extends Controller
             'nropaquetesbl' => $request->nropaquetesbl,
         ]);
 
-        // Calcular la suma de nropaquetesro y nropaquetesbl
-        $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0);
-
-        // Actualizar el campo nropaquetes en el registro de Saca
+        // Recuperar la saca relacionada
         $saca = Saca::find($request->saca_id);
         if ($saca) {
+            // Calcular la suma de nropaquetesro y nropaquetesbl
+            $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0);
+
+            // Actualizar el campo nropaquetes en la saca
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
+
+            // Registrar el evento en la tabla Eventos
+            Eventos::create([
+                'action' => 'DECLARACION DE CONTENIDO',
+                'descripcion' => 'Contenido declarado en saca postal',
+                'identificador' => $saca->receptaculo,
+                'user_id' => auth()->user()->name,
+            ]);
         }
 
         // Redirección después de la creación exitosa
@@ -57,7 +67,7 @@ class ContenidoController extends Controller
             'nropaquetesro' => 'nullable|integer',
             'nropaquetesbl' => 'nullable|integer',
         ]);
-    
+
         // Encontrar el contenido existente y actualizar sus datos
         $contenido = Contenido::findOrFail($id);
         $contenido->update([
@@ -68,19 +78,26 @@ class ContenidoController extends Controller
             'nropaquetesro' => $request->nropaquetesro,
             'nropaquetesbl' => $request->nropaquetesbl,
         ]);
-    
+
         // Calcular la suma de nropaquetesro y nropaquetesbl
         $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0);
-    
+
         // Actualizar el campo nropaquetes en el registro de Saca
         $saca = Saca::find($contenido->saca_id);
         if ($saca) {
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
+
+            // Registrar el evento en la tabla Eventos
+            Eventos::create([
+                'action' => 'ACTUALIZACION DE CONTENIDO',
+                'descripcion' => 'Actualización de contenido en saca postal',
+                'identificador' => $saca->receptaculo, // Usa el campo 'receptaculo' de la saca
+                'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
+            ]);
         }
-    
+
         // Redirección después de la actualización exitosa
         return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
     }
-    
 }

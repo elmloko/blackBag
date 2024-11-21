@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Despacho;
 use App\Models\Contenido;
 use App\Models\Saca;
+use App\Models\Eventos;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -104,6 +105,13 @@ class Iniciar extends Component
             'identificador' => $identificador,  // Guarda el identificador generado
         ]);
 
+        Eventos::create([
+            'action' => 'INICIO',
+            'descripcion' => 'Creacion de despacho',
+            'identificador' => $identificador,
+            'user_id' => auth()->user()->name,
+        ]);
+
         session()->flash('success', 'Despacho creado exitosamente.');
 
         // Cierra el modal de confirmación y restablece los campos
@@ -114,14 +122,27 @@ class Iniciar extends Component
     {
         // Cambiar el estado de todas las sacas relacionadas a 'APERTURA'
         Saca::where('despacho_id', $despachoId)->update(['estado' => 'APERTURA']);
-
+    
         // Cambiar el estado del despacho a 'REAPERTURA'
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'REAPERTURA']);
-
+    
+        // Obtener la primera saca asociada al despacho para el identificador
+        $saca = Saca::where('despacho_id', $despachoId)->first();
+        $identificador = $saca ? $saca->receptaculo : 'SIN SACAS ASOCIADAS';
+    
+        // Registrar el evento en la tabla Eventos
+        Eventos::create([
+            'action' => 'REAPERTURA',
+            'descripcion' => 'Reapertura de despacho',
+            'identificador' => $identificador,
+            'user_id' => auth()->user()->name, // Usa el ID del usuario autenticado
+        ]);
+    
         // Emitir un mensaje de éxito
         session()->flash('message', 'Despacho y todas sus sacas reaperturadas exitosamente.');
     }
+    
     public function expedicionDespacho($despachoId)
     {
         // Mapeo de siglas a nombres de ciudades
@@ -185,6 +206,14 @@ class Iniciar extends Component
         // Convertir la sigla de ofdestino a nombre de ciudad
         $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
     
+        // Registrar el evento en la tabla Eventos
+        Eventos::create([
+            'action' => 'EXPEDICION',
+            'descripcion' => 'Expedición de despacho',
+            'identificador' => $despacho->identificador, // Usa el identificador del despacho
+            'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
+        ]);
+    
         // Datos para el PDF
         $data = [
             'despacho' => $despacho,
@@ -219,6 +248,7 @@ class Iniciar extends Component
             echo $pdf->output();
         }, 'CN.pdf');
     }
+    
 
     public function render()
     {
