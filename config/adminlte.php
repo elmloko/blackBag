@@ -366,15 +366,18 @@ return [
             ],
         ],
         [
+            'text' => 'Eventos',
+            'url' => '/event',
+            'icon' => 'fas fa-user',
+        ],
+        [
             'text' => 'Rendimiento',
             'url' => '/pulse',
-
             'icon' => 'fas fa-user',
         ],
         [
             'text' => 'Logs',
             'url' => '/log-viewer',
-
             'icon' => 'fas fa-user',
         ],
     ],

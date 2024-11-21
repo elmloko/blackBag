@@ -8,7 +8,9 @@ use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DespachoController;
 use App\Http\Controllers\SacaController;
 use App\Http\Controllers\ContenidoController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +84,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/saca/{id}', [SacaController::class, 'destroy'])->name('saca.delete');
     Route::put('/saca/{id}', [SacaController::class, 'update'])->name('saca.update');
     Route::post('/despacho/{id}/cerrar', [SacaController::class, 'cerrar'])->name('despacho.cerrar');
+
+    //Eventos
+    Route::get('/event', [EventController::class, 'getEvent']);
 
     //contenido
     Route::put('/contenido/{id}', [ContenidoController::class, 'update'])->name('contenido.update');
