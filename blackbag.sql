@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
+-- Host:                         172.65.10.52
+-- Versión del servidor:         10.11.4-MariaDB-1~deb12u1 - Debian 12
+-- SO del servidor:              debian-linux-gnu
 -- HeidiSQL Versión:             12.6.0.6765
 -- --------------------------------------------------------
 
@@ -32,9 +32,19 @@ CREATE TABLE IF NOT EXISTS `contenido` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `saca_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.contenido: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.contenido: ~9 rows (aproximadamente)
+INSERT INTO `contenido` (`id`, `descripcion`, `listas`, `nropaquetesro`, `nropaquetesbl`, `sacasm`, `lcao`, `created_at`, `updated_at`, `saca_id`) VALUES
+	(1, 'MINL', NULL, 2, 0, 2, NULL, '2024-11-19 23:55:45', '2024-11-20 00:00:48', 1),
+	(2, 'MINL', 1, 76, NULL, NULL, NULL, '2024-11-19 23:59:40', '2024-11-20 00:00:53', 2),
+	(3, 'MINL', 1, 64, NULL, NULL, NULL, '2024-11-20 00:02:07', '2024-11-20 00:02:07', 3),
+	(4, 'MINL', 1, 16, NULL, NULL, NULL, '2024-11-20 00:03:28', '2024-11-20 00:03:28', 4),
+	(5, 'MINL', 1, 7, NULL, NULL, NULL, '2024-11-20 00:05:28', '2024-11-20 00:05:28', 5),
+	(6, 'MINL', 1, 2, NULL, NULL, NULL, '2024-11-20 00:06:58', '2024-11-20 00:06:58', 6),
+	(7, 'MINL', 1, 15, NULL, NULL, NULL, '2024-11-20 00:08:33', '2024-11-20 00:08:33', 7),
+	(8, 'MINL', 1, 9, NULL, NULL, NULL, '2024-11-20 00:09:43', '2024-11-20 00:09:43', 8),
+	(9, 'MINL', 1, 3, NULL, NULL, NULL, '2024-11-20 00:10:46', '2024-11-20 00:10:46', 9);
 
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
@@ -52,9 +62,18 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~8 rows (aproximadamente)
+INSERT INTO `despacho` (`id`, `ofdestino`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'BOTJA', 'C', 'UR', 1, 9, 1.400, 'BOLPZBOTJACUR4001', 4, 'EXPEDICION', '2024-11-19 23:28:52', '2024-11-20 00:11:05', NULL),
+	(2, 'BOPOI', 'C', 'UR', 1, 7, 1.600, 'BOLPZBOPOICUR4001', 4, 'EXPEDICION', '2024-11-19 23:29:11', '2024-11-20 00:11:06', NULL),
+	(3, 'BOCIJ', 'C', 'UR', 1, 3, 1.400, 'BOLPZBOCIJCUR4001', 4, 'EXPEDICION', '2024-11-19 23:29:28', '2024-11-20 00:11:11', NULL),
+	(4, 'BOORU', 'C', 'UR', 1, 15, 3.700, 'BOLPZBOORUCUR4001', 4, 'EXPEDICION', '2024-11-19 23:29:43', '2024-11-20 00:11:13', NULL),
+	(5, 'BOTDD', 'C', 'UR', 1, 2, 0.200, 'BOLPZBOTDDCUR4001', 4, 'EXPEDICION', '2024-11-19 23:30:07', '2024-11-20 00:11:15', NULL),
+	(6, 'BOSRZ', 'C', 'UR', 1, 78, 37.800, 'BOLPZBOSRZCUR4001', 4, 'EXPEDICION', '2024-11-19 23:30:24', '2024-11-20 00:01:04', NULL),
+	(7, 'BOSRE', 'C', 'UR', 1, 16, 2.100, 'BOLPZBOSRECUR4001', 4, 'EXPEDICION', '2024-11-19 23:31:07', '2024-11-20 00:11:16', NULL),
+	(8, 'BOCBB', 'C', 'UR', 1, 64, 19.400, 'BOLPZBOCBBCUR4001', 4, 'EXPEDICION', '2024-11-20 00:01:33', '2024-11-20 00:11:16', NULL);
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -170,9 +189,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=4603 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5335 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.094 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.225 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -1313,7 +1332,92 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(4525, 1731601440, 1440, 'user_request', '1', 'count', 20.00, NULL),
 	(4579, 1731601500, 60, 'user_request', '1', 'count', 4.00, NULL),
 	(4595, 1731601620, 60, 'user_request', '1', 'count', 1.00, NULL),
-	(4599, 1731601680, 60, 'user_request', '1', 'count', 1.00, NULL);
+	(4599, 1731601680, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(4603, 1731959100, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(4604, 1731958920, 360, 'user_request', '1', 'count', 10.00, NULL),
+	(4605, 1731958560, 1440, 'user_request', '1', 'count', 14.00, NULL),
+	(4606, 1731955680, 10080, 'user_request', '1', 'count', 14.00, NULL),
+	(4615, 1731959160, 60, 'user_request', '1', 'count', 7.00, NULL),
+	(4643, 1731959340, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(4644, 1731959280, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(4655, 1731959520, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(4659, 1732040760, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(4660, 1732040640, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(4661, 1732040640, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(4662, 1732036320, 10080, 'user_request', '1', 'count', 23.00, NULL),
+	(4667, 1732043760, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(4668, 1732043520, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(4669, 1732043520, 1440, 'user_request', '1', 'count', 19.00, NULL),
+	(4691, 1732043940, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(4692, 1732043880, 360, 'user_request', '1', 'count', 7.00, NULL),
+	(4703, 1732044000, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(4719, 1732044360, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(4720, 1732044240, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(4731, 1732044420, 60, 'user_request', '4', 'count', 3.00, NULL),
+	(4732, 1732044240, 360, 'user_request', '4', 'count', 12.00, NULL),
+	(4733, 1732043520, 1440, 'user_request', '4', 'count', 19.00, NULL),
+	(4734, 1732036320, 10080, 'user_request', '4', 'count', 41.00, NULL),
+	(4743, 1732044480, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(4751, 1732044540, 60, 'user_request', '4', 'count', 7.00, NULL),
+	(4767, 1732044540, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(4783, 1732044600, 60, 'user_request', '4', 'count', 5.00, NULL),
+	(4784, 1732044600, 360, 'user_request', '4', 'count', 7.00, NULL),
+	(4803, 1732044660, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(4811, 1732044840, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(4812, 1732044600, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(4819, 1732045020, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(4820, 1732044960, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(4821, 1732044960, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(4827, 1732045980, 60, 'user_request', '4', 'count', 4.00, NULL),
+	(4828, 1732045680, 360, 'user_request', '4', 'count', 4.00, NULL),
+	(4829, 1732044960, 1440, 'user_request', '4', 'count', 22.00, NULL),
+	(4835, 1732045980, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(4836, 1732045680, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(4837, 1732044960, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(4838, 1732036320, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(4839, 1732045980, 60, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(4840, 1732045680, 360, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(4841, 1732044960, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(4842, 1732036320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(4875, 1732046040, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(4876, 1732046040, 360, 'user_request', '4', 'count', 18.00, NULL),
+	(4883, 1732046100, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(4891, 1732046160, 60, 'user_request', '4', 'count', 4.00, NULL),
+	(4907, 1732046280, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(4915, 1732046340, 60, 'user_request', '4', 'count', 8.00, NULL),
+	(4947, 1732046400, 60, 'user_request', '4', 'count', 18.00, NULL),
+	(4948, 1732046400, 360, 'user_request', '4', 'count', 48.00, NULL),
+	(4949, 1732046400, 1440, 'user_request', '4', 'count', 86.00, NULL),
+	(4950, 1732046400, 10080, 'user_request', '4', 'count', 86.00, NULL),
+	(5019, 1732046460, 60, 'user_request', '4', 'count', 6.00, NULL),
+	(5043, 1732046520, 60, 'user_request', '4', 'count', 5.00, NULL),
+	(5063, 1732046580, 60, 'user_request', '4', 'count', 8.00, NULL),
+	(5095, 1732046640, 60, 'user_request', '4', 'count', 1.00, NULL),
+	(5099, 1732046700, 60, 'user_request', '4', 'count', 10.00, NULL),
+	(5139, 1732046760, 60, 'user_request', '4', 'count', 7.00, NULL),
+	(5140, 1732046760, 360, 'user_request', '4', 'count', 37.00, NULL),
+	(5167, 1732046820, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(5175, 1732046880, 60, 'user_request', '4', 'count', 7.00, NULL),
+	(5203, 1732046940, 60, 'user_request', '4', 'count', 8.00, NULL),
+	(5235, 1732047000, 60, 'user_request', '4', 'count', 6.00, NULL),
+	(5259, 1732047060, 60, 'user_request', '4', 'count', 7.00, NULL),
+	(5287, 1732047180, 60, 'user_request', '4', 'count', 1.00, NULL),
+	(5288, 1732047120, 360, 'user_request', '4', 'count', 1.00, NULL),
+	(5291, 1732193100, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(5292, 1732192920, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(5293, 1732191840, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(5294, 1732187520, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(5299, 1732193580, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(5300, 1732193280, 360, 'user_request', '1', 'count', 1.00, NULL),
+	(5301, 1732193280, 1440, 'user_request', '1', 'count', 1.00, NULL),
+	(5303, 1732204680, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(5304, 1732204440, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(5305, 1732203360, 1440, 'user_request', '1', 'count', 6.00, NULL),
+	(5306, 1732197600, 10080, 'user_request', '1', 'count', 8.00, NULL),
+	(5319, 1732204740, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(5327, 1732205280, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(5328, 1732205160, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(5329, 1732204800, 1440, 'user_request', '1', 'count', 2.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -1328,9 +1432,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=1198 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1381 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~1.079 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~1.262 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -2410,7 +2514,190 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1194, 1731601513, 'user_request', '1', NULL),
 	(1195, 1731601514, 'user_request', '1', NULL),
 	(1196, 1731601664, 'user_request', '1', NULL),
-	(1197, 1731601721, 'user_request', '1', NULL);
+	(1197, 1731601721, 'user_request', '1', NULL),
+	(1198, 1731959124, 'user_request', '1', NULL),
+	(1199, 1731959124, 'user_request', '1', NULL),
+	(1200, 1731959158, 'user_request', '1', NULL),
+	(1201, 1731959167, 'user_request', '1', NULL),
+	(1202, 1731959170, 'user_request', '1', NULL),
+	(1203, 1731959174, 'user_request', '1', NULL),
+	(1204, 1731959176, 'user_request', '1', NULL),
+	(1205, 1731959178, 'user_request', '1', NULL),
+	(1206, 1731959185, 'user_request', '1', NULL),
+	(1207, 1731959186, 'user_request', '1', NULL),
+	(1208, 1731959351, 'user_request', '1', NULL),
+	(1209, 1731959388, 'user_request', '1', NULL),
+	(1210, 1731959388, 'user_request', '1', NULL),
+	(1211, 1731959558, 'user_request', '1', NULL),
+	(1212, 1732040799, 'user_request', '1', NULL),
+	(1213, 1732040799, 'user_request', '1', NULL),
+	(1214, 1732043766, 'user_request', '1', NULL),
+	(1215, 1732043766, 'user_request', '1', NULL),
+	(1216, 1732043773, 'user_request', '1', NULL),
+	(1217, 1732043776, 'user_request', '1', NULL),
+	(1218, 1732043778, 'user_request', '1', NULL),
+	(1219, 1732043781, 'user_request', '1', NULL),
+	(1220, 1732043960, 'user_request', '1', NULL),
+	(1221, 1732043960, 'user_request', '1', NULL),
+	(1222, 1732043965, 'user_request', '1', NULL),
+	(1223, 1732044012, 'user_request', '1', NULL),
+	(1224, 1732044012, 'user_request', '1', NULL),
+	(1225, 1732044019, 'user_request', '1', NULL),
+	(1226, 1732044032, 'user_request', '1', NULL),
+	(1227, 1732044390, 'user_request', '1', NULL),
+	(1228, 1732044390, 'user_request', '1', NULL),
+	(1229, 1732044401, 'user_request', '1', NULL),
+	(1230, 1732044449, 'user_request', '4', NULL),
+	(1231, 1732044449, 'user_request', '4', NULL),
+	(1232, 1732044461, 'user_request', '4', NULL),
+	(1233, 1732044526, 'user_request', '4', NULL),
+	(1234, 1732044532, 'user_request', '4', NULL),
+	(1235, 1732044549, 'user_request', '4', NULL),
+	(1236, 1732044550, 'user_request', '4', NULL),
+	(1237, 1732044566, 'user_request', '4', NULL),
+	(1238, 1732044568, 'user_request', '4', NULL),
+	(1239, 1732044575, 'user_request', '1', NULL),
+	(1240, 1732044581, 'user_request', '4', NULL),
+	(1241, 1732044583, 'user_request', '4', NULL),
+	(1242, 1732044589, 'user_request', '4', NULL),
+	(1243, 1732044605, 'user_request', '4', NULL),
+	(1244, 1732044607, 'user_request', '4', NULL),
+	(1245, 1732044623, 'user_request', '4', NULL),
+	(1246, 1732044624, 'user_request', '4', NULL),
+	(1247, 1732044649, 'user_request', '4', NULL),
+	(1248, 1732044665, 'user_request', '4', NULL),
+	(1249, 1732044667, 'user_request', '4', NULL),
+	(1250, 1732044870, 'user_request', '1', NULL),
+	(1251, 1732044873, 'user_request', '1', NULL),
+	(1252, 1732045068, 'user_request', '1', NULL),
+	(1253, 1732045076, 'user_request', '1', NULL),
+	(1254, 1732045980, 'user_request', '4', NULL),
+	(1255, 1732045980, 'user_request', '4', NULL),
+	(1256, 1732045983, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1257, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1258, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1259, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1260, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1261, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1262, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1263, 1732045984, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1264, 1732045986, 'user_request', '4', NULL),
+	(1265, 1732046025, 'user_request', '4', NULL),
+	(1266, 1732046044, 'user_request', '4', NULL),
+	(1267, 1732046044, 'user_request', '4', NULL),
+	(1268, 1732046145, 'user_request', '4', NULL),
+	(1269, 1732046145, 'user_request', '4', NULL),
+	(1270, 1732046192, 'user_request', '4', NULL),
+	(1271, 1732046192, 'user_request', '4', NULL),
+	(1272, 1732046208, 'user_request', '4', NULL),
+	(1273, 1732046208, 'user_request', '4', NULL),
+	(1274, 1732046337, 'user_request', '4', NULL),
+	(1275, 1732046337, 'user_request', '4', NULL),
+	(1276, 1732046345, 'user_request', '4', NULL),
+	(1277, 1732046345, 'user_request', '4', NULL),
+	(1278, 1732046350, 'user_request', '4', NULL),
+	(1279, 1732046350, 'user_request', '4', NULL),
+	(1280, 1732046380, 'user_request', '4', NULL),
+	(1281, 1732046380, 'user_request', '4', NULL),
+	(1282, 1732046390, 'user_request', '4', NULL),
+	(1283, 1732046390, 'user_request', '4', NULL),
+	(1284, 1732046408, 'user_request', '4', NULL),
+	(1285, 1732046408, 'user_request', '4', NULL),
+	(1286, 1732046410, 'user_request', '4', NULL),
+	(1287, 1732046410, 'user_request', '4', NULL),
+	(1288, 1732046416, 'user_request', '4', NULL),
+	(1289, 1732046416, 'user_request', '4', NULL),
+	(1290, 1732046420, 'user_request', '4', NULL),
+	(1291, 1732046420, 'user_request', '4', NULL),
+	(1292, 1732046423, 'user_request', '4', NULL),
+	(1293, 1732046423, 'user_request', '4', NULL),
+	(1294, 1732046425, 'user_request', '4', NULL),
+	(1295, 1732046429, 'user_request', '4', NULL),
+	(1296, 1732046448, 'user_request', '4', NULL),
+	(1297, 1732046448, 'user_request', '4', NULL),
+	(1298, 1732046453, 'user_request', '4', NULL),
+	(1299, 1732046453, 'user_request', '4', NULL),
+	(1300, 1732046458, 'user_request', '4', NULL),
+	(1301, 1732046459, 'user_request', '4', NULL),
+	(1302, 1732046464, 'user_request', '4', NULL),
+	(1303, 1732046492, 'user_request', '4', NULL),
+	(1304, 1732046493, 'user_request', '4', NULL),
+	(1305, 1732046495, 'user_request', '4', NULL),
+	(1306, 1732046507, 'user_request', '4', NULL),
+	(1307, 1732046507, 'user_request', '4', NULL),
+	(1308, 1732046527, 'user_request', '4', NULL),
+	(1309, 1732046527, 'user_request', '4', NULL),
+	(1310, 1732046530, 'user_request', '4', NULL),
+	(1311, 1732046530, 'user_request', '4', NULL),
+	(1312, 1732046575, 'user_request', '4', NULL),
+	(1313, 1732046584, 'user_request', '4', NULL),
+	(1314, 1732046584, 'user_request', '4', NULL),
+	(1315, 1732046608, 'user_request', '4', NULL),
+	(1316, 1732046608, 'user_request', '4', NULL),
+	(1317, 1732046616, 'user_request', '4', NULL),
+	(1318, 1732046616, 'user_request', '4', NULL),
+	(1319, 1732046620, 'user_request', '4', NULL),
+	(1320, 1732046620, 'user_request', '4', NULL),
+	(1321, 1732046690, 'user_request', '4', NULL),
+	(1322, 1732046720, 'user_request', '4', NULL),
+	(1323, 1732046720, 'user_request', '4', NULL),
+	(1324, 1732046728, 'user_request', '4', NULL),
+	(1325, 1732046728, 'user_request', '4', NULL),
+	(1326, 1732046732, 'user_request', '4', NULL),
+	(1327, 1732046732, 'user_request', '4', NULL),
+	(1328, 1732046742, 'user_request', '4', NULL),
+	(1329, 1732046743, 'user_request', '4', NULL),
+	(1330, 1732046755, 'user_request', '4', NULL),
+	(1331, 1732046755, 'user_request', '4', NULL),
+	(1332, 1732046760, 'user_request', '4', NULL),
+	(1333, 1732046760, 'user_request', '4', NULL),
+	(1334, 1732046785, 'user_request', '4', NULL),
+	(1335, 1732046794, 'user_request', '4', NULL),
+	(1336, 1732046794, 'user_request', '4', NULL),
+	(1337, 1732046818, 'user_request', '4', NULL),
+	(1338, 1732046818, 'user_request', '4', NULL),
+	(1339, 1732046852, 'user_request', '4', NULL),
+	(1340, 1732046852, 'user_request', '4', NULL),
+	(1341, 1732046880, 'user_request', '4', NULL),
+	(1342, 1732046889, 'user_request', '4', NULL),
+	(1343, 1732046889, 'user_request', '4', NULL),
+	(1344, 1732046913, 'user_request', '4', NULL),
+	(1345, 1732046913, 'user_request', '4', NULL),
+	(1346, 1732046916, 'user_request', '4', NULL),
+	(1347, 1732046916, 'user_request', '4', NULL),
+	(1348, 1732046959, 'user_request', '4', NULL),
+	(1349, 1732046964, 'user_request', '4', NULL),
+	(1350, 1732046964, 'user_request', '4', NULL),
+	(1351, 1732046983, 'user_request', '4', NULL),
+	(1352, 1732046983, 'user_request', '4', NULL),
+	(1353, 1732046985, 'user_request', '4', NULL),
+	(1354, 1732046985, 'user_request', '4', NULL),
+	(1355, 1732046989, 'user_request', '4', NULL),
+	(1356, 1732047037, 'user_request', '4', NULL),
+	(1357, 1732047037, 'user_request', '4', NULL),
+	(1358, 1732047046, 'user_request', '4', NULL),
+	(1359, 1732047046, 'user_request', '4', NULL),
+	(1360, 1732047049, 'user_request', '4', NULL),
+	(1361, 1732047049, 'user_request', '4', NULL),
+	(1362, 1732047065, 'user_request', '4', NULL),
+	(1363, 1732047066, 'user_request', '4', NULL),
+	(1364, 1732047071, 'user_request', '4', NULL),
+	(1365, 1732047073, 'user_request', '4', NULL),
+	(1366, 1732047075, 'user_request', '4', NULL),
+	(1367, 1732047076, 'user_request', '4', NULL),
+	(1368, 1732047076, 'user_request', '4', NULL),
+	(1369, 1732047232, 'user_request', '4', NULL),
+	(1370, 1732193134, 'user_request', '1', NULL),
+	(1371, 1732193134, 'user_request', '1', NULL),
+	(1372, 1732193609, 'user_request', '1', NULL),
+	(1373, 1732204726, 'user_request', '1', NULL),
+	(1374, 1732204726, 'user_request', '1', NULL),
+	(1375, 1732204729, 'user_request', '1', NULL),
+	(1376, 1732204735, 'user_request', '1', NULL),
+	(1377, 1732204742, 'user_request', '1', NULL),
+	(1378, 1732204745, 'user_request', '1', NULL),
+	(1379, 1732205302, 'user_request', '1', NULL),
+	(1380, 1732205304, 'user_request', '1', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -2468,9 +2755,19 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~9 rows (aproximadamente)
+INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiqueta`, `receptaculo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
+	(1, 1, 'BOLPZBOSRZCUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOSRZCUR40010010252', 25.200, 2, '2024-11-19 23:54:04', '2024-11-20 00:00:59', '6'),
+	(2, 2, 'BOLPZBOSRZCUR4001002', 'BG', 'CERRADO', 'RO', 'BOLPZBOSRZCUR40010020126', 12.600, 76, '2024-11-19 23:59:10', '2024-11-20 00:00:59', '6'),
+	(3, 1, 'BOLPZBOCBBCUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUR40010010194', 19.400, 64, '2024-11-20 00:01:47', '2024-11-20 00:02:10', '8'),
+	(4, 1, 'BOLPZBOSRECUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOSRECUR40010010021', 2.100, 16, '2024-11-20 00:03:04', '2024-11-20 00:03:40', '7'),
+	(5, 1, 'BOLPZBOPOICUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOPOICUR40010010016', 1.600, 7, '2024-11-20 00:05:20', '2024-11-20 00:06:00', '2'),
+	(6, 1, 'BOLPZBOTDDCUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOTDDCUR40010010002', 0.200, 2, '2024-11-20 00:06:34', '2024-11-20 00:07:32', '5'),
+	(7, 1, 'BOLPZBOORUCUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOORUCUR40010010037', 3.700, 15, '2024-11-20 00:08:09', '2024-11-20 00:08:36', '4'),
+	(8, 1, 'BOLPZBOTJACUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOTJACUR40010010014', 1.400, 9, '2024-11-20 00:09:24', '2024-11-20 00:09:45', '1'),
+	(9, 1, 'BOLPZBOCIJCUR4001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOCIJCUR40010010014', 1.400, 3, '2024-11-20 00:10:37', '2024-11-20 00:10:49', '3');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -2487,12 +2784,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.users: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.users: ~3 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `city`, `ci`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'TGu1G0p048cmwdgoiYPDuQBO7oS2S5jsyPcAnlc9wnNg7L3h1CNtR4BnaOhU', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2024-11-05 23:21:55', NULL),
-	(2, 'Leonardo Doria Medina Ochoa', 'leonardo.doria@correos.gob.bo', NULL, '$2y$10$j0ccA5Pghe8OmWdNHeU2zOgpd.ubGV4V9E5xVlwTF92yw0lF2JIMC', NULL, 'LA PAZ', 12345678, '2024-11-05 23:18:56', '2024-11-05 23:29:15', NULL);
+	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'jeNvRX0lqiMssx1u99m80IOhT9BMe5Fnchs6J8JsVipVmtTU0LcBu28Ou0I4', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2024-11-05 23:21:55', NULL),
+	(3, 'Omar Quispe Condori', 'omar.quispe@correos.gob.bo', NULL, '$2y$10$lDMqM0A2pxfqRtp9dpx5N.0Ar2EqICXw7oi38KZrnn3m2K0OHriPC', NULL, 'LA PAZ', 8441338, '2024-11-19 23:19:20', '2024-11-19 23:19:20', NULL),
+	(4, 'Andrea Belen Fernandez Loza', 'belen.fernandez@correos.gob.bo', NULL, '$2y$10$qk/QO71Le46AATm1ortqqemzQF.6htRIUUaiyGdiFNBY23ymO0kwa', NULL, 'LA PAZ', 9250377, '2024-11-19 23:20:12', '2024-11-19 23:20:12', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
