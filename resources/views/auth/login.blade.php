@@ -13,7 +13,7 @@
             <div class="col-md-6 col-lg-5">
                 <div class="login-wrap p-4 p-md-5">
                     <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="fa fa-user-o"></span>
+                        <img src="{{ asset('images/AGBClogo.png') }}" alt="Logo GESPA" style="width: 65px; height: auto; border-radius: 50%;">
                     </div>
                     <h3 class="text-center mb-4">{{ __('GESPA') }}</h3>
                     <form method="POST" action="{{ route('login') }}" class="login-form">
@@ -31,22 +31,6 @@
                             <x-text-input id="password" class="form-control rounded-left" type="password"
                                 name="password" placeholder="{{ __('Password') }}" required />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
-
-                        <!-- Remember Me -->
-                        <div class="form-group d-md-flex">
-                            <div class="w-50">
-                                <label class="checkbox-wrap checkbox-primary">
-                                    {{ __('Remember Me') }}
-                                    <input type="checkbox" name="remember" checked>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="w-50 text-md-right">
-                                @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
-                                @endif
-                            </div>
                         </div>
 
                         <!-- Submit -->
