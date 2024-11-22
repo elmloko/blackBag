@@ -86,12 +86,25 @@ class Iniciar extends Component
         // Calcula el último dígito del año actual
         $ultimoDigitoAno = substr(Carbon::now()->format('Y'), -1);
 
-        // Obtén el código de la ciudad del usuario logueado
+        // Mapeo de ciudades a sus códigos
+        $cityCodes = [
+            'LA PAZ' => 'BOLPZ',
+            'TARIJA' => 'BOTJA',
+            'POTOSI' => 'BOPOI',
+            'PANDO' => 'BOCIJ',
+            'COCHABAMBA' => 'BOCBB',
+            'ORURO' => 'BOORU',
+            'BENI' => 'BOTDD',
+            'SUCRE' => 'BOSRE',
+            'SANTA CRUZ' => 'BOSRZ',
+        ];
+
+        // Obtén la ciudad del usuario y tradúcela al código
         $userCity = auth()->user()->city;
-        $ofremitente = $this->cityCodes[$userCity] ?? 'UNKNOWN'; // Usa 'UNKNOWN' si la ciudad no está en el mapeo
+        $oforigen = $cityCodes[strtoupper($userCity)] ?? 'UNKNOWN'; // Traduce la ciudad o usa 'UNKNOWN' si no está mapeada
 
         // Construye el identificador concatenando los valores deseados
-        $identificador = $ofremitente . $this->ofdestino . $this->categoria . $this->subclase . $ultimoDigitoAno . $this->nrodespacho;
+        $identificador = $oforigen . $this->ofdestino . $this->categoria . $this->subclase . $ultimoDigitoAno . $this->nrodespacho;
 
         // Guarda el despacho en la base de datos con el estado "ABIERTO", el último dígito del año, y el identificador
         Despacho::create([
@@ -102,9 +115,12 @@ class Iniciar extends Component
             'fecha_hora_creacion' => $this->fechaHoraActual,
             'estado' => 'APERTURA',
             'ano' => $ultimoDigitoAno,
-            'identificador' => $identificador,  // Guarda el identificador generado
+            'identificador' => $identificador, // Guarda el identificador generado
+            'oforigen' => $oforigen,
+            'user' => auth()->user()->name,
         ]);
 
+        // Registrar el evento relacionado
         Eventos::create([
             'action' => 'INICIO',
             'descripcion' => 'Creacion de despacho',
@@ -118,19 +134,20 @@ class Iniciar extends Component
         $this->dispatch('closeConfirmModal');
         $this->reset(['categoria', 'ofdestino', 'subclase', 'nrodespacho', 'fechaHoraActual']);
     }
+
     public function reaperturarDespacho($despachoId)
     {
         // Cambiar el estado de todas las sacas relacionadas a 'APERTURA'
         Saca::where('despacho_id', $despachoId)->update(['estado' => 'APERTURA']);
-    
+
         // Cambiar el estado del despacho a 'REAPERTURA'
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'REAPERTURA']);
-    
+
         // Obtener la primera saca asociada al despacho para el identificador
         $saca = Saca::where('despacho_id', $despachoId)->first();
         $identificador = $saca ? $saca->receptaculo : 'SIN SACAS ASOCIADAS';
-    
+
         // Registrar el evento en la tabla Eventos
         Eventos::create([
             'action' => 'REAPERTURA',
@@ -138,11 +155,11 @@ class Iniciar extends Component
             'identificador' => $identificador,
             'user_id' => auth()->user()->name, // Usa el ID del usuario autenticado
         ]);
-    
+
         // Emitir un mensaje de éxito
         session()->flash('message', 'Despacho y todas sus sacas reaperturadas exitosamente.');
     }
-    
+
     public function expedicionDespacho($despachoId)
     {
         // Mapeo de siglas a nombres de ciudades
@@ -157,27 +174,27 @@ class Iniciar extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-    
+
         // Obtener la ciudad del usuario como origen
         $ciudadOrigen = auth()->user()->city;
         $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
-    
+
         // Encontrar el despacho y actualizar su estado
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'EXPEDICION']);
-    
+
         // Inicializar los totales
         $totalPeso = $totalPaquetes = 0;
         $nropaquetesro = $nropaquetesbl = 0;
         $sacasm = $listas = $lcao = 0;
         $totalContenidoR = $totalContenidoB = 0;
-    
+
         // Obtener todos los registros de saca relacionados al despacho
         $sacas = Saca::where('despacho_id', $despacho->id)->get();
-    
+
         foreach ($sacas as $saca) {
             $contenido = Contenido::where('saca_id', $saca->id)->get();
-    
+
             foreach ($contenido as $item) {
                 // Verificar si tiene contenido en etiquetas rojas o blancas
                 if ($item->nropaquetesro > 0) {
@@ -186,26 +203,26 @@ class Iniciar extends Component
                 if ($item->nropaquetesbl > 0) {
                     $totalContenidoB += 1; // Cuenta como 1 si hay contenido en blancas
                 }
-    
+
                 // Sumar los valores de nropaquetesro y nropaquetesbl
                 $nropaquetesro += $item->nropaquetesro;
                 $nropaquetesbl += $item->nropaquetesbl;
-    
+
                 // Sumar otros campos
                 $sacasm += $item->sacasm;
                 $listas += $item->listas;
-    
+
                 // Acumular el total de paquetes
                 $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl;
             }
         }
-    
+
         // Calcular el total general basado en contenidos rojas, blancas y sacas
         $totalContenido = $totalContenidoR + $totalContenidoB + $sacasm;
-    
+
         // Convertir la sigla de ofdestino a nombre de ciudad
         $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
-    
+
         // Registrar el evento en la tabla Eventos
         Eventos::create([
             'action' => 'EXPEDICION',
@@ -213,7 +230,7 @@ class Iniciar extends Component
             'identificador' => $despacho->identificador, // Usa el identificador del despacho
             'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
         ]);
-    
+
         // Datos para el PDF
         $data = [
             'despacho' => $despacho,
@@ -240,15 +257,15 @@ class Iniciar extends Component
             'totalContenidoB' => $totalContenidoB,
             'totalContenido' => $totalContenido,
         ];
-    
+
         // Crear el PDF usando la vista 'despacho.pdf.cn31'
         $pdf = PDF::loadView('despacho.pdf.cn', $data);
-    
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'CN.pdf');
     }
-    
+
 
     public function render()
     {

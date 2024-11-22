@@ -13,6 +13,7 @@ class Despacho extends Model
     protected $table = 'despacho';
 
     protected $fillable = [
+        'oforigen',
         'ofdestino',
         'categoria',
         'subclase',
@@ -22,5 +23,6 @@ class Despacho extends Model
         'identificador',
         'ano',
         'estado',
+        'user',
     ];
 }
