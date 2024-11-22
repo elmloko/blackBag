@@ -50,3 +50,14 @@
 <script src="{{ asset('js/popper.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<style>
+    body {
+        background-image: url('{{ asset('images/sobres.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 50vh;
+        margin: 0;
+    }
+    </style>
+    
