@@ -318,8 +318,9 @@ return [
         ],
         [
             'text' => 'Gestion Usuarios',
+            'can'  => 'user.admin',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            
             'submenu' => [
                 [
                     'text' => 'Personal AGBC',
@@ -351,16 +352,19 @@ return [
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciar',
+                    'can'  => 'apertura.lc',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Despachos Expedicion',
                     'url' => '/expedicion',
+                    'can'  => 'expedicion.lc',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Despachos Admisiones',
                     'url' => '/admitir',
+                    'can'  => 'admision.lc',
                     'icon' => 'fas fa-user',
                 ],
             ],
@@ -373,11 +377,13 @@ return [
         [
             'text' => 'Rendimiento',
             'url' => '/pulse',
+            'can'  => 'user.admin',
             'icon' => 'fas fa-user',
         ],
         [
             'text' => 'Logs',
             'url' => '/log-viewer',
+            'can'  => 'user.admin',
             'icon' => 'fas fa-user',
         ],
     ],
