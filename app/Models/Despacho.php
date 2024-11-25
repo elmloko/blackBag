@@ -24,5 +24,7 @@ class Despacho extends Model
         'ano',
         'estado',
         'user',
+        'service',
+        'depto',
     ];
 }
