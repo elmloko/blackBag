@@ -156,9 +156,9 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.permissions: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.permissions: ~7 rows (aproximadamente)
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'apertura.lc', 'web', '2024-11-22 18:17:18', '2024-11-22 18:17:18'),
 	(2, 'expedicion.lc', 'web', '2024-11-22 18:17:24', '2024-11-22 18:17:24'),
@@ -203,9 +203,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=7379 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7735 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.822 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.810 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -1906,11 +1906,11 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(6811, 1732541580, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(6812, 1732541400, 360, 'user_request', '1', 'count', 1.00, NULL),
 	(6813, 1732540320, 1440, 'user_request', '1', 'count', 1.00, NULL),
-	(6814, 1732540320, 10080, 'user_request', '1', 'count', 126.00, NULL),
+	(6814, 1732540320, 10080, 'user_request', '1', 'count', 136.00, NULL),
 	(6815, 1732541580, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(6816, 1732541400, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(6817, 1732540320, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(6818, 1732540320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 75.00, NULL),
+	(6818, 1732540320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 82.00, NULL),
 	(6819, 1732543320, 60, 'user_request', '1', 'count', 3.00, NULL),
 	(6820, 1732543200, 360, 'user_request', '1', 'count', 10.00, NULL),
 	(6821, 1732543200, 1440, 'user_request', '1', 'count', 26.00, NULL),
@@ -2011,10 +2011,10 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(7256, 1732546980, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(7287, 1732547820, 60, 'user_request', '1', 'count', 2.00, NULL),
 	(7288, 1732547520, 360, 'user_request', '1', 'count', 2.00, NULL),
-	(7289, 1732547520, 1440, 'user_request', '1', 'count', 51.00, NULL),
+	(7289, 1732547520, 1440, 'user_request', '1', 'count', 61.00, NULL),
 	(7290, 1732547820, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(7291, 1732547520, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
-	(7292, 1732547520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 38.00, NULL),
+	(7292, 1732547520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 45.00, NULL),
 	(7303, 1732547940, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(7304, 1732547880, 360, 'user_request', '1', 'count', 7.00, NULL),
 	(7305, 1732547940, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
@@ -2043,10 +2043,12 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(7535, 1732548480, 60, 'cache_miss', 'spatie.permission.cache', 'count', 3.00, NULL),
 	(7591, 1732548540, 60, 'user_request', '1', 'count', 9.00, NULL),
 	(7592, 1732548540, 60, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
-	(7655, 1732548600, 60, 'user_request', '1', 'count', 2.00, NULL),
-	(7656, 1732548600, 360, 'user_request', '1', 'count', 2.00, NULL),
-	(7659, 1732548600, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(7660, 1732548600, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(7655, 1732548600, 60, 'user_request', '1', 'count', 4.00, NULL),
+	(7656, 1732548600, 360, 'user_request', '1', 'count', 12.00, NULL),
+	(7659, 1732548600, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(7660, 1732548600, 360, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(7683, 1732548660, 60, 'user_request', '1', 'count', 8.00, NULL),
+	(7687, 1732548660, 60, 'cache_hit', 'spatie.permission.cache', 'count', 5.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -2061,9 +2063,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=1887 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1976 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~1.768 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~1.857 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1729716018, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 1065),
 	(2, 1729716020, 'slow_query', '["alter table `model_has_roles` add constraint `model_has_roles_role_id_foreign` foreign key (`role_id`) references `roles` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:78"]', 1874),
@@ -3904,7 +3906,24 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1955, 1732548598, 'cache_hit', 'spatie.permission.cache', NULL),
 	(1956, 1732548605, 'user_request', '1', NULL),
 	(1957, 1732548606, 'user_request', '1', NULL),
-	(1958, 1732548606, 'cache_hit', 'spatie.permission.cache', NULL);
+	(1958, 1732548606, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1959, 1732548651, 'user_request', '1', NULL),
+	(1960, 1732548652, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1961, 1732548656, 'user_request', '1', NULL),
+	(1962, 1732548656, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1963, 1732548661, 'user_request', '1', NULL),
+	(1964, 1732548661, 'user_request', '1', NULL),
+	(1965, 1732548662, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1966, 1732548664, 'user_request', '1', NULL),
+	(1967, 1732548664, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1968, 1732548670, 'user_request', '1', NULL),
+	(1969, 1732548670, 'user_request', '1', NULL),
+	(1970, 1732548670, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1971, 1732548673, 'user_request', '1', NULL),
+	(1972, 1732548673, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1973, 1732548679, 'user_request', '1', NULL),
+	(1974, 1732548679, 'user_request', '1', NULL),
+	(1975, 1732548679, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -3931,9 +3950,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.roles: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.roles: ~7 rows (aproximadamente)
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(2, 'Administrador', 'web', '2024-11-22 18:16:35', '2024-11-22 18:16:35'),
 	(3, 'LCD', 'web', '2024-11-22 18:16:43', '2024-11-22 18:16:43'),
@@ -3953,7 +3972,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.role_has_permissions: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.role_has_permissions: ~13 rows (aproximadamente)
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(1, 2),
 	(1, 3),
@@ -3962,8 +3981,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(3, 2),
 	(3, 5),
 	(4, 2),
+	(5, 2),
 	(5, 6),
+	(6, 2),
 	(6, 7),
+	(7, 2),
 	(7, 8);
 
 -- Volcando estructura para tabla blackbag.saca
