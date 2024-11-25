@@ -163,21 +163,43 @@ class Admitir extends Component
 
     public function render()
     {
-        $despachos = Despacho::where(function ($query) {
-            $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
-        })
+        // Mapeo de ciudades a sus códigos
+        $cityCodes = [
+            'LA PAZ' => 'BOLPZ',
+            'TARIJA' => 'BOTJA',
+            'POTOSI' => 'BOPOI',
+            'PANDO' => 'BOCIJ',
+            'COCHABAMBA' => 'BOCBB',
+            'ORURO' => 'BOORU',
+            'BENI' => 'BOTDD',
+            'SUCRE' => 'BOSRE',
+            'SANTA CRUZ' => 'BOSRZ',
+        ];
+    
+        // Traduce la ciudad del usuario al código correspondiente
+        $userCity = auth()->user()->city;
+        $translatedCityCode = $cityCodes[strtoupper($userCity)] ?? null;
+    
+        // Filtra los despachos según el código traducido
+        $despachos = Despacho::where('ofdestino', $translatedCityCode) // Filtra por el código traducido
+            ->where(function ($query) {
+                $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
+            })
+            ->whereIn('estado', ['ADMITIDO'])
             ->paginate($this->perPage);
-
+    
         // Agregar el conteo de sacas admitidas y cerradas para cada despacho
         foreach ($despachos as $despacho) {
             $despacho->sacas_admitidas = Saca::where('despacho_id', $despacho->id)->where('estado', 'ADMITIDO')->count();
             $despacho->sacas_cerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
         }
-
+    
         return view('livewire.admitir', [
             'despachos' => $despachos,
         ]);
     }
+    
+    
 }
