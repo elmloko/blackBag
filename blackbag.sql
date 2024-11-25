@@ -163,7 +163,10 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(1, 'apertura.lc', 'web', '2024-11-22 18:17:18', '2024-11-22 18:17:18'),
 	(2, 'expedicion.lc', 'web', '2024-11-22 18:17:24', '2024-11-22 18:17:24'),
 	(3, 'admision.lc', 'web', '2024-11-22 18:17:30', '2024-11-22 18:17:30'),
-	(4, 'user.admin', 'web', '2024-11-22 18:17:37', '2024-11-22 18:17:37');
+	(4, 'user.admin', 'web', '2024-11-22 18:17:37', '2024-11-22 18:17:37'),
+	(5, 'apertura.ems', 'web', '2024-11-25 19:26:50', '2024-11-25 19:26:50'),
+	(6, 'expedicion.ems', 'web', '2024-11-25 19:27:08', '2024-11-25 19:27:08'),
+	(7, 'admision.ems', 'web', '2024-11-25 19:27:18', '2024-11-25 19:27:18');
 
 -- Volcando estructura para tabla blackbag.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
@@ -202,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7379 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.770 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~1.822 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1729716000, 60, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
 	(2, 1729715760, 360, 'slow_query', '["alter table `model_has_permissions` add constraint `model_has_permissions_permission_id_foreign` foreign key (`permission_id`) references `permissions` (`id`) on delete cascade","database\\\\migrations\\\\2024_07_09_222147_create_permission_tables.php:54"]', 'count', 1.00, NULL),
@@ -1903,11 +1906,11 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(6811, 1732541580, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(6812, 1732541400, 360, 'user_request', '1', 'count', 1.00, NULL),
 	(6813, 1732540320, 1440, 'user_request', '1', 'count', 1.00, NULL),
-	(6814, 1732540320, 10080, 'user_request', '1', 'count', 87.00, NULL),
+	(6814, 1732540320, 10080, 'user_request', '1', 'count', 126.00, NULL),
 	(6815, 1732541580, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(6816, 1732541400, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(6817, 1732540320, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(6818, 1732540320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 48.00, NULL),
+	(6818, 1732540320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 75.00, NULL),
 	(6819, 1732543320, 60, 'user_request', '1', 'count', 3.00, NULL),
 	(6820, 1732543200, 360, 'user_request', '1', 'count', 10.00, NULL),
 	(6821, 1732543200, 1440, 'user_request', '1', 'count', 26.00, NULL),
@@ -2008,10 +2011,10 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(7256, 1732546980, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(7287, 1732547820, 60, 'user_request', '1', 'count', 2.00, NULL),
 	(7288, 1732547520, 360, 'user_request', '1', 'count', 2.00, NULL),
-	(7289, 1732547520, 1440, 'user_request', '1', 'count', 12.00, NULL),
+	(7289, 1732547520, 1440, 'user_request', '1', 'count', 51.00, NULL),
 	(7290, 1732547820, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(7291, 1732547520, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
-	(7292, 1732547520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 11.00, NULL),
+	(7292, 1732547520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 38.00, NULL),
 	(7303, 1732547940, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(7304, 1732547880, 360, 'user_request', '1', 'count', 7.00, NULL),
 	(7305, 1732547940, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
@@ -2023,9 +2026,27 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(7351, 1732548180, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(7352, 1732548180, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(7359, 1732548240, 60, 'user_request', '1', 'count', 3.00, NULL),
-	(7360, 1732548240, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(7360, 1732548240, 360, 'user_request', '1', 'count', 40.00, NULL),
 	(7361, 1732548240, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
-	(7362, 1732548240, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL);
+	(7362, 1732548240, 360, 'cache_hit', 'spatie.permission.cache', 'count', 28.00, NULL),
+	(7379, 1732548360, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(7380, 1732548360, 60, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(7403, 1732548360, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(7404, 1732548240, 360, 'cache_miss', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(7405, 1732547520, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(7406, 1732540320, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(7419, 1732548420, 60, 'user_request', '1', 'count', 7.00, NULL),
+	(7420, 1732548420, 60, 'cache_hit', 'spatie.permission.cache', 'count', 5.00, NULL),
+	(7427, 1732548420, 60, 'cache_miss', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(7475, 1732548480, 60, 'user_request', '1', 'count', 16.00, NULL),
+	(7476, 1732548480, 60, 'cache_hit', 'spatie.permission.cache', 'count', 10.00, NULL),
+	(7535, 1732548480, 60, 'cache_miss', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(7591, 1732548540, 60, 'user_request', '1', 'count', 9.00, NULL),
+	(7592, 1732548540, 60, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(7655, 1732548600, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(7656, 1732548600, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(7659, 1732548600, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(7660, 1732548600, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -3811,7 +3832,79 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1883, 1732548240, 'cache_hit', 'spatie.permission.cache', NULL),
 	(1884, 1732548245, 'user_request', '1', NULL),
 	(1885, 1732548287, 'user_request', '1', NULL),
-	(1886, 1732548287, 'cache_hit', 'spatie.permission.cache', NULL);
+	(1886, 1732548287, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1887, 1732548400, 'user_request', '1', NULL),
+	(1888, 1732548401, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1889, 1732548404, 'user_request', '1', NULL),
+	(1890, 1732548404, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1891, 1732548410, 'user_request', '1', NULL),
+	(1892, 1732548410, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1893, 1732548411, 'user_request', '1', NULL),
+	(1894, 1732548411, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1895, 1732548418, 'user_request', '1', NULL),
+	(1896, 1732548418, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1897, 1732548427, 'user_request', '1', NULL),
+	(1898, 1732548428, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1899, 1732548428, 'user_request', '1', NULL),
+	(1900, 1732548428, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1901, 1732548432, 'user_request', '1', NULL),
+	(1902, 1732548433, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1903, 1732548438, 'user_request', '1', NULL),
+	(1904, 1732548438, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1905, 1732548438, 'user_request', '1', NULL),
+	(1906, 1732548439, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1907, 1732548475, 'user_request', '1', NULL),
+	(1908, 1732548475, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1909, 1732548478, 'user_request', '1', NULL),
+	(1910, 1732548478, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1911, 1732548481, 'user_request', '1', NULL),
+	(1912, 1732548481, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1913, 1732548484, 'user_request', '1', NULL),
+	(1914, 1732548484, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1915, 1732548489, 'user_request', '1', NULL),
+	(1916, 1732548489, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1917, 1732548493, 'user_request', '1', NULL),
+	(1918, 1732548493, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1919, 1732548504, 'user_request', '1', NULL),
+	(1920, 1732548504, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1921, 1732548509, 'user_request', '1', NULL),
+	(1922, 1732548509, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1923, 1732548512, 'user_request', '1', NULL),
+	(1924, 1732548513, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1925, 1732548518, 'user_request', '1', NULL),
+	(1926, 1732548519, 'user_request', '1', NULL),
+	(1927, 1732548519, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1928, 1732548521, 'user_request', '1', NULL),
+	(1929, 1732548521, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1930, 1732548526, 'user_request', '1', NULL),
+	(1931, 1732548527, 'user_request', '1', NULL),
+	(1932, 1732548527, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1933, 1732548529, 'user_request', '1', NULL),
+	(1934, 1732548529, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1935, 1732548533, 'user_request', '1', NULL),
+	(1936, 1732548533, 'user_request', '1', NULL),
+	(1937, 1732548534, 'cache_miss', 'spatie.permission.cache', NULL),
+	(1938, 1732548539, 'user_request', '1', NULL),
+	(1939, 1732548539, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1940, 1732548541, 'user_request', '1', NULL),
+	(1941, 1732548541, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1942, 1732548549, 'user_request', '1', NULL),
+	(1943, 1732548549, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1944, 1732548559, 'user_request', '1', NULL),
+	(1945, 1732548559, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1946, 1732548567, 'user_request', '1', NULL),
+	(1947, 1732548567, 'user_request', '1', NULL),
+	(1948, 1732548567, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1949, 1732548582, 'user_request', '1', NULL),
+	(1950, 1732548583, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1951, 1732548589, 'user_request', '1', NULL),
+	(1952, 1732548589, 'user_request', '1', NULL),
+	(1953, 1732548590, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1954, 1732548598, 'user_request', '1', NULL),
+	(1955, 1732548598, 'cache_hit', 'spatie.permission.cache', NULL),
+	(1956, 1732548605, 'user_request', '1', NULL),
+	(1957, 1732548606, 'user_request', '1', NULL),
+	(1958, 1732548606, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -3845,7 +3938,10 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 	(2, 'Administrador', 'web', '2024-11-22 18:16:35', '2024-11-22 18:16:35'),
 	(3, 'LCD', 'web', '2024-11-22 18:16:43', '2024-11-22 18:16:43'),
 	(4, 'LCE', 'web', '2024-11-22 18:16:54', '2024-11-22 18:16:54'),
-	(5, 'LCF', 'web', '2024-11-22 18:17:01', '2024-11-22 18:17:01');
+	(5, 'LCF', 'web', '2024-11-22 18:17:01', '2024-11-22 18:17:01'),
+	(6, 'EMSD', 'web', '2024-11-25 19:28:38', '2024-11-25 19:28:38'),
+	(7, 'EMSE', 'web', '2024-11-25 19:28:46', '2024-11-25 19:28:46'),
+	(8, 'EMSF', 'web', '2024-11-25 19:28:53', '2024-11-25 19:28:53');
 
 -- Volcando estructura para tabla blackbag.role_has_permissions
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
@@ -3865,7 +3961,10 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(2, 4),
 	(3, 2),
 	(3, 5),
-	(4, 2);
+	(4, 2),
+	(5, 6),
+	(6, 7),
+	(7, 8);
 
 -- Volcando estructura para tabla blackbag.saca
 CREATE TABLE IF NOT EXISTS `saca` (

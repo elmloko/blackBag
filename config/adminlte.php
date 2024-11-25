@@ -377,19 +377,19 @@ return [
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciarems',
-                    'can'  => 'apertura.lc',
+                    'can'  => 'apertura.ems',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Despachos Expedicion',
                     'url' => '/expedicionems',
-                    'can'  => 'expedicion.lc',
+                    'can'  => 'expedicion.ems',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Despachos Admisiones',
                     'url' => '/admitirems',
-                    'can'  => 'admision.lc',
+                    'can'  => 'admision.ems',
                     'icon' => 'fas fa-user',
                 ],
             ],
