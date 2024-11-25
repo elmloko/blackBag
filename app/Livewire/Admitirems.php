@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Saca;
 use App\Models\Eventos;
 
-class Admitir extends Component
+class Admitirems extends Component
 {
     use WithPagination;
 
@@ -188,7 +188,7 @@ class Admitir extends Component
                     ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
             })
             ->whereIn('estado', ['ADMITIDO'])
-            ->where('service', 'LC')
+            ->where('service', 'EMS')
             ->paginate($this->perPage);
     
         // Agregar el conteo de sacas admitidas y cerradas para cada despacho
@@ -197,7 +197,7 @@ class Admitir extends Component
             $despacho->sacas_cerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
         }
     
-        return view('livewire.admitir', [
+        return view('livewire.admitirems', [
             'despachos' => $despachos,
         ]);
     }

@@ -370,6 +370,31 @@ return [
             ],
         ],
         [
+            'text' => 'DESPACHOS EMS',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Despachos Abiertos',
+                    'url' => '/iniciarems',
+                    'can'  => 'apertura.lc',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Despachos Expedicion',
+                    'url' => '/expedicionems',
+                    'can'  => 'expedicion.lc',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Despachos Admisiones',
+                    'url' => '/admitirems',
+                    'can'  => 'admision.lc',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
+        [
             'text' => 'Eventos',
             'url' => '/event',
             'icon' => 'fas fa-user',

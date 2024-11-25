@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use App\Exports\ExpedicionExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class Expedicion extends Component
+class Expedicionems extends Component
 {
     use WithPagination;
 
@@ -40,10 +40,10 @@ class Expedicion extends Component
                 ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
         })
             ->whereIn('estado', ['EXPEDICION'])
-            ->where('service', 'LC')
+            ->where('service', 'EMS')
             ->paginate($this->perPage);
 
-        return view('livewire.expedicion', [
+        return view('livewire.expedicionems', [
             'despachos' => $despachos,
         ]);
     }
