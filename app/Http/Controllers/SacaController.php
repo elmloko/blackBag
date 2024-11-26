@@ -18,7 +18,10 @@ class SacaController extends Controller
         $despacho = Despacho::findOrFail($id);
         $identificadorDespacho = $despacho->identificador;
 
-        return view('sacas.crear', compact('id', 'sacas', 'identificadorDespacho'));
+        // Asumamos que el tipo de servicio está almacenado en el despacho
+        $service = $despacho->service; // Ajusta 'service' según el campo de tu modelo
+
+        return view('sacas.crear', compact('id', 'sacas', 'identificadorDespacho', 'service'));
     }
 
     public function store(Request $request)

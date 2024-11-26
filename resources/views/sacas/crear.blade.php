@@ -30,7 +30,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
-                                    <a href="/iniciar" class="btn btn-secondary">Atrás</a>
+                                    @if ($service == 'EMS')
+                                        <a href="/iniciarems" class="btn btn-secondary">Atrás</a>
+                                    @elseif ($service == 'LC')
+                                        <a href="/iniciar" class="btn btn-secondary">Atrás</a>
+                                    @else
+                                        <a href="/" class="btn btn-secondary">Atrás</a> {{-- Opción predeterminada, si no es EMS ni LC --}}
+                                    @endif
                                     <button type="button" class="btn btn-success" data-toggle="modal"
                                         data-target="#createSacaModal">
                                         Crear Nueva Saca
@@ -189,7 +195,8 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="createContenidoModalLabel">
+                                                                    <h5 class="modal-title"
+                                                                        id="createContenidoModalLabel">
                                                                         {{ $contenido ? 'Editar' : 'Declarar' }} Contenido
                                                                     </h5>
                                                                     <button type="button" class="close"
