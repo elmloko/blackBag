@@ -328,12 +328,27 @@
                                 </table>
                             </div>
                             <div class="card-footer text-right">
-                                <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
-                                    onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Cerrar Despacho</button>
-                                </form>
+                                @if ($service == 'EMS')
+                                    <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas del tipo EMS?');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Cerrar Despacho EMS</button>
+                                    </form>
+                                @elseif ($service == 'LC')
+                                    <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas del tipo LC?');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Cerrar Despacho LC</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Cerrar Despacho</button>
+                                    </form>
+                                @endif
                             </div>
+                            
                             <div class="card-footer">
                                 <!-- Aquí puedes incluir una paginación si es necesario -->
                             </div>
