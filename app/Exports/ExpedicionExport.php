@@ -67,7 +67,37 @@ class ExpedicionExport implements FromQuery, WithHeadings, WithMapping, WithStyl
             'UA' => 'UA CARTAS - AO',
             'UB' => 'UB CARTAS - MASIVO',
             'UC' => 'UC CARTAS - CORREO DIRECTO ARMONIZADO',
-            // Añade el resto de las subclases según sea necesario...
+            'UD' => 'UD CARTAS - FUERA DEL SISTEMA DE GASTOS TERMINALES',
+            'UE' => 'UE CARTAS - DECOUVERT',
+            'UF' => 'UF CARTAS - LC ENTRADA DIRECTA',
+            'UG' => 'UG CARTAS - AO ENTRADA DIRECTA',
+            'UH' => 'UH CARTAS - LC/AO ENTRADA DIRECTA',
+            'UI' => 'UI CARTAS - CCRI',
+            'UL' => 'UL CARTAS - LC',
+            'UM' => 'UM CARTAS - SACAS M',
+            'UN' => 'UN CARTAS - LC/AO',
+            'UP' => 'UP CARTAS - TARJETAS POSTALES',
+            'UR' => 'UR CARTAS - CERTIFICADO',
+            'US' => 'US CARTAS - SACAS VACIAS',
+            'UT' => 'UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+            'UV' =>
+            'UV CARTAS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR SUJETOS A REMUNERACIÓN',
+            'UX' => 'UX CARTAS - EXPRESO',
+            'UY' =>
+            'UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+            'UZ' => 'UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+            'EA' => 'EA EMS - AL DESCUBIERTO',
+            'ED' => 'ED EMS - DOCUMENTOS',
+            'EG' => 'EG EMS - PLAZO GARANTIZADO: DOCUMENTOS',
+            'EH' => 'EH EMS - PLAZO GARANTIZADO: MERCANCIA',
+            'EI' => 'EI EMS - PLAZO GARANTIZADO: MIXTO',
+            'EM' => 'EM EMS - MERCADERIA',
+            'EN' => 'EN EMS - MIXTO',
+            'ER' => 'ER EMS - MERCANCIA DEVUELTA',
+            'ET' => 'ET EMS - SACAS VACIAS',
+            'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+            'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+            'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
         ];
 
         return [

@@ -73,28 +73,18 @@
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
                                                 ];
                                                 $subclases = [
-                                                    'UA' => 'UA CARTAS - AO',
-                                                    'UB' => 'UB CARTAS - MASIVO',
-                                                    'UC' => 'UC CARTAS - CORREO DIRECTO ARMONIZADO',
-                                                    'UD' => 'UD CARTAS - FUERA DEL SISTEMA DE GASTOS TERMINALES',
-                                                    'UE' => 'UE CARTAS - DECOUVERT',
-                                                    'UF' => 'UF CARTAS - LC ENTRADA DIRECTA',
-                                                    'UG' => 'UG CARTAS - AO ENTRADA DIRECTA',
-                                                    'UH' => 'UH CARTAS - LC/AO ENTRADA DIRECTA',
-                                                    'UI' => 'UI CARTAS - CCRI',
-                                                    'UL' => 'UL CARTAS - LC',
-                                                    'UM' => 'UM CARTAS - SACAS M',
-                                                    'UN' => 'UN CARTAS - LC/AO',
-                                                    'UP' => 'UP CARTAS - TARJETAS POSTALES',
-                                                    'UR' => 'UR CARTAS - CERTIFICADO',
-                                                    'US' => 'US CARTAS - SACAS VACIAS',
-                                                    'UT' => 'UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'UV' =>
-                                                        'UV LETTERS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR SUJETOS A REMUNERACIÓN',
-                                                    'UX' => 'UX CARTAS - EXPRESO',
-                                                    'UY' =>
-                                                        'UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
-                                                    'UZ' => 'UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'EA' => 'EA EMS - AL DESCUBIERTO',
+                                                    'ED' => 'ED EMS - DOCUMENTOS',
+                                                    'EG' => 'EG EMS - PLAZO GARANTIZADO: DOCUMENTOS',
+                                                    'EH' => 'EH EMS - PLAZO GARANTIZADO: MERCANCIA',
+                                                    'EI' => 'EI EMS - PLAZO GARANTIZADO: MIXTO',
+                                                    'EM' => 'EM EMS - MERCADERIA',
+                                                    'EN' => 'EN EMS - MIXTO',
+                                                    'ER' => 'ER EMS - MERCANCIA DEVUELTA',
+                                                    'ET' => 'ET EMS - SACAS VACIAS',
+                                                    'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
                                                     'A' => 'A - Aéreo',
@@ -112,10 +102,13 @@
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
                                                 @if ($despacho->estado === 'CERRADO')
-                                                    <button wire:click="reaperturarDespacho({{ $despacho->id }})" class="btn btn-warning">Reaperturar Saca</button>
-                                                    <button wire:click="expedicionDespacho({{ $despacho->id }})" class="btn btn-info">Expedición</button>
-                                                    @elseif ($despacho->estado === 'APERTURA' || $despacho->estado === 'REAPERTURA')
-                                                    <a href="{{ route('saca.crear', $despacho->id) }}" class="btn btn-primary">Ver Detalles de Saca</a>
+                                                    <button wire:click="reaperturarDespacho({{ $despacho->id }})"
+                                                        class="btn btn-warning">Reaperturar Saca</button>
+                                                    <button wire:click="expedicionDespacho({{ $despacho->id }})"
+                                                        class="btn btn-info">Expedición</button>
+                                                @elseif ($despacho->estado === 'APERTURA' || $despacho->estado === 'REAPERTURA')
+                                                    <a href="{{ route('saca.crear', $despacho->id) }}"
+                                                        class="btn btn-primary">Ver Detalles de Saca</a>
                                                 @endif
                                             </td>
                                         </tr>
@@ -180,28 +173,19 @@
                             <label for="subclase">Subclase</label>
                             <select class="form-control" id="subclase" wire:model="subclase">
                                 <option value="">Seleccione una opción</option>
-                                <option value="UA">UA CARTAS - AO</option>
-                                <option value="UB">UB CARTAS - MASIVO</option>
-                                <option value="UC">UC CARTAS - CORREO DIRECTO ARMONIZADO</option>
-                                <option value="UD">UD CARTAS - FUERA DEL SISTEMA DE GASTOS TERMINALES</option>
-                                <option value="UE">UE CARTAS - DECOUVERT</option>
-                                <option value="UF">UF CARTAS - LC ENTRADA DIRECTA</option>
-                                <option value="UG">UG CARTAS - AO ENTRADA DIRECTA</option>
-                                <option value="UH">UH CARTAS - LC/AO ENTRADA DIRECTA</option>
-                                <option value="UI">UI CARTAS - CCRI</option>
-                                <option value="UL">UL CARTAS - LC</option>
-                                <option value="UM">UM CARTAS - SACAS M</option>
-                                <option value="UN">UN CARTAS - LC/AO</option>
-                                <option value="UP">UP CARTAS - TARJETAS POSTALES</option>
-                                <option value="UR">UR CARTAS - CERTIFICADO</option>
-                                <option value="US">US CARTAS - SACAS VACIAS</option>
-                                <option value="UT">UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
-                                <option value="UV">UV LETTERS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR
-                                    SUJETOS A REMUNERACIÓN</option>
-                                <option value="UX">UX CARTAS - EXPRESO</option>
-                                <option value="UY">UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS
-                                    DESIGNADOS</option>
-                                <option value="UZ">UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
+                                <option value="EA">EA EMS - AL DESCUBIERTO</option>
+                                <option value="ED">ED EMS - DOCUMENTOS</option>
+                                <option value="EG">EG EMS - PLAZO GARANTIZADO: DOCUMENTOS</option>
+                                <option value="EH">EH EMS - PLAZO GARANTIZADO: MERCANCIA</option>
+                                <option value="EI">EI EMS - PLAZO GARANTIZADO: MIXTO</option>
+                                <option value="EM">EM EMS - MERCADERIA</option>
+                                <option value="EN">EN EMS - MIXTO</option>
+                                <option value="ER">ER EMS - MERCANCIA DEVUELTA</option>
+                                <option value="ET">ET EMS - SACAS VACIAS</option>
+                                <option value="EU">EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
+                                <option value="EY">EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS
+                                </option>
+                                <option value="EZ">EZ EMS: RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
                             </select>
                             @error('subclase')
                                 <span class="text-danger">{{ $message }}</span>

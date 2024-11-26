@@ -90,7 +90,7 @@
                                                     'US' => 'US CARTAS - SACAS VACIAS',
                                                     'UT' => 'UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                     'UV' =>
-                                                        'UV LETTERS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR SUJETOS A REMUNERACIÓN',
+                                                        'UV CARTAS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR SUJETOS A REMUNERACIÓN',
                                                     'UX' => 'UX CARTAS - EXPRESO',
                                                     'UY' =>
                                                         'UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
@@ -196,7 +196,7 @@
                                 <option value="UR">UR CARTAS - CERTIFICADO</option>
                                 <option value="US">US CARTAS - SACAS VACIAS</option>
                                 <option value="UT">UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
-                                <option value="UV">UV LETTERS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR
+                                <option value="UV">UV CARTAS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR
                                     SUJETOS A REMUNERACIÓN</option>
                                 <option value="UX">UX CARTAS - EXPRESO</option>
                                 <option value="UY">UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS
