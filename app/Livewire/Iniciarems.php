@@ -19,7 +19,6 @@ class Iniciarems extends Component
     public $categoria;
     public $ofdestino;
     public $subclase;
-    public $service;
     public $nrodespacho;
     public $fechaHoraActual;
     public $perPage = 10;
@@ -52,35 +51,31 @@ class Iniciarems extends Component
             return;
         }
 
-        // Obtén el departamento del usuario autenticado
-        $userDepto = auth()->user()->city;
-
-        // Verificar si ya existe un despacho en estado APERTURA o REAPERTURA con el mismo destino, mismo departamento, y mismo servicio
+        // Verificar si ya existe un despacho en estado APERTURA o REAPERTURA con el mismo ofdestino, depto y service
         $despachoExistente = Despacho::where('ofdestino', $this->ofdestino)
-            ->where('depto', $userDepto) // Verificar solo en el mismo departamento
-            ->where('service', $this->service) // Verificar solo en el mismo servicio
+            ->where('depto', auth()->user()->city)
+            ->where('service', 'EMS')
             ->whereIn('estado', ['APERTURA', 'REAPERTURA'])
             ->exists();
 
         if ($despachoExistente) {
-            session()->flash('error', 'No se puede crear un despacho con la misma oficina, servicio y en estado APERTURA o REAPERTURA para tu departamento.');
+            session()->flash('error', 'No se puede crear un despacho con la misma oficina, departamento y servicio en estado APERTURA o REAPERTURA.');
             $this->dispatch('closeCreateDespachoModal'); // Cierra el modal
             return;
         }
 
-        // Obtiene el último número de despacho para la oficina, el departamento, y el servicio
-        $ultimoDespacho = Despacho::where('ofdestino', $this->ofdestino)
-            ->where('depto', $userDepto) // Filtrar también por departamento
-            ->where('service', $this->service) // Filtrar también por servicio
-            ->latest('id')
+        // Obtiene el último número de despacho para la combinación de service, depto y ofdestino
+        $ultimoDespacho = Despacho::where('service', 'EMS')
+            ->where('depto', auth()->user()->city)
+            ->where('ofdestino', $this->ofdestino)
+            ->latest('nrodespacho')
             ->first();
-
         $ultimoNumero = $ultimoDespacho ? intval($ultimoDespacho->nrodespacho) : 0;
 
         // Incrementa el número de despacho en +1
         $nuevoNumero = $ultimoNumero + 1;
 
-        // Formatea el número con ceros a la izquierda para obtener el formato 001, 002, etc.
+        // Formatea el número con ceros a la izquierda
         $this->nrodespacho = str_pad($nuevoNumero, 3, '0', STR_PAD_LEFT);
 
         // Guarda la fecha y hora actual
@@ -124,12 +119,12 @@ class Iniciarems extends Component
             'nrodespacho' => $this->nrodespacho,
             'fecha_hora_creacion' => $this->fechaHoraActual,
             'estado' => 'APERTURA',
-            'service' => 'EMS',
             'ano' => $ultimoDigitoAno,
             'identificador' => $identificador, // Guarda el identificador generado
             'oforigen' => $oforigen,
             'user' => auth()->user()->name,
             'depto' => auth()->user()->city,
+            'service' => 'EMS',
         ]);
 
         // Registrar el evento relacionado
@@ -282,18 +277,17 @@ class Iniciarems extends Component
     public function render()
     {
         $despachos = Despacho::where(function ($query) {
-                $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
-                    ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
-                    ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
-            })
+            $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
+        })
             ->where('service', 'EMS') // Filtrar solo los despachos con service = 'LC'
             ->where('depto', auth()->user()->city) // Filtrar por el departamento del usuario
             ->whereIn('estado', ['APERTURA', 'CERRADO', 'REAPERTURA']) // Filtra solo los estados deseados
             ->paginate($this->perPage);
-    
+
         return view('livewire.iniciarems', [
             'despachos' => $despachos,
         ]);
     }
-    
 }

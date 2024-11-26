@@ -51,25 +51,31 @@ class Iniciar extends Component
             return;
         }
 
-        // Verificar si ya existe un despacho en estado APERTURA o REAPERTURA con el mismo ofdestino
+        // Verificar si ya existe un despacho en estado APERTURA o REAPERTURA con el mismo ofdestino, depto y service
         $despachoExistente = Despacho::where('ofdestino', $this->ofdestino)
+            ->where('depto', auth()->user()->city)
+            ->where('service', 'LC')
             ->whereIn('estado', ['APERTURA', 'REAPERTURA'])
             ->exists();
 
         if ($despachoExistente) {
-            session()->flash('error', 'No se puede crear un despacho con la misma oficina en estado APERTURA o REAPERTURA.');
+            session()->flash('error', 'No se puede crear un despacho con la misma oficina, departamento y servicio en estado APERTURA o REAPERTURA.');
             $this->dispatch('closeCreateDespachoModal'); // Cierra el modal
             return;
         }
 
-        // Obtiene el último número de despacho para la oficina seleccionada
-        $ultimoDespacho = Despacho::where('ofdestino', $this->ofdestino)->latest('id')->first();
+        // Obtiene el último número de despacho para la combinación de service, depto y ofdestino
+        $ultimoDespacho = Despacho::where('service', 'LC')
+            ->where('depto', auth()->user()->city)
+            ->where('ofdestino', $this->ofdestino)
+            ->latest('nrodespacho')
+            ->first();
         $ultimoNumero = $ultimoDespacho ? intval($ultimoDespacho->nrodespacho) : 0;
 
         // Incrementa el número de despacho en +1
         $nuevoNumero = $ultimoNumero + 1;
 
-        // Formatea el número con ceros a la izquierda para obtener el formato 001, 002, etc.
+        // Formatea el número con ceros a la izquierda
         $this->nrodespacho = str_pad($nuevoNumero, 3, '0', STR_PAD_LEFT);
 
         // Guarda la fecha y hora actual
@@ -79,7 +85,6 @@ class Iniciar extends Component
         $this->dispatch('closeCreateDespachoModal');
         $this->dispatch('openConfirmModal');
     }
-
 
     public function confirmarGuardarDespacho()
     {
@@ -276,6 +281,8 @@ class Iniciar extends Component
                 ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
         })
+            ->where('service', 'LC') // Filtrar solo los despachos con service = 'LC'
+            ->where('depto', auth()->user()->city) // Filtrar por el departamento del usuario
             ->whereIn('estado', ['APERTURA', 'CERRADO', 'REAPERTURA']) // Filtra solo los estados deseados
             ->paginate($this->perPage);
 
