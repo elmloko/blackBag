@@ -181,27 +181,27 @@ class Iniciar extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-
+    
         // Obtener la ciudad del usuario como origen
         $ciudadOrigen = auth()->user()->city;
         $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
-
+    
         // Encontrar el despacho y actualizar su estado
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'EXPEDICION']);
-
+    
         // Inicializar los totales
         $totalPeso = $totalPaquetes = 0;
         $nropaquetesro = $nropaquetesbl = 0;
         $sacasm = $listas = $lcao = 0;
         $totalContenidoR = $totalContenidoB = 0;
-
+    
         // Obtener todos los registros de saca relacionados al despacho
         $sacas = Saca::where('despacho_id', $despacho->id)->get();
-
+    
         foreach ($sacas as $saca) {
             $contenido = Contenido::where('saca_id', $saca->id)->get();
-
+    
             foreach ($contenido as $item) {
                 // Verificar si tiene contenido en etiquetas rojas o blancas
                 if ($item->nropaquetesro > 0) {
@@ -210,26 +210,29 @@ class Iniciar extends Component
                 if ($item->nropaquetesbl > 0) {
                     $totalContenidoB += 1; // Cuenta como 1 si hay contenido en blancas
                 }
-
+    
                 // Sumar los valores de nropaquetesro y nropaquetesbl
                 $nropaquetesro += $item->nropaquetesro;
                 $nropaquetesbl += $item->nropaquetesbl;
-
+    
                 // Sumar otros campos
                 $sacasm += $item->sacasm;
                 $listas += $item->listas;
-
+    
                 // Acumular el total de paquetes
                 $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl;
             }
         }
-
+    
         // Calcular el total general basado en contenidos rojas, blancas y sacas
         $totalContenido = $totalContenidoR + $totalContenidoB + $sacasm;
-
+    
         // Convertir la sigla de ofdestino a nombre de ciudad
         $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
-
+    
+        // Obtener el tipo de servicio
+        $service = $despacho->service; // Asegúrate de que el campo 'service' existe en el modelo
+    
         // Registrar el evento en la tabla Eventos
         Eventos::create([
             'action' => 'EXPEDICION',
@@ -237,7 +240,7 @@ class Iniciar extends Component
             'identificador' => $despacho->identificador, // Usa el identificador del despacho
             'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
         ]);
-
+    
         // Datos para el PDF
         $data = [
             'despacho' => $despacho,
@@ -263,16 +266,16 @@ class Iniciar extends Component
             'totalContenidoR' => $totalContenidoR,
             'totalContenidoB' => $totalContenidoB,
             'totalContenido' => $totalContenido,
+            'service' => $service, // Agregado aquí
         ];
-
+    
         // Crear el PDF usando la vista 'despacho.pdf.cn31'
         $pdf = PDF::loadView('despacho.pdf.cn', $data);
-
+    
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'CN.pdf');
-    }
-
+    }    
 
     public function render()
     {

@@ -133,7 +133,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- CN-31 Content -->
     <div class="header">
@@ -324,6 +323,18 @@
                                 'UX' => 'UX CARTAS - EXPRESO',
                                 'UY' => 'UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
                                 'UZ' => 'UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                'EA' => 'EA EMS - AL DESCUBIERTO',
+                                'ED' => 'ED EMS - DOCUMENTOS',
+                                'EG' => 'EG EMS - PLAZO GARANTIZADO: DOCUMENTOS',
+                                'EH' => 'EH EMS - PLAZO GARANTIZADO: MERCANCIA',
+                                'EI' => 'EI EMS - PLAZO GARANTIZADO: MIXTO',
+                                'EM' => 'EM EMS - MERCADERIA',
+                                'EN' => 'EN EMS - MIXTO',
+                                'ER' => 'ER EMS - MERCANCIA DEVUELTA',
+                                'ET' => 'ET EMS - SACAS VACIAS',
+                                'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                             ];
                         @endphp
                         Clase: {{ $claseTranslation[$subclase] ?? $subclase }}
@@ -442,7 +453,7 @@
     <table class="cn35-table">
         <tr>
             <td colspan="2" class="transparent-bottom-border">PARA :</td>
-            <td class="transparent-bottom-border text-center">GESPA LC/AO</td>
+            <td class="transparent-bottom-border text-center">GESPA {{ $despacho->service}}</td>
             <td class="transparent-bottom-border text-center">CN 35</td>
         </tr>
         <tr>
@@ -456,7 +467,7 @@
             <td>Cat: {{ $categoria }}</td>
             <td>SubC: {{ $subclase }}</td>
             <td class="transparent-right-border text-right">{{ $siglaOrigen }} (BOA)</td>
-            <td>{{ $ciudadOrigen }} LC/AO</td>
+            <td>{{ $ciudadOrigen }} {{ $despacho->service}}</td>
         </tr>
         <tr>
             <td colspan="2" class="text-center">{{ $despacho->created_at->format('Y-m-d') }}</td>
