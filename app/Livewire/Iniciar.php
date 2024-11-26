@@ -118,6 +118,8 @@ class Iniciar extends Component
             'identificador' => $identificador, // Guarda el identificador generado
             'oforigen' => $oforigen,
             'user' => auth()->user()->name,
+            'depto' => auth()->user()->city,
+            'service' => 'LC',
         ]);
 
         // Registrar el evento relacionado
