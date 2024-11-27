@@ -35,7 +35,7 @@ class ExpedicionExport implements FromQuery, WithHeadings, WithMapping, WithStyl
             'Oficina Destino',
             'Categoría',
             'Subclase',
-            'Nro. Envases',
+            'Nro. Paquetes',
             'Peso (Kg)',
             'Estado',
             'Enviado',

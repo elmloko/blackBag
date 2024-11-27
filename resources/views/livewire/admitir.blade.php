@@ -57,7 +57,7 @@
                                         <th>Oficina Destino</th>
                                         <th>Categoría</th>
                                         <th>Subclase</th>
-                                        <th>Nro. Envases</th>
+                                        <th>Nro. Paquetes</th>
                                         <th>Peso</th>
                                         <th>Sacas Admitidas/Expedicion</th>
                                         <th>Estado</th>

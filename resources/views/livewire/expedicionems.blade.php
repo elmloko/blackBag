@@ -52,7 +52,7 @@
                                         <th>Identificador</th>
                                         <th>Categoría</th>
                                         <th>Subclase</th>
-                                        <th>Nro. Envases</th>
+                                        <th>Nro. Paquetes</th>
                                         <th>Peso</th>
                                         <th>Estado</th>
                                         <th>Enviado:</th>
