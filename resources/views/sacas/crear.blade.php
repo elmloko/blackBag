@@ -252,66 +252,206 @@
                                                                                 <!-- Añade las demás opciones aquí -->
                                                                             </select>
                                                                         </div>
-                                                                        <h5 class="mb-3">Contenido declarado</h5>
+                                                                        <h5 class="mb-3">Contenido declarado (SACAS)</h5>
                                                                         <!-- Campo para LC/AO -->
                                                                         <div class="row">
-
-                                                                            <div class="col-md-2 text-center">
-                                                                                <br>
-                                                                                <span
-                                                                                    style="color: #ffffff;">Cantidad</span>
-                                                                            </div>
-                                                                            <!-- Campo para LC/AO -->
-                                                                            <div class="form-group col-md-4">
-                                                                                <label for="lcao">LC/AO</label>
-                                                                                <input type="number" class="form-control"
-                                                                                    id="lcao" name="lcao"
-                                                                                    value="{{ $contenido->lcao ?? '' }}">
-                                                                            </div>
-
-                                                                            <!-- Campo para SACAS M -->
-                                                                            <div class="form-group col-md-3">
-                                                                                <label for="sacasm">SACAS M</label>
-                                                                                <input type="number" class="form-control"
-                                                                                    id="sacasm" name="sacasm"
-                                                                                    value="{{ $contenido->sacasm ?? '' }}">
-                                                                            </div>
-
-                                                                            <!-- Campo para CN33 -->
-                                                                            <div class="form-group col-md-3">
-                                                                                <label for="listas">CN33</label>
-                                                                                <input type="number" class="form-control"
-                                                                                    id="listas" name="listas"
-                                                                                    value="{{ $contenido->listas ?? '' }}">
-                                                                            </div>
+                                                                            @if ($service === 'LC')
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <!-- Campo para LC/AO -->
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label for="lcao">LC/AO</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="lcao" name="lcao"
+                                                                                        value="{{ $contenido->lcao ?? '' }}">
+                                                                                </div>
+                                                                                <!-- Campo para SACAS M -->
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label for="sacasm">SACAS M</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="sacasm" name="sacasm"
+                                                                                        value="{{ $contenido->sacasm ?? '' }}">
+                                                                                </div>
+                                                                                <!-- Campo para CN33 -->
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label for="listas">CN33</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="listas" name="listas"
+                                                                                        value="{{ $contenido->listas ?? '' }}">
+                                                                                </div>
+                                                                            @elseif ($service === 'EMS')
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="correotradicional">CORREO
+                                                                                        TRADICIONAL</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="correotradicional"
+                                                                                        name="correotradicional"
+                                                                                        value="{{ $contenido->correotradicional ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="encomiendas">ENCOMIENDAS
+                                                                                        CP</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="encomiendas"
+                                                                                        name="encomiendas"
+                                                                                        value="{{ $contenido->encomiendas ?? '' }}">
+                                                                                </div>
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="enviotrans">ENVIO
+                                                                                        TRASFERENCIA</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="enviotrans" name="enviotrans"
+                                                                                        value="{{ $contenido->enviotrans ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="listas">CN33</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="listas" name="listas"
+                                                                                        value="{{ $contenido->listas ?? '' }}">
+                                                                                </div>
+                                                                            @endif
                                                                         </div>
-                                                                        <h5 class="mb-3">Paquetería declarada</h5>
+                                                                        <h5 class="mb-3">Contenido declarado (PAQUETES)</h5>
                                                                         <!-- Campo para LC/AO -->
                                                                         <div class="row">
-
-                                                                            <div class="col-md-2 text-center">
-                                                                                <br>
-                                                                                <span
-                                                                                    style="color: #ffffff;">Cantidad</span>
-                                                                            </div>
-                                                                            <!-- Campo para ROJAS -->
-                                                                            <div class="form-group col-md-5">
-                                                                                <label for="nropaquetesro">ROJAS</label>
-                                                                                <input type="number" class="form-control"
-                                                                                    id="nropaquetesro"
-                                                                                    name="nropaquetesro"
-                                                                                    value="{{ $contenido->nropaquetesro ?? '' }}">
-                                                                            </div>
-
-                                                                            <!-- Campo para BLANCAS -->
-                                                                            <div class="form-group col-md-5">
-                                                                                <label for="nropaquetesbl">BLANCAS</label>
-                                                                                <input type="number" class="form-control"
-                                                                                    id="nropaquetesbl"
-                                                                                    name="nropaquetesbl"
-                                                                                    value="{{ $contenido->nropaquetesbl ?? '' }}">
-                                                                            </div>
-
+                                                                            @if ($service === 'LC')
+                                                                                <!-- Contenido para LC -->
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label
+                                                                                        for="nropaquetesro">ROJAS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesro"
+                                                                                        name="nropaquetesro"
+                                                                                        value="{{ $contenido->nropaquetesro ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label
+                                                                                        for="nropaquetesbl">BLANCAS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesbl"
+                                                                                        name="nropaquetesbl"
+                                                                                        value="{{ $contenido->nropaquetesbl ?? '' }}">
+                                                                                </div>
+                                                                            @elseif ($service === 'EMS')
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaquetesems">EMS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesems"
+                                                                                        name="nropaquetesems"
+                                                                                        value="{{ $contenido->nropaquetesems ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label
+                                                                                        for="nropaquetescp">ENCOMIENDAS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetescp"
+                                                                                        name="nropaquetescp"
+                                                                                        value="{{ $contenido->nropaquetescp ?? '' }}">
+                                                                                </div>
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label
+                                                                                        for="nropaquetesco">CONTRATOS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesco"
+                                                                                        name="nropaquetesco"
+                                                                                        value="{{ $contenido->nropaquetesco ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaquetesof">ENVIO
+                                                                                        OFICIALES</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesof"
+                                                                                        name="nropaquetesof"
+                                                                                        value="{{ $contenido->nropaquetesof ?? '' }}">
+                                                                                </div>
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaquetesii">ENV.
+                                                                                        INTERNACIONALES</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetesii"
+                                                                                        name="nropaquetesii"
+                                                                                        value="{{ $contenido->nropaquetesii ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaqueteset">ENVIOS
+                                                                                        TRANSITO</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaqueteset"
+                                                                                        name="nropaqueteset"
+                                                                                        value="{{ $contenido->nropaqueteset ?? '' }}">
+                                                                                </div>
+                                                                                <div class="col-md-2 text-center">
+                                                                                    <br>
+                                                                                    <span
+                                                                                        style="color: #ffffff;">Cantidad</span>
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaquetessu">SUPER
+                                                                                        EXPRESS</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetessu"
+                                                                                        name="nropaquetessu"
+                                                                                        value="{{ $contenido->nropaquetessu ?? '' }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-5">
+                                                                                    <label for="nropaquetessn">ENVIO
+                                                                                        S/D</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        id="nropaquetessn"
+                                                                                        name="nropaquetessn"
+                                                                                        value="{{ $contenido->nropaquetessn ?? '' }}">
+                                                                                </div>
+                                                                            @endif
                                                                         </div>
                                                                         <button type="submit"
                                                                             class="btn btn-primary">{{ $contenido ? 'Actualizar' : 'Guardar' }}
@@ -348,7 +488,7 @@
                                     </form>
                                 @endif
                             </div>
-                            
+
                             <div class="card-footer">
                                 <!-- Aquí puedes incluir una paginación si es necesario -->
                             </div>

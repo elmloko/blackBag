@@ -16,9 +16,20 @@ class Contenido extends Model
         'listas',
         'nropaquetesro',
         'nropaquetesbl',
+        'nropaquetesems',
+        'nropaquetescp',
+        'nropaquetesco',
+        'nropaquetessn',
+        'nropaquetessu',
+        'nropaqueteset',
+        'nropaquetesii',
+        'nropaquetesof',
         'sacasm',
         'lcao',
         'saca_id',
+        'correotradicional',
+        'encomiendas',
+        'enviotrans',
     ];
 
     protected $casts = [

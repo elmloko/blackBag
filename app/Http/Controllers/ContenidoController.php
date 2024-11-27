@@ -18,8 +18,19 @@ class ContenidoController extends Controller
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
             'listas' => 'nullable|integer',
+            'correotradicional' => 'nullable|integer',
+            'encomiendas' => 'nullable|integer',
+            'enviotrans' => 'nullable|integer',
             'nropaquetesro' => 'nullable|integer',
             'nropaquetesbl' => 'nullable|integer',
+            'nropaquetesems' => 'nullable|integer',
+            'nropaquetescp' => 'nullable|integer',
+            'nropaquetesco' => 'nullable|integer',
+            'nropaquetessn' => 'nullable|integer',
+            'nropaquetessu' => 'nullable|integer',
+            'nropaqueteset' => 'nullable|integer',
+            'nropaquetesii' => 'nullable|integer',
+            'nropaquetesof' => 'nullable|integer',
         ]);
 
         // Creación del nuevo contenido en la base de datos
@@ -29,15 +40,26 @@ class ContenidoController extends Controller
             'lcao' => $request->lcao,
             'sacasm' => $request->sacasm,
             'listas' => $request->listas,
+            'correotradicional' => $request->correotradicional,
+            'encomiendas' => $request->encomiendas,
+            'enviotrans' => $request->enviotrans,
             'nropaquetesro' => $request->nropaquetesro,
             'nropaquetesbl' => $request->nropaquetesbl,
+            'nropaquetesems' => $request->nropaquetesems,
+            'nropaquetescp' => $request->nropaquetescp,
+            'nropaquetesco' => $request->nropaquetesco,
+            'nropaquetessn' => $request->nropaquetessn,
+            'nropaquetessu' => $request->nropaquetessu,
+            'nropaqueteset' => $request->nropaqueteset,
+            'nropaquetesii' => $request->nropaquetesii,
+            'nropaquetesof' => $request->nropaquetesof,
         ]);
 
         // Recuperar la saca relacionada
         $saca = Saca::find($request->saca_id);
         if ($saca) {
             // Calcular la suma de nropaquetesro y nropaquetesbl
-            $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0);
+            $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0) + ($request->nropaquetesems ?? 0) + ($request->nropaquetescp ?? 0) + ($request->nropaquetesco ?? 0) + ($request->nropaquetessn ?? 0) + ($request->nropaquetessu ?? 0)  + ($request->nropaqueteset ?? 0) + ($request->nropaquetesii ?? 0) + ($request->nropaquetesof ?? 0);
 
             // Actualizar el campo nropaquetes en la saca
             $saca->nropaquetes = $totalPaquetes;
@@ -64,8 +86,19 @@ class ContenidoController extends Controller
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
             'listas' => 'nullable|integer',
+            'correotradicional' => 'nullable|integer',
+            'encomiendas' => 'nullable|integer',
+            'enviotrans' => 'nullable|integer',
             'nropaquetesro' => 'nullable|integer',
             'nropaquetesbl' => 'nullable|integer',
+            'nropaquetesems' => 'nullable|integer',
+            'nropaquetescp' => 'nullable|integer',
+            'nropaquetesco' => 'nullable|integer',
+            'nropaquetessn' => 'nullable|integer',
+            'nropaquetessu' => 'nullable|integer',
+            'nropaqueteset' => 'nullable|integer',
+            'nropaquetesii' => 'nullable|integer',
+            'nropaquetesof' => 'nullable|integer',
         ]);
 
         // Encontrar el contenido existente y actualizar sus datos
@@ -75,12 +108,23 @@ class ContenidoController extends Controller
             'lcao' => $request->lcao,
             'sacasm' => $request->sacasm,
             'listas' => $request->listas,
+            'correotradicional' => $request->correotradicional,
+            'encomiendas' => $request->encomiendas,
+            'enviotrans' => $request->enviotrans,
             'nropaquetesro' => $request->nropaquetesro,
             'nropaquetesbl' => $request->nropaquetesbl,
+            'nropaquetesems' => $request->nropaquetesems,
+            'nropaquetescp' => $request->nropaquetescp,
+            'nropaquetesco' => $request->nropaquetesco,
+            'nropaquetessn' => $request->nropaquetessn,
+            'nropaquetessu' => $request->nropaquetessu,
+            'nropaqueteset' => $request->nropaqueteset,
+            'nropaquetesii' => $request->nropaquetesii,
+            'nropaquetesof' => $request->nropaquetesof,
         ]);
 
         // Calcular la suma de nropaquetesro y nropaquetesbl
-        $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0);
+        $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0) + ($request->nropaquetesems ?? 0) + ($request->nropaquetescp ?? 0) + ($request->nropaquetesco ?? 0) + ($request->nropaquetessn ?? 0) + ($request->nropaquetessu ?? 0)  + ($request->nropaqueteset ?? 0) + ($request->nropaquetesii ?? 0) + ($request->nropaquetesof ?? 0);
 
         // Actualizar el campo nropaquetes en el registro de Saca
         $saca = Saca::find($contenido->saca_id);
