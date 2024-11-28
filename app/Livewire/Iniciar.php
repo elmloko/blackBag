@@ -181,27 +181,29 @@ class Iniciar extends Component
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
         ];
-    
+
         // Obtener la ciudad del usuario como origen
         $ciudadOrigen = auth()->user()->city;
         $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
-    
+
         // Encontrar el despacho y actualizar su estado
         $despacho = Despacho::findOrFail($despachoId);
         $despacho->update(['estado' => 'EXPEDICION']);
-    
+        $service = $despacho->service;
+
         // Inicializar los totales
         $totalPeso = $totalPaquetes = 0;
         $nropaquetesro = $nropaquetesbl = 0;
-        $sacasm = $listas = $lcao = 0;
-        $totalContenidoR = $totalContenidoB = 0;
-    
+        $nropaquetesco = $nropaquetescp = $nropaquetesems = $nropaquetessu = $nropaquetesof = $nropaquetesii = $nropaqueteset = $nropaquetessn = 0;
+        $sacasm = $listas = $lcao = $correotradicional = $encomiendas = $enviotrans = 0;
+        $totalContenidoR = $totalContenidoB = $totalContenidoOF = $totalContenidoII = $totalContenidoET = $totalContenidoSU = $totalContenidoSN = $totalContenidoEMS = $totalContenidoCP = $totalContenidoCO = 0;
+
         // Obtener todos los registros de saca relacionados al despacho
         $sacas = Saca::where('despacho_id', $despacho->id)->get();
-    
+
         foreach ($sacas as $saca) {
             $contenido = Contenido::where('saca_id', $saca->id)->get();
-    
+
             foreach ($contenido as $item) {
                 // Verificar si tiene contenido en etiquetas rojas o blancas
                 if ($item->nropaquetesro > 0) {
@@ -210,29 +212,65 @@ class Iniciar extends Component
                 if ($item->nropaquetesbl > 0) {
                     $totalContenidoB += 1; // Cuenta como 1 si hay contenido en blancas
                 }
-    
+                if ($item->nropaquetesof > 0) {
+                    $totalContenidoOF += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetesii > 0) {
+                    $totalContenidoII += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaqueteset > 0) {
+                    $totalContenidoET += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetessu > 0) {
+                    $totalContenidoSU += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetessn > 0) {
+                    $totalContenidoSN += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetesems > 0) {
+                    $totalContenidoEMS += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetescp > 0) {
+                    $totalContenidoCP += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+                if ($item->nropaquetesco > 0) {
+                    $totalContenidoCO += 1; // Cuenta como 1 si hay contenido en rojas
+                }
+
                 // Sumar los valores de nropaquetesro y nropaquetesbl
                 $nropaquetesro += $item->nropaquetesro;
                 $nropaquetesbl += $item->nropaquetesbl;
-    
+                $nropaquetesof += $item->nropaquetesof;
+                $nropaquetesii += $item->nropaquetesii;
+                $nropaqueteset += $item->nropaqueteset;
+                $nropaquetessu += $item->nropaquetessu;
+                $nropaquetessn += $item->nropaquetessn;
+                $nropaquetesems += $item->nropaquetesems;
+                $nropaquetescp += $item->nropaquetescp;
+                $nropaquetesco += $item->nropaquetesco;
+
                 // Sumar otros campos
                 $sacasm += $item->sacasm;
+                $correotradicional += $item->correotradicional;
+                $encomiendas += $item->encomiendas;
+                $enviotrans += $item->enviotrans;
                 $listas += $item->listas;
-    
+                $lcao += $item->lcao;
+
                 // Acumular el total de paquetes
-                $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl;
+                $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl + $item->nropaquetesof + $item->nropaquetesii + $item->nropaqueteset + $item->nropaquetessu + $item->nropaquetessn + $item->nropaquetesems + $item->nropaquetescp + $item->nropaquetesco;
             }
         }
-    
+
         // Calcular el total general basado en contenidos rojas, blancas y sacas
-        $totalContenido = $totalContenidoR + $totalContenidoB + $sacasm;
-    
+        $totalContenido = $totalContenidoR + $totalContenidoB + $totalContenidoOF + $totalContenidoII + $totalContenidoET + $totalContenidoSU + $totalContenidoSN + $totalContenidoEMS + $totalContenidoCP + $totalContenidoCO + $sacasm + $correotradicional + $encomiendas + $enviotrans;
+
         // Convertir la sigla de ofdestino a nombre de ciudad
         $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
-    
+
         // Obtener el tipo de servicio
         $service = $despacho->service; // Asegúrate de que el campo 'service' existe en el modelo
-    
+
         // Registrar el evento en la tabla Eventos
         Eventos::create([
             'action' => 'EXPEDICION',
@@ -240,7 +278,7 @@ class Iniciar extends Component
             'identificador' => $despacho->identificador, // Usa el identificador del despacho
             'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
         ]);
-    
+
         // Datos para el PDF
         $data = [
             'despacho' => $despacho,
@@ -260,22 +298,41 @@ class Iniciar extends Component
             'created_at' => $despacho->created_at,
             'nropaquetesro' => $nropaquetesro,
             'nropaquetesbl' => $nropaquetesbl,
+            'nropaquetesco' => $nropaquetesco,
+            'nropaquetescp' => $nropaquetescp,
+            'nropaquetesems' => $nropaquetesems,
+            'nropaquetessu' => $nropaquetessu,
+            'nropaquetesof' => $nropaquetesof,
+            'nropaquetesii' => $nropaquetesii,
+            'nropaqueteset' => $nropaqueteset,
+            'nropaquetessn' => $nropaquetessn,
+            'encomiendas' => $encomiendas,
+            'correotradicional' => $correotradicional,
+            'enviotrans' => $enviotrans,
             'sacasm' => $sacasm,
             'listas' => $listas,
             'lcao' => $lcao,
             'totalContenidoR' => $totalContenidoR,
             'totalContenidoB' => $totalContenidoB,
             'totalContenido' => $totalContenido,
+            'totalContenidoOF' => $totalContenidoOF,
+            'totalContenidoII' => $totalContenidoII,
+            'totalContenidoET' => $totalContenidoET,
+            'totalContenidoSU' => $totalContenidoSU,
+            'totalContenidoSN' => $totalContenidoSN,
+            'totalContenidoEMS' => $totalContenidoEMS,
+            'totalContenidoCP' => $totalContenidoCP,
+            'totalContenidoCO' => $totalContenidoCO,
             'service' => $service, // Agregado aquí
         ];
-    
+
         // Crear el PDF usando la vista 'despacho.pdf.cn31'
         $pdf = PDF::loadView('despacho.pdf.cn', $data);
-    
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'CN.pdf');
-    }    
+    }
 
     public function render()
     {

@@ -133,6 +133,7 @@
         }
     </style>
 </head>
+@if ($despacho->service === 'LC')
 <body>
     <!-- CN-31 Content -->
     <div class="header">
@@ -229,16 +230,60 @@
                 <th>Cantidad (PAQUETES)</th>
                 <th>Peso Kg.</th>
             </tr>
-            <tr>
-                <td>ORDINARIOS</td>
-                <td>{{ $nropaquetesbl }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>CERTIFICADOS</td>
-                <td>{{ $nropaquetesro }}</td>
-                <td></td>
-            </tr>
+
+            @if ($despacho->service === 'LC')
+                <tr>
+                    <td>ORDINARIOS</td>
+                    <td>{{ $nropaquetesbl ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CERTIFICADOS</td>
+                    <td>{{ $nropaquetesro ?? '0' }}</td>
+                    <td></td>
+                </tr>
+            @elseif ($despacho->service === 'EMS')
+                <tr>
+                    <td>CONTRATOS</td>
+                    <td>{{ $nropaquetesco ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ENCOMIENDAS</td>
+                    <td>{{ $nropaquetescp ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>EMS</td>
+                    <td>{{ $nropaquetesems ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>SUPER EXPRESS</td>
+                    <td>{{ $nropaquetessu ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ENVIO OFICIAL</td>
+                    <td>{{ $nropaquetesof ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ENVIO INTERNACIONAL</td>
+                    <td>{{ $nropaquetesii ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ENVIO TRANSITO</td>
+                    <td>{{ $nropaqueteset ?? '0' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ENVIO SIN DESPACHO</td>
+                    <td>{{ $nropaquetessn ?? '0' }}</td>
+                    <td></td>
+                </tr>
+            @endif
             <tr>
                 <td>Total</td>
                 <td>{{ $totalPaquetes }}</td>
@@ -260,7 +305,8 @@
         </table>
     </div>
 </body>
-
+@elseif ($despacho->service === 'EMS')
+@endif
 <body>
     <!-- CN-38 Content -->
     <div class="content">
@@ -374,9 +420,17 @@
                     </td>
                     <td>AGBC - {{ $ofdestino }}
                     </td>
-                    <td>1</td>
+                    @if ($despacho->service === 'LC')
+                        <td>1</td>
+                    @else
+                        <td></td>
+                    @endif
                     <td></td>
-                    <td></td>
+                    @if ($despacho->service === 'EMS')
+                        <td>1</td>
+                    @else
+                        <td></td>
+                    @endif
                     <td>{{ $saca->peso }}Kg.</td>
                     <td>
                         @php
@@ -453,21 +507,27 @@
     <table class="cn35-table">
         <tr>
             <td colspan="2" class="transparent-bottom-border">PARA :</td>
-            <td class="transparent-bottom-border text-center">GESPA {{ $despacho->service}}</td>
+            <td class="transparent-bottom-border text-center">GESPA <strong>{{ $despacho->service }}</strong></td>
             <td class="transparent-bottom-border text-center">CN 35</td>
         </tr>
         <tr>
             <td colspan="2" class="text-center">{{ $ciudadDestino }}</td>
-            <td></td>
+            <td class="text-center">
+                @if ($despacho->service === 'LC')
+                    <br><strong style="font-size: 20px;">TRADICIONAL</strong>
+                @elseif ($despacho->service === 'EMS')
+                    <br><strong style="font-size: 20px;">PRIORITARIO</strong>
+                @endif
+            </td>
             @if ($index === count($sacas) - 1)
-                <td class="text-center"><strong>F</strong></td>
+                <td class="text-center" style="font-size: 20px;"><strong>F</strong></td>
             @endif
         </tr>
         <tr>
             <td>Cat: {{ $categoria }}</td>
             <td>SubC: {{ $subclase }}</td>
             <td class="transparent-right-border text-right">{{ $siglaOrigen }} (BOA)</td>
-            <td>{{ $ciudadOrigen }} {{ $despacho->service}}</td>
+            <td>{{ $ciudadOrigen }} {{ $despacho->service }}</td>
         </tr>
         <tr>
             <td colspan="2" class="text-center">{{ $despacho->created_at->format('Y-m-d') }}</td>
