@@ -83,7 +83,8 @@
                                                     'ER' => 'ER EMS - MERCANCIA DEVUELTA',
                                                     'ET' => 'ET EMS - SACAS VACIAS',
                                                     'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'EY' =>
+                                                        'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
                                                     'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
@@ -172,14 +173,13 @@
                         <div class="form-group">
                             <label for="subclase">Subclase</label>
                             <select class="form-control" id="subclase" wire:model="subclase">
-                                <option value="">Seleccione una opción</option>
+                                <option value="EN">EN EMS - MIXTO</option>
                                 <option value="EA">EA EMS - AL DESCUBIERTO</option>
                                 <option value="ED">ED EMS - DOCUMENTOS</option>
                                 <option value="EG">EG EMS - PLAZO GARANTIZADO: DOCUMENTOS</option>
                                 <option value="EH">EH EMS - PLAZO GARANTIZADO: MERCANCIA</option>
                                 <option value="EI">EI EMS - PLAZO GARANTIZADO: MIXTO</option>
                                 <option value="EM">EM EMS - MERCADERIA</option>
-                                <option value="EN">EN EMS - MIXTO</option>
                                 <option value="ER">ER EMS - MERCANCIA DEVUELTA</option>
                                 <option value="ET">ET EMS - SACAS VACIAS</option>
                                 <option value="EU">EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>

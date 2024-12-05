@@ -90,7 +90,8 @@
                                                     'ER' => 'ER EMS - MERCANCIA DEVUELTA',
                                                     'ET' => 'ET EMS - SACAS VACIAS',
                                                     'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'EY' =>
+                                                        'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
                                                     'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
@@ -106,7 +107,13 @@
                                             <td>{{ $subclases[$despacho->subclase] ?? $despacho->subclase }}</td>
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
-                                            <td>{{ $despacho->sacas_admitidas }} / {{ $despacho->sacas_cerradas }}</td>
+                                            <td>
+                                                {{ $despacho->sacas_admitidas }} / {{ $despacho->sacas_cerradas }}
+                                                <span
+                                                    class="badge {{ $despacho->estado_sacas == 'Completo' ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $despacho->estado_sacas }}
+                                                </span>
+                                            </td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>{{ $despacho->updated_at }}</td>
                                             {{-- <td>

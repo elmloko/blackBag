@@ -181,26 +181,29 @@ class Admitirems extends Component
         $translatedCityCode = $cityCodes[strtoupper($userCity)] ?? null;
     
         // Filtra los despachos según el código traducido
-        $despachos = Despacho::where('ofdestino', $translatedCityCode) // Filtra por el código traducido
+        $despachos = Despacho::where('ofdestino', $translatedCityCode)
             ->where(function ($query) {
                 $query->where('ofdestino', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('categoria', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('subclase', 'like', '%' . $this->searchTerm . '%');
             })
-            ->whereIn('estado', ['ADMITIDO'])
             ->where('service', 'EMS')
             ->paginate($this->perPage);
     
         // Agregar el conteo de sacas admitidas y cerradas para cada despacho
         foreach ($despachos as $despacho) {
-            $despacho->sacas_admitidas = Saca::where('despacho_id', $despacho->id)->where('estado', 'ADMITIDO')->count();
-            $despacho->sacas_cerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
+            $sacasAdmitidas = Saca::where('despacho_id', $despacho->id)->where('estado', 'ADMITIDO')->count();
+            $sacasCerradas = Saca::where('despacho_id', $despacho->id)->where('estado', 'CERRADO')->count();
+    
+            $despacho->sacas_admitidas = $sacasAdmitidas;
+            $despacho->sacas_cerradas = $sacasCerradas;
+    
+            // Definir el estado de las sacas
+            $despacho->estado_sacas = $sacasAdmitidas > $sacasCerradas ? 'Completo' : 'Incompleto';
         }
     
         return view('livewire.admitirems', [
             'despachos' => $despachos,
         ]);
     }
-    
-    
 }
