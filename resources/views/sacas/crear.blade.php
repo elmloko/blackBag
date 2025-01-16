@@ -366,12 +366,15 @@
                                                                                         style="color: #ffffff;">Cantidad</span>
                                                                                 </div>
                                                                                 <div class="form-group col-md-5">
-                                                                                    <label for="nropaquetesems">EMS</label>
-                                                                                    <input type="number"
+                                                                                    <label for="nropaquetesems">Código EMS (manifiesto)</label>
+                                                                                    <input
+                                                                                        type="text"
                                                                                         class="form-control"
                                                                                         id="nropaquetesems"
                                                                                         name="nropaquetesems"
-                                                                                        value="{{ $contenido->nropaquetesems ?? '' }}">
+                                                                                        value="{{ $contenido->nropaquetesems ?? '' }}"
+                                                                                        placeholder="Ingresa código de manifiesto"
+                                                                                    >
                                                                                 </div>
                                                                                 <div class="form-group col-md-5">
                                                                                     <label
