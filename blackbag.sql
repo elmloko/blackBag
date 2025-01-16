@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
+-- Host:                         172.65.10.52
+-- Versión del servidor:         10.11.4-MariaDB-1~deb12u1 - Debian 12
+-- SO del servidor:              debian-linux-gnu
 -- HeidiSQL Versión:             12.6.0.6765
 -- --------------------------------------------------------
 
@@ -67,9 +67,11 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~1 rows (aproximadamente)
+INSERT INTO `despacho` (`id`, `oforigen`, `ofdestino`, `user`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `service`, `depto`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'BOCBB', 'BOPOI', 'Marco Antonio Espinoza Rojas', 'B', 'EG', 1, NULL, NULL, 'BOCBBBOPOIBEG5001', 5, 'APERTURA', 'EMS', 'COCHABAMBA', '2025-01-10 02:01:23', '2025-01-10 02:01:23', NULL);
 
 -- Volcando estructura para tabla blackbag.events
 CREATE TABLE IF NOT EXISTS `events` (
@@ -81,123 +83,12 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.events: ~113 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.events: ~2 rows (aproximadamente)
 INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `identificador`, `created_at`, `updated_at`) VALUES
-	(1, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUF4001', '2024-11-25 19:34:31', '2024-11-25 19:34:31'),
-	(2, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUM4001', '2024-11-25 19:34:40', '2024-11-25 19:34:40'),
-	(3, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUL4001', '2024-11-25 19:35:46', '2024-11-25 19:35:46'),
-	(4, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUF4001', '2024-11-25 19:36:15', '2024-11-25 19:36:15'),
-	(5, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUL4001', '2024-11-25 19:39:51', '2024-11-25 19:39:51'),
-	(6, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUF4001', '2024-11-25 19:43:12', '2024-11-25 19:43:12'),
-	(7, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUL4001', '2024-11-25 19:46:09', '2024-11-25 19:46:09'),
-	(8, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUL4001', '2024-11-26 17:34:47', '2024-11-26 17:34:47'),
-	(9, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOLPZBUN4001', '2024-11-26 17:38:55', '2024-11-26 17:38:55'),
-	(10, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUN4001', '2024-11-26 17:42:24', '2024-11-26 17:42:24'),
-	(11, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOCBBBUN4001001', '2024-11-26 17:42:40', '2024-11-26 17:42:40'),
-	(12, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOCBBBUN4001002', '2024-11-26 17:42:41', '2024-11-26 17:42:41'),
-	(13, 'Marco Antonio Espinoza Rojas', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOCBBBOCBBBUN40010010150', '2024-11-26 17:42:52', '2024-11-26 17:42:52'),
-	(14, 'Marco Antonio Espinoza Rojas', 'ELIMINACION', 'Eliminación de Saca', 'BOCBBBOCBBBUN40010020150', '2024-11-26 17:42:57', '2024-11-26 17:42:57'),
-	(15, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBUN40010010150', '2024-11-26 17:43:01', '2024-11-26 17:43:01'),
-	(16, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBUN4001', '2024-11-26 17:43:06', '2024-11-26 17:43:06'),
-	(17, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUL4002', '2024-11-26 17:43:16', '2024-11-26 17:43:16'),
-	(18, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOORUBUN4001', '2024-11-26 17:46:01', '2024-11-26 17:46:01'),
-	(19, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCIJBUL4001', '2024-11-26 18:18:50', '2024-11-26 18:18:50'),
-	(20, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCBBBUN4001', '2024-11-26 18:24:38', '2024-11-26 18:24:38'),
-	(21, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCBBBUN4002', '2024-11-26 18:42:24', '2024-11-26 18:42:24'),
-	(22, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCIJBUN4001', '2024-11-26 19:14:12', '2024-11-26 19:14:12'),
-	(23, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCIJBUN4001', '2024-11-26 19:15:26', '2024-11-26 19:15:26'),
-	(24, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCBBBUM4002', '2024-11-26 19:16:54', '2024-11-26 19:16:54'),
-	(25, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOCIJBUN4002', '2024-11-26 19:17:06', '2024-11-26 19:17:06'),
-	(26, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOLPZBOORUBUN4001', '2024-11-26 19:17:46', '2024-11-26 19:17:46'),
-	(27, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUN4001', '2024-11-26 19:25:32', '2024-11-26 19:25:32'),
-	(28, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUM4001', '2024-11-26 19:25:51', '2024-11-26 19:25:51'),
-	(29, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUN4001', '2024-11-26 19:26:32', '2024-11-26 19:26:32'),
-	(30, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBUN4001', '2024-11-26 19:26:45', '2024-11-26 19:26:45'),
-	(31, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:01:16', '2024-11-26 20:01:16'),
-	(32, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOCBBBEI4002001', '2024-11-26 20:09:09', '2024-11-26 20:09:09'),
-	(33, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOCIJBEN4001', '2024-11-26 20:09:42', '2024-11-26 20:09:42'),
-	(34, 'Marco Antonio Espinoza Rojas', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:12:27', '2024-11-26 20:12:27'),
-	(35, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:12:37', '2024-11-26 20:12:37'),
-	(36, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:13:33', '2024-11-26 20:13:33'),
-	(37, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:16:02', '2024-11-26 20:16:02'),
-	(38, 'Marco Antonio Espinoza Rojas', 'REAPERTURA', 'Reapertura de despacho', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:16:10', '2024-11-26 20:16:10'),
-	(39, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:16:16', '2024-11-26 20:16:16'),
-	(40, 'Marco Antonio Espinoza Rojas', 'REAPERTURA', 'Reapertura de despacho', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:16:53', '2024-11-26 20:16:53'),
-	(41, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:19:48', '2024-11-26 20:19:48'),
-	(42, 'Marco Antonio Espinoza Rojas', 'REAPERTURA', 'Reapertura de despacho', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:19:55', '2024-11-26 20:19:55'),
-	(43, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCBBBEI40020010150', '2024-11-26 20:23:12', '2024-11-26 20:23:12'),
-	(44, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:23:19', '2024-11-26 20:23:19'),
-	(45, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:24:41', '2024-11-26 20:24:41'),
-	(46, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:28:37', '2024-11-26 20:28:37'),
-	(47, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:30:20', '2024-11-26 20:30:20'),
-	(48, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:30:35', '2024-11-26 20:30:35'),
-	(49, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:33:11', '2024-11-26 20:33:11'),
-	(50, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:39:07', '2024-11-26 20:39:07'),
-	(51, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:39:23', '2024-11-26 20:39:23'),
-	(52, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:43:13', '2024-11-26 20:43:13'),
-	(53, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:46:18', '2024-11-26 20:46:18'),
-	(54, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 20:49:10', '2024-11-26 20:49:10'),
-	(55, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 22:34:27', '2024-11-26 22:34:27'),
-	(56, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBEI4002', '2024-11-26 22:50:14', '2024-11-26 22:50:14'),
-	(57, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOCIJBEN4001001', '2024-11-26 23:53:30', '2024-11-26 23:53:30'),
-	(58, 'Marco Antonio Espinoza Rojas', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-27 22:31:49', '2024-11-27 22:31:49'),
-	(59, 'Marco Antonio Espinoza Rojas', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:22:55', '2024-11-28 01:22:55'),
-	(60, 'Marco Antonio Espinoza Rojas', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:39:11', '2024-11-28 01:39:11'),
-	(61, 'Marco Antonio Espinoza Rojas', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:40:25', '2024-11-28 01:40:25'),
-	(62, 'Marco Antonio Espinoza Rojas', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:41:12', '2024-11-28 01:41:12'),
-	(63, 'Marco Antonio Espinoza Rojas', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:42:52', '2024-11-28 01:42:52'),
-	(64, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:42:56', '2024-11-28 01:42:56'),
-	(65, 'Marco Antonio Espinoza Rojas', 'REAPERTURA', 'Reapertura de despacho', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:43:06', '2024-11-28 01:43:06'),
-	(66, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOCIJBEN40010010150', '2024-11-28 01:43:13', '2024-11-28 01:43:13'),
-	(67, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:21:12', '2024-11-28 17:21:12'),
-	(68, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:22:54', '2024-11-28 17:22:54'),
-	(69, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:25:02', '2024-11-28 17:25:02'),
-	(70, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:28:49', '2024-11-28 17:28:49'),
-	(71, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:29:43', '2024-11-28 17:29:43'),
-	(72, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:38:49', '2024-11-28 17:38:49'),
-	(73, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:39:53', '2024-11-28 17:39:53'),
-	(74, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:41:10', '2024-11-28 17:41:10'),
-	(75, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:42:13', '2024-11-28 17:42:13'),
-	(76, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:54:15', '2024-11-28 17:54:15'),
-	(77, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 17:57:36', '2024-11-28 17:57:36'),
-	(78, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:00:04', '2024-11-28 18:00:04'),
-	(79, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:00:23', '2024-11-28 18:00:23'),
-	(80, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:06:42', '2024-11-28 18:06:42'),
-	(81, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOTJABEN4001001', '2024-11-28 18:06:55', '2024-11-28 18:06:55'),
-	(82, 'Marco Antonio Espinoza Rojas', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOCBBBOTJABEN40010010140', '2024-11-28 18:07:10', '2024-11-28 18:07:10'),
-	(83, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOTJABEN40010010140', '2024-11-28 18:07:14', '2024-11-28 18:07:14'),
-	(84, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:07:17', '2024-11-28 18:07:17'),
-	(85, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:07:18', '2024-11-28 18:07:18'),
-	(86, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBUN4002', '2024-11-28 18:12:39', '2024-11-28 18:12:39'),
-	(87, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:12:52', '2024-11-28 18:12:52'),
-	(88, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:19:29', '2024-11-28 18:19:29'),
-	(89, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:19:55', '2024-11-28 18:19:55'),
-	(90, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBUN4002', '2024-11-28 18:37:49', '2024-11-28 18:37:49'),
-	(91, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:37:56', '2024-11-28 18:37:56'),
-	(92, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:38:47', '2024-11-28 18:38:47'),
-	(93, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:40:15', '2024-11-28 18:40:15'),
-	(94, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:41:59', '2024-11-28 18:41:59'),
-	(95, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:42:17', '2024-11-28 18:42:17'),
-	(96, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:42:40', '2024-11-28 18:42:40'),
-	(97, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 18:53:45', '2024-11-28 18:53:45'),
-	(98, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 18:56:57', '2024-11-28 18:56:57'),
-	(99, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 19:03:56', '2024-11-28 19:03:56'),
-	(100, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:04:18', '2024-11-28 19:04:18'),
-	(101, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCBBBUN4002', '2024-11-28 19:14:19', '2024-11-28 19:14:19'),
-	(102, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:14:24', '2024-11-28 19:14:24'),
-	(103, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:15:05', '2024-11-28 19:15:05'),
-	(104, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 19:17:56', '2024-11-28 19:17:56'),
-	(105, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:37:41', '2024-11-28 19:37:41'),
-	(106, 'Marco Antonio Espinoza Rojas', 'REAPERTURA', 'Reapertura de despacho', 'BOCBBBOTJABEN40010010140', '2024-11-28 19:39:46', '2024-11-28 19:39:46'),
-	(107, 'Marco Antonio Espinoza Rojas', 'CLAUSURA', 'Cierre de Saca', 'BOCBBBOTJABEN40010010140', '2024-11-28 19:39:56', '2024-11-28 19:39:56'),
-	(108, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 19:39:59', '2024-11-28 19:39:59'),
-	(109, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 19:46:06', '2024-11-28 19:46:06'),
-	(110, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:46:29', '2024-11-28 19:46:29'),
-	(111, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:48:30', '2024-11-28 19:48:30'),
-	(112, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOTJABEN4001', '2024-11-28 19:51:30', '2024-11-28 19:51:30'),
-	(113, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOCBBBOCIJBEN4001', '2024-11-28 19:52:35', '2024-11-28 19:52:35');
+	(1, 'Marco Antonio Espinoza Rojas', 'INICIO', 'Creacion de despacho', 'BOCBBBOPOIBEG5001', '2025-01-10 02:01:23', '2025-01-10 02:01:23'),
+	(2, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOCBBBOPOIBEG5001001', '2025-01-10 02:01:35', '2025-01-10 02:01:35');
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -328,9 +219,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=10859 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10984 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~357 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~404 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(5342, 1732217760, 10080, 'user_request', '1', 'count', 8.00, NULL),
 	(5354, 1732217760, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","vendor\\/laravel\\/framework\\/src\\/Illuminate\\/Database\\/Connection.php:829"]', 'count', 1.00, NULL),
@@ -698,7 +589,48 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(10836, 1732809060, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(10837, 1732808880, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(10847, 1732809120, 60, 'user_request', '1', 'count', 2.00, NULL),
-	(10848, 1732809120, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(10848, 1732809120, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10859, 1732816020, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(10860, 1732815720, 360, 'user_request', '1', 'count', 5.00, NULL),
+	(10861, 1732815360, 1440, 'user_request', '1', 'count', 5.00, NULL),
+	(10862, 1732812480, 10080, 'user_request', '1', 'count', 5.00, NULL),
+	(10863, 1732816020, 60, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(10864, 1732815720, 360, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(10865, 1732815360, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(10866, 1732812480, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(10888, 1736434500, 60, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'count', 1.00, NULL),
+	(10889, 1736434440, 360, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'count', 1.00, NULL),
+	(10890, 1736434080, 1440, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'count', 1.00, NULL),
+	(10891, 1736431200, 10080, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'count', 1.00, NULL),
+	(10892, 1736434500, 60, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'max', 1142.00, NULL),
+	(10893, 1736434440, 360, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'max', 1142.00, NULL),
+	(10894, 1736434080, 1440, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'max', 1142.00, NULL),
+	(10895, 1736431200, 10080, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 'max', 1142.00, NULL),
+	(10896, 1736460000, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(10897, 1736460000, 360, 'user_request', '1', 'count', 13.00, NULL),
+	(10898, 1736460000, 1440, 'user_request', '1', 'count', 13.00, NULL),
+	(10899, 1736451360, 10080, 'user_request', '1', 'count', 13.00, NULL),
+	(10900, 1736460000, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10901, 1736460000, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10902, 1736460000, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10903, 1736451360, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10908, 1736460060, 60, 'user_request', '1', 'count', 11.00, NULL),
+	(10909, 1736460060, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(10910, 1736460000, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(10911, 1736460000, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(10912, 1736451360, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(10964, 1737043680, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(10965, 1737043560, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(10966, 1737043200, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(10967, 1737036000, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(10968, 1737043680, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10969, 1737043560, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10970, 1737043200, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10971, 1737036000, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10976, 1737043680, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10977, 1737043560, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10978, 1737043200, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(10979, 1737036000, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -713,9 +645,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=2714 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2746 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~1.341 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~1.364 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1373, 1732204726, 'user_request', '1', NULL),
 	(1374, 1732204726, 'user_request', '1', NULL),
@@ -2057,7 +1989,39 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(2710, 1732809090, 'user_request', '1', NULL),
 	(2711, 1732809152, 'user_request', '1', NULL),
 	(2712, 1732809152, 'cache_hit', 'spatie.permission.cache', NULL),
-	(2713, 1732809154, 'user_request', '1', NULL);
+	(2713, 1732809154, 'user_request', '1', NULL),
+	(2714, 1732816037, 'user_request', '1', NULL),
+	(2715, 1732816037, 'user_request', '1', NULL),
+	(2716, 1732816037, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2717, 1732816041, 'user_request', '1', NULL),
+	(2718, 1732816041, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2719, 1732816055, 'user_request', '1', NULL),
+	(2720, 1732816055, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2721, 1732816059, 'user_request', '1', NULL),
+	(2722, 1732816059, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2723, 1736434525, 'slow_request', '["GET","\\/iniciarems","App\\\\Http\\\\Controllers\\\\DespachoController@getIniciarems"]', 1142),
+	(2724, 1736460043, 'user_request', '1', NULL),
+	(2725, 1736460045, 'user_request', '1', NULL),
+	(2726, 1736460045, 'cache_miss', 'spatie.permission.cache', NULL),
+	(2727, 1736460060, 'user_request', '1', NULL),
+	(2728, 1736460060, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2729, 1736460071, 'user_request', '1', NULL),
+	(2730, 1736460075, 'user_request', '1', NULL),
+	(2731, 1736460076, 'user_request', '1', NULL),
+	(2732, 1736460076, 'user_request', '1', NULL),
+	(2733, 1736460076, 'user_request', '1', NULL),
+	(2734, 1736460080, 'user_request', '1', NULL),
+	(2735, 1736460083, 'user_request', '1', NULL),
+	(2736, 1736460085, 'user_request', '1', NULL),
+	(2737, 1736460085, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2738, 1736460095, 'user_request', '1', NULL),
+	(2739, 1736460095, 'user_request', '1', NULL),
+	(2740, 1736460095, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2741, 1737043706, 'user_request', '1', NULL),
+	(2742, 1737043707, 'user_request', '1', NULL),
+	(2743, 1737043707, 'cache_miss', 'spatie.permission.cache', NULL),
+	(2744, 1737043711, 'user_request', '1', NULL),
+	(2745, 1737043711, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -2137,9 +2101,11 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~1 rows (aproximadamente)
+INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiqueta`, `receptaculo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
+	(1, 1, 'BOCBBBOPOIBEG5001001', 'BG', 'APERTURA', 'RO', 'BOCBBBOPOIBEG50010010020', 2.000, NULL, '2025-01-10 02:01:35', '2025-01-10 02:01:35', '1');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
