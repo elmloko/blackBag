@@ -331,7 +331,8 @@
                                                                                 </div>
                                                                             @endif
                                                                         </div>
-                                                                        <h5 class="mb-3">Contenido declarado (PAQUETES)</h5>
+                                                                        <h5 class="mb-3">Contenido declarado (PAQUETES)
+                                                                        </h5>
                                                                         <!-- Campo para LC/AO -->
                                                                         <div class="row">
                                                                             @if ($service === 'LC')
@@ -353,10 +354,11 @@
                                                                                 <div class="form-group col-md-5">
                                                                                     <label
                                                                                         for="nropaquetesbl">BLANCAS</label>
-                                                                                    <input type="number"
+                                                                                    <input type="text"
                                                                                         class="form-control"
                                                                                         id="nropaquetesbl"
                                                                                         name="nropaquetesbl"
+                                                                                        placeholder="Ingresa código de manifiesto"
                                                                                         value="{{ $contenido->nropaquetesbl ?? '' }}">
                                                                                 </div>
                                                                             @elseif ($service === 'EMS')
@@ -366,15 +368,14 @@
                                                                                         style="color: #ffffff;">Cantidad</span>
                                                                                 </div>
                                                                                 <div class="form-group col-md-5">
-                                                                                    <label for="nropaquetesems">Código EMS (manifiesto)</label>
-                                                                                    <input
-                                                                                        type="text"
+                                                                                    <label for="nropaquetesems">Código EMS
+                                                                                        (manifiesto)</label>
+                                                                                    <input type="text"
                                                                                         class="form-control"
                                                                                         id="nropaquetesems"
                                                                                         name="nropaquetesems"
                                                                                         value="{{ $contenido->nropaquetesems ?? '' }}"
-                                                                                        placeholder="Ingresa código de manifiesto"
-                                                                                    >
+                                                                                        placeholder="Ingresa código de manifiesto">
                                                                                 </div>
                                                                                 <div class="form-group col-md-5">
                                                                                     <label

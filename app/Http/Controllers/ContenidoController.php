@@ -34,82 +34,37 @@ class ContenidoController extends Controller
             'nropaquetesof' => 'nullable|integer',
         ]);
 
-        // Asumimos que en 'nropaquetesems' viene el "código" del manifiesto
-        $codigoManifiesto = $request->input('nropaquetesems');
-
-        if ($codigoManifiesto) {
-            // Realiza la petición GET a la API
-            $url = "http://172.65.10.52:8011/api/admisiones/manifiesto?manifiesto=$codigoManifiesto";
-
-            try {
-                $response = Http::get($url); // Retorna una instancia de Illuminate\Http\Client\Response
-
-                // Asegúrate que la llamada fue exitosa (status 200)
-                if ($response->successful()) {
-                    $jsonData = $response->json(); // Convierte a array asociativo
-                    // Verificamos la estructura
-                    if (isset($jsonData['data'])) {
-                        // Contar la cantidad de registros en 'data'
-                        $cantidad = count($jsonData['data']);
-
-                        // Sobrescribimos el valor de nropaquetesems con la cantidad
-                        // devuelta por la API
-                        $request->merge([
-                            'nropaquetesems' => $cantidad
-                        ]);
-                    }
-                } else {
-                    // Manejar error (status != 200). Podrías registrar un Log, etc.
-                }
-            } catch (\Exception $e) {
-                // Manejar excepciones de la llamada: timeout, conexión fallida, etc.
-                // Registrar en logs, por ejemplo
-            }
+        // Procesar manifiesto para nropaquetesems (API 1)
+        $codigoManifiestoEms = $request->input('nropaquetesems');
+        if ($codigoManifiestoEms) {
+            $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
         }
 
-        // Creación del nuevo contenido en la base de datos
-        Contenido::create([
-            'saca_id' => $request->saca_id,
-            'descripcion' => $request->descripcion,
-            'lcao' => $request->lcao,
-            'sacasm' => $request->sacasm,
-            'listas' => $request->listas,
-            'correotradicional' => $request->correotradicional,
-            'encomiendas' => $request->encomiendas,
-            'enviotrans' => $request->enviotrans,
-            'nropaquetesro' => $request->nropaquetesro,
-            'nropaquetesbl' => $request->nropaquetesbl,
-            'nropaquetesems' => $request->nropaquetesems,
-            'nropaquetescp' => $request->nropaquetescp,
-            'nropaquetesco' => $request->nropaquetesco,
-            'nropaquetessn' => $request->nropaquetessn,
-            'nropaquetessu' => $request->nropaquetessu,
-            'nropaqueteset' => $request->nropaqueteset,
-            'nropaquetesii' => $request->nropaquetesii,
-            'nropaquetesof' => $request->nropaquetesof,
-        ]);
+        // Crear el nuevo contenido en la base de datos
+        Contenido::create($request->all());
 
         // Recuperar la saca relacionada
         $saca = Saca::find($request->saca_id);
         if ($saca) {
-            // Calcular la suma de nropaquetesX
-            $totalPaquetes =
-                ($request->nropaquetesro ?? 0)
-                + ($request->nropaquetesbl ?? 0)
-                + ($request->nropaquetesems ?? 0) // este ya viene sobreescrito
-                + ($request->nropaquetescp ?? 0)
-                + ($request->nropaquetesco ?? 0)
-                + ($request->nropaquetessn ?? 0)
-                + ($request->nropaquetessu ?? 0)
-                + ($request->nropaqueteset ?? 0)
-                + ($request->nropaquetesii ?? 0)
-                + ($request->nropaquetesof ?? 0);
+            // Calcular la suma de nropaquetes
+            $totalPaquetes = collect([
+                $request->nropaquetesro,
+                $request->nropaquetesbl,
+                $request->nropaquetesems,
+                $request->nropaquetescp,
+                $request->nropaquetesco,
+                $request->nropaquetessn,
+                $request->nropaquetessu,
+                $request->nropaqueteset,
+                $request->nropaquetesii,
+                $request->nropaquetesof,
+            ])->filter()->sum();
 
-            // Actualizar el campo nropaquetes en la saca
+            // Actualizar el total en la saca
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
 
-            // Registrar el evento en la tabla Eventos
+            // Registrar evento en la tabla Eventos
             Eventos::create([
                 'action' => 'DECLARACION DE CONTENIDO',
                 'descripcion' => 'Contenido declarado en saca postal',
@@ -120,6 +75,28 @@ class ContenidoController extends Controller
 
         // Redirección después de la creación exitosa
         return redirect()->back()->with('message', 'Contenido creado exitosamente');
+    }
+
+    private function procesarManifiestoApi1($codigoManifiesto, &$request, $campo)
+    {
+        $url = "http://172.65.10.52:8011/api/admisiones/manifiesto?manifiesto=$codigoManifiesto";
+
+        try {
+            $response = Http::get($url);
+
+            if ($response->successful()) {
+                $jsonData = $response->json();
+
+                if (isset($jsonData['data'])) {
+                    $cantidad = count($jsonData['data']);
+                    $request->merge([$campo => $cantidad]);
+                }
+            } else {
+                return redirect()->back()->with('message', 'Error al consultar la API EMS para el manifiesto.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Excepción en la API EMS para el manifiesto:');
+        }
     }
 
     public function update(Request $request, $id)
