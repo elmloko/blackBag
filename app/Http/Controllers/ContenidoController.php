@@ -107,13 +107,14 @@ class ContenidoController extends Controller
 
     private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
     {
-        $url = "http://172.65.10.52/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
-        $token = "eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK";
+        $url = "https://correos.gob.bo:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
     
         try {
-            // Enviar la solicitud con el token en los encabezados
+            // Enviar la solicitud con el token en los encabezados y verificar SSL desactivado
             $response = Http::withHeaders([
-                'Authorization' => "Bearer $token",
+                'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
+            ])->withOptions([
+                'verify' => false,
             ])->get($url);
     
             if ($response->successful()) {
@@ -129,7 +130,7 @@ class ContenidoController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('message', 'Excepción en la API TrackingBO para el manifiesto: ' . $e->getMessage());
         }
-    }    
+    }      
 
     public function update(Request $request, $id)
     {
