@@ -23,7 +23,7 @@ class ContenidoController extends Controller
             'encomiendas' => 'nullable|integer',
             'enviotrans' => 'nullable|integer',
             'nropaquetesro' => 'nullable|integer',
-            'nropaquetesbl' => 'nullable|integer',
+            'nropaquetesbl' => 'nullable|string',
             'nropaquetesems' => 'nullable|string',
             'nropaquetescp' => 'nullable|integer',
             'nropaquetesco' => 'nullable|integer',
@@ -38,6 +38,12 @@ class ContenidoController extends Controller
         $codigoManifiestoEms = $request->input('nropaquetesems');
         if ($codigoManifiestoEms) {
             $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
+        }
+
+        // Procesar manifiesto para nropaquetesems (API 1)
+        $codigoManifiestoBL = $request->input('nropaquetesbl');
+        if ($codigoManifiestoBL) {
+            $this->procesarManifiestoApi2($codigoManifiestoBL, $request, 'nropaquetesbl');
         }
 
         // Crear el nuevo contenido en la base de datos
@@ -98,6 +104,32 @@ class ContenidoController extends Controller
             return redirect()->back()->with('message', 'Excepción en la API EMS para el manifiesto:');
         }
     }
+
+    private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
+    {
+        $url = "http://172.65.10.52/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
+        $token = "eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK";
+    
+        try {
+            // Enviar la solicitud con el token en los encabezados
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer $token",
+            ])->get($url);
+    
+            if ($response->successful()) {
+                $jsonData = $response->json();
+    
+                if (isset($jsonData['data'])) {
+                    $cantidad = count($jsonData['data']);
+                    $request->merge([$campo => $cantidad]);
+                }
+            } else {
+                return redirect()->back()->with('message', 'Error al consultar la API TrackingBO para el manifiesto.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Excepción en la API TrackingBO para el manifiesto: ' . $e->getMessage());
+        }
+    }    
 
     public function update(Request $request, $id)
     {
