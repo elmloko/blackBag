@@ -139,54 +139,70 @@ class SacaController extends Controller
     {
         // Obtener todas las sacas relacionadas al despacho
         $sacas = Saca::where('despacho_id', $id)->get();
-    
+
         // Verificar si alguna saca tiene peso o nropaquetes en null o 0
         $incompleteSacas = $sacas->contains(function ($saca) {
             return $saca->peso === null || $saca->peso == 0 || $saca->nropaquetes === null || $saca->nropaquetes == 0;
         });
-    
+
         // Si existe alguna saca incompleta, redirigir con un mensaje de error
         if ($incompleteSacas) {
             return redirect()->back()->with('error', 'No se puede cerrar el despacho. Todas las sacas deben tener valores válidos de peso y número de paquetes.');
         }
-    
+
+        // Obtener el despacho y verificar su estado
+        $despacho = Despacho::findOrFail($id);
+        $estadoDespacho = $despacho->estado;
+        $service = $despacho->service; // Asegúrate de que el campo 'service' existe en el modelo
+
         // Calcular la suma total de peso y número de paquetes
         $totalPeso = $sacas->sum('peso');
         $totalPaquetes = $sacas->sum('nropaquetes');
-    
-        // Cambiar el estado de todas las sacas a 'CERRADO'
-        Saca::where('despacho_id', $id)->update(['estado' => 'CERRADO']);
-    
-        // Cambiar el estado del despacho a 'CERRADO' y guardar los totales
-        $despacho = Despacho::findOrFail($id);
-    
-        // Verificar el tipo de servicio (service) del despacho
-        $service = $despacho->service; // Asegúrate de que el campo 'service' existe en el modelo
-    
+
+        // Definir el nuevo estado basado en el estado actual del despacho
+        $nuevoEstado = '';
+        if (in_array($estadoDespacho, ['APERTURA', 'CERRADO'])) {
+            $nuevoEstado = 'CERRADO';
+        } elseif (in_array($estadoDespacho, ['OBSERVADO', 'EXPEDICION'])) {
+            $nuevoEstado = 'EXPEDICION';
+        }
+
+        // Cambiar el estado de todas las sacas al nuevo estado
+        Saca::where('despacho_id', $id)->update(['estado' => $nuevoEstado]);
+
+        // Cambiar el estado del despacho y guardar los totales
         $despacho->update([
-            'estado' => 'CERRADO',
+            'estado' => $nuevoEstado,
             'peso' => $totalPeso,
             'nroenvase' => $totalPaquetes,
         ]);
-    
+
         // Registrar cada saca en la tabla Eventos
         foreach ($sacas as $saca) {
             Eventos::create([
-                'action' => 'CLAUSURA',
+                'action' => $nuevoEstado,
                 'descripcion' => 'Cierre de Saca',
                 'identificador' => $saca->receptaculo, // Campo receptaculo para identificar la saca
                 'user_id' => auth()->user()->name, // ID del usuario autenticado
             ]);
         }
-    
-        // Redirigir según el tipo de servicio
+
+        // Redirigir según el tipo de servicio y estado
         if ($service === 'EMS') {
-            return redirect('/iniciarems')->with('message', 'Despacho EMS cerrado exitosamente con todos los datos actualizados.');
+            if ($nuevoEstado === 'EXPEDICION') {
+                return redirect('/expedicionems')->with('message', "Despacho EMS cerrado exitosamente con el estado: $nuevoEstado y todos los datos actualizados.");
+            } elseif ($nuevoEstado === 'CERRADO') {
+                return redirect('/iniciarems')->with('message', "Despacho EMS cerrado exitosamente con el estado: $nuevoEstado y todos los datos actualizados.");
+            }
         } elseif ($service === 'LC') {
-            return redirect('/iniciar')->with('message', 'Despacho LC cerrado exitosamente con todos los datos actualizados.');
+            if ($nuevoEstado === 'EXPEDICION') {
+                return redirect('/expedicion')->with('message', "Despacho LC cerrado exitosamente con el estado: $nuevoEstado y todos los datos actualizados.");
+            } elseif ($nuevoEstado === 'CERRADO') {
+                return redirect('/iniciar')->with('message', "Despacho LC cerrado exitosamente con el estado: $nuevoEstado y todos los datos actualizados.");
+            }
         } else {
             // Opción por defecto para otros tipos de servicio
-            return redirect('/iniciar')->with('message', 'Despacho cerrado exitosamente con todos los datos actualizados.');
+            return redirect('/iniciar')->with('message', "Despacho cerrado exitosamente con el estado: $nuevoEstado y todos los datos actualizados.");
         }
-    }    
+    }
 }

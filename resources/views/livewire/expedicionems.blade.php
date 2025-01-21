@@ -28,9 +28,12 @@
                                     <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                                 </div>
                                 <div class="ml-auto d-flex">
-                                    <input type="date" wire:model="fechaInicio" class="form-control" style="margin-right: 10px;">
-                                    <input type="date" wire:model="fechaFin" class="form-control" style="margin-right: 10px;">
-                                    <button type="button" class="btn btn-success" wire:click="exportToExcel">Exportar a Excel</button>
+                                    <input type="date" wire:model="fechaInicio" class="form-control"
+                                        style="margin-right: 10px;">
+                                    <input type="date" wire:model="fechaFin" class="form-control"
+                                        style="margin-right: 10px;">
+                                    <button type="button" class="btn btn-success" wire:click="exportToExcel">Exportar a
+                                        Excel</button>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +59,7 @@
                                         <th>Peso</th>
                                         <th>Estado</th>
                                         <th>Enviado:</th>
-                                        {{-- <th>Acciones</th> --}}
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +88,8 @@
                                                     'ER' => 'ER EMS - MERCANCIA DEVUELTA',
                                                     'ET' => 'ET EMS - SACAS VACIAS',
                                                     'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'EY' => 'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'EY' =>
+                                                        'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
                                                     'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
@@ -103,9 +107,17 @@
                                             <td>{{ $despacho->peso }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>{{ $despacho->updated_at }}</td>
-                                            {{-- <td>
-                                                
-                                            </td> --}}
+                                            <td>
+                                                @if ($despacho->estado === 'EXPEDICION')
+                                                    <button wire:click="reaperturarDespacho({{ $despacho->id }})"
+                                                        class="btn btn-warning">Intervenir Saca</button>
+                                                    {{-- <button wire:click="expedicionDespacho({{ $despacho->id }})"
+                                                        class="btn btn-info">Expedición</button> --}}
+                                                @elseif ($despacho->estado === 'OBSERVADO')
+                                                    <a href="{{ route('saca.crear', $despacho->id) }}"
+                                                        class="btn btn-primary">Editar Detalles del Despacho</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
