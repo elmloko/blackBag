@@ -1,3 +1,4 @@
+<title>GESPA | AGBC</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -13,7 +14,8 @@
             <div class="col-md-6 col-lg-5">
                 <div class="login-wrap p-4 p-md-5">
                     <div class="icon d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('images/AGBClogo.png') }}" alt="Logo GESPA" style="width: 65px; height: auto; border-radius: 50%;">
+                        <img src="{{ asset('images/AGBClogo.png') }}" alt="Logo GESPA"
+                            style="width: 65px; height: auto; border-radius: 50%;">
                     </div>
                     <h3 class="text-center mb-4">{{ __('GESPA') }}</h3>
                     <form method="POST" action="{{ route('login') }}" class="login-form">
@@ -59,5 +61,4 @@
         height: 50vh;
         margin: 0;
     }
-    </style>
-    
+</style>
