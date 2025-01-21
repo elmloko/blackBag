@@ -62,3 +62,11 @@
         margin: 0;
     }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3ST0TCSVE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X3ST0TCSVE');
+</script>
