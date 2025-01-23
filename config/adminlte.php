@@ -350,6 +350,11 @@ return [
             // 'can'  => 'users.index',
             'submenu' => [
                 [
+                    'text' => 'Todos los despachos',
+                    'url' => '/alllc',
+                    'icon' => 'fas fa-user',
+                ],
+                [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciar',
                     'can'  => 'apertura.lc',
@@ -374,6 +379,11 @@ return [
             'icon' => 'fas fa-users',
             // 'can'  => 'users.index',
             'submenu' => [
+                [
+                    'text' => 'Todos los despachos',
+                    'url' => '/allems',
+                    'icon' => 'fas fa-user',
+                ],
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciarems',

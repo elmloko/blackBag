@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class DespachoController extends Controller
 {
+    public function getAlllc ()
+    {
+        return view('despacho.alllc ');
+    }
+    public function getAllems ()
+    {
+        return view('despacho.allems ');
+    }
     public function getIniciar ()
     {
         return view('despacho.iniciar ');

@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'destroy'])->name('role-has-permissions.destroy');
 
     //despachos
+    Route::get('/alllc', [DespachoController::class, 'getAlllc']);
+    Route::get('/allems', [DespachoController::class, 'getAllems']);
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
     Route::get('/iniciarems', [DespachoController::class, 'getIniciarems']);
     Route::get('/expedicion', [DespachoController::class, 'getExpedicion']);
