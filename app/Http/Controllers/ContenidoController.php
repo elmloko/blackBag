@@ -151,8 +151,8 @@ class ContenidoController extends Controller
             'encomiendas' => 'nullable|integer',
             'enviotrans' => 'nullable|integer',
             'nropaquetesro' => 'nullable|integer',
-            'nropaquetesbl' => 'nullable|integer',
-            'nropaquetesems' => 'nullable|integer',
+            'nropaquetesbl' => 'nullable|string',
+            'nropaquetesems' => 'nullable|string',
             'nropaquetescp' => 'nullable|integer',
             'nropaquetesco' => 'nullable|integer',
             'nropaquetessn' => 'nullable|integer',
@@ -161,7 +161,13 @@ class ContenidoController extends Controller
             'nropaquetesii' => 'nullable|integer',
             'nropaquetesof' => 'nullable|integer',
         ]);
-
+    
+        // Procesar manifiesto para nropaquetesems (API 1)
+        $codigoManifiestoEms = $request->input('nropaquetesems');
+        if ($codigoManifiestoEms) {
+            $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
+        }
+    
         // Encontrar el contenido existente y actualizar sus datos
         $contenido = Contenido::findOrFail($id);
         $contenido->update([
@@ -183,16 +189,27 @@ class ContenidoController extends Controller
             'nropaquetesii' => $request->nropaquetesii,
             'nropaquetesof' => $request->nropaquetesof,
         ]);
-
-        // Calcular la suma de nropaquetesro y nropaquetesbl
-        $totalPaquetes = ($request->nropaquetesro ?? 0) + ($request->nropaquetesbl ?? 0) + ($request->nropaquetesems ?? 0) + ($request->nropaquetescp ?? 0) + ($request->nropaquetesco ?? 0) + ($request->nropaquetessn ?? 0) + ($request->nropaquetessu ?? 0)  + ($request->nropaqueteset ?? 0) + ($request->nropaquetesii ?? 0) + ($request->nropaquetesof ?? 0);
-
+    
+        // Calcular la suma de los paquetes
+        $totalPaquetes = collect([
+            $request->nropaquetesro,
+            $request->nropaquetesbl,
+            $request->nropaquetesems,
+            $request->nropaquetescp,
+            $request->nropaquetesco,
+            $request->nropaquetessn,
+            $request->nropaquetessu,
+            $request->nropaqueteset,
+            $request->nropaquetesii,
+            $request->nropaquetesof,
+        ])->filter()->sum();
+    
         // Actualizar el campo nropaquetes en el registro de Saca
         $saca = Saca::find($contenido->saca_id);
         if ($saca) {
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
-
+    
             // Registrar el evento en la tabla Eventos
             Eventos::create([
                 'action' => 'ACTUALIZACION DE CONTENIDO',
@@ -201,8 +218,9 @@ class ContenidoController extends Controller
                 'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
             ]);
         }
-
+    
         // Redirección después de la actualización exitosa
         return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
     }
+    
 }
