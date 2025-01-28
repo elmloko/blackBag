@@ -111,11 +111,11 @@
                                                 @if ($despacho->estado === 'EXPEDICION')
                                                     <button wire:click="reaperturarDespacho({{ $despacho->id }})"
                                                         class="btn btn-warning">Intervenir Saca</button>
-                                                    {{-- <button wire:click="expedicionDespacho({{ $despacho->id }})"
-                                                        class="btn btn-info">Expedición</button> --}}
                                                 @elseif ($despacho->estado === 'OBSERVADO')
                                                     <a href="{{ route('saca.crear', $despacho->id) }}"
                                                         class="btn btn-primary">Editar Detalles del Despacho</a>
+                                                    <button wire:click="expedicionDespacho({{ $despacho->id }})"
+                                                        class="btn btn-info">Expedición</button>
                                                 @endif
                                             </td>
                                         </tr>
