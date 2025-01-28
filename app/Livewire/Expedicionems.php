@@ -171,5 +171,4 @@ class Expedicionems extends Component
             echo $pdf->output();
         }, 'CN.pdf');
     }
-    
 }
