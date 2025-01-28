@@ -173,6 +173,7 @@
                         <div class="form-group">
                             <label for="subclase">Subclase</label>
                             <select class="form-control" id="subclase" wire:model="subclase">
+                                <option value="">Seleccione una opción</option>
                                 <option value="EN">EN EMS - MIXTO</option>
                                 <option value="EA">EA EMS - AL DESCUBIERTO</option>
                                 <option value="ED">ED EMS - DOCUMENTOS</option>
