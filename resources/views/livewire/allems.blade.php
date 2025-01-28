@@ -98,7 +98,7 @@
                                             <td>{{ $despacho->peso }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
-                                                <a href="{{ route('saca.crear', $despacho->id) }}" class="btn btn-primary">Ver Detalles de Saca</a>
+                                                {{-- <a href="{{ route('saca.crear', $despacho->id) }}" class="btn btn-primary">Ver Detalles de Saca</a> --}}
                                                 <button wire:click="expedicionDespacho({{ $despacho->id }})"
                                                     class="btn btn-info">REIMPRIMIR CN</button>
                                             </td>
