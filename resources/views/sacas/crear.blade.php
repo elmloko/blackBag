@@ -383,7 +383,7 @@
                                                     <!-- Botón de Editar que abre el modal -->
                                                     <button type="button" class="btn btn-warning" data-toggle="modal"
                                                         data-target="#editSacaModal{{ $saca->id }}">
-                                                        Editar
+                                                        Editar Saca
                                                     </button>
                                                     <!-- Modal para editar la saca -->
                                                     <div class="modal fade" id="editSacaModal{{ $saca->id }}"
