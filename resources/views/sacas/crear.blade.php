@@ -101,90 +101,6 @@
                                                 <td>{{ $saca->nropaquetes }}</td>
                                                 <td>{{ $saca->created_at }}</td>
                                                 <td>
-                                                    <!-- Botón de Editar que abre el modal -->
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                        data-target="#editSacaModal{{ $saca->id }}">
-                                                        Editar
-                                                    </button>
-                                                    <!-- Modal para editar la saca -->
-                                                    <div class="modal fade" id="editSacaModal{{ $saca->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="editSacaModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="editSacaModalLabel">Editar
-                                                                        Saca</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <!-- Formulario para editar la saca -->
-                                                                    <form action="{{ route('saca.update', $saca->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('PUT')
-                                                                        <div class="form-group">
-                                                                            <label for="tipo">Tipo</label>
-                                                                            <select class="form-control" id="tipo"
-                                                                                name="tipo" required>
-                                                                                <option value="BG"
-                                                                                    {{ $saca->tipo == 'BG' ? 'selected' : '' }}>
-                                                                                    BG (Saca)</option>
-                                                                                <option value="CG"
-                                                                                    {{ $saca->tipo == 'CG' ? 'selected' : '' }}>
-                                                                                    CG (Rodillo) Cesta
-                                                                                </option>
-                                                                                <option value="CN"
-                                                                                    {{ $saca->tipo == 'CN' ? 'selected' : '' }}>
-                                                                                    CN Contenedor
-                                                                                </option>
-                                                                                <!-- Añade las demás opciones aquí -->
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="etiqueta">Etiqueta</label>
-                                                                            <select class="form-control" id="etiqueta"
-                                                                                name="etiqueta" required>
-                                                                                <option value="RO"
-                                                                                    {{ $saca->etiqueta == 'RO' ? 'selected' : '' }}>
-                                                                                    RO - Roja</option>
-                                                                                <option value="BL"
-                                                                                    {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>
-                                                                                    BL Blanca</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="peso">Peso</label>
-                                                                            <input type="text" step="0,001"
-                                                                                class="form-control" id="peso"
-                                                                                name="peso" value="{{ $saca->peso }}"
-                                                                                required>
-                                                                        </div>
-                                                                        {{-- <div class="form-group">
-                                                                            <label for="nropaquetes">Número de
-                                                                                Paquetes</label>
-                                                                            <input type="number" class="form-control"
-                                                                                id="nropaquetes" name="nropaquetes"
-                                                                                value="{{ $saca->nropaquetes }}" required>
-                                                                        </div> --}}
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Guardar Cambios</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Botón de Eliminar -->
-                                                    <form action="{{ route('saca.delete', $saca->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('¿Estás seguro de que deseas eliminar esta saca?')">Eliminar</button>
-                                                    </form>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#createContenidoModal{{ $saca->id }}">
                                                         Declarar Contenido
@@ -195,8 +111,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="createContenidoModalLabel">
+                                                                    <h5 class="modal-title" id="createContenidoModalLabel">
                                                                         {{ $contenido ? 'Editar' : 'Declarar' }} Contenido
                                                                     </h5>
                                                                     <button type="button" class="close"
@@ -265,24 +180,24 @@
                                                                                 <div class="form-group col-md-4">
                                                                                     <label for="lcao">LC/AO</label>
                                                                                     <input type="number"
-                                                                                        class="form-control"
-                                                                                        id="lcao" name="lcao"
+                                                                                        class="form-control" id="lcao"
+                                                                                        name="lcao"
                                                                                         value="{{ $contenido->lcao ?? '' }}">
                                                                                 </div>
                                                                                 <!-- Campo para SACAS M -->
                                                                                 <div class="form-group col-md-3">
                                                                                     <label for="sacasm">SACAS M</label>
                                                                                     <input type="number"
-                                                                                        class="form-control"
-                                                                                        id="sacasm" name="sacasm"
+                                                                                        class="form-control" id="sacasm"
+                                                                                        name="sacasm"
                                                                                         value="{{ $contenido->sacasm ?? '' }}">
                                                                                 </div>
                                                                                 <!-- Campo para CN33 -->
                                                                                 <div class="form-group col-md-3">
                                                                                     <label for="listas">CN33</label>
                                                                                     <input type="number"
-                                                                                        class="form-control"
-                                                                                        id="listas" name="listas"
+                                                                                        class="form-control" id="listas"
+                                                                                        name="listas"
                                                                                         value="{{ $contenido->listas ?? '' }}">
                                                                                 </div>
                                                                             @elseif ($service === 'EMS')
@@ -465,6 +380,92 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- Botón de Editar que abre el modal -->
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#editSacaModal{{ $saca->id }}">
+                                                        Editar
+                                                    </button>
+                                                    <!-- Modal para editar la saca -->
+                                                    <div class="modal fade" id="editSacaModal{{ $saca->id }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="editSacaModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editSacaModalLabel">Editar
+                                                                        Saca</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!-- Formulario para editar la saca -->
+                                                                    <form action="{{ route('saca.update', $saca->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="form-group">
+                                                                            <label for="tipo">Tipo</label>
+                                                                            <select class="form-control" id="tipo"
+                                                                                name="tipo" required>
+                                                                                <option value="BG"
+                                                                                    {{ $saca->tipo == 'BG' ? 'selected' : '' }}>
+                                                                                    BG (Saca)</option>
+                                                                                <option value="CG"
+                                                                                    {{ $saca->tipo == 'CG' ? 'selected' : '' }}>
+                                                                                    CG (Rodillo) Cesta
+                                                                                </option>
+                                                                                <option value="CN"
+                                                                                    {{ $saca->tipo == 'CN' ? 'selected' : '' }}>
+                                                                                    CN Contenedor
+                                                                                </option>
+                                                                                <!-- Añade las demás opciones aquí -->
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="etiqueta">Etiqueta</label>
+                                                                            <select class="form-control" id="etiqueta"
+                                                                                name="etiqueta" required>
+                                                                                <option value="RO"
+                                                                                    {{ $saca->etiqueta == 'RO' ? 'selected' : '' }}>
+                                                                                    RO - Roja</option>
+                                                                                <option value="BL"
+                                                                                    {{ $saca->etiqueta == 'BL' ? 'selected' : '' }}>
+                                                                                    BL Blanca</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="peso">Peso</label>
+                                                                            <input type="text" step="0,001"
+                                                                                class="form-control" id="peso"
+                                                                                name="peso"
+                                                                                value="{{ $saca->peso }}" required>
+                                                                        </div>
+                                                                        {{-- <div class="form-group">
+                                                                            <label for="nropaquetes">Número de
+                                                                                Paquetes</label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="nropaquetes" name="nropaquetes"
+                                                                                value="{{ $saca->nropaquetes }}" required>
+                                                                        </div> --}}
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Guardar
+                                                                            Cambios</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Botón de Eliminar -->
+                                                    <form action="{{ route('saca.delete', $saca->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('¿Estás seguro de que deseas eliminar esta saca?')">Eliminar</button>
+                                                    </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach
