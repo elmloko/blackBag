@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -11,7 +12,7 @@ class Dashboardadmin extends Component
 {
     public function render()
     {
-        // Estadísticas que ya tienes
+        // -- ESTADÍSTICAS GLOBALES (SIN FILTRO) --
         $totalDespachos = Despacho::count();
         $totalSacas = Saca::count();
         $totalDespachosAbiertos = Despacho::where('estado', 'APERTURA')->count();
@@ -19,31 +20,19 @@ class Dashboardadmin extends Component
         $totalDespachosExpeditos = Despacho::where('estado', 'EXPEDICION')->count();
         $totalDespachosAdmitidos = Despacho::where('estado', 'ADMITIDO')->count();
 
-        // 1) Cantidad de DESPACHOS por departamento
-        // -----------------------------------------
         $despachosPorDepartamento = Despacho::select(
-                'depto',
-                DB::raw('COUNT(*) as total')
-            )
-            ->groupBy('depto')
-            ->get();
+            'depto',
+            DB::raw('COUNT(*) as total')
+        )
+        ->groupBy('depto')
+        ->get();
 
-        // 2) Cantidad de SACAS por departamento
-        //    Se asume que saca.despacho_id = despacho.id (aunque sea varchar).
-        //    Unimos despacho con saca, agrupando por departamento.
-        // -----------------------------------------
         $sacasPorDepartamento = DB::table('despacho')
             ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
             ->select('despacho.depto', DB::raw('COUNT(saca.id) as total'))
             ->groupBy('despacho.depto')
             ->get();
 
-        // 3) Cantidad de PAQUETES por departamento
-        //    Unimos despacho->saca->contenido y contamos cuántos registros
-        //    hay en contenido para cada departamento.
-        //    (Se asume un "paquete" por cada fila en 'contenido'. Si la
-        //    lógica difiere, ajusta la consulta.)
-        // -----------------------------------------
         $paquetesPorDepartamento = DB::table('despacho')
             ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
             ->join('contenido', 'contenido.saca_id', '=', 'saca.id')
@@ -51,18 +40,121 @@ class Dashboardadmin extends Component
             ->groupBy('despacho.depto')
             ->get();
 
-        // Retornamos todo a la vista Livewire
-        return view('livewire.dashboardadmin', [
-            'totalDespachos'             => $totalDespachos,
-            'totalSacas'                 => $totalSacas,
-            'totalDespachosAbiertos'     => $totalDespachosAbiertos,
-            'totalDespachosCerrados'     => $totalDespachosCerrados,
-            'totalDespachosExpeditos'    => $totalDespachosExpeditos,
-            'totalDespachosAdmitidos'    => $totalDespachosAdmitidos,
 
-            'despachosPorDepartamento'   => $despachosPorDepartamento,
-            'sacasPorDepartamento'       => $sacasPorDepartamento,
-            'paquetesPorDepartamento'    => $paquetesPorDepartamento,
+        // -- ESTADÍSTICAS PARA EMS --
+        $emsDespachos = Despacho::where('service', 'EMS'); // Filtramos EMS
+        $totalDespachosEMS = $emsDespachos->count();
+
+        // Sacas que pertenecen a despachos EMS
+        $totalSacasEMS = Saca::whereHas('despacho', function ($query) {
+            $query->where('service', 'EMS');
+        })->count();
+
+        // Otros estados para EMS
+        $totalDespachosAbiertosEMS   = $emsDespachos->where('estado', 'APERTURA')->count();
+        $totalDespachosCerradosEMS   = $emsDespachos->where('estado', 'CERRADO')->count();
+        $totalDespachosExpeditosEMS  = $emsDespachos->where('estado', 'EXPEDICION')->count();
+        $totalDespachosAdmitidosEMS  = $emsDespachos->where('estado', 'ADMITIDO')->count();
+
+        // Despachos EMS por departamento
+        $emsDespachosPorDepartamento = $emsDespachos
+            ->select('depto', DB::raw('COUNT(*) as total'))
+            ->groupBy('depto')
+            ->get();
+
+        // Sacas EMS por departamento
+        $emsSacasPorDepartamento = DB::table('despacho')
+            ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
+            ->where('despacho.service', 'EMS')
+            ->select('despacho.depto', DB::raw('COUNT(saca.id) as total'))
+            ->groupBy('despacho.depto')
+            ->get();
+
+        // Paquetes EMS por departamento
+        $emsPaquetesPorDepartamento = DB::table('despacho')
+            ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
+            ->join('contenido', 'contenido.saca_id', '=', 'saca.id')
+            ->where('despacho.service', 'EMS')
+            ->select('despacho.depto', DB::raw('COUNT(contenido.id) as total'))
+            ->groupBy('despacho.depto')
+            ->get();
+
+
+        // -- ESTADÍSTICAS PARA LC --
+        $lcDespachos = Despacho::where('service', 'LC'); // Filtramos LC
+        $totalDespachosLC = $lcDespachos->count();
+
+        // Sacas que pertenecen a despachos LC
+        $totalSacasLC = Saca::whereHas('despacho', function ($query) {
+            $query->where('service', 'LC');
+        })->count();
+
+        // Otros estados para LC
+        $totalDespachosAbiertosLC   = $lcDespachos->where('estado', 'APERTURA')->count();
+        $totalDespachosCerradosLC   = $lcDespachos->where('estado', 'CERRADO')->count();
+        $totalDespachosExpeditosLC  = $lcDespachos->where('estado', 'EXPEDICION')->count();
+        $totalDespachosAdmitidosLC  = $lcDespachos->where('estado', 'ADMITIDO')->count();
+
+        // Despachos LC por departamento
+        $lcDespachosPorDepartamento = $lcDespachos
+            ->select('depto', DB::raw('COUNT(*) as total'))
+            ->groupBy('depto')
+            ->get();
+
+        // Sacas LC por departamento
+        $lcSacasPorDepartamento = DB::table('despacho')
+            ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
+            ->where('despacho.service', 'LC')
+            ->select('despacho.depto', DB::raw('COUNT(saca.id) as total'))
+            ->groupBy('despacho.depto')
+            ->get();
+
+        // Paquetes LC por departamento
+        $lcPaquetesPorDepartamento = DB::table('despacho')
+            ->join('saca', 'saca.despacho_id', '=', 'despacho.id')
+            ->join('contenido', 'contenido.saca_id', '=', 'saca.id')
+            ->where('despacho.service', 'LC')
+            ->select('despacho.depto', DB::raw('COUNT(contenido.id) as total'))
+            ->groupBy('despacho.depto')
+            ->get();
+
+
+        return view('livewire.dashboardadmin', [
+            // Globales
+            'totalDespachos'          => $totalDespachos,
+            'totalSacas'              => $totalSacas,
+            'totalDespachosAbiertos'  => $totalDespachosAbiertos,
+            'totalDespachosCerrados'  => $totalDespachosCerrados,
+            'totalDespachosExpeditos' => $totalDespachosExpeditos,
+            'totalDespachosAdmitidos' => $totalDespachosAdmitidos,
+
+            'despachosPorDepartamento'=> $despachosPorDepartamento,
+            'sacasPorDepartamento'    => $sacasPorDepartamento,
+            'paquetesPorDepartamento' => $paquetesPorDepartamento,
+
+            // EMS
+            'totalDespachosEMS'            => $totalDespachosEMS,
+            'totalSacasEMS'                => $totalSacasEMS,
+            'totalDespachosAbiertosEMS'    => $totalDespachosAbiertosEMS,
+            'totalDespachosCerradosEMS'    => $totalDespachosCerradosEMS,
+            'totalDespachosExpeditosEMS'   => $totalDespachosExpeditosEMS,
+            'totalDespachosAdmitidosEMS'   => $totalDespachosAdmitidosEMS,
+
+            'emsDespachosPorDepartamento'  => $emsDespachosPorDepartamento,
+            'emsSacasPorDepartamento'      => $emsSacasPorDepartamento,
+            'emsPaquetesPorDepartamento'   => $emsPaquetesPorDepartamento,
+
+            // LC
+            'totalDespachosLC'            => $totalDespachosLC,
+            'totalSacasLC'                => $totalSacasLC,
+            'totalDespachosAbiertosLC'    => $totalDespachosAbiertosLC,
+            'totalDespachosCerradosLC'    => $totalDespachosCerradosLC,
+            'totalDespachosExpeditosLC'   => $totalDespachosExpeditosLC,
+            'totalDespachosAdmitidosLC'   => $totalDespachosAdmitidosLC,
+
+            'lcDespachosPorDepartamento'  => $lcDespachosPorDepartamento,
+            'lcSacasPorDepartamento'      => $lcSacasPorDepartamento,
+            'lcPaquetesPorDepartamento'   => $lcPaquetesPorDepartamento,
         ]);
     }
 }
