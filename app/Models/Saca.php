@@ -38,12 +38,11 @@ class Saca extends Model
     // Definir las relaciones
     public function despacho()
     {
-        return $this->belongsTo(Despacho::class, 'despacho_id', 'id');
+        return $this->belongsTo(Despacho::class, 'despacho_id');
     }
-
-    public function contenidos()
+    public function contenido()
     {
-        return $this->hasMany(Contenido::class, 'saca_id', 'id');
+        return $this->hasOne(Contenido::class, 'saca_id');
     }
 
     // Desactivar timestamps si no se desea manejar created_at y updated_at automáticamente

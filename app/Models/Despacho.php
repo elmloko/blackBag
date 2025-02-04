@@ -27,8 +27,4 @@ class Despacho extends Model
         'service',
         'depto',
     ];
-    public function sacas()
-    {
-        return $this->hasMany(Saca::class, 'despacho_id', 'id');
-    }
 }
