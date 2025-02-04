@@ -45,6 +45,6 @@ class Contenido extends Model
     // Define the relationship with the Saca model if necessary
     public function saca()
     {
-        return $this->belongsTo(Saca::class, 'saca_id');
+        return $this->belongsTo(Saca::class, 'saca_id', 'id');
     }
 }
