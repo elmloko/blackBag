@@ -13,6 +13,7 @@ class ApiController extends Controller
     {
         $despachos = Despacho::with(['sacas.contenidos'])
             ->where('estado', 'APERTURA')
+            ->orwhere('estado', 'REAPERTURA')
             ->get();
 
         return response()->json([
