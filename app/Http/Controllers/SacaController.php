@@ -12,7 +12,7 @@ class SacaController extends Controller
     public function crear($id)
     {
         // Obtener las sacas relacionadas con el despacho
-        $sacas = Saca::where('despacho_id', $id)->with('contenido')->get();
+        $sacas = Saca::where('despacho_id', $id)->with('contenidos')->get();
 
         // Obtener el identificador del despacho
         $despacho = Despacho::findOrFail($id);

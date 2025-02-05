@@ -71,7 +71,7 @@
                                         @foreach ($sacas as $saca)
                                             @php
                                                 // Verificar si ya existe contenido asociado a esta saca
-                                                $contenido = $saca->contenido()->first(); // Ajusta esta consulta según tu relación entre 'saca' y 'contenido'
+                                                $contenido = $saca->contenidos()->first(); // Ajusta esta consulta según tu relación entre 'saca' y 'contenido'
                                             @endphp
                                             <tr>
                                                 <td>{{ str_pad($saca->nrosaca, 3, '0', STR_PAD_LEFT) }}</td>
