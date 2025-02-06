@@ -40,10 +40,27 @@ class ContenidoController extends Controller
             $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
         }
 
-        // Procesar manifiesto para nropaquetesems (API 1)
+        // Procesar manifiesto para nropaquetesbl (API 2)
         $codigoManifiestoBL = $request->input('nropaquetesbl');
         if ($codigoManifiestoBL) {
             $this->procesarManifiestoApi2($codigoManifiestoBL, $request, 'nropaquetesbl');
+        }
+
+        // Contar cuántos campos tienen contenido
+        $campos_a_sumar = [
+            'lcao', 'sacasm', 'correotradicional', 'encomiendas', 'enviotrans',
+            'nropaquetesro', 'nropaquetesbl', 'nropaquetesems', 'nropaquetescp',
+            'nropaquetesco', 'nropaquetessn', 'nropaquetessu', 'nropaqueteset',
+            'nropaquetesii', 'nropaquetesof'
+        ];
+
+        $listas_incremento = collect($campos_a_sumar)->filter(function ($campo) use ($request) {
+            return !empty($request->input($campo));
+        })->count();
+
+        // Si hay al menos un campo con contenido, incrementar listas
+        if ($listas_incremento > 0) {
+            $request->merge(['listas' => $request->input('listas', 0) + 1]);
         }
 
         // Crear el nuevo contenido en la base de datos
@@ -83,62 +100,6 @@ class ContenidoController extends Controller
         return redirect()->back()->with('message', 'Contenido creado exitosamente');
     }
 
-    private function procesarManifiestoApi1($codigoManifiesto, &$request, $campo)
-    {
-        $url = "http://172.65.10.52:8011/api/admisiones/manifiesto?manifiesto=$codigoManifiesto";
-
-        try {
-            $response = Http::get($url);
-
-            if ($response->successful()) {
-                $jsonData = $response->json();
-
-                if (isset($jsonData['data'])) {
-                    $cantidad = count($jsonData['data']);
-                    $request->merge([$campo => $cantidad]);
-
-                    // Incrementar el campo 'listas' en +1
-                    $listas = $request->input('listas', 0); // Si 'listas' es nulo, inicia con 0
-                    $request->merge(['listas' => $listas + 1]);
-                }
-            } else {
-                return redirect()->back()->with('message', 'Error al consultar la API EMS para el manifiesto.');
-            }
-        } catch (\Exception $e) {
-            return redirect()->back()->with('message', 'Excepción en la API EMS para el manifiesto: ' . $e->getMessage());
-        }
-    }
-
-    private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
-    {
-        $url = "https://correos.gob.bo:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
-
-        try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
-            ])->withOptions([
-                'verify' => false,
-            ])->get($url);
-
-            if ($response->successful()) {
-                $jsonData = $response->json();
-
-                if (isset($jsonData['data'])) {
-                    $cantidad = count($jsonData['data']);
-                    $request->merge([$campo => $cantidad]);
-
-                    // Incrementar el campo 'listas' en +1
-                    $listas = $request->input('listas', 0); // Si 'listas' es nulo, inicia con 0
-                    $request->merge(['listas' => $listas + 1]);
-                }
-            } else {
-                return redirect()->back()->with('message', 'Error al consultar la API TrackingBO para el manifiesto.');
-            }
-        } catch (\Exception $e) {
-            return redirect()->back()->with('message', 'Excepción en la API TrackingBO para el manifiesto: ' . $e->getMessage());
-        }
-    }
-
     public function update(Request $request, $id)
     {
         // Validación de los datos de entrada
@@ -146,7 +107,6 @@ class ContenidoController extends Controller
             'descripcion' => 'required|string|max:50',
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
-            'listas' => 'nullable|integer',
             'correotradicional' => 'nullable|integer',
             'encomiendas' => 'nullable|integer',
             'enviotrans' => 'nullable|integer',
@@ -161,35 +121,13 @@ class ContenidoController extends Controller
             'nropaquetesii' => 'nullable|integer',
             'nropaquetesof' => 'nullable|integer',
         ]);
-    
-        // Procesar manifiesto para nropaquetesems (API 1)
-        $codigoManifiestoEms = $request->input('nropaquetesems');
-        if ($codigoManifiestoEms) {
-            $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
-        }
-    
+
+        // No incrementar listas en update
+
         // Encontrar el contenido existente y actualizar sus datos
         $contenido = Contenido::findOrFail($id);
-        $contenido->update([
-            'descripcion' => $request->descripcion,
-            'lcao' => $request->lcao,
-            'sacasm' => $request->sacasm,
-            'listas' => $request->listas,
-            'correotradicional' => $request->correotradicional,
-            'encomiendas' => $request->encomiendas,
-            'enviotrans' => $request->enviotrans,
-            'nropaquetesro' => $request->nropaquetesro,
-            'nropaquetesbl' => $request->nropaquetesbl,
-            'nropaquetesems' => $request->nropaquetesems,
-            'nropaquetescp' => $request->nropaquetescp,
-            'nropaquetesco' => $request->nropaquetesco,
-            'nropaquetessn' => $request->nropaquetessn,
-            'nropaquetessu' => $request->nropaquetessu,
-            'nropaqueteset' => $request->nropaqueteset,
-            'nropaquetesii' => $request->nropaquetesii,
-            'nropaquetesof' => $request->nropaquetesof,
-        ]);
-    
+        $contenido->update($request->all());
+
         // Calcular la suma de los paquetes
         $totalPaquetes = collect([
             $request->nropaquetesro,
@@ -203,24 +141,61 @@ class ContenidoController extends Controller
             $request->nropaquetesii,
             $request->nropaquetesof,
         ])->filter()->sum();
-    
+
         // Actualizar el campo nropaquetes en el registro de Saca
         $saca = Saca::find($contenido->saca_id);
         if ($saca) {
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
-    
+
             // Registrar el evento en la tabla Eventos
             Eventos::create([
                 'action' => 'ACTUALIZACION DE CONTENIDO',
                 'descripcion' => 'Actualización de contenido en saca postal',
-                'identificador' => $saca->receptaculo, // Usa el campo 'receptaculo' de la saca
-                'user_id' => auth()->user()->name, // Guarda el ID del usuario autenticado
+                'identificador' => $saca->receptaculo,
+                'user_id' => auth()->user()->name,
             ]);
         }
-    
-        // Redirección después de la actualización exitosa
+
         return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
     }
-    
+
+    private function procesarManifiestoApi1($codigoManifiesto, &$request, $campo)
+    {
+        $url = "http://172.65.10.52:8011/api/admisiones/manifiesto?manifiesto=$codigoManifiesto";
+
+        try {
+            $response = Http::get($url);
+            if ($response->successful()) {
+                $jsonData = $response->json();
+                if (isset($jsonData['data'])) {
+                    $cantidad = count($jsonData['data']);
+                    $request->merge([$campo => $cantidad]);
+                }
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Excepción en la API EMS: ' . $e->getMessage());
+        }
+    }
+
+    private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
+    {
+        $url = "https://correos.gob.bo:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
+            ])->withOptions(['verify' => false])->get($url);
+
+            if ($response->successful()) {
+                $jsonData = $response->json();
+                if (isset($jsonData['data'])) {
+                    $cantidad = count($jsonData['data']);
+                    $request->merge([$campo => $cantidad]);
+                }
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', 'Excepción en API TrackingBO: ' . $e->getMessage());
+        }
+    }
 }
