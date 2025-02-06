@@ -18,7 +18,6 @@ class ContenidoController extends Controller
             'descripcion' => 'required|string|max:50',
             'lcao' => 'nullable|integer',
             'sacasm' => 'nullable|integer',
-            'listas' => 'nullable|integer',
             'correotradicional' => 'nullable|integer',
             'encomiendas' => 'nullable|integer',
             'enviotrans' => 'nullable|integer',
@@ -44,23 +43,6 @@ class ContenidoController extends Controller
         $codigoManifiestoBL = $request->input('nropaquetesbl');
         if ($codigoManifiestoBL) {
             $this->procesarManifiestoApi2($codigoManifiestoBL, $request, 'nropaquetesbl');
-        }
-
-        // Contar cuántos campos tienen contenido
-        $campos_a_sumar = [
-            'lcao', 'sacasm', 'correotradicional', 'encomiendas', 'enviotrans',
-            'nropaquetesro', 'nropaquetesbl', 'nropaquetesems', 'nropaquetescp',
-            'nropaquetesco', 'nropaquetessn', 'nropaquetessu', 'nropaqueteset',
-            'nropaquetesii', 'nropaquetesof'
-        ];
-
-        $listas_incremento = collect($campos_a_sumar)->filter(function ($campo) use ($request) {
-            return !empty($request->input($campo));
-        })->count();
-
-        // Si hay al menos un campo con contenido, incrementar listas
-        if ($listas_incremento > 0) {
-            $request->merge(['listas' => $request->input('listas', 0) + 1]);
         }
 
         // Crear el nuevo contenido en la base de datos
@@ -96,7 +78,6 @@ class ContenidoController extends Controller
             ]);
         }
 
-        // Redirección después de la creación exitosa
         return redirect()->back()->with('message', 'Contenido creado exitosamente');
     }
 
