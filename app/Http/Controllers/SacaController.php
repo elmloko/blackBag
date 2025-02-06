@@ -161,7 +161,7 @@ class SacaController extends Controller
     
         // Definir el nuevo estado del despacho
         $nuevoEstadoDespacho = '';
-        if (in_array($estadoDespacho, ['APERTURA', 'CERRADO'])) {
+        if (in_array($estadoDespacho, ['APERTURA', 'CERRADO',  'REAPERTURA'])) {
             $nuevoEstadoDespacho = 'CERRADO';
         } elseif (in_array($estadoDespacho, ['OBSERVADO', 'EXPEDICION'])) {
             $nuevoEstadoDespacho = 'EXPEDICION';
