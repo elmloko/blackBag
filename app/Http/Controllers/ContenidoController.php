@@ -102,13 +102,23 @@ class ContenidoController extends Controller
             'nropaquetesii' => 'nullable|integer',
             'nropaquetesof' => 'nullable|integer',
         ]);
-
-        // No incrementar listas en update
-
+    
+        // Procesar manifiesto para nropaquetesems (API 1)
+        $codigoManifiestoEms = $request->input('nropaquetesems');
+        if ($codigoManifiestoEms) {
+            $this->procesarManifiestoApi1($codigoManifiestoEms, $request, 'nropaquetesems');
+        }
+    
+        // Procesar manifiesto para nropaquetesbl (API 2)
+        $codigoManifiestoBL = $request->input('nropaquetesbl');
+        if ($codigoManifiestoBL) {
+            $this->procesarManifiestoApi2($codigoManifiestoBL, $request, 'nropaquetesbl');
+        }
+    
         // Encontrar el contenido existente y actualizar sus datos
         $contenido = Contenido::findOrFail($id);
         $contenido->update($request->all());
-
+    
         // Calcular la suma de los paquetes
         $totalPaquetes = collect([
             $request->nropaquetesro,
@@ -122,13 +132,13 @@ class ContenidoController extends Controller
             $request->nropaquetesii,
             $request->nropaquetesof,
         ])->filter()->sum();
-
+    
         // Actualizar el campo nropaquetes en el registro de Saca
         $saca = Saca::find($contenido->saca_id);
         if ($saca) {
             $saca->nropaquetes = $totalPaquetes;
             $saca->save();
-
+    
             // Registrar el evento en la tabla Eventos
             Eventos::create([
                 'action' => 'ACTUALIZACION DE CONTENIDO',
@@ -137,9 +147,10 @@ class ContenidoController extends Controller
                 'user_id' => auth()->user()->name,
             ]);
         }
-
+    
         return redirect()->back()->with('message', 'Contenido actualizado exitosamente');
     }
+    
 
     private function procesarManifiestoApi1($codigoManifiesto, &$request, $campo)
     {
