@@ -290,7 +290,8 @@
                                                                                         id="nropaquetesems"
                                                                                         name="nropaquetesems"
                                                                                         value="{{ $contenido->nropaquetesems ?? '' }}"
-                                                                                        placeholder="Ingresa código de manifiesto">
+                                                                                        placeholder="Ingresa código de manifiesto"
+                                                                                        style="background-color: #ffffff; color: #000000;">
                                                                                 </div>
                                                                                 <div class="form-group col-md-5">
                                                                                     <label
@@ -436,7 +437,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="peso">Peso</label>
+                                                                            <label for="peso">Peso(Kg.)</label>
                                                                             <input type="text" step="0,001"
                                                                                 class="form-control" id="peso"
                                                                                 name="peso"

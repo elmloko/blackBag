@@ -48,7 +48,7 @@
                                         <th>Categoría</th>
                                         <th>Subclase</th>
                                         <th>Nro. Paquetes</th>
-                                        <th>Peso</th>
+                                        <th>Peso(Kg.)</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>

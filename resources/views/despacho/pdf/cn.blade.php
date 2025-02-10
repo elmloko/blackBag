@@ -228,7 +228,7 @@
             <tr>
                 <th>Formato</th>
                 <th>Cantidad (PAQUETES)</th>
-                <th>Peso Kg.</th>
+                <th>Peso (Kg.)</th>
             </tr>
 
             @if ($despacho->service === 'LC')
