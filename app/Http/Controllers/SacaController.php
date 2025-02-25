@@ -142,7 +142,7 @@ class SacaController extends Controller
     
         // Verificar si alguna saca tiene peso o nropaquetes en null o 0
         $incompleteSacas = $sacas->contains(function ($saca) {
-            return $saca->peso === null || $saca->peso == 0 || $saca->nropaquetes === null || $saca->nropaquetes == 0;
+            return $saca->peso === null || $saca->peso == 0 || $saca->nropaquetes === null;
         });
     
         // Si existe alguna saca incompleta, redirigir con un mensaje de error
