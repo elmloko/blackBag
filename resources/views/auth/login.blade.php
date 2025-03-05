@@ -17,7 +17,10 @@
                         <img src="{{ asset('images/AGBClogo.png') }}" alt="Logo GESPA"
                             style="width: 65px; height: auto; border-radius: 50%;">
                     </div>
-                    <h3 class="text-center mb-4">{{ __('GESPA') }}</h3>
+                    <div class="text-center mb-4">
+                        <h2>SISTEMA DE GESTION DE SACAS POSTALES</h2>
+                        <h3>GESPA</h3>
+                    </div>
                     <form method="POST" action="{{ route('login') }}" class="login-form">
                         @csrf
 
