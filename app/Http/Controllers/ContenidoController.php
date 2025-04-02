@@ -172,7 +172,7 @@ class ContenidoController extends Controller
 
     private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
     {
-        $url = "http://correos.gob.bo:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
+        $url = "https://correos.gob.bo:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
 
         try {
             $response = Http::withHeaders([
