@@ -172,7 +172,7 @@ class ContenidoController extends Controller
 
     private function procesarManifiestoApi2($codigoManifiesto, &$request, $campo)
     {
-        $url = "https://172.18.242.145:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
+        $url = "http://172.18.242.145:8000/api/searchbymanifiesto?manifiesto=$codigoManifiesto";
 
         try {
             $response = Http::withHeaders([
