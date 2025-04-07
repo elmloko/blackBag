@@ -374,36 +374,36 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'DESPACHOS EMS',
-            'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
-            'submenu' => [
-                [
-                    'text' => 'Todos los despachos',
-                    'url' => '/allems',
-                    'icon' => 'fas fa-user',
-                ],
-                [
-                    'text' => 'Despachos Abiertos',
-                    'url' => '/iniciarems',
-                    'can'  => 'apertura.ems',
-                    'icon' => 'fas fa-user',
-                ],
-                [
-                    'text' => 'Despachos Expedicion',
-                    'url' => '/expedicionems',
-                    'can'  => 'expedicion.ems',
-                    'icon' => 'fas fa-user',
-                ],
-                [
-                    'text' => 'Despachos Admisiones',
-                    'url' => '/admitirems',
-                    'can'  => 'admision.ems',
-                    'icon' => 'fas fa-user',
-                ],
-            ],
-        ],
+        // [
+        //     'text' => 'DESPACHOS EMS',
+        //     'icon' => 'fas fa-users',
+        //     // 'can'  => 'users.index',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Todos los despachos',
+        //             'url' => '/allems',
+        //             'icon' => 'fas fa-user',
+        //         ],
+        //         [
+        //             'text' => 'Despachos Abiertos',
+        //             'url' => '/iniciarems',
+        //             'can'  => 'apertura.ems',
+        //             'icon' => 'fas fa-user',
+        //         ],
+        //         [
+        //             'text' => 'Despachos Expedicion',
+        //             'url' => '/expedicionems',
+        //             'can'  => 'expedicion.ems',
+        //             'icon' => 'fas fa-user',
+        //         ],
+        //         [
+        //             'text' => 'Despachos Admisiones',
+        //             'url' => '/admitirems',
+        //             'can'  => 'admision.ems',
+        //             'icon' => 'fas fa-user',
+        //         ],
+        //     ],
+        // ],
         [
             'text' => 'Eventos',
             'url' => '/event',
