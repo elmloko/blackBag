@@ -120,6 +120,8 @@
                                                 @if ($despacho->estado === 'EXPEDICION')
                                                     <button wire:click="reaperturarDespacho({{ $despacho->id }})"
                                                         class="btn btn-warning">Intervenir Saca</button>
+                                                    <button wire:click="reimprimirDespacho({{ $despacho->id }})"
+                                                        class="btn btn-secondary">Reimprimir PDF</button>
                                                     {{-- <button wire:click="expedicionDespacho({{ $despacho->id }})"
                                                         class="btn btn-info">Expedición</button> --}}
                                                 @elseif ($despacho->estado === 'OBSERVADO')

@@ -52,6 +52,86 @@ class Expedicion extends Component
             'despachos' => $despachos,
         ]);
     }
+
+public function reimprimirDespacho($despachoId)
+{
+    $despacho = Despacho::findOrFail($despachoId);
+    $sacas = Saca::where('despacho_id', $despacho->id)->get();
+
+    $ciudades = [
+        'BOLPZ' => 'LA PAZ',
+        'BOTJA' => 'TARIJA',
+        'BOPOI' => 'POTOSI',
+        'BOCIJ' => 'PANDO',
+        'BOCBB' => 'COCHABAMBA',
+        'BOORU' => 'ORURO',
+        'BOTDD' => 'BENI',
+        'BOSRE' => 'SUCRE',
+        'BOSRZ' => 'SANTA CRUZ',
+    ];
+
+    $ciudadOrigen = auth()->user()->city;
+    $siglaOrigen = array_search($ciudadOrigen, $ciudades) ?: $ciudadOrigen;
+    $ciudadDestino = $ciudades[$despacho->ofdestino] ?? $despacho->ofdestino;
+
+    // Variables acumuladoras
+    $totalPeso = $totalPaquetes = 0;
+    $nropaquetesro = $nropaquetesbl = 0;
+    $sacasm = $listas = $lcao = 0;
+    $totalContenidoR = $totalContenidoB = 0;
+
+    foreach ($sacas as $saca) {
+        $contenido = Contenido::where('saca_id', $saca->id)->get();
+
+        foreach ($contenido as $item) {
+            if ($item->nropaquetesro > 0) $totalContenidoR += 1;
+            if ($item->nropaquetesbl > 0) $totalContenidoB += 1;
+
+            $nropaquetesro += $item->nropaquetesro;
+            $nropaquetesbl += $item->nropaquetesbl;
+            $sacasm += $item->sacasm;
+            $listas += $item->listas;
+            $lcao += $item->lcao;
+
+            $totalPaquetes += $item->nropaquetesro + $item->nropaquetesbl;
+        }
+    }
+
+    $totalContenido = $totalContenidoR + $totalContenidoB + $sacasm;
+
+    $data = [
+        'despacho' => $despacho,
+        'sacas' => $sacas,
+        'peso' => $despacho->peso,
+        'totalPeso' => $totalPeso,
+        'totalPaquetes' => $totalPaquetes,
+        'ciudadOrigen' => $ciudadOrigen,
+        'siglaOrigen' => $siglaOrigen,
+        'ofdestino' => $despacho->ofdestino,
+        'ciudadDestino' => $ciudadDestino,
+        'categoria' => $despacho->categoria,
+        'subclase' => $despacho->subclase,
+        'ano' => $despacho->created_at->format('Y'),
+        'nrodespacho' => $despacho->nrodespacho,
+        'identificador' => $despacho->identificador,
+        'created_at' => $despacho->created_at,
+        'nropaquetesro' => $nropaquetesro,
+        'nropaquetesbl' => $nropaquetesbl,
+        'sacasm' => $sacasm,
+        'listas' => $listas,
+        'lcao' => $lcao,
+        'totalContenidoR' => $totalContenidoR,
+        'totalContenidoB' => $totalContenidoB,
+        'totalContenido' => $totalContenido,
+    ];
+
+    $pdf = PDF::loadView('despacho.pdf.cn', $data);
+
+    return response()->streamDownload(function () use ($pdf) {
+        echo $pdf->output();
+    }, 'CN_reimpresion.pdf');
+}
+
     public function reaperturarDespacho($despachoId)
     {
         // Cambiar el estado de todas las sacas relacionadas a 'APERTURA'
