@@ -50,6 +50,7 @@ class Alllc extends Component
         })
             ->where('service', 'LC') // Filtrar solo los despachos con service = 'LC'
             ->where('depto', auth()->user()->city) // Filtrar por el departamento del usuario
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.alllc', [

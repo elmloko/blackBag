@@ -49,6 +49,7 @@
                                         <th>Subclase</th>
                                         <th>Nro. Paquetes</th>
                                         <th>Peso(Kg.)</th>
+                                        <th>Fecha Creacion</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -105,6 +106,7 @@
                                             <td>{{ $subclases[$despacho->subclase] ?? $despacho->subclase }}</td>
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
+                                            <td>{{ $despacho->created_at }}</td>
                                             <td>{{ $despacho->estado }}</td>
                                             <td>
                                                 {{-- <button wire:click="expedicionDespacho({{ $despacho->id }})"

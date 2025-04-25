@@ -189,6 +189,7 @@ class Admitir extends Component
             })
             ->whereIn('estado', ['ADMITIDO'])
             ->where('service', 'LC')
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
     
         // Agregar el conteo de sacas admitidas y cerradas para cada despacho

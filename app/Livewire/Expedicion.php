@@ -45,6 +45,7 @@ class Expedicion extends Component
         })
             ->whereIn('estado', ['EXPEDICION','OBSERVADO'])
             ->where('service', 'LC')
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.expedicion', [

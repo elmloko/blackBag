@@ -344,6 +344,7 @@ class Iniciar extends Component
             ->where('service', 'LC') // Filtrar solo los despachos con service = 'LC'
             ->where('depto', auth()->user()->city) // Filtrar por el departamento del usuario
             ->whereIn('estado', ['APERTURA', 'CERRADO', 'REAPERTURA']) // Filtra solo los estados deseados
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.iniciar', [
