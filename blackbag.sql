@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `contenido` (
   `saca_id` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.contenido: ~349 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.contenido: ~333 rows (aproximadamente)
 INSERT INTO `contenido` (`id`, `descripcion`, `listas`, `nropaquetesro`, `nropaquetesbl`, `nropaquetesof`, `nropaquetesii`, `nropaqueteset`, `nropaquetessu`, `nropaquetessn`, `nropaquetesems`, `nropaquetescp`, `nropaquetesco`, `sacasm`, `lcao`, `correotradicional`, `encomiendas`, `enviotrans`, `created_at`, `saca_id`, `updated_at`) VALUES
 	(1, 'MINL', NULL, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-18 01:32:18', 1, '2025-02-18 01:32:18'),
 	(2, 'MINL', NULL, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-18 01:32:30', 2, '2025-02-18 01:32:30'),
@@ -395,7 +395,11 @@ INSERT INTO `contenido` (`id`, `descripcion`, `listas`, `nropaquetesro`, `nropaq
 	(346, 'MINL', NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-24 22:31:58', 345, '2025-04-24 22:31:58'),
 	(347, 'MINL', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-24 22:32:16', 346, '2025-04-24 22:32:16'),
 	(348, 'MINL', NULL, NULL, 57, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-24 22:32:31', 347, '2025-04-24 22:32:40'),
-	(349, 'MINL', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-24 22:33:14', 348, '2025-04-24 22:33:14');
+	(349, 'MINL', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-24 22:33:14', 348, '2025-04-24 22:33:14'),
+	(350, 'MINL', NULL, NULL, 505, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-29 21:59:26', 349, '2025-04-29 21:59:26'),
+	(351, 'MINL', NULL, NULL, 186, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-29 22:10:26', 350, '2025-04-29 22:10:26'),
+	(352, 'MINL', NULL, NULL, 267, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-04-29 22:10:51', 351, '2025-04-29 22:10:51'),
+	(353, 'MINL', NULL, NULL, 312, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-03 19:25:56', 352, '2025-05-03 19:25:56');
 
 -- Volcando estructura para tabla blackbag.despacho
 CREATE TABLE IF NOT EXISTS `despacho` (
@@ -417,9 +421,9 @@ CREATE TABLE IF NOT EXISTS `despacho` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=175 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.despacho: ~170 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.despacho: ~171 rows (aproximadamente)
 INSERT INTO `despacho` (`id`, `oforigen`, `ofdestino`, `user`, `categoria`, `subclase`, `nrodespacho`, `nroenvase`, `peso`, `identificador`, `ano`, `estado`, `service`, `depto`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'BOLPZ', 'BOTJA', 'Andrea Belen Fernandez Loza', 'C', 'UA', 1, 8, 2.900, 'BOLPZBOTJACUA5001', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-02-18 01:30:37', '2025-02-18 01:43:32', NULL),
 	(2, 'BOLPZ', 'BOPOI', 'Andrea Belen Fernandez Loza', 'C', 'UA', 1, 546, 34.100, 'BOLPZBOPOICUA5001', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-02-18 01:30:47', '2025-02-26 02:07:08', NULL),
@@ -590,7 +594,11 @@ INSERT INTO `despacho` (`id`, `oforigen`, `ofdestino`, `user`, `categoria`, `sub
 	(167, 'BOLPZ', 'BOCBB', 'Omar Quispe Condori', 'C', 'UN', 28, 38, 31.500, 'BOLPZBOCBBCUN5028', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-24 22:12:45', '2025-04-24 22:25:27', NULL),
 	(168, 'BOLPZ', 'BOTDD', 'Omar Quispe Condori', 'C', 'UN', 13, 3, 4.300, 'BOLPZBOTDDCUN5013', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-24 22:13:01', '2025-04-25 23:26:45', NULL),
 	(169, 'BOLPZ', NULL, 'Omar Quispe Condori', NULL, NULL, NULL, NULL, NULL, 'BOLPZ5', 5, 'APERTURA', 'LC', 'LA PAZ', '2025-04-24 22:13:02', '2025-04-24 22:13:02', NULL),
-	(170, 'BOLPZ', 'BOSRE', 'Omar Quispe Condori', 'C', 'UN', 25, 8, 2.400, 'BOLPZBOSRECUN5025', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-24 22:13:15', '2025-04-24 22:28:52', NULL);
+	(170, 'BOLPZ', 'BOSRE', 'Omar Quispe Condori', 'C', 'UN', 25, 8, 2.400, 'BOLPZBOSRECUN5025', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-24 22:13:15', '2025-04-24 22:28:52', NULL),
+	(171, 'BOLPZ', 'BOSRZ', 'Andrea Belen Fernandez Loza', 'C', 'UN', 29, 505, 20.600, 'BOLPZBOSRZCUN5029', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-29 21:58:51', '2025-04-29 21:59:39', NULL),
+	(172, 'BOLPZ', 'BOORU', 'Andrea Belen Fernandez Loza', 'C', 'UN', 22, 186, 7.600, 'BOLPZBOORUCUN5022', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-29 22:09:25', '2025-04-29 22:10:34', NULL),
+	(173, 'BOLPZ', 'BOCBB', 'Andrea Belen Fernandez Loza', 'C', 'UN', 29, 267, 10.400, 'BOLPZBOCBBCUN5029', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-04-29 22:09:42', '2025-04-29 22:11:00', NULL),
+	(174, 'BOLPZ', 'BOLPZ', 'Andrea Belen Fernandez Loza', 'C', 'UN', 8, 312, 13.100, 'BOLPZBOLPZCUN5008', 5, 'EXPEDICION', 'LC', 'LA PAZ', '2025-05-03 19:25:39', '2025-05-03 19:26:05', NULL);
 
 -- Volcando estructura para tabla blackbag.events
 CREATE TABLE IF NOT EXISTS `events` (
@@ -602,9 +610,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1514 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1534 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.events: ~1.513 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.events: ~1.452 rows (aproximadamente)
 INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `identificador`, `created_at`, `updated_at`) VALUES
 	(1, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOTJACUA5001', '2025-02-18 01:30:37', '2025-02-18 01:30:37'),
 	(2, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOPOICUA5001', '2025-02-18 01:30:47', '2025-02-18 01:30:47'),
@@ -2118,7 +2126,27 @@ INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `identificador`,
 	(1510, 'Omar Quispe Condori', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOLPZCUN5007', '2025-04-24 22:33:19', '2025-04-24 22:33:19'),
 	(1511, 'Omar Quispe Condori', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOLPZCUN5007', '2025-04-24 22:33:22', '2025-04-24 22:33:22'),
 	(1512, 'Marco Antonio Espinoza Rojas', 'CERRADO', 'Cierre de Saca', 'BOLPZBOTDDCUN50130010043', '2025-04-25 23:26:34', '2025-04-25 23:26:34'),
-	(1513, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOTDDCUN5013', '2025-04-25 23:26:46', '2025-04-25 23:26:46');
+	(1513, 'Marco Antonio Espinoza Rojas', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOTDDCUN5013', '2025-04-25 23:26:46', '2025-04-25 23:26:46'),
+	(1514, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOSRZCUN5029', '2025-04-29 21:58:51', '2025-04-29 21:58:51'),
+	(1515, 'Andrea Belen Fernandez Loza', 'APERTURA', 'Creacion de saca', 'BOLPZBOSRZCUN5029001', '2025-04-29 21:59:13', '2025-04-29 21:59:13'),
+	(1516, 'Andrea Belen Fernandez Loza', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOLPZBOSRZCUN50290010206', '2025-04-29 21:59:26', '2025-04-29 21:59:26'),
+	(1517, 'Andrea Belen Fernandez Loza', 'CERRADO', 'Cierre de Saca', 'BOLPZBOSRZCUN50290010206', '2025-04-29 21:59:33', '2025-04-29 21:59:33'),
+	(1518, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOSRZCUN5029', '2025-04-29 21:59:39', '2025-04-29 21:59:39'),
+	(1519, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOORUCUN5022', '2025-04-29 22:09:25', '2025-04-29 22:09:25'),
+	(1520, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOCBBCUN5029', '2025-04-29 22:09:42', '2025-04-29 22:09:42'),
+	(1521, 'Andrea Belen Fernandez Loza', 'APERTURA', 'Creacion de saca', 'BOLPZBOORUCUN5022001', '2025-04-29 22:10:20', '2025-04-29 22:10:20'),
+	(1522, 'Andrea Belen Fernandez Loza', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOLPZBOORUCUN50220010076', '2025-04-29 22:10:26', '2025-04-29 22:10:26'),
+	(1523, 'Andrea Belen Fernandez Loza', 'CERRADO', 'Cierre de Saca', 'BOLPZBOORUCUN50220010076', '2025-04-29 22:10:31', '2025-04-29 22:10:31'),
+	(1524, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOORUCUN5022', '2025-04-29 22:10:34', '2025-04-29 22:10:34'),
+	(1525, 'Andrea Belen Fernandez Loza', 'APERTURA', 'Creacion de saca', 'BOLPZBOCBBCUN5029001', '2025-04-29 22:10:46', '2025-04-29 22:10:46'),
+	(1526, 'Andrea Belen Fernandez Loza', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOLPZBOCBBCUN50290010104', '2025-04-29 22:10:51', '2025-04-29 22:10:51'),
+	(1527, 'Andrea Belen Fernandez Loza', 'CERRADO', 'Cierre de Saca', 'BOLPZBOCBBCUN50290010104', '2025-04-29 22:10:56', '2025-04-29 22:10:56'),
+	(1528, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOCBBCUN5029', '2025-04-29 22:11:00', '2025-04-29 22:11:00'),
+	(1529, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOLPZCUN5008', '2025-05-03 19:25:39', '2025-05-03 19:25:39'),
+	(1530, 'Andrea Belen Fernandez Loza', 'APERTURA', 'Creacion de saca', 'BOLPZBOLPZCUN5008001', '2025-05-03 19:25:50', '2025-05-03 19:25:50'),
+	(1531, 'Andrea Belen Fernandez Loza', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOLPZBOLPZCUN50080010131', '2025-05-03 19:25:56', '2025-05-03 19:25:56'),
+	(1532, 'Andrea Belen Fernandez Loza', 'CERRADO', 'Cierre de Saca', 'BOLPZBOLPZCUN50080010131', '2025-05-03 19:26:02', '2025-05-03 19:26:02'),
+	(1533, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOLPZCUN5008', '2025-05-03 19:26:05', '2025-05-03 19:26:05');
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -2254,9 +2282,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=46038 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46407 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~3.402 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~3.591 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(28672, 1741965120, 10080, 'user_request', '1', 'count', 3.00, NULL),
 	(28676, 1741965120, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
@@ -5704,7 +5732,84 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(46034, 1745796360, 60, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', 'count', 1.00, NULL),
 	(46035, 1745796240, 360, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', 'count', 1.00, NULL),
 	(46036, 1745795520, 1440, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', 'count', 1.00, NULL),
-	(46037, 1745795520, 10080, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', 'count', 1.00, NULL);
+	(46037, 1745795520, 10080, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', 'count', 1.00, NULL),
+	(46038, 1745867700, 60, 'user_request', '1', 'count', 5.00, NULL),
+	(46039, 1745867520, 360, 'user_request', '1', 'count', 5.00, NULL),
+	(46040, 1745867520, 1440, 'user_request', '1', 'count', 5.00, NULL),
+	(46041, 1745866080, 10080, 'user_request', '1', 'count', 5.00, NULL),
+	(46042, 1745867700, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46043, 1745867520, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46044, 1745867520, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46045, 1745866080, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46054, 1745867700, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46055, 1745867520, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46056, 1745867520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46057, 1745866080, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46066, 1745949480, 60, 'user_request', '4', 'count', 7.00, NULL),
+	(46067, 1745949240, 360, 'user_request', '4', 'count', 15.00, NULL),
+	(46068, 1745948160, 1440, 'user_request', '4', 'count', 15.00, NULL),
+	(46069, 1745946720, 10080, 'user_request', '4', 'count', 35.00, NULL),
+	(46070, 1745949480, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(46071, 1745949240, 360, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(46072, 1745948160, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 7.00, NULL),
+	(46073, 1745946720, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 15.00, NULL),
+	(46106, 1745949540, 60, 'user_request', '4', 'count', 8.00, NULL),
+	(46107, 1745949540, 60, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(46154, 1745950140, 60, 'user_request', '4', 'count', 4.00, NULL),
+	(46155, 1745949960, 360, 'user_request', '4', 'count', 20.00, NULL),
+	(46156, 1745949600, 1440, 'user_request', '4', 'count', 20.00, NULL),
+	(46170, 1745950200, 60, 'user_request', '4', 'count', 15.00, NULL),
+	(46171, 1745950200, 60, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(46172, 1745949960, 360, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(46173, 1745949600, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(46262, 1745950260, 60, 'user_request', '4', 'count', 1.00, NULL),
+	(46266, 1746022020, 60, 'user_request', '4', 'count', 4.00, NULL),
+	(46267, 1746021960, 360, 'user_request', '4', 'count', 4.00, NULL),
+	(46268, 1746021600, 1440, 'user_request', '4', 'count', 4.00, NULL),
+	(46269, 1746017280, 10080, 'user_request', '4', 'count', 4.00, NULL),
+	(46270, 1746022020, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46271, 1746021960, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46272, 1746021600, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46273, 1746017280, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46278, 1746022020, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46279, 1746021960, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46280, 1746021600, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46281, 1746017280, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46294, 1746046140, 60, 'user_request', '4', 'count', 3.00, NULL),
+	(46295, 1746046080, 360, 'user_request', '4', 'count', 5.00, NULL),
+	(46296, 1746046080, 1440, 'user_request', '4', 'count', 5.00, NULL),
+	(46297, 1746037440, 10080, 'user_request', '4', 'count', 5.00, NULL),
+	(46306, 1746046140, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46307, 1746046080, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46308, 1746046080, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46309, 1746037440, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(46322, 1746046200, 60, 'user_request', '4', 'count', 2.00, NULL),
+	(46330, 1746048600, 60, 'user_request', '4', 'count', 1.00, NULL),
+	(46331, 1746048600, 360, 'user_request', '4', 'count', 1.00, NULL),
+	(46332, 1746047520, 1440, 'user_request', '4', 'count', 1.00, NULL),
+	(46333, 1746047520, 10080, 'user_request', '4', 'count', 1.00, NULL),
+	(46334, 1746285900, 60, 'user_request', '4', 'count', 9.00, NULL),
+	(46335, 1746285840, 360, 'user_request', '4', 'count', 12.00, NULL),
+	(46336, 1746285120, 1440, 'user_request', '4', 'count', 12.00, NULL),
+	(46337, 1746279360, 10080, 'user_request', '4', 'count', 12.00, NULL),
+	(46338, 1746285900, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46339, 1746285840, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46340, 1746285120, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46341, 1746279360, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46354, 1746285900, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(46355, 1746285840, 360, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(46356, 1746285120, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(46357, 1746279360, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL),
+	(46386, 1746285960, 60, 'user_request', '4', 'count', 3.00, NULL),
+	(46390, 1746285960, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(46399, 1746471540, 60, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'count', 1.00, NULL),
+	(46400, 1746471240, 360, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'count', 1.00, NULL),
+	(46401, 1746470880, 1440, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'count', 1.00, NULL),
+	(46402, 1746470880, 10080, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'count', 1.00, NULL),
+	(46403, 1746471540, 60, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 20817.00, NULL),
+	(46404, 1746471240, 360, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 20817.00, NULL),
+	(46405, 1746470880, 1440, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 20817.00, NULL),
+	(46406, 1746470880, 10080, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 20817.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -5719,9 +5824,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=11914 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12006 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~4.334 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~4.405 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(7580, 1741967120, 'user_request', '1', NULL),
 	(7581, 1741967120, 'user_request', '1', NULL),
@@ -10056,7 +10161,97 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(11910, 1745616441, 'cache_hit', 'spatie.permission.cache', NULL),
 	(11911, 1745616443, 'user_request', '1', NULL),
 	(11912, 1745796374, 'cache_miss', 'c3e592e06df729e08e193b1c7023febe', NULL),
-	(11913, 1745796374, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', NULL);
+	(11913, 1745796374, 'cache_hit', 'c3e592e06df729e08e193b1c7023febe', NULL),
+	(11914, 1745867716, 'user_request', '1', NULL),
+	(11915, 1745867716, 'user_request', '1', NULL),
+	(11916, 1745867716, 'cache_miss', 'spatie.permission.cache', NULL),
+	(11917, 1745867720, 'user_request', '1', NULL),
+	(11918, 1745867720, 'user_request', '1', NULL),
+	(11919, 1745867721, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11920, 1745867723, 'user_request', '1', NULL),
+	(11921, 1745949495, 'user_request', '4', NULL),
+	(11922, 1745949495, 'user_request', '4', NULL),
+	(11923, 1745949495, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11924, 1745949499, 'user_request', '4', NULL),
+	(11925, 1745949499, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11926, 1745949502, 'user_request', '4', NULL),
+	(11927, 1745949502, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11928, 1745949516, 'user_request', '4', NULL),
+	(11929, 1745949526, 'user_request', '4', NULL),
+	(11930, 1745949531, 'user_request', '4', NULL),
+	(11931, 1745949540, 'user_request', '4', NULL),
+	(11932, 1745949540, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11933, 1745949553, 'user_request', '4', NULL),
+	(11934, 1745949554, 'user_request', '4', NULL),
+	(11935, 1745949554, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11936, 1745949566, 'user_request', '4', NULL),
+	(11937, 1745949566, 'user_request', '4', NULL),
+	(11938, 1745949566, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11939, 1745949573, 'user_request', '4', NULL),
+	(11940, 1745949573, 'user_request', '4', NULL),
+	(11941, 1745949573, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11942, 1745949579, 'user_request', '4', NULL),
+	(11943, 1745950163, 'user_request', '4', NULL),
+	(11944, 1745950165, 'user_request', '4', NULL),
+	(11945, 1745950179, 'user_request', '4', NULL),
+	(11946, 1745950182, 'user_request', '4', NULL),
+	(11947, 1745950209, 'user_request', '4', NULL),
+	(11948, 1745950209, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11949, 1745950220, 'user_request', '4', NULL),
+	(11950, 1745950220, 'user_request', '4', NULL),
+	(11951, 1745950221, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11952, 1745950226, 'user_request', '4', NULL),
+	(11953, 1745950226, 'user_request', '4', NULL),
+	(11954, 1745950227, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11955, 1745950231, 'user_request', '4', NULL),
+	(11956, 1745950231, 'user_request', '4', NULL),
+	(11957, 1745950231, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11958, 1745950234, 'user_request', '4', NULL),
+	(11959, 1745950241, 'user_request', '4', NULL),
+	(11960, 1745950241, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11961, 1745950246, 'user_request', '4', NULL),
+	(11962, 1745950246, 'user_request', '4', NULL),
+	(11963, 1745950246, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11964, 1745950251, 'user_request', '4', NULL),
+	(11965, 1745950251, 'user_request', '4', NULL),
+	(11966, 1745950252, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11967, 1745950256, 'user_request', '4', NULL),
+	(11968, 1745950256, 'user_request', '4', NULL),
+	(11969, 1745950256, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11970, 1745950260, 'user_request', '4', NULL),
+	(11971, 1746022024, 'user_request', '4', NULL),
+	(11972, 1746022025, 'user_request', '4', NULL),
+	(11973, 1746022025, 'cache_miss', 'spatie.permission.cache', NULL),
+	(11974, 1746022033, 'user_request', '4', NULL),
+	(11975, 1746022033, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11976, 1746022037, 'user_request', '4', NULL),
+	(11977, 1746022038, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11978, 1746046179, 'user_request', '4', NULL),
+	(11981, 1746046179, 'user_request', '4', NULL),
+	(11982, 1746046179, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11983, 1746046193, 'user_request', '4', NULL),
+	(11984, 1746046193, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11985, 1746046211, 'user_request', '4', NULL),
+	(11986, 1746046225, 'user_request', '4', NULL),
+	(11987, 1746048615, 'user_request', '4', NULL),
+	(11988, 1746285923, 'user_request', '4', NULL),
+	(11989, 1746285923, 'user_request', '4', NULL),
+	(11990, 1746285923, 'cache_miss', 'spatie.permission.cache', NULL),
+	(11991, 1746285934, 'user_request', '4', NULL),
+	(11992, 1746285939, 'user_request', '4', NULL),
+	(11993, 1746285943, 'user_request', '4', NULL),
+	(11994, 1746285943, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11995, 1746285950, 'user_request', '4', NULL),
+	(11996, 1746285950, 'user_request', '4', NULL),
+	(11997, 1746285950, 'cache_hit', 'spatie.permission.cache', NULL),
+	(11998, 1746285956, 'user_request', '4', NULL),
+	(11999, 1746285956, 'user_request', '4', NULL),
+	(12000, 1746285956, 'cache_hit', 'spatie.permission.cache', NULL),
+	(12001, 1746285962, 'user_request', '4', NULL),
+	(12002, 1746285962, 'user_request', '4', NULL),
+	(12003, 1746285962, 'cache_hit', 'spatie.permission.cache', NULL),
+	(12004, 1746285965, 'user_request', '4', NULL),
+	(12005, 1746471564, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 20817);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -10136,9 +10331,9 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=353 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~334 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~333 rows (aproximadamente)
 INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiqueta`, `receptaculo`, `peso`, `nropaquetes`, `created_at`, `updated_at`, `despacho_id`) VALUES
 	(1, 1, 'BOLPZBOCBBCUA5001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUA50010010125', 12.500, 50, '2025-02-18 01:32:10', '2025-02-18 01:33:03', '3'),
 	(2, 2, 'BOLPZBOCBBCUA5001002', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUA50010020132', 13.200, 32, '2025-02-18 01:32:24', '2025-02-18 01:33:03', '3'),
@@ -10473,7 +10668,11 @@ INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiquet
 	(345, 1, 'BOLPZBOLPZCUN5007001', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50070010065', 6.500, 12, '2025-04-24 22:31:52', '2025-04-24 22:33:17', '162'),
 	(346, 2, 'BOLPZBOLPZCUN5007002', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50070020012', 1.200, 1, '2025-04-24 22:32:12', '2025-04-24 22:33:17', '162'),
 	(347, 3, 'BOLPZBOLPZCUN5007003', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50070030317', 31.700, 57, '2025-04-24 22:32:25', '2025-04-24 22:33:17', '162'),
-	(348, 4, 'BOLPZBOLPZCUN5007004', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50070040233', 23.300, 0, '2025-04-24 22:33:07', '2025-04-24 22:33:17', '162');
+	(348, 4, 'BOLPZBOLPZCUN5007004', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50070040233', 23.300, 0, '2025-04-24 22:33:07', '2025-04-24 22:33:17', '162'),
+	(349, 1, 'BOLPZBOSRZCUN5029001', 'BG', 'CERRADO', 'BL', 'BOLPZBOSRZCUN50290010206', 20.600, 505, '2025-04-29 21:59:13', '2025-04-29 21:59:33', '171'),
+	(350, 1, 'BOLPZBOORUCUN5022001', 'BG', 'CERRADO', 'BL', 'BOLPZBOORUCUN50220010076', 7.600, 186, '2025-04-29 22:10:20', '2025-04-29 22:10:31', '172'),
+	(351, 1, 'BOLPZBOCBBCUN5029001', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUN50290010104', 10.400, 267, '2025-04-29 22:10:46', '2025-04-29 22:10:56', '173'),
+	(352, 1, 'BOLPZBOLPZCUN5008001', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZCUN50080010131', 13.100, 312, '2025-05-03 19:25:50', '2025-05-03 19:26:02', '174');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -10494,7 +10693,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Volcando datos para la tabla blackbag.users: ~3 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `city`, `ci`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'Nmm4TFbz27hoMTgPEJDJecMkhkFmb43YrrmZbdGjeAGC3t9ZTgAwBo5e1mL9', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2025-03-28 00:08:02', NULL),
+	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$VOn55.vOVzJM1CaXAJu9WeI8IpfNSO1B0ngvH30tRxha1JdQVL9KG', 'qBdSdSRdVotjZZmzOc4huxSFQHqaazH46gKFXz2prkxboLRo2NTUzA7tRRlQ', 'LA PAZ', 10909669, '2024-10-24 00:43:33', '2025-03-28 00:08:02', NULL),
 	(3, 'Omar Quispe Condori', 'omar.quispe@correos.gob.bo', NULL, '$2y$10$lDMqM0A2pxfqRtp9dpx5N.0Ar2EqICXw7oi38KZrnn3m2K0OHriPC', NULL, 'LA PAZ', 8441338, '2024-11-19 23:19:20', '2024-11-19 23:19:20', NULL),
 	(4, 'Andrea Belen Fernandez Loza', 'belen.fernandez@correos.gob.bo', NULL, '$2y$10$qk/QO71Le46AATm1ortqqemzQF.6htRIUUaiyGdiFNBY23ymO0kwa', 'T6WEBktAls6ukU6CERP5WvFKKLVqQ7Qrjp0xS103mfYSbJTCKE2HuCKr9QtX', 'LA PAZ', 9250377, '2024-11-19 23:20:12', '2024-11-19 23:20:12', NULL);
 
