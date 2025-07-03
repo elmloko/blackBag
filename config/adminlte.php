@@ -314,112 +314,113 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/dashboard',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-tachometer-alt', 
         ],
         [
-            'text' => 'Gestion Usuarios',
+            'text' => 'Gestión Usuarios',
+            'icon' => 'fas fa-users', // Grupo de usuarios
             'can'  => 'user.admin',
-            'icon' => 'fas fa-users',
-            
             'submenu' => [
                 [
                     'text' => 'Personal AGBC',
                     'url' => 'users',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-id-badge', // Identificación del personal
                 ],
                 [
                     'text' => 'Roles',
                     'url' => 'roles',
-                    'icon' => 'fas fa-users-cog',
+                    'icon' => 'fas fa-user-shield', // Representa roles con privilegios
                 ],
                 [
                     'text' => 'Permisos',
                     'url' => 'permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-unlock-alt', // Permiso, acceso autorizado
                 ],
                 [
                     'text' => 'Accesos',
                     'url' => 'role-has-permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-door-open', // Acceso físico o lógico
                 ],
             ],
         ],
         [
             'text' => 'DESPACHOS LC',
-            'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'icon' => 'fas fa-truck', // Representa movimiento/logística
+
             'submenu' => [
                 [
                     'text' => 'Todos los despachos',
                     'url' => '/alllc',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-folder-open', // Vista general
                 ],
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciar',
                     'can'  => 'apertura.lc',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-door-open', // Abierto o iniciado
                 ],
                 [
-                    'text' => 'Despachos Expedicion',
+                    'text' => 'Despachos Expedición',
                     'url' => '/expedicion',
                     'can'  => 'expedicion.lc',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-truck-loading', // En expedición o en tránsito
                 ],
                 [
                     'text' => 'Despachos Admisiones',
                     'url' => '/admitir',
                     'can'  => 'admision.lc',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-check-circle', // Admitido o aprobado
                 ],
             ],
         ],
         [
             'text' => 'DESPACHOS EMS',
-            'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'icon' => 'fas fa-shipping-fast', // Representa velocidad y envíos EMS
+
             'submenu' => [
                 [
                     'text' => 'Todos los despachos',
                     'url' => '/allems',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-folder-open', // Vista general
                 ],
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciarems',
                     'can'  => 'apertura.ems',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-door-open', // Inicio de despacho
                 ],
                 [
-                    'text' => 'Despachos Expedicion',
+                    'text' => 'Despachos Expedición',
                     'url' => '/expedicionems',
                     'can'  => 'expedicion.ems',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-truck-loading', // En camino o procesando
                 ],
                 [
                     'text' => 'Despachos Admisiones',
                     'url' => '/admitirems',
                     'can'  => 'admision.ems',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-check-circle', // Despacho ya admitido
                 ],
             ],
         ],
+
         [
             'text' => 'Eventos',
             'url' => '/event',
-            'icon' => 'fas fa-user',
-        ],
-        [
-            'text' => 'Rendimiento',
-            'url' => '/pulse',
             'can'  => 'user.admin',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-calendar-check', // Evento agendado o confirmado
         ],
         [
             'text' => 'Logs',
             'url' => '/log-viewer',
+            'icon' => 'fas fa-file-alt', // Representa claramente registros/logs
             'can'  => 'user.admin',
-            'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => 'Rendimiento',
+            'url' => '/pulse',
+            'icon' => 'fas fa-tachometer-alt', // Icono de panel o rendimiento
+            'can'  => 'user.admin',
         ],
     ],
 
