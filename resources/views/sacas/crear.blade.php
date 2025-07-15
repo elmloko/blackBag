@@ -536,6 +536,12 @@
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Cerrar Despacho LC</button>
                                     </form>
+                                @elseif ($service == 'MX')
+                                    <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas del tipo MX?');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Cerrar Despacho LC</button>
+                                    </form>
                                 @else
                                     <form action="{{ route('despacho.cerrar', $id) }}" method="POST"
                                         onsubmit="return confirm('¿Estás seguro de que deseas cerrar este despacho y todas sus sacas?');">
