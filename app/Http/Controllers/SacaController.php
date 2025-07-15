@@ -33,6 +33,7 @@ class SacaController extends Controller
             'peso' => 'nullable|numeric',
             'nropaquetes' => 'nullable|integer',
             'aduana' => 'required|string|max:2',
+            'codigo_manifiesto' => 'required|string|max:20',
         ]);
 
         // Obtener el último valor de nrosaca para el despacho actual y calcular el siguiente
@@ -64,6 +65,7 @@ class SacaController extends Controller
             'estado' => 'APERTURA',
             'receptaculo' => $receptaculo, // Guardar la variable receptaculo
             'aduana' => $request->aduana,
+            'codigo_manifiesto' => $request->codigo_manifiesto,
         ]);
 
         Eventos::create([
@@ -84,6 +86,7 @@ class SacaController extends Controller
             'etiqueta' => 'required|string|max:50',
             'nropaquetes' => 'nullable|integer',
             'aduana' => 'required|string|max:2',
+            'codigo_manifiesto' => 'required|string|max:20',
         ]);
 
         // Buscar la saca a actualizar
@@ -103,6 +106,7 @@ class SacaController extends Controller
             'etiqueta' => $request->etiqueta,
             'receptaculo' => $receptaculo, // Guardar el nuevo valor de receptaculo
             'aduana' => $request->aduana,
+            'codigo_manifiesto' => $request->codigo_manifiesto,
         ]);
 
         Eventos::create([

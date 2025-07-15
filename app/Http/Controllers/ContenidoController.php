@@ -30,12 +30,8 @@ class ContenidoController extends Controller
             'nropaquetessu' => 'nullable|integer',
             'nropaqueteset' => 'nullable|integer',
             'nropaquetesii' => 'nullable|integer',
-            'paquetes_ems' => 'nullable|integer',
-            'peso_ems' => 'nullable|integer',
-            'paquetes_cp' => 'nullable|integer',
-            'peso_cp' => 'nullable|integer',
-            'paquetes_lcao' => 'nullable|integer',
-            'peso_lcao' => 'nullable|integer',
+            'paquetes' => 'nullable|integer',
+            'peso' => 'nullable|integer',
         ]);
 
         // Procesar manifiesto para nropaquetesems (API 1)
@@ -68,9 +64,7 @@ class ContenidoController extends Controller
                 $request->nropaqueteset,
                 $request->nropaquetesii,
                 $request->nropaquetesof,
-                $request->paquetes_ems,
-                $request->paquetes_cp,
-                $request->paquetes_lcao,
+                $request->paquetes,
             ])->filter()->sum();
 
             // Actualizar el total en la saca
@@ -109,12 +103,8 @@ class ContenidoController extends Controller
             'nropaqueteset' => 'nullable|integer',
             'nropaquetesii' => 'nullable|integer',
             'nropaquetesof' => 'nullable|integer',
-            'paquetes_ems' => 'nullable|integer',
-            'peso_ems' => 'nullable|integer',
-            'paquetes_cp' => 'nullable|integer',
-            'peso_cp' => 'nullable|integer',
-            'paquetes_lcao' => 'nullable|integer',
-            'peso_lcao' => 'nullable|integer',
+            'paquetes' => 'nullable|integer',
+            'peso' => 'nullable|integer',
         ]);
 
         // Procesar manifiesto para nropaquetesems (API 1)
@@ -145,9 +135,7 @@ class ContenidoController extends Controller
             $request->nropaqueteset,
             $request->nropaquetesii,
             $request->nropaquetesof,
-            $request->paquetes_ems,
-            $request->paquetes_cp,
-            $request->paquetes_lcao,
+            $request->paquetes,
         ])->filter()->sum();
 
         // Actualizar el campo nropaquetes en el registro de Saca

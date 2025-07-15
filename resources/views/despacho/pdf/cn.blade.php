@@ -398,9 +398,15 @@
                         <th>DESPACHO</th>
                         <th>ORIGEN</th>
                         <th>DESTINO</th>
-                        <th>LC-BOLSAS DE CORREO</th>
-                        <th>CP-BOLSAS DE CORREO</th>
-                        <th>EMS-BOLSAS DE CORREO</th>
+                        @if ($despacho->service === 'LC')
+                            <th>LC-BOLSAS DE CORREO</th>
+                        @elseif ($despacho->service === 'CP')
+                            <th>CP-BOLSAS DE CORREO</th>
+                        @elseif ($despacho->service === 'EMS')
+                            <th>EMS-BOLSAS DE CORREO</th>
+                        @elseif ($despacho->service === 'MX')
+                            <th>ENVIOS - BOLSAS DE CORREO</th>
+                        @endif
                         <th>PESO TOTAL(Kg.)</th>
                         <th>OBSERVACIONES</th>
                     </tr>
@@ -435,15 +441,13 @@
                             <td>{{ $siglaIATA[$siglaOrigen] ?? $siglaOrigen }}</td>
                             <td>{{ $siglaIATA[$ofdestino] ?? $ofdestino }}</td>
                             @if ($despacho->service === 'LC')
-                                <td>1</td>
-                            @else
-                                <td></td>
-                            @endif
-                            <td></td>
-                            @if ($despacho->service === 'EMS')
-                                <td>1</td>
-                            @else
-                                <td></td>
+                                <td class="text-center">1</td>
+                            @elseif ($despacho->service === 'CP')
+                                <td class="text-center">1</td>
+                            @elseif ($despacho->service === 'EMS')
+                                <td class="text-center">1</td>
+                            @elseif ($despacho->service === 'MX')
+                                <td class="text-center">{{ $saca->nropaquetes }}</td>
                             @endif
                             <td>{{ $saca->peso }}Kg.</td>
                             <td>

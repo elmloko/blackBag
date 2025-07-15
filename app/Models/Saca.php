@@ -34,6 +34,7 @@ class Saca extends Model
         'etiqueta',
         'receptaculo',
         'aduana',
+        'codigo_manifiesto',
     ];
 
     // Definir las relaciones

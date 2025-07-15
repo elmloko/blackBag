@@ -199,6 +199,8 @@ use WithPagination;
     
             // Definir el estado de las sacas
             $despacho->estado_sacas = $sacasAdmitidas > $sacasCerradas ? 'Completo' : 'Incompleto';
+            $saca = Saca::where('despacho_id', $despacho->id)->first();
+            $despacho->saca = $saca;
         }
     
         return view('livewire.admitirmx', [

@@ -34,6 +34,8 @@
                                         <a href="/iniciarems" class="btn btn-secondary">Atrás</a>
                                     @elseif ($service == 'LC')
                                         <a href="/iniciar" class="btn btn-secondary">Atrás</a>
+                                    @elseif ($service == 'MX')
+                                        <a href="/iniciarmx" class="btn btn-secondary">Atrás</a>
                                     @else
                                         <a href="/" class="btn btn-secondary">Atrás</a> {{-- Opción predeterminada, si no es EMS ni LC --}}
                                     @endif
@@ -62,7 +64,8 @@
                                             <th>Tipo</th>
                                             <th>Etiqueta</th>
                                             <th>Peso(Kg.)</th>
-                                            <th>Número de Paquetes</th>
+                                            <th>Nro. de Paquetes</th>
+                                            <th>Codigo Manifiesto</th>
                                             <th>Aduana</th>
                                             <th>Fecha de Creación</th>
                                             <th>Acciones</th>
@@ -100,6 +103,7 @@
                                                 <td>{{ $etiqueta[$saca->etiqueta] ?? $saca->etiqueta }}</td>
                                                 <td>{{ $saca->peso }}</td>
                                                 <td>{{ $saca->nropaquetes }}</td>
+                                                <td>{{ $saca->codigo_manifiesto }}</td>
                                                 <td>{{ $saca->aduana }}</td>
                                                 <td>{{ $saca->created_at }}</td>
                                                 <td>
@@ -251,67 +255,19 @@
                                                                                         value="{{ $contenido->listas ?? '' }}">
                                                                                 </div>
                                                                             @elseif ($service === 'MX')
-                                                                                <h5 class="mb-3">Contenido declarado
-                                                                                </h5>
-
-                                                                                <div class="form-row">
-                                                                                    {{-- PAQUETES EMS --}}
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="paquetes_ems">PAQUETES
-                                                                                            EMS</label>
+                                                                                <div class="mb-3">
+                                                                                    <h5 class="mb-3 font-weight-bold">
+                                                                                        Contenido declarado</h5>
+                                                                                    <div class="form-group">
+                                                                                        <label for="paquetes"
+                                                                                            class="font-weight-bold">Cantidad
+                                                                                            de Paquetes</label>
                                                                                         <input type="number"
                                                                                             class="form-control"
-                                                                                            id="paquetes_ems"
-                                                                                            name="paquetes_ems"
-                                                                                            value="{{ old('paquetes_ems', $contenido->paquetes_ems ?? '') }}">
-                                                                                    </div>
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="peso_ems">PESO</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="peso_ems" name="peso_ems"
-                                                                                            value="{{ old('peso_ems', $contenido->peso_ems ?? '') }}">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="form-row">
-                                                                                    {{-- PAQUETES CP --}}
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="paquetes_cp">PAQUETES
-                                                                                            CP</label>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="paquetes_cp"
-                                                                                            name="paquetes_cp"
-                                                                                            value="{{ old('paquetes_cp', $contenido->paquetes_cp ?? '') }}">
-                                                                                    </div>
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="peso_cp">PESO</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="peso_cp" name="peso_cp"
-                                                                                            value="{{ old('peso_cp', $contenido->peso_cp ?? '') }}">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="form-row">
-                                                                                    {{-- PAQUETES LC/AO --}}
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="paquetes_lcao">PAQUETES
-                                                                                            LC/AO</label>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            id="paquetes_lcao"
-                                                                                            name="paquetes_lcao"
-                                                                                            value="{{ old('paquetes_lcao', $contenido->paquetes_lcao ?? '') }}">
-                                                                                    </div>
-                                                                                    <div class="form-group col-md-6">
-                                                                                        <label for="peso_lcao">PESO</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="peso_lcao"
-                                                                                            name="peso_lcao"
-                                                                                            value="{{ old('peso_lcao', $contenido->peso_lcao ?? '') }}">
+                                                                                            id="paquetes" name="paquetes"
+                                                                                            placeholder="Ej: 10"
+                                                                                            min="0"
+                                                                                            value="{{ old('paquetes', $contenido->paquetes ?? '') }}">
                                                                                     </div>
                                                                                 </div>
                                                                             @endif
@@ -520,6 +476,17 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group">
+                                                                            <label for="codigo_manifiesto">Código
+                                                                                Manifiesto</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="codigo_manifiesto"
+                                                                                name="codigo_manifiesto"
+                                                                                placeholder="Ej: BOLPBAIMU...."
+                                                                                pattern="[A-Za-z0-9]+"
+                                                                                title="Solo caracteres alfanuméricos"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
                                                                             <label for="peso">Peso(Kg.)</label>
                                                                             <input type="text" step="0,001"
                                                                                 class="form-control" id="peso"
@@ -639,12 +606,13 @@
                                 <label for="peso">Peso (Kg.)</label>
                                 <input type="text" step="0,001" class="form-control" id="peso" name="peso"
                                     required>
+                            </div> 
+                            <div class="form-group">
+                                <label for="codigo_manifiesto">Código Manifiesto</label>
+                                <input type="text" class="form-control" id="codigo_manifiesto"
+                                    name="codigo_manifiesto" placeholder="Ej: BOLPBAIMU...." pattern="[A-Za-z0-9]+"
+                                    title="Solo caracteres alfanuméricos" required>
                             </div>
-
-                            {{-- <div class="form-group">
-                                <label for="nropaquetes">Número de Paquetes</label>
-                                <input type="number" class="form-control" id="nropaquetes" name="nropaquetes" required>
-                            </div> --}}
                             <button type="submit" class="btn btn-primary">Crear Saca</button>
                         </form>
                     </div>

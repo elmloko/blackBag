@@ -59,6 +59,7 @@
                                         <th>Subclase</th>
                                         <th>Nro. Paquetes</th>
                                         <th>Peso(Kg.)</th>
+                                        <th>Aduana</th>
                                         <th>Sacas Admitidas/Expedicion</th>
                                         <th>Estado</th>
                                         <th>Enviado:</th>
@@ -107,6 +108,7 @@
                                             <td>{{ $subclases[$despacho->subclase] ?? $despacho->subclase }}</td>
                                             <td>{{ $despacho->nroenvase }}</td>
                                             <td>{{ $despacho->peso }}</td>
+                                            <td>{{ $despacho->saca->aduana ?? '' }}</td>
                                             <td>
                                                 {{ $despacho->sacas_admitidas }} / {{ $despacho->sacas_cerradas }}
                                                 <span
