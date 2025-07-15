@@ -401,7 +401,7 @@
                         <th>LC-BOLSAS DE CORREO</th>
                         <th>CP-BOLSAS DE CORREO</th>
                         <th>EMS-BOLSAS DE CORREO</th>
-                        <th>PESO (Kg.)</th>
+                        <th>PESO TOTAL(Kg.)</th>
                         <th>OBSERVACIONES</th>
                     </tr>
                 </thead>
