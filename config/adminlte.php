@@ -314,7 +314,7 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/dashboard',
-            'icon' => 'fas fa-tachometer-alt', 
+            'icon' => 'fas fa-tachometer-alt',
         ],
         [
             'text' => 'Gestión Usuarios',
@@ -356,19 +356,19 @@ return [
                 [
                     'text' => 'Despachos Abiertos',
                     'url' => '/iniciarmx',
-                    // 'can'  => 'apertura.ems',
+                    'can'  => 'apertura.mx',
                     'icon' => 'fas fa-door-open', // Inicio de despacho
                 ],
                 [
                     'text' => 'Despachos Expedición',
                     'url' => '/expedicionmx',
-                    // 'can'  => 'expedicion.ems',
+                    'can'  => 'expedicion.mx',
                     'icon' => 'fas fa-truck-loading', // En camino o procesando
                 ],
                 [
                     'text' => 'Despachos Admisiones',
                     'url' => '/admitirmx',
-                // 'can'  => 'admision.ems',
+                    'can'  => 'admision.mx',
                     'icon' => 'fas fa-check-circle', // Despacho ya admitido
                 ],
             ],
