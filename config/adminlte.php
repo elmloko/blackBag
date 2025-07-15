@@ -344,6 +344,36 @@ return [
             ],
         ],
         [
+            'text' => 'DESPACHOS MIXTOS',
+            'icon' => 'fas fa-shipping-fast', // Representa velocidad y envíos EMS
+
+            'submenu' => [
+                [
+                    'text' => 'Todos los despachos',
+                    'url' => '/allmx',
+                    'icon' => 'fas fa-folder-open', // Vista general
+                ],
+                [
+                    'text' => 'Despachos Abiertos',
+                    'url' => '/iniciarmx',
+                    // 'can'  => 'apertura.ems',
+                    'icon' => 'fas fa-door-open', // Inicio de despacho
+                ],
+                [
+                    'text' => 'Despachos Expedición',
+                    'url' => '/expedicionmx',
+                    // 'can'  => 'expedicion.ems',
+                    'icon' => 'fas fa-truck-loading', // En camino o procesando
+                ],
+                [
+                    'text' => 'Despachos Admisiones',
+                    'url' => '/admitirmx',
+                // 'can'  => 'admision.ems',
+                    'icon' => 'fas fa-check-circle', // Despacho ya admitido
+                ],
+            ],
+        ],
+        [
             'text' => 'DESPACHOS LC',
             'icon' => 'fas fa-truck', // Representa movimiento/logística
 

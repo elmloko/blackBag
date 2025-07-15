@@ -75,13 +75,17 @@ Route::middleware('auth')->group(function () {
 
     //despachos
     Route::get('/alllc', [DespachoController::class, 'getAlllc']);
+    Route::get('/allmx', [DespachoController::class, 'getAllmx']);
     Route::get('/allems', [DespachoController::class, 'getAllems']);
     Route::get('/iniciar', [DespachoController::class, 'getIniciar']);
     Route::get('/iniciarems', [DespachoController::class, 'getIniciarems']);
+    Route::get('/iniciarmx', [DespachoController::class, 'getIniciarmx']);
     Route::get('/expedicion', [DespachoController::class, 'getExpedicion']);
     Route::get('/expedicionems', [DespachoController::class, 'getExpedicionems']);
+    Route::get('/expedicionmx', [DespachoController::class, 'getExpedicionmx']);
     Route::get('/admitir', [DespachoController::class, 'getAdmitir']);
     Route::get('/admitirems', [DespachoController::class, 'getAdmitirems']);
+    Route::get('/admitirmx', [DespachoController::class, 'getAdmitirmx']);
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');
