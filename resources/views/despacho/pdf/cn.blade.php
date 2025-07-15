@@ -506,14 +506,14 @@
         <div class="footer">
             <table>
                 <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
-                    <p class="special-text">__________________________</p>
-                    <p class="special-text">RECIBIDO POR</p>
-                    <p class="special-text"></p>
-                </td>
-                <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
                     <p class="special-text">__________________________ </p>
                     <p class="special-text">ENTREGADO POR</p>
                     <p class="special-text">{{ auth()->user()->name }}</p>
+                </td>
+                <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
+                    <p class="special-text">__________________________</p>
+                    <p class="special-text">RECIBIDO POR</p>
+                    <p class="special-text"></p>
                 </td>
             </table>
         </div>
