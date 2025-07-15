@@ -532,6 +532,8 @@
                         <br><strong style="font-size: 20px;">TRADICIONAL</strong>
                     @elseif ($despacho->service === 'EMS')
                         <br><strong style="font-size: 20px;">PRIORITARIO</strong>
+                    @elseif ($despacho->service === 'MX')
+                        <br><strong style="font-size: 20px;">MIXTO</strong>
                     @endif
                 </td>
                 @if ($index === count($sacas) - 1)
@@ -556,8 +558,14 @@
             <tr>
                 <td>Peso: {{ $saca->peso }} Kg.</td>
                 <td>NoPaq: {{ $saca->nropaquetes }}</td>
-                <td colspan="2" class="transparent-bottom-border text-center">{{ $saca->receptaculo }}</td>
+                <td colspan="2" class="transparent-bottom-border text-center">
+                    {{ $saca->receptaculo }}
+                    @if ($saca->aduana == 'SI')
+                        <br><strong style="font-size: 20px;">ADUANA</strong>
+                    @endif
+                </td>
             </tr>
+
             <tr>
                 @php
                     $subclaseTranslation = [
