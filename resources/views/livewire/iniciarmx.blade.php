@@ -73,19 +73,19 @@
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
                                                 ];
                                                 $subclases = [
-                                                    'EA' => 'EA EMS - AL DESCUBIERTO',
-                                                    'ED' => 'ED EMS - DOCUMENTOS',
-                                                    'EG' => 'EG EMS - PLAZO GARANTIZADO: DOCUMENTOS',
-                                                    'EH' => 'EH EMS - PLAZO GARANTIZADO: MERCANCIA',
-                                                    'EI' => 'EI EMS - PLAZO GARANTIZADO: MIXTO',
-                                                    'EM' => 'EM EMS - MERCADERIA',
-                                                    'EN' => 'EN EMS - MIXTO',
-                                                    'ER' => 'ER EMS - MERCANCIA DEVUELTA',
-                                                    'ET' => 'ET EMS - SACAS VACIAS',
-                                                    'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'EY' =>
-                                                        'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
-                                                    'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MA' => 'MA MIXTO - AL DESCUBIERTO',
+                                                    'MD' => 'MD MIXTO - DOCUMENTOS',
+                                                    'MG' => 'MG MIXTO - PLAZO GARANTIZADO: DOCUMENTOS',
+                                                    'MH' => 'MH MIXTO - PLAZO GARANTIZADO: MERCANCIA',
+                                                    'MI' => 'MI MIXTO - PLAZO GARANTIZADO: MIXTO',
+                                                    'MM' => 'MM MIXTO - MERCADERIA',
+                                                    'MN' => 'MN MIXTO - MIXTO',
+                                                    'MR' => 'MR MIXTO - MERCANCIA DEVUELTA',
+                                                    'MT' => 'MT MIXTO - SACAS VACIAS',
+                                                    'MU' => 'MU MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MY' =>
+                                                        'MY MIXTO - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'MZ' => 'MZ MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
                                                     'A' => 'A - Aéreo',
@@ -174,19 +174,19 @@
                             <label for="subclase">Subclase</label>
                             <select class="form-control" id="subclase" wire:model="subclase">
                                 <option value="">Seleccione una opción</option>
-                                <option value="EN">EN EMS - MIXTO</option>
-                                <option value="EA">EA EMS - AL DESCUBIERTO</option>
-                                <option value="ED">ED EMS - DOCUMENTOS</option>
-                                <option value="EG">EG EMS - PLAZO GARANTIZADO: DOCUMENTOS</option>
-                                <option value="EH">EH EMS - PLAZO GARANTIZADO: MERCANCIA</option>
-                                <option value="EI">EI EMS - PLAZO GARANTIZADO: MIXTO</option>
-                                <option value="EM">EM EMS - MERCADERIA</option>
-                                <option value="ER">ER EMS - MERCANCIA DEVUELTA</option>
-                                <option value="ET">ET EMS - SACAS VACIAS</option>
-                                <option value="EU">EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
-                                <option value="EY">EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS
+                                <option value="MN">MN MIXTO - MIXTO</option>
+                                <option value="MA">MA MIXTO - AL DESCUBIERTO</option>
+                                <option value="MD">MD MIXTO - DOCUMENTOS</option>
+                                <option value="MG">MG MIXTO - PLAZO GARANTIZADO: DOCUMENTOS</option>
+                                <option value="MH">MH MIXTO - PLAZO GARANTIZADO: MERCANCIA</option>
+                                <option value="MI">MI MIXTO - PLAZO GARANTIZADO: MIXTO</option>
+                                <option value="MM">MM MIXTO - MERCADERIA</option>
+                                <option value="MR">MR MIXTO - MERCANCIA DEVUELTA</option>
+                                <option value="MT">MT MIXTO - SACAS VACIAS</option>
+                                <option value="MU">MU MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
+                                <option value="MY">MY MIXTO - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS
                                 </option>
-                                <option value="EZ">EZ EMS: RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
+                                <option value="MZ">MZ MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
                             </select>
                             @error('subclase')
                                 <span class="text-danger">{{ $message }}</span>

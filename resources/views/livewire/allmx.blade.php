@@ -70,28 +70,19 @@
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
                                                 ];
                                                 $subclases = [
-                                                    'UA' => 'UA CARTAS - AO',
-                                                    'UB' => 'UB CARTAS - MASIVO',
-                                                    'UC' => 'UC CARTAS - CORREO DIRECTO ARMONIZADO',
-                                                    'UD' => 'UD CARTAS - FUERA DEL SISTEMA DE GASTOS TERMINALES',
-                                                    'UE' => 'UE CARTAS - DECOUVERT',
-                                                    'UF' => 'UF CARTAS - LC ENTRADA DIRECTA',
-                                                    'UG' => 'UG CARTAS - AO ENTRADA DIRECTA',
-                                                    'UH' => 'UH CARTAS - LC/AO ENTRADA DIRECTA',
-                                                    'UI' => 'UI CARTAS - CCRI',
-                                                    'UL' => 'UL CARTAS - LC',
-                                                    'UM' => 'UM CARTAS - SACAS M',
-                                                    'UN' => 'UN CARTAS - LC/AO',
-                                                    'UP' => 'UP CARTAS - TARJETAS POSTALES',
-                                                    'UR' => 'UR CARTAS - CERTIFICADO',
-                                                    'US' => 'US CARTAS - SACAS VACIAS',
-                                                    'UT' => 'UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'UV' =>
-                                                        'UV CARTAS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR SUJETOS A REMUNERACIÓN',
-                                                    'UX' => 'UX CARTAS - EXPRESO',
-                                                    'UY' =>
-                                                        'UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
-                                                    'UZ' => 'UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MA' => 'MA MIXTO - AL DESCUBIERTO',
+                                                    'MD' => 'MD MIXTO - DOCUMENTOS',
+                                                    'MG' => 'MG MIXTO - PLAZO GARANTIZADO: DOCUMENTOS',
+                                                    'MH' => 'MH MIXTO - PLAZO GARANTIZADO: MERCANCIA',
+                                                    'MI' => 'MI MIXTO - PLAZO GARANTIZADO: MIXTO',
+                                                    'MM' => 'MM MIXTO - MERCADERIA',
+                                                    'MN' => 'MN MIXTO - MIXTO',
+                                                    'MR' => 'MR MIXTO - MERCANCIA DEVUELTA',
+                                                    'MT' => 'MT MIXTO - SACAS VACIAS',
+                                                    'MU' => 'MU MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MY' =>
+                                                        'MY MIXTO - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'MZ' => 'MZ MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
                                                     'A' => 'A - Aéreo',

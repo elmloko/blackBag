@@ -80,19 +80,19 @@
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
                                                 ];
                                                 $subclases = [
-                                                    'EA' => 'EA EMS - AL DESCUBIERTO',
-                                                    'ED' => 'ED EMS - DOCUMENTOS',
-                                                    'EG' => 'EG EMS - PLAZO GARANTIZADO: DOCUMENTOS',
-                                                    'EH' => 'EH EMS - PLAZO GARANTIZADO: MERCANCIA',
-                                                    'EI' => 'EI EMS - PLAZO GARANTIZADO: MIXTO',
-                                                    'EM' => 'EM EMS - MERCADERIA',
-                                                    'EN' => 'EN EMS - MIXTO',
-                                                    'ER' => 'ER EMS - MERCANCIA DEVUELTA',
-                                                    'ET' => 'ET EMS - SACAS VACIAS',
-                                                    'EU' => 'EU EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
-                                                    'EY' =>
-                                                        'EY EMS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
-                                                    'EZ' => 'EZ EMS - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MA' => 'MA MIXTO - AL DESCUBIERTO',
+                                                    'MD' => 'MD MIXTO - DOCUMENTOS',
+                                                    'MG' => 'MG MIXTO - PLAZO GARANTIZADO: DOCUMENTOS',
+                                                    'MH' => 'MH MIXTO - PLAZO GARANTIZADO: MERCANCIA',
+                                                    'MI' => 'MI MIXTO - PLAZO GARANTIZADO: MIXTO',
+                                                    'MM' => 'MM MIXTO - MERCADERIA',
+                                                    'MN' => 'MN MIXTO - MIXTO',
+                                                    'MR' => 'MR MIXTO - MERCANCIA DEVUELTA',
+                                                    'MT' => 'MT MIXTO - SACAS VACIAS',
+                                                    'MU' => 'MU MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
+                                                    'MY' =>
+                                                        'MY MIXTO - RESERVADO PARA USO MULTILATERAL EN PROYECTOS DESIGNADOS',
+                                                    'MZ' => 'MZ MIXTO - RESERVADO PARA USO DE ACUERDOS BILATERALES',
                                                 ];
                                                 $categorias = [
                                                     'A' => 'A - Aéreo',
