@@ -30,6 +30,12 @@ class Contenido extends Model
         'correotradicional',
         'encomiendas',
         'enviotrans',
+        'paquetes_ems',
+        'peso_ems',
+        'paquetes_cp',
+        'peso_cp',
+        'paquetes_lcao',
+        'peso_lcao',
     ];
 
     protected $casts = [

@@ -32,6 +32,7 @@ class SacaController extends Controller
             'etiqueta' => 'required|string|max:50',
             'peso' => 'nullable|numeric',
             'nropaquetes' => 'nullable|integer',
+            'aduana' => 'required|string|max:2',
         ]);
 
         // Obtener el último valor de nrosaca para el despacho actual y calcular el siguiente
@@ -62,6 +63,7 @@ class SacaController extends Controller
             'nropaquetes' => $request->nropaquetes,
             'estado' => 'APERTURA',
             'receptaculo' => $receptaculo, // Guardar la variable receptaculo
+            'aduana' => $request->aduana,
         ]);
 
         Eventos::create([
@@ -81,6 +83,7 @@ class SacaController extends Controller
             'peso' => 'nullable|numeric',
             'etiqueta' => 'required|string|max:50',
             'nropaquetes' => 'nullable|integer',
+            'aduana' => 'required|string|max:2',
         ]);
 
         // Buscar la saca a actualizar
@@ -99,6 +102,7 @@ class SacaController extends Controller
             'nropaquetes' => $request->nropaquetes,
             'etiqueta' => $request->etiqueta,
             'receptaculo' => $receptaculo, // Guardar el nuevo valor de receptaculo
+            'aduana' => $request->aduana,
         ]);
 
         Eventos::create([
@@ -199,6 +203,12 @@ class SacaController extends Controller
                 return redirect('/expedicion')->with('message', "Despacho LC cerrado exitosamente con el estado: $nuevoEstadoDespacho y todos los datos actualizados.");
             } elseif ($nuevoEstadoDespacho === 'CERRADO') {
                 return redirect('/iniciar')->with('message', "Despacho LC cerrado exitosamente con el estado: $nuevoEstadoDespacho y todos los datos actualizados.");
+            }
+        } elseif ($service === 'MX') {
+            if ($nuevoEstadoDespacho === 'EXPEDICION') {
+                return redirect('/expedicionmx')->with('message', "Despacho MX cerrado exitosamente con el estado: $nuevoEstadoDespacho y todos los datos actualizados.");
+            } elseif ($nuevoEstadoDespacho === 'CERRADO') {
+                return redirect('/iniciarmx')->with('message', "Despacho MX cerrado exitosamente con el estado: $nuevoEstadoDespacho y todos los datos actualizados.");
             }
         } else {
             // Opción por defecto para otros tipos de servicio

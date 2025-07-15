@@ -33,6 +33,7 @@ class Saca extends Model
         'estado',
         'etiqueta',
         'receptaculo',
+        'aduana',
     ];
 
     // Definir las relaciones
