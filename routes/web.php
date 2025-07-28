@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DespachoController;
 use App\Http\Controllers\SacaController;
+use App\Http\Controllers\EtiquetasController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admitir', [DespachoController::class, 'getAdmitir']);
     Route::get('/admitirems', [DespachoController::class, 'getAdmitirems']);
     Route::get('/admitirmx', [DespachoController::class, 'getAdmitirmx']);
+
+    Route::get('/cn35', [EtiquetasController::class, 'getCn35']);
+    Route::get('/cn38', [EtiquetasController::class, 'getCn38']);
 
     //sacas
     Route::get('/sacas/crear/{id}', [SacaController::class, 'crear'])->name('saca.crear');

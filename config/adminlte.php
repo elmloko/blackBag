@@ -435,6 +435,26 @@ return [
         ],
 
         [
+            'text' => 'GENERAR ETIQUETAS',
+            'icon' => 'fas fa-file-alt', // Ícono de camión rápido: representa el envío ágil y las etiquetas EMS
+
+            'submenu' => [
+                [
+                    'text' => 'CN35',
+                    'url'  => '/cn35',
+                    'icon' => 'fas fa-tags', // Ícono de carpeta abierta: representa formularios/documentos que se completan
+                ],
+                [
+                    'text' => 'CN38',
+                    'url'  => '/cn38',
+                    'can'  => 'expedicion.ems',
+                    'icon' => 'fas fa-file-export', // Ícono de carga de camión: representa paquetes en proceso de despacho/exportación
+                ],
+            ],
+        ],
+
+
+        [
             'text' => 'Eventos',
             'url' => '/event',
             'can'  => 'user.admin',
