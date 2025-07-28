@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         172.65.10.50
--- Versión del servidor:         10.6.14-MariaDB - MariaDB Server
--- SO del servidor:              Linux
--- HeidiSQL Versión:             12.11.0.7065
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.6.0.6765
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,6 +18,26 @@
 -- Volcando estructura de base de datos para blackbag
 CREATE DATABASE IF NOT EXISTS `blackbag` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `blackbag`;
+
+-- Volcando estructura para tabla blackbag.cn35
+CREATE TABLE IF NOT EXISTS `cn35` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `despacho` int(11) DEFAULT NULL,
+  `origen` varchar(50) DEFAULT NULL,
+  `destino` varchar(50) DEFAULT NULL,
+  `saca` int(11) DEFAULT NULL,
+  `categoria` varchar(50) DEFAULT NULL,
+  `subclase` varchar(50) DEFAULT NULL,
+  `servicio` varchar(50) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `paquetes` int(11) DEFAULT NULL,
+  `peso` float DEFAULT NULL,
+  `aduana` varchar(50) DEFAULT NULL,
+  `codigo_manifiesto` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla blackbag.cn35: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla blackbag.contenido
 CREATE TABLE IF NOT EXISTS `contenido` (
@@ -47,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `contenido` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=411 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.contenido: ~333 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.contenido: ~410 rows (aproximadamente)
 INSERT INTO `contenido` (`id`, `descripcion`, `listas`, `nropaquetesro`, `nropaquetesbl`, `nropaquetesof`, `nropaquetesii`, `nropaqueteset`, `nropaquetessu`, `nropaquetessn`, `nropaquetesems`, `nropaquetescp`, `nropaquetesco`, `sacasm`, `lcao`, `correotradicional`, `encomiendas`, `enviotrans`, `paquetes`, `peso`, `created_at`, `updated_at`, `saca_id`) VALUES
 	(1, 'MINL', NULL, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-18 01:32:18', '2025-02-18 01:32:18', 1),
 	(2, 'MINL', NULL, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-18 01:32:30', '2025-02-18 01:32:30', 2),
@@ -718,9 +738,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1806 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1807 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.events: ~1.786 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.events: ~1.806 rows (aproximadamente)
 INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `identificador`, `created_at`, `updated_at`) VALUES
 	(1, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOTJACUA5001', '2025-02-18 01:30:37', '2025-02-18 01:30:37'),
 	(2, 'Andrea Belen Fernandez Loza', 'INICIO', 'Creacion de despacho', 'BOLPZBOPOICUA5001', '2025-02-18 01:30:47', '2025-02-18 01:30:47'),
@@ -2526,7 +2546,8 @@ INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `identificador`,
 	(1802, 'Andrea Belen Fernandez Loza', 'DECLARACION DE CONTENIDO', 'Contenido declarado en saca postal', 'BOLPZBOLPZCUN50250010025', '2025-07-10 19:47:34', '2025-07-10 19:47:34'),
 	(1803, 'Andrea Belen Fernandez Loza', 'ACTUALIZACION DE CONTENIDO', 'Actualización de contenido en saca postal', 'BOLPZBOLPZCUN50250010025', '2025-07-10 19:47:45', '2025-07-10 19:47:45'),
 	(1804, 'Andrea Belen Fernandez Loza', 'CERRADO', 'Cierre de Saca', 'BOLPZBOLPZCUN50250010025', '2025-07-10 19:47:54', '2025-07-10 19:47:54'),
-	(1805, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOLPZCUN5025', '2025-07-10 19:47:59', '2025-07-10 19:47:59');
+	(1805, 'Andrea Belen Fernandez Loza', 'EXPEDICION', 'Expedición de despacho', 'BOLPZBOLPZCUN5025', '2025-07-10 19:47:59', '2025-07-10 19:47:59'),
+	(1806, 'Marco Antonio Espinoza Rojas', 'APERTURA', 'Creacion de saca', 'BOLPZBOORUCUN5002002', '2025-07-28 19:02:24', '2025-07-28 19:02:24');
 
 -- Volcando estructura para tabla blackbag.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -2665,9 +2686,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=102827 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102951 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_aggregates: ~39 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_aggregates: ~103 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(102298, 1752065280, 10080, 'user_request', '1', 'count', 3.00, NULL),
 	(102302, 1752065280, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
@@ -2711,7 +2732,67 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(102819, 1752597360, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(102820, 1752597360, 360, 'user_request', '1', 'count', 1.00, NULL),
 	(102821, 1752597360, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(102822, 1752597360, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(102822, 1752597360, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102827, 1753714920, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(102828, 1753714800, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(102829, 1753714080, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(102830, 1753708320, 10080, 'user_request', '1', 'count', 2.00, NULL),
+	(102831, 1753714920, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102832, 1753714800, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102833, 1753714080, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102834, 1753708320, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102839, 1753733040, 60, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'count', 1.00, NULL),
+	(102840, 1753732800, 360, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'count', 1.00, NULL),
+	(102841, 1753732800, 1440, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'count', 1.00, NULL),
+	(102842, 1753728480, 10080, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'count', 1.00, NULL),
+	(102843, 1753733040, 60, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'max', 4635.00, NULL),
+	(102844, 1753732800, 360, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'max', 4635.00, NULL),
+	(102845, 1753732800, 1440, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'max', 4635.00, NULL),
+	(102846, 1753728480, 10080, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 'max', 4635.00, NULL),
+	(102847, 1753733040, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(102848, 1753732800, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(102849, 1753732800, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(102850, 1753728480, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(102851, 1753733040, 60, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(102852, 1753732800, 360, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(102853, 1753732800, 1440, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(102854, 1753728480, 10080, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(102855, 1753733040, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(102856, 1753732800, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(102857, 1753732800, 1440, 'user_request', '1', 'count', 11.00, NULL),
+	(102858, 1753728480, 10080, 'user_request', '1', 'count', 11.00, NULL),
+	(102859, 1753733040, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 3417.00, NULL),
+	(102860, 1753732800, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 3417.00, NULL),
+	(102861, 1753732800, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 3417.00, NULL),
+	(102862, 1753728480, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 3417.00, NULL),
+	(102863, 1753733100, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(102864, 1753733100, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102865, 1753732800, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102866, 1753732800, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 9.00, NULL),
+	(102867, 1753728480, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 9.00, NULL),
+	(102871, 1753733160, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(102872, 1753733160, 360, 'user_request', '1', 'count', 5.00, NULL),
+	(102873, 1753733160, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(102874, 1753733160, 360, 'cache_hit', 'spatie.permission.cache', 'count', 5.00, NULL),
+	(102887, 1753733280, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(102888, 1753733280, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(102911, 1753733700, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(102912, 1753733520, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(102915, 1753733760, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(102916, 1753733760, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(102917, 1753733520, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(102931, 1753733820, 60, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'count', 1.00, NULL),
+	(102932, 1753733520, 360, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'count', 1.00, NULL),
+	(102933, 1753732800, 1440, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'count', 1.00, NULL),
+	(102934, 1753728480, 10080, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'count', 1.00, NULL),
+	(102935, 1753733820, 60, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(102936, 1753733520, 360, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(102937, 1753733820, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(102938, 1753733820, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(102947, 1753733820, 60, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'max', 1078.00, NULL),
+	(102948, 1753733520, 360, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'max', 1078.00, NULL),
+	(102949, 1753732800, 1440, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'max', 1078.00, NULL),
+	(102950, 1753728480, 10080, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 'max', 1078.00, NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -2726,9 +2807,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=19647 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19675 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla blackbag.pulse_entries: ~131 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.pulse_entries: ~161 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(19514, 1752066637, 'user_request', '1', NULL),
 	(19515, 1752066637, 'user_request', '1', NULL),
@@ -2862,7 +2943,35 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(19643, 1752597218, 'user_request', '1', NULL),
 	(19644, 1752597218, 'cache_hit', 'spatie.permission.cache', NULL),
 	(19645, 1752597372, 'user_request', '1', NULL),
-	(19646, 1752597372, 'cache_hit', 'spatie.permission.cache', NULL);
+	(19646, 1752597372, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19647, 1753714943, 'user_request', '1', NULL),
+	(19648, 1753714944, 'user_request', '1', NULL),
+	(19649, 1753714944, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19650, 1753733087, 'slow_request', '["GET","\\/sacas\\/crear\\/{id}","App\\\\Http\\\\Controllers\\\\SacaController@crear"]', 4635),
+	(19651, 1753733096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 3417),
+	(19652, 1753733096, 'slow_user_request', '1', NULL),
+	(19653, 1753733096, 'user_request', '1', NULL),
+	(19654, 1753733100, 'user_request', '1', NULL),
+	(19655, 1753733100, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19656, 1753733179, 'user_request', '1', NULL),
+	(19657, 1753733179, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19658, 1753733211, 'user_request', '1', NULL),
+	(19659, 1753733211, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19660, 1753733291, 'user_request', '1', NULL),
+	(19661, 1753733291, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19662, 1753733310, 'user_request', '1', NULL),
+	(19663, 1753733311, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19664, 1753733335, 'user_request', '1', NULL),
+	(19665, 1753733335, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19666, 1753733740, 'user_request', '1', NULL),
+	(19667, 1753733781, 'user_request', '1', NULL),
+	(19668, 1753733781, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19669, 1753733786, 'user_request', '1', NULL),
+	(19670, 1753733786, 'cache_hit', 'spatie.permission.cache', NULL),
+	(19671, 1753733846, 'slow_request', '["GET","\\/cn38","App\\\\Http\\\\Controllers\\\\EtiquetasController@getCn38"]', 1078),
+	(19672, 1753733846, 'slow_user_request', '1', NULL),
+	(19673, 1753733846, 'user_request', '1', NULL),
+	(19674, 1753733847, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla blackbag.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -2953,9 +3062,9 @@ CREATE TABLE IF NOT EXISTS `saca` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `despacho_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=410 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=411 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla blackbag.saca: ~391 rows (aproximadamente)
+-- Volcando datos para la tabla blackbag.saca: ~394 rows (aproximadamente)
 INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiqueta`, `receptaculo`, `peso`, `nropaquetes`, `aduana`, `codigo_manifiesto`, `created_at`, `updated_at`, `despacho_id`) VALUES
 	(1, 1, 'BOLPZBOCBBCUA5001001', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUA50010010125', 12.500, 50, NULL, NULL, '2025-02-18 01:32:10', '2025-02-18 01:33:03', '3'),
 	(2, 2, 'BOLPZBOCBBCUA5001002', 'BG', 'CERRADO', 'RO', 'BOLPZBOCBBCUA50010020132', 13.200, 32, NULL, NULL, '2025-02-18 01:32:24', '2025-02-18 01:33:03', '3'),
@@ -3349,7 +3458,8 @@ INSERT INTO `saca` (`id`, `nrosaca`, `identificador`, `tipo`, `estado`, `etiquet
 	(406, 1, 'BOLPZBOLPZCUN5023001', 'BG', 'CERRADO', 'BL', 'BOLPZBOLPZCUN50230010088', 8.800, 79, NULL, NULL, '2025-07-01 23:34:53', '2025-07-01 23:35:45', '221'),
 	(407, 2, 'BOLPZBOLPZCUN5023002', 'BG', 'CERRADO', 'BL', 'BOLPZBOLPZCUN50230020052', 5.200, 5, NULL, NULL, '2025-07-01 23:35:24', '2025-07-01 23:35:45', '221'),
 	(408, 1, 'BOLPZBOLPZAUN5024001', 'BG', 'CERRADO', 'RO', 'BOLPZBOLPZAUN50240010022', 2.200, 5, NULL, NULL, '2025-07-05 18:37:37', '2025-07-05 18:37:50', '222'),
-	(409, 1, 'BOLPZBOLPZCUN5025001', 'BG', 'CERRADO', 'BL', 'BOLPZBOLPZCUN50250010025', 2.500, 3, NULL, NULL, '2025-07-10 19:47:09', '2025-07-10 19:47:54', '223');
+	(409, 1, 'BOLPZBOLPZCUN5025001', 'BG', 'CERRADO', 'BL', 'BOLPZBOLPZCUN50250010025', 2.500, 3, NULL, NULL, '2025-07-10 19:47:09', '2025-07-10 19:47:54', '223'),
+	(410, 2, 'BOLPZBOORUCUN5002002', 'BG', 'APERTURA', 'RO', 'BOLPZBOORUCUN50020020056', 5.600, NULL, 'SI', 'PSADSADS', '2025-07-28 19:02:23', '2025-07-28 19:02:23', '13');
 
 -- Volcando estructura para tabla blackbag.users
 CREATE TABLE IF NOT EXISTS `users` (

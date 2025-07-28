@@ -453,7 +453,6 @@ return [
             ],
         ],
 
-
         [
             'text' => 'Eventos',
             'url' => '/event',
