@@ -13,10 +13,11 @@ class Cn35 extends Component
     public $search = '';
     public $searchInput = '';
     public $modal = false;
+    public $modalExtra = false;
 
     public $cn35_id;
     public $despacho, $origen, $destino, $saca, $categoria, $subclase, $servicio,
-           $tipo, $paquetes, $peso, $aduana, $codigo_manifiesto, $receptaculo, $identificador;
+        $paquetes, $peso, $aduana, $codigo_manifiesto, $receptaculo, $identificador;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -28,7 +29,6 @@ class Cn35 extends Component
         'categoria'         => 'nullable|string|max:50',
         'subclase'          => 'nullable|string|max:50',
         'servicio'          => 'nullable|string|max:50',
-        'tipo'              => 'nullable|string|max:50',
         'paquetes'          => 'nullable|integer',
         'peso'              => 'nullable|numeric',
         'aduana'            => 'nullable|string|max:50',
@@ -46,6 +46,16 @@ class Cn35 extends Component
     {
         $this->search = $this->searchInput;
         $this->resetPage();
+    }
+
+    public function abrirModalExtra()
+    {
+        $this->modalExtra = true;
+    }
+
+    public function cerrarModalExtra()
+    {
+        $this->modalExtra = false;
     }
 
     public function abrirModal()
@@ -73,7 +83,6 @@ class Cn35 extends Component
                 'categoria'         => strtoupper($this->categoria),
                 'subclase'          => strtoupper($this->subclase),
                 'servicio'          => strtoupper($this->servicio),
-                'tipo'              => strtoupper($this->tipo),
                 'paquetes'          => $this->paquetes,
                 'peso'              => $this->peso,
                 'aduana'            => strtoupper($this->aduana),

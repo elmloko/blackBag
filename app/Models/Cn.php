@@ -19,7 +19,6 @@ class Cn extends Model
         'categoria',
         'subclase',
         'servicio',
-        'tipo',
         'paquetes',
         'peso',
         'aduana',
