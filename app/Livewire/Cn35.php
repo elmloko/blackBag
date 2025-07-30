@@ -73,6 +73,22 @@ class Cn35 extends Component
     {
         $this->validate();
 
+        // Último dígito del año
+        $ultimoDigitoAnio = substr(date('Y'), -1);
+
+        // Despacho con ceros a la izquierda (formato 4 dígitos)
+        $despachoFormateado = str_pad($this->despacho, 4, '0', STR_PAD_LEFT);
+
+        // Construir receptáculo
+        $this->receptaculo = strtoupper(
+            $this->origen .
+                $this->destino .
+                $this->categoria .
+                $this->subclase .
+                $ultimoDigitoAnio .
+                $despachoFormateado
+        );
+
         Cn::updateOrCreate(
             ['id' => $this->cn35_id],
             [
@@ -87,7 +103,7 @@ class Cn35 extends Component
                 'peso'              => $this->peso,
                 'aduana'            => strtoupper($this->aduana),
                 'codigo_manifiesto' => strtoupper($this->codigo_manifiesto),
-                'receptaculo'       => strtoupper($this->receptaculo),
+                'receptaculo'       => $this->receptaculo,
                 'identificador'     => strtoupper($this->identificador),
             ]
         );

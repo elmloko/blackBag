@@ -9,7 +9,7 @@ class Cn extends Model
 {
     use HasFactory;
 
-    protected $table = 'cn35'; // Nombre exacto de la tabla
+    protected $table = 'cn35';
 
     protected $fillable = [
         'despacho',
@@ -19,10 +19,19 @@ class Cn extends Model
         'categoria',
         'subclase',
         'servicio',
+        'tipo',
         'paquetes',
         'peso',
         'aduana',
         'codigo_manifiesto',
+        'receptaculo',
+        'identificador',
     ];
 
+    protected $casts = [
+        'despacho' => 'integer',
+        'saca' => 'integer',
+        'paquetes' => 'integer',
+        'peso' => 'float',
+    ];
 }

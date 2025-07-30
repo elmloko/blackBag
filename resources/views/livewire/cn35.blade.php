@@ -262,8 +262,10 @@
 
                     <div class="form-group col-md-6">
                         <label for="aduana">Aduana</label>
-                        <input type="text" wire:model.defer="aduana" class="form-control"
-                            style="text-transform: uppercase;">
+                        <select class="form-control" id="aduana" name="aduana" required>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
                         @error('aduana')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
