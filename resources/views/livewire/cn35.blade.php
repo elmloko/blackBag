@@ -48,7 +48,6 @@
                         <tr>
                             <th>Receptáculo</th>
                             <th>Identificador</th>
-                            <th>Servicio</th>
                             <th>Paquetes</th>
                             <th>Peso</th>
                             <th>Aduana</th>
@@ -61,7 +60,6 @@
                             <tr>
                                 <td>{{ $registro->receptaculo }}</td>
                                 <td>{{ $registro->identificador }}</td>
-                                <td>{{ $registro->servicio }}</td>
                                 <td>{{ $registro->paquetes }}</td>
                                 <td>{{ $registro->peso }}</td>
                                 <td>{{ $registro->aduana }}</td>
@@ -178,28 +176,7 @@
                         <label for="subclase">Subclase</label>
                         <select class="form-control" id="subclase" wire:model="subclase">
                             <option value="">Seleccione una opción</option>
-                            <option value="UA">UA CARTAS - AO</option>
-                            <option value="UB">UB CARTAS - MASIVO</option>
-                            <option value="UC">UC CARTAS - CORREO DIRECTO ARMONIZADO</option>
-                            <option value="UD">UD CARTAS - FUERA DEL SISTEMA DE GASTOS TERMINALES</option>
-                            <option value="UE">UE CARTAS - DECOUVERT</option>
-                            <option value="UF">UF CARTAS - LC ENTRADA DIRECTA</option>
-                            <option value="UG">UG CARTAS - AO ENTRADA DIRECTA</option>
-                            <option value="UH">UH CARTAS - LC/AO ENTRADA DIRECTA</option>
-                            <option value="UI">UI CARTAS - CCRI</option>
-                            <option value="UL">UL CARTAS - LC</option>
-                            <option value="UM">UM CARTAS - SACAS M</option>
-                            <option value="UN">UN CARTAS - LC/AO</option>
-                            <option value="UP">UP CARTAS - TARJETAS POSTALES</option>
-                            <option value="UR">UR CARTAS - CERTIFICADO</option>
-                            <option value="US">US CARTAS - SACAS VACIAS</option>
-                            <option value="UT">UT CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
-                            <option value="UV">UV CARTAS - ARTÍCULOS DEVUELTOS QUE NO SE PUEDEN ENTREGAR
-                                SUJETOS A REMUNERACIÓN</option>
-                            <option value="UX">UX CARTAS - EXPRESO</option>
-                            <option value="UY">UY CARTAS - RESERVADO PARA USO MULTILATERAL EN PROYECTOS
-                                DESIGNADOS</option>
-                            <option value="UZ">UZ CARTAS - RESERVADO PARA USO DE ACUERDOS BILATERALES</option>
+
                         </select>
                         @error('subclase')
                             <small class="text-danger">{{ $message }}</small>
@@ -263,9 +240,9 @@
                     <div class="form-group col-md-6">
                         <label for="aduana">Aduana</label>
                         <select class="form-control" id="aduana" name="aduana" required>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                </select>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
                         @error('aduana')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -290,5 +267,91 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const servicioSelect = document.querySelector('select[wire\\:model\\.defer="servicio"]');
+            const subclaseSelect = document.getElementById('subclase');
 
+            const opciones = {
+                'EMS': ['EA', 'ED', 'EG', 'EH', 'EI', 'EM', 'EN', 'ER', 'ET', 'EU', 'EY', 'EZ'],
+                'LC/AO': ['UA', 'UB', 'UC', 'UD', 'UE', 'UF', 'UG', 'UH', 'UI', 'UL', 'UM', 'UN', 'UP', 'UR',
+                    'UT', 'UU', 'UV', 'UX', 'UY', 'UZ'
+                ],
+                'CP': ['CA', 'CB', 'CC', 'CD', 'CF', 'CN', 'CR', 'CT', 'CU', 'CV', 'CX', 'CY', 'CZ']
+            };
+
+            const descripciones = {
+                // EMS
+                'EA': 'EA - EMS a descubierto',
+                'ED': 'ED - EMS documentos',
+                'EG': 'EG - EMS documentos con hora específica',
+                'EH': 'EH - EMS mercancía con hora específica',
+                'EI': 'EI - EMS mixto con hora específica',
+                'EM': 'EM - EMS mercancía',
+                'EN': 'EN - EMS mixto',
+                'ER': 'ER - EMS devuelto',
+                'ET': 'ET - EMS saca vacía',
+                'EU': 'EU - EMS otro',
+                'EY': 'EY - EMS especial',
+                'EZ': 'EZ - EMS reservado',
+
+                // LC/AO
+                'UA': 'UA - Cartas AO',
+                'UB': 'UB - Cartas masivo',
+                'UC': 'UC - Correo directo armonizado',
+                'UD': 'UD - Fuera del sistema de gastos terminales',
+                'UE': 'UE - Cartas a descubierto',
+                'UF': 'UF - Entrada directa LC',
+                'UG': 'UG - Entrada directa AO',
+                'UH': 'UH - Entrada directa LC/AO',
+                'UI': 'UI - CCRI (Centro Clasificación)',
+                'UL': 'UL - Cartas LC',
+                'UM': 'UM - Sacas M',
+                'UN': 'UN - Cartas LC/AO',
+                'UP': 'UP - Tarjetas postales',
+                'UR': 'UR - Certificado',
+                'UT': 'UT - Reservado para acuerdos bilaterales',
+                'UU': 'UU - Otros artículos',
+                'UV': 'UV - Devueltos no entregables con remuneración',
+                'UX': 'UX - Expreso',
+                'UY': 'UY - Uso multilateral en proyectos designados',
+                'UZ': 'UZ - Reservado para acuerdos bilaterales',
+
+                // CP
+                'CA': 'CA - Paquetes a descubierto',
+                'CB': 'CB - Paquetes devueltos',
+                'CC': 'CC - Comercio electrónico',
+                'CD': 'CD - Acceso directo',
+                'CF': 'CF - Servicio de consignación',
+                'CN': 'CN - Paquete ordinario',
+                'CR': 'CR - Mercancía devuelta',
+                'CT': 'CT - Sacas vacías',
+                'CU': 'CU - Uso bilateral reservado',
+                'CV': 'CV - Paquete asegurado',
+                'CX': 'CX - Uso multilateral en proyectos designados',
+                'CY': 'CY - Multilateral reservado',
+                'CZ': 'CZ - Reservado bilateral'
+            };
+
+            function actualizarSubclases() {
+                const tipo = servicioSelect.value;
+                subclaseSelect.innerHTML = '<option value="">Seleccione una opción</option>';
+                if (opciones[tipo]) {
+                    opciones[tipo].forEach(code => {
+                        const option = document.createElement('option');
+                        option.value = code;
+                        option.textContent = descripciones[code] || code;
+                        subclaseSelect.appendChild(option);
+                    });
+                }
+            }
+
+            servicioSelect.addEventListener('change', actualizarSubclases);
+
+            // Si se cambia programáticamente (por Livewire o recuperación), actualiza
+            window.livewire.hook('message.processed', () => {
+                actualizarSubclases();
+            });
+        });
+    </script>
 </div>
