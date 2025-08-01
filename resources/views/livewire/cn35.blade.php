@@ -218,45 +218,35 @@
                     </button>
                 </div>
                 <div class="modal-body row">
+                    @foreach ($detalles as $index => $detalle)
+                        <div class="form-group col-md-6">
+                            <label>Paquetes #{{ $index + 1 }}</label>
+                            <input type="number" class="form-control"
+                                wire:model.defer="detalles.{{ $index }}.paquetes">
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="paquetes">Paquetes</label>
-                        <input type="number" wire:model.defer="paquetes" class="form-control"
-                            style="text-transform: uppercase;">
-                        @error('paquetes')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label>Peso #{{ $index + 1 }}</label>
+                            <input type="number" class="form-control"
+                                wire:model.defer="detalles.{{ $index }}.peso">
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="peso">Peso</label>
-                        <input type="number" wire:model.defer="peso" class="form-control"
-                            style="text-transform: uppercase;">
-                        @error('peso')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label>Aduana #{{ $index + 1 }}</label>
+                            <select class="form-control" wire:model.defer="detalles.{{ $index }}.aduana">
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="aduana">Aduana</label>
-                        <select class="form-control" id="aduana" name="aduana" required>
-                            <option value="SI">SI</option>
-                            <option value="NO">NO</option>
-                        </select>
-                        @error('aduana')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label>Código Manifiesto #{{ $index + 1 }}</label>
+                            <input type="text" class="form-control"
+                                wire:model.defer="detalles.{{ $index }}.codigo_manifiesto">
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="codigo_manifiesto">Código Manifiesto</label>
-                        <input type="text" wire:model.defer="codigo_manifiesto" class="form-control"
-                            style="text-transform: uppercase;">
-                        @error('codigo_manifiesto')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
+                        <hr class="w-100">
+                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button wire:click="guardar" class="btn btn-primary">
