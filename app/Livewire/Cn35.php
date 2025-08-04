@@ -86,18 +86,22 @@ class Cn35 extends Component
         $this->validate();
 
         foreach ($this->detalles as $key => $detalle) {
+            $nrosaca = $key + 1;
             $ultimoDigitoAnio = substr(date('Y'), -1);
             $despachoFormateado = str_pad($this->despacho, 4, '0', STR_PAD_LEFT);
             $receptaculo = strtoupper(
                 $this->origen . $this->destino . $this->categoria . $this->subclase . $ultimoDigitoAnio . $despachoFormateado
             );
 
+            $nrosacaFormateado = str_pad($nrosaca, 3, '0', STR_PAD_LEFT); // ← "001", "002", etc.
+            $identificador = $receptaculo . $nrosacaFormateado;
+
             Cn::create([
                 'despacho'          => $this->despacho,
                 'origen'            => strtoupper($this->origen),
                 'destino'           => strtoupper($this->destino),
                 'saca'              => $this->saca,
-                'nrosaca'           => $key + 1, // 👈 AQUI SE NUMERA AUTOMÁTICAMENTE
+                'nrosaca'           => $nrosaca,
                 'categoria'         => strtoupper($this->categoria),
                 'subclase'          => strtoupper($this->subclase),
                 'servicio'          => strtoupper($this->servicio),
@@ -106,7 +110,7 @@ class Cn35 extends Component
                 'aduana'            => strtoupper($detalle['aduana']),
                 'codigo_manifiesto' => strtoupper($detalle['codigo_manifiesto']),
                 'receptaculo'       => $receptaculo,
-                'identificador'     => strtoupper($this->identificador),
+                'identificador'     => $identificador,
             ]);
         }
 
@@ -114,7 +118,6 @@ class Cn35 extends Component
         $this->cerrarModal();
         $this->cerrarModalExtra();
     }
-
 
     public function editar($id)
     {
