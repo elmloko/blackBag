@@ -217,131 +217,140 @@
                         <span>&times;</span>
                     </button>
                 </div>
-                <div class="modal-body row">
+                <div class="modal-body" style="max-height: 65vh; overflow-y: auto;">
                     @foreach ($detalles as $index => $detalle)
-                        <div class="form-group col-md-6">
-                            <label>Paquetes #{{ $index + 1 }}</label>
-                            <input type="number" class="form-control"
-                                wire:model.defer="detalles.{{ $index }}.paquetes">
-                        </div>
+                        <div class="mb-4 border-bottom pb-3">
+                            <h5 class="mb-3">Saca Nº {{ $index + 1 }}</h5>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label>Paquetes</label>
+                                    <input type="number" min="0" class="form-control"
+                                        wire:model.defer="detalles.{{ $index }}.paquetes"
+                                        placeholder="Ej. 10">
+                                </div>
 
-                        <div class="form-group col-md-6">
-                            <label>Peso #{{ $index + 1 }}</label>
-                            <input type="number" class="form-control"
-                                wire:model.defer="detalles.{{ $index }}.peso">
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <label>Peso (kg)</label>
+                                    <input type="number" min="0" step="0.01" class="form-control"
+                                        wire:model.defer="detalles.{{ $index }}.peso" placeholder="Ej. 2.50">
+                                </div>
 
-                        <div class="form-group col-md-6">
-                            <label>Aduana #{{ $index + 1 }}</label>
-                            <select class="form-control" wire:model.defer="detalles.{{ $index }}.aduana">
-                                <option value="SI">SI</option>
-                                <option value="NO">NO</option>
-                            </select>
-                        </div>
+                                <div class="form-group col-md-3">
+                                    <label>Aduana</label>
+                                    <select class="form-control"
+                                        wire:model.defer="detalles.{{ $index }}.aduana">
+                                        <option value="">Seleccione</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
 
-                        <div class="form-group col-md-6">
-                            <label>Código Manifiesto #{{ $index + 1 }}</label>
-                            <input type="text" class="form-control"
-                                wire:model.defer="detalles.{{ $index }}.codigo_manifiesto">
+                                <div class="form-group col-md-3">
+                                    <label>Código Manifiesto</label>
+                                    <input type="text" class="form-control"
+                                        wire:model.defer="detalles.{{ $index }}.codigo_manifiesto"
+                                        placeholder="Ej. MANI-00123">
+                                </div>
+                            </div>
                         </div>
-
-                        <hr class="w-100">
                     @endforeach
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="guardar" class="btn btn-primary">
-                        {{ $cn35_id ? 'Actualizar' : 'Guardar' }}
-                    </button>
-                    <button type="button" class="btn btn-secondary" wire:click="cerrarModalExtra">Cerrar</button>
+                    <div class="modal-footer">
+                        <button wire:click="guardar" class="btn btn-primary">
+                            {{ $cn35_id ? 'Actualizar' : 'Guardar' }}
+                        </button>
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="cerrarModalExtra">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const servicioSelect = document.querySelector('select[wire\\:model\\.defer="servicio"]');
-            const subclaseSelect = document.getElementById('subclase');
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const servicioSelect = document.querySelector('select[wire\\:model\\.defer="servicio"]');
+        const subclaseSelect = document.getElementById('subclase');
 
-            const opciones = {
-                'EMS': ['EA', 'ED', 'EG', 'EH', 'EI', 'EM', 'EN', 'ER', 'ET', 'EU', 'EY', 'EZ'],
-                'LC/AO': ['UA', 'UB', 'UC', 'UD', 'UE', 'UF', 'UG', 'UH', 'UI', 'UL', 'UM', 'UN', 'UP', 'UR',
-                    'UT', 'UU', 'UV', 'UX', 'UY', 'UZ'
-                ],
-                'CP': ['CA', 'CB', 'CC', 'CD', 'CF', 'CN', 'CR', 'CT', 'CU', 'CV', 'CX', 'CY', 'CZ']
-            };
+        const opciones = {
+            'EMS': ['EA', 'ED', 'EG', 'EH', 'EI', 'EM', 'EN', 'ER', 'ET', 'EU', 'EY', 'EZ'],
+            'LC/AO': ['UA', 'UB', 'UC', 'UD', 'UE', 'UF', 'UG', 'UH', 'UI', 'UL', 'UM', 'UN', 'UP', 'UR',
+                'UT', 'UU', 'UV', 'UX', 'UY', 'UZ'
+            ],
+            'CP': ['CA', 'CB', 'CC', 'CD', 'CF', 'CN', 'CR', 'CT', 'CU', 'CV', 'CX', 'CY', 'CZ']
+        };
 
-            const descripciones = {
-                // EMS
-                'EA': 'EA - EMS a descubierto',
-                'ED': 'ED - EMS documentos',
-                'EG': 'EG - EMS documentos con hora específica',
-                'EH': 'EH - EMS mercancía con hora específica',
-                'EI': 'EI - EMS mixto con hora específica',
-                'EM': 'EM - EMS mercancía',
-                'EN': 'EN - EMS mixto',
-                'ER': 'ER - EMS devuelto',
-                'ET': 'ET - EMS saca vacía',
-                'EU': 'EU - EMS otro',
-                'EY': 'EY - EMS especial',
-                'EZ': 'EZ - EMS reservado',
+        const descripciones = {
+            // EMS
+            'EA': 'EA - EMS a descubierto',
+            'ED': 'ED - EMS documentos',
+            'EG': 'EG - EMS documentos con hora específica',
+            'EH': 'EH - EMS mercancía con hora específica',
+            'EI': 'EI - EMS mixto con hora específica',
+            'EM': 'EM - EMS mercancía',
+            'EN': 'EN - EMS mixto',
+            'ER': 'ER - EMS devuelto',
+            'ET': 'ET - EMS saca vacía',
+            'EU': 'EU - EMS otro',
+            'EY': 'EY - EMS especial',
+            'EZ': 'EZ - EMS reservado',
 
-                // LC/AO
-                'UA': 'UA - Cartas AO',
-                'UB': 'UB - Cartas masivo',
-                'UC': 'UC - Correo directo armonizado',
-                'UD': 'UD - Fuera del sistema de gastos terminales',
-                'UE': 'UE - Cartas a descubierto',
-                'UF': 'UF - Entrada directa LC',
-                'UG': 'UG - Entrada directa AO',
-                'UH': 'UH - Entrada directa LC/AO',
-                'UI': 'UI - CCRI (Centro Clasificación)',
-                'UL': 'UL - Cartas LC',
-                'UM': 'UM - Sacas M',
-                'UN': 'UN - Cartas LC/AO',
-                'UP': 'UP - Tarjetas postales',
-                'UR': 'UR - Certificado',
-                'UT': 'UT - Reservado para acuerdos bilaterales',
-                'UU': 'UU - Otros artículos',
-                'UV': 'UV - Devueltos no entregables con remuneración',
-                'UX': 'UX - Expreso',
-                'UY': 'UY - Uso multilateral en proyectos designados',
-                'UZ': 'UZ - Reservado para acuerdos bilaterales',
+            // LC/AO
+            'UA': 'UA - Cartas AO',
+            'UB': 'UB - Cartas masivo',
+            'UC': 'UC - Correo directo armonizado',
+            'UD': 'UD - Fuera del sistema de gastos terminales',
+            'UE': 'UE - Cartas a descubierto',
+            'UF': 'UF - Entrada directa LC',
+            'UG': 'UG - Entrada directa AO',
+            'UH': 'UH - Entrada directa LC/AO',
+            'UI': 'UI - CCRI (Centro Clasificación)',
+            'UL': 'UL - Cartas LC',
+            'UM': 'UM - Sacas M',
+            'UN': 'UN - Cartas LC/AO',
+            'UP': 'UP - Tarjetas postales',
+            'UR': 'UR - Certificado',
+            'UT': 'UT - Reservado para acuerdos bilaterales',
+            'UU': 'UU - Otros artículos',
+            'UV': 'UV - Devueltos no entregables con remuneración',
+            'UX': 'UX - Expreso',
+            'UY': 'UY - Uso multilateral en proyectos designados',
+            'UZ': 'UZ - Reservado para acuerdos bilaterales',
 
-                // CP
-                'CA': 'CA - Paquetes a descubierto',
-                'CB': 'CB - Paquetes devueltos',
-                'CC': 'CC - Comercio electrónico',
-                'CD': 'CD - Acceso directo',
-                'CF': 'CF - Servicio de consignación',
-                'CN': 'CN - Paquete ordinario',
-                'CR': 'CR - Mercancía devuelta',
-                'CT': 'CT - Sacas vacías',
-                'CU': 'CU - Uso bilateral reservado',
-                'CV': 'CV - Paquete asegurado',
-                'CX': 'CX - Uso multilateral en proyectos designados',
-                'CY': 'CY - Multilateral reservado',
-                'CZ': 'CZ - Reservado bilateral'
-            };
+            // CP
+            'CA': 'CA - Paquetes a descubierto',
+            'CB': 'CB - Paquetes devueltos',
+            'CC': 'CC - Comercio electrónico',
+            'CD': 'CD - Acceso directo',
+            'CF': 'CF - Servicio de consignación',
+            'CN': 'CN - Paquete ordinario',
+            'CR': 'CR - Mercancía devuelta',
+            'CT': 'CT - Sacas vacías',
+            'CU': 'CU - Uso bilateral reservado',
+            'CV': 'CV - Paquete asegurado',
+            'CX': 'CX - Uso multilateral en proyectos designados',
+            'CY': 'CY - Multilateral reservado',
+            'CZ': 'CZ - Reservado bilateral'
+        };
 
-            function actualizarSubclases() {
-                const tipo = servicioSelect.value;
-                subclaseSelect.innerHTML = '<option value="">Seleccione una opción</option>';
-                if (opciones[tipo]) {
-                    opciones[tipo].forEach(code => {
-                        const option = document.createElement('option');
-                        option.value = code;
-                        option.textContent = descripciones[code] || code;
-                        subclaseSelect.appendChild(option);
-                    });
-                }
+        function actualizarSubclases() {
+            const tipo = servicioSelect.value;
+            subclaseSelect.innerHTML = '<option value="">Seleccione una opción</option>';
+            if (opciones[tipo]) {
+                opciones[tipo].forEach(code => {
+                    const option = document.createElement('option');
+                    option.value = code;
+                    option.textContent = descripciones[code] || code;
+                    subclaseSelect.appendChild(option);
+                });
             }
+        }
 
-            servicioSelect.addEventListener('change', actualizarSubclases);
+        servicioSelect.addEventListener('change', actualizarSubclases);
 
-            // Si se cambia programáticamente (por Livewire o recuperación), actualiza
-            window.livewire.hook('message.processed', () => {
-                actualizarSubclases();
-            });
+        // Si se cambia programáticamente (por Livewire o recuperación), actualiza
+        window.livewire.hook('message.processed', () => {
+            actualizarSubclases();
         });
-    </script>
+    });
+</script>
 </div>

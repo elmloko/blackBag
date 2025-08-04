@@ -85,7 +85,7 @@ class Cn35 extends Component
     {
         $this->validate();
 
-        foreach ($this->detalles as $detalle) {
+        foreach ($this->detalles as $key => $detalle) {
             $ultimoDigitoAnio = substr(date('Y'), -1);
             $despachoFormateado = str_pad($this->despacho, 4, '0', STR_PAD_LEFT);
             $receptaculo = strtoupper(
@@ -97,6 +97,7 @@ class Cn35 extends Component
                 'origen'            => strtoupper($this->origen),
                 'destino'           => strtoupper($this->destino),
                 'saca'              => $this->saca,
+                'nrosaca'           => $key + 1, // 👈 AQUI SE NUMERA AUTOMÁTICAMENTE
                 'categoria'         => strtoupper($this->categoria),
                 'subclase'          => strtoupper($this->subclase),
                 'servicio'          => strtoupper($this->servicio),

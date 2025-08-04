@@ -26,6 +26,8 @@ class Cn extends Model
         'codigo_manifiesto',
         'receptaculo',
         'identificador',
+        'nrosaca',
+        'etiqueta',
     ];
 
     protected $casts = [
