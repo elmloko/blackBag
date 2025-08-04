@@ -93,8 +93,14 @@ class Cn35 extends Component
                 $this->origen . $this->destino . $this->categoria . $this->subclase . $ultimoDigitoAnio . $despachoFormateado
             );
 
-            $nrosacaFormateado = str_pad($nrosaca, 3, '0', STR_PAD_LEFT); // ← "001", "002", etc.
+            $nrosacaFormateado = str_pad($nrosaca, 3, '0', STR_PAD_LEFT);
             $identificador = $receptaculo . $nrosacaFormateado;
+
+            // Convertir peso en decimal a entero sin punto ni coma (multiplicado por 10)
+            $pesoEntero = round($detalle['peso'] * 10); // ej. 23.2 → 232
+
+            $pesoFormateado = str_pad($pesoEntero, 4, '0', STR_PAD_LEFT); // 0232
+            $etiqueta = $identificador . $pesoFormateado;
 
             Cn::create([
                 'despacho'          => $this->despacho,
@@ -111,6 +117,7 @@ class Cn35 extends Component
                 'codigo_manifiesto' => strtoupper($detalle['codigo_manifiesto']),
                 'receptaculo'       => $receptaculo,
                 'identificador'     => $identificador,
+                'etiqueta'          => $etiqueta, // ← Aquí lo guardas
             ]);
         }
 
