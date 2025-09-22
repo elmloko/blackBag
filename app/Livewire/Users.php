@@ -6,83 +6,153 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role; // ← IMPORTANTE
+use Illuminate\Validation\Rule;
 
 class Users extends Component
 {
     use WithPagination;
 
-    public $search = ''; // Campo para búsqueda
-    public $searchQuery = ''; // Campo que se actualizará al hacer clic en el botón
-    public $newPassword = ''; // Nueva contraseña
-    public $userIdBeingUpdated = null; // ID del usuario que será actualizado
+    public $search = '';
+    public $searchQuery = '';
+    public $newPassword = '';
+    public $userIdBeingUpdated = null;
 
-    protected $paginationTheme = 'bootstrap'; // Usar paginación de Bootstrap
+    // Roles
+    public $allRoles = [];     // lista de roles (id=>name) para el select
+    public $roleId = null;     // id del rol seleccionado en el modal
+    public $userIdForRole = null; // usuario al que se le asignará el rol
 
-    // Método que se ejecuta cuando se presiona el botón de búsqueda
-    public function searchUsers()
+    protected $paginationTheme = 'bootstrap';
+
+    public function mount()
     {
-        $this->searchQuery = $this->search; // Actualiza la query de búsqueda
-        $this->resetPage(); // Resetea la paginación cuando se realiza una búsqueda
+        // Carga todos los roles del guard 'web'
+        $this->allRoles = Role::where('guard_name', 'web')
+            ->orderBy('name')
+            ->get(['id','name'])
+            ->toArray();
     }
 
-    // Establecer el ID del usuario para cambiar la contraseña y abrir el modal
+    public function updatingSearch()
+    {
+        // Si teclea, que pagine desde la primera página
+        $this->resetPage();
+    }
+
+    public function searchUsers()
+    {
+        $this->searchQuery = $this->search;
+        $this->resetPage();
+    }
+
+    // Modal: Cambiar contraseña
     public function setPasswordUser($userId)
     {
         $this->userIdBeingUpdated = $userId;
-        $this->dispatch('openModal'); // Disparar evento para abrir el modal
+        $this->dispatch('openModal'); // abre modal de contraseña
     }
 
+    // Baja (soft delete)
     public function deleteUser($userId)
     {
         $user = User::withTrashed()->findOrFail($userId);
         $user->delete();
-
         session()->flash('success', 'Usuario dado de baja correctamente.');
     }
 
+    // Alta (restore)
     public function restore($id)
     {
         $user = User::withTrashed()->findOrFail($id);
         $user->restore();
 
-        return redirect()->route('users.index')
-            ->with('success', 'Usuario reactivado correctamente');
+        session()->flash('success', 'Usuario reactivado correctamente');
+        // Si prefieres redirigir:
+        // return redirect()->route('users.index')->with('success','Usuario reactivado correctamente');
     }
-    // Método para actualizar la contraseña del usuario
+
+    // Guardar nueva contraseña
     public function updatePassword()
     {
         $this->validate([
-            'newPassword' => 'required|min:6', // Validar que la nueva contraseña tenga al menos 6 caracteres
+            'newPassword' => ['required','min:6'],
         ]);
 
         $user = User::find($this->userIdBeingUpdated);
 
         if ($user) {
-            $user->password = Hash::make($this->newPassword); // Cambiar la contraseña
+            $user->password = Hash::make($this->newPassword);
             $user->save();
             session()->flash('success', 'Contraseña actualizada correctamente.');
         } else {
             session()->flash('error', 'Usuario no encontrado.');
         }
 
-        // Limpiar el campo de la nueva contraseña y el ID del usuario
         $this->newPassword = '';
         $this->userIdBeingUpdated = null;
-
-        // Cerrar el modal después de la actualización
         $this->dispatch('closeModal');
+    }
+
+    // Modal: abrir asignación de rol
+    public function setRoleUser($userId)
+    {
+        $this->userIdForRole = $userId;
+
+        // Preseleccionar el primer rol del usuario (si tiene)
+        $user = User::with('roles')->findOrFail($userId);
+        $this->roleId = optional($user->roles->first())->id;
+
+        $this->dispatch('openRoleModal');
+    }
+
+    // Guardar rol (resuelve por ID con guard web)
+    public function saveUserRole()
+    {
+        $this->validate([
+            'userIdForRole' => ['required','integer','exists:users,id'],
+            'roleId'        => ['required','integer', Rule::exists('roles','id')->where('guard_name','web')],
+        ], [
+            'roleId.required' => 'Debes seleccionar un rol.',
+            'roleId.exists'   => 'El rol seleccionado no existe para el guard web.',
+        ]);
+
+        $user = User::findOrFail($this->userIdForRole);
+
+        // Resuelve el rol por ID y guard 'web' para evitar "There is no role named '3'"
+        $role = Role::findById((int)$this->roleId, 'web');
+
+        // Opción 1: reemplazar TODOS los roles del usuario por uno
+        $user->syncRoles([$role]);
+
+        // Opción 2 (alternativa): agregar sin quitar otros
+        // $user->assignRole($role);
+
+        session()->flash('success', 'Rol actualizado correctamente.');
+
+        $this->roleId = null;
+        $this->userIdForRole = null;
+
+        $this->dispatch('closeRoleModal');
     }
 
     public function render()
     {
-        // Obtener los usuarios con paginación y filtrados por el campo de búsqueda
+        $q = trim($this->searchQuery);
+
         $users = User::withTrashed()
-            ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->searchQuery . '%')
-                    ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+            ->with(['roles' => function($r){ $r->select('id','name'); }])
+            ->when($q !== '', function ($query) use ($q) {
+                $query->where(function ($qq) use ($q) {
+                    $qq->where('name', 'like', "%{$q}%")
+                       ->orWhere('email', 'like', "%{$q}%");
+                });
             })
+            ->orderBy('id','asc')
             ->paginate(10);
 
-        return view('livewire.users', ['users' => $users]);
+        return view('livewire.users', [
+            'users' => $users,
+        ]);
     }
 }
