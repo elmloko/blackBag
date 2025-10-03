@@ -133,7 +133,7 @@
         }
     </style>
 </head>
-@if ($despacho->service === 'LC')
+{{-- @if ($despacho->service === 'LC') --}}
 
     <body>
         <!-- CN-31 Content -->
@@ -306,8 +306,8 @@
             </table>
         </div>
     </body>
-@elseif ($despacho->service === 'EMS')
-@endif
+{{-- @elseif ($despacho->service === 'EMS')
+@endif --}}
 
 <body>
     <!-- CN-38 Content -->
