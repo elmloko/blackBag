@@ -436,6 +436,7 @@
                                     'BOTDD' => 'TDD',
                                     'BOSRE' => 'SRE',
                                     'BOSRZ' => 'SRZ',
+                                    'PELIM' => 'LIM',
                                 ];
                             @endphp
                             <td>{{ $siglaIATA[$siglaOrigen] ?? $siglaOrigen }}</td>

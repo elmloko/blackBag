@@ -54,6 +54,7 @@ class ExpedicionExport implements FromQuery, WithHeadings, WithMapping, WithStyl
             'BOTDD' => 'BOTDD - BENI',
             'BOSRE' => 'BOSRE - SUCRE',
             'BOSRZ' => 'BOSRZ - SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
 
         $categorias = [

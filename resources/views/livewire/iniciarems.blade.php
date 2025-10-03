@@ -71,6 +71,7 @@
                                                     'BOTDD' => 'BOTDD - BENI',
                                                     'BOSRE' => 'BOSRE - SUCRE',
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
+                                                    'PELIM' => 'PELIM - PERU/LIMA',
                                                 ];
                                                 $subclases = [
                                                     'EA' => 'EA EMS - AL DESCUBIERTO',
@@ -165,6 +166,7 @@
                                 <option value="BOTDD">BOTDD - BENI</option>
                                 <option value="BOSRE">BOSRE - SUCRE</option>
                                 <option value="BOSRZ">BOSRZ - SANTA CRUZ</option>
+                                <option value="PELIM">PELIM - PERU/LIMA</option>
                             </select>
                             @error('ofdestino')
                                 <span class="text-danger">{{ $message }}</span>

@@ -133,6 +133,7 @@
                             <option value="BOTDD">BOTDD - BENI</option>
                             <option value="BOSRE">BOSRE - SUCRE</option>
                             <option value="BOSRZ">BOSRZ - SANTA CRUZ</option>
+                            <option value="PELIM">PELIM - PERU/LIMA</option>
                         </select>
                         @error('origen')
                             <small class="text-danger">{{ $message }}</small>
@@ -152,6 +153,7 @@
                             <option value="BOTDD">BOTDD - BENI</option>
                             <option value="BOSRE">BOSRE - SUCRE</option>
                             <option value="BOSRZ">BOSRZ - SANTA CRUZ</option>
+                            <option value="PELIM">PELIM - PERU/LIMA</option>
                         </select>
                         @error('destino')
                             <small class="text-danger">{{ $message }}</small>

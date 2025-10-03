@@ -78,6 +78,7 @@
                                                     'BOTDD' => 'BOTDD - BENI',
                                                     'BOSRE' => 'BOSRE - SUCRE',
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
+                                                    'PELIM' => 'PELIM - PERU/LIMA',
                                                 ];
                                                 $subclases = [
                                                     'UA' => 'UA CARTAS - AO',

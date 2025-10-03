@@ -68,6 +68,7 @@ public function reimprimirDespacho($despachoId)
         'BOTDD' => 'BENI',
         'BOSRE' => 'SUCRE',
         'BOSRZ' => 'SANTA CRUZ',
+        'PELIM' => 'PELIM - PERU/LIMA',
     ];
 
     $ciudadOrigen = auth()->user()->city;
@@ -169,6 +170,7 @@ public function reimprimirDespacho($despachoId)
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
     
         // Obtener la ciudad del usuario como origen

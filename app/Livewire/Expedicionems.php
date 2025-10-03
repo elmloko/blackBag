@@ -88,6 +88,7 @@ class Expedicionems extends Component
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
     
         // Obtener la ciudad del usuario como origen

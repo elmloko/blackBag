@@ -55,6 +55,7 @@ class Admitir extends Component
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
 
         // Buscar el registro en la tabla Saca

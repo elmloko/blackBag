@@ -39,6 +39,7 @@ class Iniciar extends Component
         'BENI' => 'BOTDD',
         'SUCRE' => 'BOSRE',
         'SANTA CRUZ' => 'BOSRZ',
+        'PERU/LIMA' => 'PELIM',
     ];
 
     public function crearDespacho()
@@ -102,6 +103,7 @@ class Iniciar extends Component
             'BENI' => 'BOTDD',
             'SUCRE' => 'BOSRE',
             'SANTA CRUZ' => 'BOSRZ',
+            'PERU/LIMA' => 'PELIM',
         ];
 
         // Obtén la ciudad del usuario y tradúcela al código
@@ -180,6 +182,7 @@ class Iniciar extends Component
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
 
         // Obtener la ciudad del usuario como origen

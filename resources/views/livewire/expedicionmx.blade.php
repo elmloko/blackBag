@@ -76,6 +76,7 @@
                                                     'BOTDD' => 'BOTDD - BENI',
                                                     'BOSRE' => 'BOSRE - SUCRE',
                                                     'BOSRZ' => 'BOSRZ - SANTA CRUZ',
+                                                    'PELIM' => 'PELIM - PERU/LIMA',
                                                 ];
                                                 $subclases = [
                                                     'MA' => 'MA MIXTO - AL DESCUBIERTO',

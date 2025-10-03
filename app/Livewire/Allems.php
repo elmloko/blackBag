@@ -39,6 +39,7 @@ class Allems extends Component
         'BENI' => 'BOTDD',
         'SUCRE' => 'BOSRE',
         'SANTA CRUZ' => 'BOSRZ',
+        'PERU/LIMA' => 'PELIM',
     ];
 
     public function render()
@@ -69,6 +70,7 @@ class Allems extends Component
             'BOTDD' => 'BENI',
             'BOSRE' => 'SUCRE',
             'BOSRZ' => 'SANTA CRUZ',
+            'PELIM' => 'PELIM - PERU/LIMA',
         ];
     
         // Obtener la ciudad del usuario como origen
