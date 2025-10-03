@@ -16,12 +16,12 @@ class Iniciarems extends Component
     use WithPagination;
 
     public $searchTerm = '';
-    public $categoria;
     public $ofdestino;
-    public $subclase;
     public $nrodespacho;
     public $fechaHoraActual;
     public $perPage = 10;
+    public $categoria = 'A';   // A - Aéreo por defecto
+    public $subclase = 'EN';   // EN EMS - MIXTO por defecto
 
     protected $rules = [
         'categoria' => 'required|string|max:50',

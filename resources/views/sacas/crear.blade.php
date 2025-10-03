@@ -604,8 +604,8 @@
                             <div class="form-group">
                                 <label for="aduana">Aduana</label>
                                 <select class="form-control" id="aduana" name="aduana" required>
-                                    <option value="SI">SI</option>
                                     <option value="NO">NO</option>
+                                    <option value="SI">SI</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -617,7 +617,7 @@
                                 <label for="codigo_manifiesto">Código Manifiesto</label>
                                 <input type="text" class="form-control" id="codigo_manifiesto"
                                     name="codigo_manifiesto" placeholder="Ej: BOLPBAIMU...." pattern="[A-Za-z0-9]+"
-                                    title="Solo caracteres alfanuméricos" required>
+                                    title="Solo caracteres alfanuméricos">
                             </div>
                             <button type="submit" class="btn btn-primary">Crear Saca</button>
                         </form>

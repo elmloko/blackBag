@@ -33,7 +33,7 @@ class SacaController extends Controller
             'peso' => 'nullable|numeric',
             'nropaquetes' => 'nullable|integer',
             'aduana' => 'required|string|max:2',
-            'codigo_manifiesto' => 'required|string|max:20',
+            'codigo_manifiesto' => 'nullable|string|max:20',
         ]);
 
         // Obtener el último valor de nrosaca para el despacho actual y calcular el siguiente

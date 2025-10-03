@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <label for="categoria">Categoría</label>
                             <select class="form-control" id="categoria" wire:model="categoria">
-                                <option value="">Seleccione una opción</option>
+                                {{-- <option value="">Seleccione una opción</option> --}}
                                 <option value="A">A - Aéreo</option>
                                 <option value="B">B - S.A.L.</option>
                                 <option value="C">C - Superficie</option>
@@ -173,7 +173,7 @@
                         <div class="form-group">
                             <label for="subclase">Subclase</label>
                             <select class="form-control" id="subclase" wire:model="subclase">
-                                <option value="">Seleccione una opción</option>
+                                {{-- <option value="">Seleccione una opción</option> --}}
                                 <option value="EN">EN EMS - MIXTO</option>
                                 <option value="EA">EA EMS - AL DESCUBIERTO</option>
                                 <option value="ED">ED EMS - DOCUMENTOS</option>
